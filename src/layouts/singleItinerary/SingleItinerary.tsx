@@ -67,10 +67,12 @@ const SingleItinerary = (props: any) => {
       setIsLoading(false);
     }
   };
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckout = async () => {
     try {
-      let data = await api.post("/billing/checkout", { itineraryId });
+      let data = await api.post("/billing/checkout", { itineraryId,        isChecked,
+ });
 
       if (data.data) {
         window.open(data.data);
@@ -98,10 +100,28 @@ const SingleItinerary = (props: any) => {
       console.log(error);
     }
   };
+  
+const sendEmail = async () => {
+    try {
+      let user = await api(`/itinerary/sendEmail/${itineraryId}`);
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
+    sendEmail();
     getProfile();
     getItinerary();
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get("check");
+    if (status) {
+      if (status === "true" && localStorage.getItem("check")) {
+        sendEmail();
+        localStorage.removeItem("check");
+      }
+    }
   }, []);
 
   return (
@@ -145,6 +165,36 @@ const SingleItinerary = (props: any) => {
                             <button onClick={handleCheckout} className="btn btn-orange navbar-btn">
                               Checkout
                             </button>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              {" "}
+                              <input
+                                type='checkbox'
+                                id='myCheckbox'
+                                name='myCheckbox'
+                                value='1'
+                                checked={isChecked}
+                                onChange={(e) => {
+                                  localStorage.setItem(
+                                    "check",
+                                    `${e.target.checked}`
+                                  );
+                                  setIsChecked(e.target.checked);
+                                }}
+                              />
+                              <label
+                                htmlFor='myCheckbox'
+                                style={{ marginLeft: "10px" }}
+                              >
+                                Do you want to send message to Admin When
+                                Checkout Complete
+                              </label>
+                            </div>
                           </div>
                         )}
                         <div className="col-md-4 col-sm-3 col-xs-4">
