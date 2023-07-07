@@ -111,7 +111,6 @@ const sendEmail = async () => {
   };
 
   useEffect(() => {
-    sendEmail();
     getProfile();
     getItinerary();
     const urlParams = new URLSearchParams(window.location.search);
