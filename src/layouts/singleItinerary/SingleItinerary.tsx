@@ -161,39 +161,51 @@ const sendEmail = async () => {
                           ""
                         ) : (
                           <div className="col-md-3 col-sm-3 col-xs-4">
-                            <button onClick={handleCheckout} className="btn btn-orange navbar-btn">
-                              Checkout
-                            </button>
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                              }}
-                            >
-                              {" "}
-                              <input
-                                type='checkbox'
-                                id='myCheckbox'
-                                name='myCheckbox'
-                                value='1'
-                                checked={isChecked}
-                                onChange={(e) => {
-                                  localStorage.setItem(
-                                    "check",
-                                    `${e.target.checked}`
-                                  );
-                                  setIsChecked(e.target.checked);
-                                }}
-                              />
-                              <label
-                                htmlFor='myCheckbox'
-                                style={{ marginLeft: "10px" }}
-                              >
-                                Do you want to send message to Admin When
-                                Checkout Complete
-                              </label>
-                            </div>
+                              {purchasedItineraries.includes(itineraryId) ||
+                            isMy ? (
+                              <></>
+                            ) : (
+                              <>
+                                {" "}
+                                <button
+                                  onClick={handleCheckout}
+                                  className='btn btn-orange navbar-btn'
+                                >
+                                  Checkout
+                                </button>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  {" "}
+                                  <input
+                                    type='checkbox'
+                                    id='myCheckbox'
+                                    name='myCheckbox'
+                                    value='1'
+                                    checked={isChecked}
+                                    onChange={(e) => {
+                                      localStorage.setItem(
+                                        "check",
+                                        `${e.target.checked}`
+                                      );
+
+                                      setIsChecked(e.target.checked);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor='myCheckbox'
+                                    style={{ marginLeft: "10px" }}
+                                  >
+                                    Do you want to send message to Admin When
+                                    Checkout Complete
+                                  </label>
+                                </div>
+                              </>
+                            )}
                           </div>
                         )}
                         <div className="col-md-4 col-sm-3 col-xs-4">
