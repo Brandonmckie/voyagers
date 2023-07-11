@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
       ? process.env.REACT_APP_SERVER_URL
-      : process.env.REACT_APP_SERVER_LOCALHOST || "https://voyagers-server.onrender.com", // Replace with your desired base URL
+      : process.env.REACT_APP_SERVER_LOCALHOST || "https://protect-garden-2148-f7e9517c98d7.herokuapp.com", // Replace with your desired base URL
 });
 
 api.interceptors.request.use((config) => {
