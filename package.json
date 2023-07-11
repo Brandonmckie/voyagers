@@ -52,8 +52,10 @@
     "workbox-strategies": "^6.5.4",
     "workbox-streams": "^6.5.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
+   "scripts": {
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "heroku-prebuild": "npm i -g serve",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
