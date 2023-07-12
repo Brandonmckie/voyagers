@@ -171,7 +171,7 @@ const Navbar = (props: Props) => {
                       style={{
                         maxHeight: "70vh",
                         overflowY: "auto",
-                        top: "70px",
+                        left: "-40%",
                       }}
                     >
                       {Object.entries(cities).map(([key, val]) => (
