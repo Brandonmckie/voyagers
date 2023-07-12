@@ -163,6 +163,42 @@ const Navbar = (props: Props) => {
                       Destinations <b className="caret"></b>
                     </a>
 
+<ul
+        className={`
+          dropdown-menu
+          ${isDropdownOpen ? "show" : "hidden"}
+        `}
+      >
+        {Object.entries(cities).map(([key, val]) => (
+                        <li className="col-sm-6">
+                          <ul>
+                            <li className="dropdown-header">{key}</li>
+                            <div className="row inn-dropdown">
+                              {createGroups(val, 23).map((each) => (
+                                <div className="col-sm-6">
+                                  {each.map((item) => (
+                                    <li>
+                                      <Link
+                                        to={{
+                                          pathname: "/itinerary/list",
+                                          search: createSearchParams({
+                                            region: item.code,
+                                          }).toString(),
+                                        }}
+                                      >
+                                        {item.country}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </div>
+                              ))}
+                            </div>
+                          </ul>
+                        </li>
+                      ))}
+      </ul>
+
+                    {/*
                     <ul
                       className="dropdown-menu dropdown-menu-large row"
                       style={{
@@ -199,6 +235,7 @@ const Navbar = (props: Props) => {
                         </li>
                       ))}
                     </ul>
+                    */}
                   </li>
                 ) : (
                   <li>
