@@ -52,7 +52,7 @@ const SignUp = () => {
             <div className="sigup-box">
               <div className="text-center">
                 <Link to="/">
-                  <img src={logo} />
+                    <img src={logo} alt="Logo" width="64px" height="64px" />
                 </Link>
                 <h1>Create your My Voyages Account</h1>
               </div>
