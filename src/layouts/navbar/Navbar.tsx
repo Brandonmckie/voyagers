@@ -151,7 +151,7 @@ const Navbar = (props: Props) => {
                   <li
                     onMouseLeave={(e) => handleShowDropdown(e, false)}
                     onMouseEnter={(e) => handleShowDropdown(e, true)}
-                    className={`dropdown dropdown-large${
+                    className={`dropdown ${
                       isDropdownOpen ? " open" : ""
                     }`}
                   >
@@ -163,42 +163,9 @@ const Navbar = (props: Props) => {
                       Destinations <b className="caret"></b>
                     </a>
 
-<ul
-        className={`
-          dropdown-menu
-          ${isDropdownOpen ? "show" : "hidden"}
-        `}
-      >
-        {Object.entries(cities).map(([key, val]) => (
-                        <li className="col-sm-6">
-                          <ul>
-                            <li className="dropdown-header">{key}</li>
-                            <div className="row inn-dropdown">
-                              {createGroups(val, 23).map((each) => (
-                                <div className="col-sm-6">
-                                  {each.map((item) => (
-                                    <li>
-                                      <Link
-                                        to={{
-                                          pathname: "/itinerary/list",
-                                          search: createSearchParams({
-                                            region: item.code,
-                                          }).toString(),
-                                        }}
-                                      >
-                                        {item.country}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </div>
-                              ))}
-                            </div>
-                          </ul>
-                        </li>
-                      ))}
-      </ul>
 
-                    {/*
+
+                    
                     <ul
                       className="dropdown-menu dropdown-menu-large row"
                       style={{
@@ -235,7 +202,7 @@ const Navbar = (props: Props) => {
                         </li>
                       ))}
                     </ul>
-                    */}
+                    
                   </li>
                 ) : (
                   <li>
@@ -247,34 +214,7 @@ const Navbar = (props: Props) => {
                   <Link to="/about-us">About us</Link>
                 </li>
 
-                <li><div
-        className={`
-          d-flex
-          align-items-center
-          justify-content-end
-          p-2
-          border-top
-          border-bottom
-          cursor-pointer
-          ${isDropdownOpen ? "show" : "hidden"}
-        `}
-        onClick={()=>{ setIsDropdownOpen(!isDropdownOpen)}}
-      >
-        <i className="fas fa-bars"></i>
-      </div>
-      <ul
-        className={`
-          dropdown-menu
-          ${isDropdownOpen ? "show" : "hidden"}
-        `}
-      >
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-      </ul> </li>
+             
                 <li>
                   <Link to="/contact-us">Contact us</Link>
                 </li>
