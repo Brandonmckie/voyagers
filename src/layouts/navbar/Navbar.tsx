@@ -209,6 +209,34 @@ const Navbar = (props: Props) => {
                   <Link to="/about-us">About us</Link>
                 </li>
 
+                <li><div
+        className={`
+          d-flex
+          align-items-center
+          justify-content-end
+          p-2
+          border-top
+          border-bottom
+          cursor-pointer
+          ${isDropdownOpen ? "show" : "hidden"}
+        `}
+        onClick={handleClick}
+      >
+        <i className="fas fa-bars"></i>
+      </div>
+      <ul
+        className={`
+          dropdown-menu
+          ${isDropdownOpen ? "show" : "hidden"}
+        `}
+      >
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+      </ul> </li>
                 <li>
                   <Link to="/contact-us">Contact us</Link>
                 </li>
