@@ -41,7 +41,7 @@ const Navbar = (props: Props) => {
   const [cities, setCities] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
-  const [isDropdownOpen,setIsDropdownOpen] = useState<boolean>(false);
+  //const [isDropdownOpen,setIsDropdownOpen] = useState<boolean>(false);
   const [user, setUser] = useState<{
     role: string;
     _id: string;
