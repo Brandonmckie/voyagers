@@ -200,7 +200,7 @@ const SingleItinerary = (props: any) => {
                                     }}
                                   />
                                   <label htmlFor="myCheckbox" style={{ marginLeft: "10px" }}>
-                                    Do you want to send message to Admin When Checkout Complete
+                                    To have a My Voyages Travel Expert execute this itinerary and contact you. 
                                   </label>
                                 </div>
                               </>
