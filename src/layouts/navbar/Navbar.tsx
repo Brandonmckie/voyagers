@@ -41,6 +41,7 @@ const Navbar = (props: Props) => {
   const [cities, setCities] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
+  const [isDropdownOpen,setIsDropdownOpen] = useState<boolean>(false);
   const [user, setUser] = useState<{
     role: string;
     _id: string;
@@ -220,7 +221,7 @@ const Navbar = (props: Props) => {
           cursor-pointer
           ${isDropdownOpen ? "show" : "hidden"}
         `}
-        onClick={handleClick}
+        onClick={()=>{ setIsDropdownOpen(!isDropdownOpen)}}
       >
         <i className="fas fa-bars"></i>
       </div>
