@@ -71,8 +71,7 @@ const SingleItinerary = (props: any) => {
 
   const handleCheckout = async () => {
     try {
-      let data = await api.post("/billing/checkout", { itineraryId,        isChecked,
- });
+      let data = await api.post("/billing/checkout", { itineraryId, isChecked });
 
       if (data.data) {
         window.open(data.data);
@@ -100,8 +99,8 @@ const SingleItinerary = (props: any) => {
       console.log(error);
     }
   };
-  
-const sendEmail = async () => {
+
+  const sendEmail = async () => {
     try {
       let user = await api(`/itinerary/sendEmail/${itineraryId}`);
       console.log(user);
@@ -117,6 +116,8 @@ const sendEmail = async () => {
     const status = urlParams.get("check");
     if (status) {
       if (status === "true" && localStorage.getItem("check")) {
+        console.log(status);
+        console.log(localStorage.getItem("check"));
         sendEmail();
         localStorage.removeItem("check");
       }
@@ -127,7 +128,13 @@ const sendEmail = async () => {
     <>
       {isLoading ? (
         <div
-          style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <CircularProgress />
         </div>
@@ -161,15 +168,14 @@ const sendEmail = async () => {
                           ""
                         ) : (
                           <div className="col-md-3 col-sm-3 col-xs-4">
-                              {purchasedItineraries.includes(itineraryId) ||
-                            isMy ? (
+                            {purchasedItineraries.includes(itineraryId) || isMy ? (
                               <></>
                             ) : (
                               <>
                                 {" "}
                                 <button
                                   onClick={handleCheckout}
-                                  className='btn btn-orange navbar-btn'
+                                  className="btn btn-orange navbar-btn"
                                 >
                                   Checkout
                                 </button>
@@ -182,26 +188,19 @@ const sendEmail = async () => {
                                 >
                                   {" "}
                                   <input
-                                    type='checkbox'
-                                    id='myCheckbox'
-                                    name='myCheckbox'
-                                    value='1'
+                                    type="checkbox"
+                                    id="myCheckbox"
+                                    name="myCheckbox"
+                                    value="1"
                                     checked={isChecked}
                                     onChange={(e) => {
-                                      localStorage.setItem(
-                                        "check",
-                                        `${e.target.checked}`
-                                      );
+                                      localStorage.setItem("check", `${e.target.checked}`);
 
                                       setIsChecked(e.target.checked);
                                     }}
                                   />
-                                  <label
-                                    htmlFor='myCheckbox'
-                                    style={{ marginLeft: "10px" }}
-                                  >
-                                    Do you want to send message to Admin When
-                                    Checkout Complete
+                                  <label htmlFor="myCheckbox" style={{ marginLeft: "10px" }}>
+                                    Do you want to send message to Admin When Checkout Complete
                                   </label>
                                 </div>
                               </>
@@ -265,7 +264,10 @@ const sendEmail = async () => {
                             </ul>
 
                             <div className="tab-content">
-                              <div className={`tab-pane${currentTab === 0 ? " active" : ""}`} id="tab_default_1">
+                              <div
+                                className={`tab-pane${currentTab === 0 ? " active" : ""}`}
+                                id="tab_default_1"
+                              >
                                 <div className="row">
                                   <div className="col-md-3">
                                     <h4>Services</h4>
@@ -291,12 +293,19 @@ const sendEmail = async () => {
                                     <div className="carousel-reviews broun-block">
                                       <div className="container-fuild">
                                         <div className="row">
-                                          <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+                                          <div
+                                            id="carousel-reviews"
+                                            className="carousel slide"
+                                            data-ride="carousel"
+                                          >
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
                                                   {each.stayImages?.map((image) => (
-                                                    <div key={image} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                    <div
+                                                      key={image}
+                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    >
                                                       <div className="card">
                                                         <img
                                                           className="card-img-top"
@@ -338,7 +347,10 @@ const sendEmail = async () => {
                                 </div>
                               </div>
 
-                              <div className={`tab-pane${currentTab === 1 ? " active" : ""}`} id="tab_default_2">
+                              <div
+                                className={`tab-pane${currentTab === 1 ? " active" : ""}`}
+                                id="tab_default_2"
+                              >
                                 <div className="row">
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
@@ -352,12 +364,19 @@ const sendEmail = async () => {
                                     <div className="carousel-reviews broun-block">
                                       <div className="container-fuild">
                                         <div className="row">
-                                          <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+                                          <div
+                                            id="carousel-reviews"
+                                            className="carousel slide"
+                                            data-ride="carousel"
+                                          >
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
                                                   {each.tasteImages?.map((image) => (
-                                                    <div key={image} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                    <div
+                                                      key={image}
+                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    >
                                                       <div className="card">
                                                         <img
                                                           className="card-img-top"
@@ -399,7 +418,10 @@ const sendEmail = async () => {
                                 </div>
                               </div>
 
-                              <div className={`tab-pane${currentTab === 2 ? " active" : ""}`} id="tab_default_3">
+                              <div
+                                className={`tab-pane${currentTab === 2 ? " active" : ""}`}
+                                id="tab_default_3"
+                              >
                                 <div className="row">
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
@@ -413,12 +435,19 @@ const sendEmail = async () => {
                                     <div className="carousel-reviews broun-block">
                                       <div className="container-fuild">
                                         <div className="row">
-                                          <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+                                          <div
+                                            id="carousel-reviews"
+                                            className="carousel slide"
+                                            data-ride="carousel"
+                                          >
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
                                                   {each.vibeImages?.map((image) => (
-                                                    <div key={image} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                    <div
+                                                      key={image}
+                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    >
                                                       <div className="card">
                                                         <img
                                                           className="card-img-top"
@@ -460,7 +489,10 @@ const sendEmail = async () => {
                                 </div>
                               </div>
 
-                              <div className={`tab-pane${currentTab === 3 ? " active" : ""}`} id="tab_default_4">
+                              <div
+                                className={`tab-pane${currentTab === 3 ? " active" : ""}`}
+                                id="tab_default_4"
+                              >
                                 <div className="row">
                                   <div className="col-md-3">
                                     <h4>Highlights of:</h4>
@@ -479,12 +511,19 @@ const sendEmail = async () => {
                                     <div className="carousel-reviews broun-block">
                                       <div className="container-fuild">
                                         <div className="row">
-                                          <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+                                          <div
+                                            id="carousel-reviews"
+                                            className="carousel slide"
+                                            data-ride="carousel"
+                                          >
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
                                                   {each.experienceImages?.map((image) => (
-                                                    <div key={image} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                    <div
+                                                      key={image}
+                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    >
                                                       <div className="card">
                                                         <img
                                                           className="card-img-top"
@@ -591,12 +630,14 @@ const sendEmail = async () => {
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
                                     <p>
-                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                      irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                      pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                      officia deserunt mollit anim id est laborum.
+                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                                      do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                      Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                      laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                      irure dolor in reprehenderit in voluptate velit esse cillum
+                                      dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                      cupidatat non proident, sunt in culpa qui officia deserunt
+                                      mollit anim id est laborum.
                                     </p>
                                   </div>
                                 </div>
@@ -606,22 +647,31 @@ const sendEmail = async () => {
                                     <div className="carousel-reviews broun-block">
                                       <div className="container-fuild">
                                         <div className="row">
-                                          <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+                                          <div
+                                            id="carousel-reviews"
+                                            className="carousel slide"
+                                            data-ride="carousel"
+                                          >
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
-                                                  {data.eachDetail?.[0]?.stayImages?.map((image) => (
-                                                    <div key={image} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                                      <div className="card">
-                                                        <img
-                                                          className="card-img-top"
-                                                          src={image}
-                                                          alt="Card image"
-                                                          style={{ width: "100%" }}
-                                                        />
+                                                  {data.eachDetail?.[0]?.stayImages?.map(
+                                                    (image) => (
+                                                      <div
+                                                        key={image}
+                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                      >
+                                                        <div className="card">
+                                                          <img
+                                                            className="card-img-top"
+                                                            src={image}
+                                                            alt="Card image"
+                                                            style={{ width: "100%" }}
+                                                          />
+                                                        </div>
                                                       </div>
-                                                    </div>
-                                                  ))}
+                                                    )
+                                                  )}
                                                 </div>
                                               </div>
                                             </div>
