@@ -49,7 +49,7 @@ const SignIn = () => {
             <div className="sigup-box">
               <div className="text-center">
                 <Link to="/">
-                  <img src={logo} alt="Logo" />
+                  <img src={logo} alt="Logo" width="64px" height="64px" />
                 </Link>
                 <h1>Create your My Voyages Account</h1>
               </div>
@@ -116,7 +116,11 @@ const SignIn = () => {
                 </p>
                 <p>Forgot Password?</p>
                 <br />
-                <button type="submit" disabled={isLoading} className="btn btn-orange navbar-btn btn-block">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn btn-orange navbar-btn btn-block"
+                >
                   {isLoading ? <CircularProgress /> : "Login"}
                 </button>
               </form>

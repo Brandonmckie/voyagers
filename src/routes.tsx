@@ -78,7 +78,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/itinerary/list",
-        element: <ProtectedRoute Element={Itineraries} />,
+        element: <Itineraries />,
       },
       { path: "/itinerary/create", element: <ProtectedRoute Element={CreateItinerary} /> },
       { path: "/itinerary/me", element: <ProtectedRoute Element={MyItineraries} /> },

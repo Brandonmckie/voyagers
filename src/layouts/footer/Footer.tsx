@@ -17,7 +17,7 @@ const Footer = (props: Props) => {
           <div className="col-sm-12 col-md-4"></div>
           <div className="col-sm-12 col-md-4 text-center">
             <div className="footer-logo">
-              <img src={logo} />
+              <img src={logo} width="64px" height="64px" />
             </div>
             <p className="footer-p">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
             <div className="social">
