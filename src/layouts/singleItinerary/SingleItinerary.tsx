@@ -154,6 +154,7 @@ const SingleItinerary = (props: any) => {
                       </ul>
                       <h1>{data.title}</h1>
                       <p>{data.introduction}</p>
+                      {/*
                       <div className="row">
                         {isMy ? (
                           <div className="col-md-2 col-sm-2 col-xs-3">
@@ -212,6 +213,80 @@ const SingleItinerary = (props: any) => {
                             Price: <span> ${data.price}</span>
                           </h3>
                         </div>
+                        */}
+
+                      <div className="col-md-4 col-sm-3 col-xs-4" style={{ paddingLeft: "0px" }}>
+                        <h3 className="price-sec text-left">
+                          Price: <span> ${data.price}</span>
+                        </h3>
+                      </div>
+
+                      <div className="row">
+                        {isMy ? (
+                          <div className="col-md-2 col-sm-2 col-xs-3">
+                            <button onClick={handleEdit} className="btn btn-orange navbar-btn">
+                              Edit
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        {profile.role === "seller" ? (
+                          ""
+                        ) : (
+                          <div className="col-md-12 col-sm-3 col-xs-4">
+                            {purchasedItineraries.includes(itineraryId) || isMy ? (
+                              <></>
+                            ) : (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "flex-start",
+                                    margin: "12px 0px -2px 0px",
+                                  }}
+                                >
+                                  <input
+                                    style={{
+                                      width: "17px",
+                                      height: "17px",
+                                      position: "relative",
+                                      top: "-2px",
+                                    }}
+                                    type="checkbox"
+                                    id="myCheckbox"
+                                    name="myCheckbox"
+                                    value="1"
+                                    checked={isChecked}
+                                    onChange={(e) => {
+                                      localStorage.setItem("check", `${e.target.checked}`);
+                                      setIsChecked(e.target.checked);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor="myCheckbox"
+                                    style={{ marginLeft: "10px", fontSize: "15px" }}
+                                  >
+                                    To have a My Voyages Travel Expert execute this itinerary and contact you.
+                                  </label>
+                                </div>
+                                <button
+                                  onClick={handleCheckout}
+                                  style={{ width: "116px" }}
+                                  className="btn btn-orange navbar-btn"
+                                >
+                                  Checkout
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )}
                         <div className="col-md-4 col-sm-3 col-xs-4"></div>
                       </div>
                     </div>
