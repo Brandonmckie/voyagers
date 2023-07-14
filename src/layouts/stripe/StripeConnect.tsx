@@ -18,7 +18,7 @@ const StripeConnect = (props: Props) => {
     <section className="main-stripe">
       <div className="text-center">
         <h2>Stripe</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <p>Let's Connect Through Stripe and Get Paid for My Voyages</p>
         <button onClick={handleStripeAdd}>Connect Stripe</button>
       </div>
     </section>
