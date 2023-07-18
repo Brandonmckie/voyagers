@@ -203,6 +203,18 @@ textarea.text-details {
   .card-grid {
     padding: 0px 0;
   }
+  .headingtag {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 530px) {
+  .nav-tabs {
+    flex-direction: column;
+  }
+  ul.nav-tabs li {
+    margin-bottom: 10px;
+  }
 }
 
 .list-item {

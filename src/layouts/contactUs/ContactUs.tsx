@@ -4,27 +4,12 @@ type Props = {};
 
 const ContactUs = (props: Props) => {
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "45px 0px",
-        }}
-      >
+    <div className="container">
+      <div className="contactus">
         <h3 style={{ color: "#f1a501" }}>Contact Us</h3>
-        <p
-          className='text-bg'
-          style={{
-            width: "62%",
-            textAlign: "justify",
-            fontSize: "18px",
-            padding: "8px 0px",
-          }}
-        >
-          For customized itineraries or to inquire about anything My Voyages,
-          send us an email at <span style={{}}>info@myvoyages.com</span>
+        <p className="text-bg contactus0">
+          For customized itineraries or to inquire about anything My Voyages, send us an email at{" "}
+          <span style={{}}>info@myvoyages.com</span>
         </p>
       </div>
       {/* // <section id="AboutUs">

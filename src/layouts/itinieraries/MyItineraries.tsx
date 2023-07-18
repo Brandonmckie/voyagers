@@ -180,7 +180,10 @@ const MyItineraries = (props: Props) => {
                       >
                         {isDeleteLoading ? <CircularProgress /> : "Delete"}
                       </button>
-                      <button className="btn btn-success navbar-btn" onClick={() => setIsOpenDelete("")}>
+                      <button
+                        className="btn btn-success navbar-btn"
+                        onClick={() => setIsOpenDelete("")}
+                      >
                         Cancel
                       </button>
                     </div>
@@ -198,7 +201,12 @@ const MyItineraries = (props: Props) => {
                         className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
                       >
                         <div className="card">
-                          <img className="card-img-top" src={each.image} alt="Card image" style={{ width: "100%" }} />
+                          <img
+                            className="card-img-top"
+                            src={each.image}
+                            alt="Card image"
+                            style={{ width: "100%" }}
+                          />
                           {badgeHover === each._id ? (
                             <button
                               type="button"
@@ -377,7 +385,9 @@ const MyItineraries = (props: Props) => {
         <CircularProgress />
       ) : (
         <div>
-          <h3 style={{ textAlign: "center" }}>No Itineraries created yet</h3>
+          <h3 style={{ textAlign: "center" }} className="headingtag">
+            No Itineraries created yet
+          </h3>
         </div>
       )}
     </>

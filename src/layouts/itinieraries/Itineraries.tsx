@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import img123 from "../home/img/img123.jpg";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 import { getUserRole } from "../../utils/utils";
 import regions from "../../utils/regions";
@@ -57,6 +58,7 @@ const Itineraries = (props: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedTab, setselectedTab] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [userRole, setuserRole] = useState("");
   const navigate = useNavigate();
 
   const getItineraries = async () => {
@@ -66,10 +68,13 @@ const Itineraries = (props: Props) => {
       let getdata = (await api(
         `/itinerary${searchParams.get("region") ? "?region=" + searchParams.get("region") : ""}`
       )) as { data: Itinerary[] };
+      console.log(getdata);
       setData(getdata.data);
 
       let purchasedData = (await api(
-        `/itinerary/purchased/${searchParams.get("region") ? "?region=" + searchParams.get("region") : ""}`
+        `/itinerary/purchased/${
+          searchParams.get("region") ? "?region=" + searchParams.get("region") : ""
+        }`
       )) as { data: Itinerary[] };
       setPurchasedItineraries(purchasedData.data);
     } catch (error) {
@@ -81,7 +86,7 @@ const Itineraries = (props: Props) => {
 
   useEffect(() => {
     const userRole = getUserRole(); // Replace this with your logic to get the user's role
-
+    setuserRole(userRole);
     if (userRole === "seller") {
       navigate("/itinerary/me");
     }
@@ -119,31 +124,51 @@ const Itineraries = (props: Props) => {
                   <div className="tabbable-line">
                     <ul className="nav nav-tabs text-center">
                       <li className={`${selectedTab === "" ? "active" : ""}`}>
-                        <a href="#tab_default_1" onClick={() => setselectedTab("")} data-toggle="tab">
+                        <a
+                          href="#tab_default_1"
+                          onClick={() => setselectedTab("")}
+                          data-toggle="tab"
+                        >
                           {" "}
                           All Itineraries
                         </a>
                       </li>
                       <li className={`${selectedTab === "stay" ? "active" : ""}`}>
-                        <a href="#tab_default_2" data-toggle="tab" onClick={() => setselectedTab("stay")}>
+                        <a
+                          href="#tab_default_2"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("stay")}
+                        >
                           {" "}
                           Stay
                         </a>
                       </li>
                       <li className={`${selectedTab === "taste" ? "active" : ""}`}>
-                        <a href="#tab_default_3" data-toggle="tab" onClick={() => setselectedTab("taste")}>
+                        <a
+                          href="#tab_default_3"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("taste")}
+                        >
                           {" "}
                           Taste
                         </a>
                       </li>
                       <li className={`${selectedTab === "vibe" ? "active" : ""}`}>
-                        <a href="#tab_default_4" data-toggle="tab" onClick={() => setselectedTab("vibe")}>
+                        <a
+                          href="#tab_default_4"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("vibe")}
+                        >
                           {" "}
                           Vibe
                         </a>
                       </li>
                       <li className={`${selectedTab === "experience" ? "active" : ""}`}>
-                        <a href="#tab_default_5" data-toggle="tab" onClick={() => setselectedTab("experience")}>
+                        <a
+                          href="#tab_default_5"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("experience")}
+                        >
                           {" "}
                           Experience
                         </a>
@@ -151,129 +176,145 @@ const Itineraries = (props: Props) => {
                     </ul>
                     <div className="tab-content listingtabs">
                       <div className="tab-pane active" id="tab_default_1">
-                        <div className="row">
-                          <div className="col-md-7">
-                            <div className="left-first">
-                              <p className="para-first">Most Loved</p>
-                              <h1 className="top-heading">
-                                <span className="first-textbg">RECOMMENDED ITINERARIES</span>
-                              </h1>
+                        {userRole ? (
+                          <>
+                            {" "}
+                            <div className="row">
+                              <div className="col-md-7">
+                                <div className="left-first">
+                                  <h1 className="top-heading">
+                                    <span className="first-textbg">My ITINERARIES</span>
+                                  </h1>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-
-                        <div className="carousel-reviews broun-block">
-                          <div className="container-fuild">
-                            {purchasedItineraries?.length > 0 ? (
-                              <div className="row">
-                                <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
-                                  <div className="carousel-inner">
-                                    <div className="item active">
-                                      <div className="card-slid">
-                                        <Carousel itemClass="w-full" responsive={responsive}>
-                                          {purchasedItineraries
-                                            .filter((each) =>
-                                              selectedTab ? each.category.includes(selectedTab) : true
-                                            )
-                                            .map((each) => (
-                                              <div key={each._id} className="list-item">
-                                                <Link
-                                                  style={{ textDecoration: "none" }}
-                                                  to={`/itinerary/view/${each._id}`}
-                                                  className="card"
-                                                >
-                                                  <img
-                                                    className="card-img-top"
-                                                    src={each.image}
-                                                    alt="Card image"
-                                                    style={{ width: "100%" }}
-                                                  />
-                                                  <div className="badge">
-                                                    <p>{each.category[0]}</p>
+                            <div className="carousel-reviews broun-block">
+                              <div className="container-fuild">
+                                {purchasedItineraries?.length > 0 ? (
+                                  <div className="row">
+                                    <div
+                                      id="carousel-reviews"
+                                      className="carousel slide"
+                                      data-ride="carousel"
+                                    >
+                                      <div className="carousel-inner">
+                                        <div className="item active">
+                                          <div className="card-slid">
+                                            <Carousel itemClass="w-full" responsive={responsive}>
+                                              {purchasedItineraries
+                                                .filter((each) =>
+                                                  selectedTab
+                                                    ? each.category.includes(selectedTab)
+                                                    : true
+                                                )
+                                                .map((each) => (
+                                                  <div key={each._id} className="list-item">
+                                                    <Link
+                                                      style={{ textDecoration: "none" }}
+                                                      to={`/itinerary/view/${each._id}`}
+                                                      className="card"
+                                                    >
+                                                      <img
+                                                        className="card-img-top"
+                                                        src={each.image}
+                                                        alt="Cardimage"
+                                                        style={{ width: "100%" }}
+                                                      />
+                                                      <div className="badge">
+                                                        <p>{each.category[0]}</p>
+                                                      </div>
+                                                      <div className="card-body">
+                                                        <h4 className="card-title">{each.title}</h4>
+                                                        <div className="subtitle">
+                                                          <span className="a">Created by:</span>
+                                                          <span className="b">
+                                                            {each.userId.username}
+                                                          </span>
+                                                        </div>
+                                                      </div>
+                                                    </Link>
                                                   </div>
-                                                  <div className="card-body">
-                                                    <h4 className="card-title">{each.title}</h4>
-                                                    <div className="subtitle">
-                                                      <span className="a">Created by:</span>
-                                                      <span className="b">{each.userId.username}</span>
-                                                    </div>
-                                                  </div>
-                                                </Link>
-                                              </div>
-                                            ))}
-                                        </Carousel>
-                                        {/* <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                      <div className="card">
-                                        <img
-                                          className="card-img-top"
-                                          src="img/Rect2.png"
-                                          alt="Card image"
-                                          style={{ width: "100%" }}
-                                        />
-                                        <div className="badge">
-                                          <p>Stay</p>
-                                        </div>
-                                        <div className="card-body">
-                                          <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                          <div className="subtitle">
-                                            <span className="a">Created by:</span>
-                                            <span className="b">Tichelle Richards</span>
-                                          </div>
-                                        </div>
+                                                ))}
+                                            </Carousel>
+                                            {/* <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div className="card">
+                                      <img
+                                        className="card-img-top"
+                                        src="img/Rect2.png"
+                                        alt="Card image"
+                                        style={{ width: "100%" }}
+                                      />
+                                      <div className="badge">
+                                        <p>Stay</p>
                                       </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                      <div className="card">
-                                        <img
-                                          className="card-img-top"
-                                          src="img/Rect2.png"
-                                          alt="Card image"
-                                          style={{ width: "100%" }}
-                                        />
-                                        <div className="badge">
-                                          <p>Stay</p>
+                                      <div className="card-body">
+                                        <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
+                                        <div className="subtitle">
+                                          <span className="a">Created by:</span>
+                                          <span className="b">Tichelle Richards</span>
                                         </div>
-                                        <div className="card-body">
-                                          <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                          <div className="subtitle">
-                                            <span className="a">Created by:</span>
-                                            <span className="b">Tichelle Richards</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                      <div className="card">
-                                        <img
-                                          className="card-img-top"
-                                          src="img/Rect2.png"
-                                          alt="Card image"
-                                          style={{ width: "100%" }}
-                                        />
-                                        <div className="badge">
-                                          <p>Stay</p>
-                                        </div>
-                                        <div className="card-body">
-                                          <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                          <div className="subtitle">
-                                            <span className="a">Created by:</span>
-                                            <span className="b">Tichelle Richards</span>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div> */}
                                       </div>
                                     </div>
                                   </div>
-                                </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div className="card">
+                                      <img
+                                        className="card-img-top"
+                                        src="img/Rect2.png"
+                                        alt="Card image"
+                                        style={{ width: "100%" }}
+                                      />
+                                      <div className="badge">
+                                        <p>Stay</p>
+                                      </div>
+                                      <div className="card-body">
+                                        <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
+                                        <div className="subtitle">
+                                          <span className="a">Created by:</span>
+                                          <span className="b">Tichelle Richards</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div className="card">
+                                      <img
+                                        className="card-img-top"
+                                        src="img/Rect2.png"
+                                        alt="Card image"
+                                        style={{ width: "100%" }}
+                                      />
+                                      <div className="badge">
+                                        <p>Stay</p>
+                                      </div>
+                                      <div className="card-body">
+                                        <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
+                                        <div className="subtitle">
+                                          <span className="a">Created by:</span>
+                                          <span className="b">Tichelle Richards</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div> */}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <h3 style={{ textAlign: "center" }}>
+                                      No Itineraries purchased yet
+                                    </h3>
+                                  </div>
+                                )}
                               </div>
-                            ) : (
-                              <div>
-                                <h3 style={{ textAlign: "center" }}>No Itineraries purchased yet</h3>
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+
                         <br />
 
                         <section className="listing">
@@ -281,7 +322,6 @@ const Itineraries = (props: Props) => {
                             <div className="row">
                               <div className="col-md-7">
                                 <div className="left-first">
-                                  <p className="para-first">My Listing</p>
                                   <h1 className="top-heading">
                                     <span className="first-textbg">ITINERARIES Listing</span>
                                   </h1>
@@ -293,7 +333,10 @@ const Itineraries = (props: Props) => {
                               <div className="row">
                                 <div className="card-grid">
                                   {data.map((each) => (
-                                    <div key={each._id} className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div
+                                      key={each._id}
+                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                    >
                                       <Link
                                         style={{ textDecoration: "none" }}
                                         to={`/itinerary/view/${each._id}`}
@@ -302,7 +345,7 @@ const Itineraries = (props: Props) => {
                                         <img
                                           className="card-img-top"
                                           src={each.image}
-                                          alt="Card image"
+                                          alt="Cardimage"
                                           style={{ width: "100%" }}
                                         />
                                         <div className="badge">
@@ -473,7 +516,9 @@ const Itineraries = (props: Props) => {
                             <div className="row">
                               <div className="col-md-12">
                                 <div className="more-listing text-center">
-                                  <button className="btn btn-orange navbar-btn">Discover more</button>
+                                  <button className="btn btn-orange navbar-btn">
+                                    Discover more
+                                  </button>
                                 </div>
                               </div>
                             </div>

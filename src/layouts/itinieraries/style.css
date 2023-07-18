@@ -138,8 +138,8 @@ span.first-textbg:after {
   background: url(../../layouts/home/img/Decore.png) no-repeat;
   position: absolute;
   background-size: 100%;
-  top: 100px;
-  left: 37%;
+  top: 73px;
+  left: 6%;
 }
 p.desc-first {
   font-family: "Work Sans";
@@ -231,7 +231,8 @@ button.btn.btn-ply.navbar-btn {
   background: #ffffff;
   box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852),
     0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01),
-    0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
+    0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185),
+    0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
   border-radius: 36px;
 }
 /*-------------------------------------------------*/
@@ -576,7 +577,7 @@ input#files {
   color: #211b1b;
 }
 .listing span.first-textbg:after {
-  top: 70px;
+  top: 58px;
   left: 13%;
 }
 
@@ -782,7 +783,7 @@ h3.price-sec span {
   }
   span.first-textbg:after {
     width: 280px;
-    top: 90px;
+    /* top: px; */
   }
   .img-rightone {
     position: absolute;
@@ -933,6 +934,7 @@ h3.price-sec span {
   .listing span.first-textbg:after {
     left: 37%;
     width: 200px;
+    top: 38px;
   }
   .itineraries h1.top-heading {
     font-size: 46px;
@@ -961,17 +963,18 @@ h3.price-sec span {
   .testimonial-arrow {
     display: none;
   }
+  span.first-textbg:after {
+    width: 200px;
+    top: 35px;
+    left: 37%;
+  }
 }
 
 @media (max-width: 320px) {
   .img-righttwo img {
     width: 100%;
   }
-  span.first-textbg:after {
-    width: 200px;
-    top: 90px;
-    left: 37%;
-  }
+
   h1.top-heading {
     font-size: 40px;
     line-height: 40px;

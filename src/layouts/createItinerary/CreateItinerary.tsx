@@ -123,7 +123,9 @@ const CreateItinerary = (props: Props) => {
   const changeServices = (title: string, day: number) => {
     if (values.eachDetail[day - 1].services.includes(title)) {
       let filtered = values.eachDetail[day - 1].services.filter((each) => each !== title);
-      let newDetail = values.eachDetail.map((each) => (each.day === day ? { ...each, services: filtered } : each));
+      let newDetail = values.eachDetail.map((each) =>
+        each.day === day ? { ...each, services: filtered } : each
+      );
 
       setValues({ ...values, eachDetail: newDetail });
     } else {
@@ -269,7 +271,8 @@ const CreateItinerary = (props: Props) => {
   ) => {
     e.preventDefault();
     let eachDetail = values.eachDetail.map((each) => {
-      if (each.day === day) return { ...each, [type]: [...(each[type] || []), ...Array.from(e.dataTransfer.files)] };
+      if (each.day === day)
+        return { ...each, [type]: [...(each[type] || []), ...Array.from(e.dataTransfer.files)] };
       else return each;
     }) as EachDetail[];
 
@@ -302,9 +305,13 @@ const CreateItinerary = (props: Props) => {
   };
 
   const getUserDetails = async () => {
-    let data = await api("/billing/user-details");
-    if (!data?.data?.isCompleted) {
-      return navigate("/stripe/connect");
+    try {
+      let data = await api("/billing/user-details");
+      if (!data?.data?.isCompleted) {
+        return navigate("/stripe/connect");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -598,17 +605,30 @@ const CreateItinerary = (props: Props) => {
         </div>
 
         <div className="row">
-          <div className="col-sm-12 col-md-6 col-lg-6" onDrop={handleDrop} onDragOver={handleDragOver}>
+          <div
+            className="col-sm-12 col-md-6 col-lg-6"
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+          >
             <div className="upload-file">
               {values.image ? (
-                <img src={URL.createObjectURL(values.image)} style={{ width: "200px" }} alt="Thumbnail" />
+                <img
+                  src={URL.createObjectURL(values.image)}
+                  style={{ width: "200px" }}
+                  alt="Thumbnail"
+                />
               ) : (
                 <img src={upload} alt="Upload" />
               )}
               <p>Drag your thumbnail here</p>
 
               <div>
-                <input id="thumbnail" type="file" style={{ display: "none" }} onChange={handleFileChange} />
+                <input
+                  id="thumbnail"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={handleFileChange}
+                />
                 <label htmlFor="thumbnail" style={{ textDecoration: "underline" }}>
                   Upload from your device
                 </label>
@@ -626,7 +646,7 @@ const CreateItinerary = (props: Props) => {
             </p>
           </div>
 
-          <div className="col-sm-12 col-md-6 col-lg-6">
+          <div className="col-sm-12 col-md-6 col-lg-6 formdes">
             <label className="control-label" htmlFor="title">
               Title
             </label>
@@ -686,6 +706,7 @@ const CreateItinerary = (props: Props) => {
                   event.preventDefault();
                 }
               }}
+              min={1}
               formEncType="number"
               className="form-control"
               id="days"
@@ -697,7 +718,12 @@ const CreateItinerary = (props: Props) => {
             <label className="control-label" htmlFor="introduction">
               Introduction
             </label>
-            <textarea name="introduction" id="introduction" value={values.introduction} onChange={handleChange}>
+            <textarea
+              name="introduction"
+              id="introduction"
+              value={values.introduction}
+              onChange={handleChange}
+            >
               Write your intro...
             </textarea>
 
@@ -737,7 +763,7 @@ const CreateItinerary = (props: Props) => {
             </p>
           </div>
 
-          <div className="col-sm-12 col-md-6 col-lg-6">
+          <div className="col-sm-12 col-md-6 col-lg-6 formdes2">
             <label className="control-label" htmlFor="message">
               Choose a category for this itinerary:
             </label>
@@ -745,14 +771,24 @@ const CreateItinerary = (props: Props) => {
               <div className="col-sm-12 col-md-6 col-lg-6">
                 <div
                   className="check-option"
-                  onClick={() => setValues({ ...values, category: Array.from(new Set([...values.category, "stay"])) })}
+                  onClick={() =>
+                    setValues({
+                      ...values,
+                      category: Array.from(new Set([...values.category, "stay"])),
+                    })
+                  }
                 >
                   <input type="checkbox" />
                   <label className="container-radio">Stay</label>
                 </div>
                 <div
                   className="check-option"
-                  onClick={() => setValues({ ...values, category: Array.from(new Set([...values.category, "taste"])) })}
+                  onClick={() =>
+                    setValues({
+                      ...values,
+                      category: Array.from(new Set([...values.category, "taste"])),
+                    })
+                  }
                 >
                   <input type="checkbox" />
                   <label className="container-radio">Taste</label>
@@ -761,14 +797,24 @@ const CreateItinerary = (props: Props) => {
               <div className="col-sm-12 col-md-6 col-lg-6">
                 <div
                   className="check-option"
-                  onClick={() => setValues({ ...values, category: Array.from(new Set([...values.category, "stay"])) })}
+                  onClick={() =>
+                    setValues({
+                      ...values,
+                      category: Array.from(new Set([...values.category, "stay"])),
+                    })
+                  }
                 >
                   <input type="checkbox" />
                   <label className="container-radio">Vibe</label>
                 </div>
                 <div
                   className="check-option"
-                  onClick={() => setValues({ ...values, category: Array.from(new Set([...values.category, "stay"])) })}
+                  onClick={() =>
+                    setValues({
+                      ...values,
+                      category: Array.from(new Set([...values.category, "stay"])),
+                    })
+                  }
                 >
                   <input type="checkbox" />
                   <label className="container-radio">Experience</label>
@@ -814,7 +860,11 @@ const CreateItinerary = (props: Props) => {
           <div>
             <h4>Are you sure you want to delete this day?</h4>
             <div className="button-group">
-              <button style={{ marginRight: "20px" }} onClick={() => deleteDay()} className="btn btn-danger navbar-btn">
+              <button
+                style={{ marginRight: "20px" }}
+                onClick={() => deleteDay()}
+                className="btn btn-danger navbar-btn"
+              >
                 Delete
               </button>
               <button className="btn btn-success navbar-btn" onClick={() => setDayForDelete(null)}>
@@ -825,7 +875,15 @@ const CreateItinerary = (props: Props) => {
         </ReactModal>
 
         {values.eachDetail.map((item, idx) => (
-          <div className="row" style={{ marginTop: "100px" }}>
+          <div
+            className="row daysrow"
+            style={{
+              marginTop: "100px",
+              border: "1px solid #00000033",
+              padding: "10px",
+              borderRadius: "10px",
+            }}
+          >
             <div className="col-md-12">
               <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
                 <button
@@ -845,12 +903,14 @@ const CreateItinerary = (props: Props) => {
                 ></button>
               </div>
 
-              <h3 style={{ textAlign: "center" }}>Day {idx + 1}</h3>
+              <h3 style={{ textAlign: "center" }} className="daytitle">
+                Day {idx + 1}
+              </h3>
               <input
                 type="text"
                 value={item.dayTitle}
                 onChange={(e) => handleChangeItem(e, item.day)}
-                className="form-control"
+                className="form-control inputday"
                 id="dayTitle"
                 style={{ width: "50%", margin: "auto", marginBottom: "10px" }}
                 placeholder={`Enter ${
@@ -866,21 +926,33 @@ const CreateItinerary = (props: Props) => {
               />
               <div className="tabbable-panel tabs-pgs">
                 <div className="tabbable-line">
-                  <ul className="nav nav-tabs text-center">
-                    <li className={`${currentTab === 0 ? "active" : ""}`}>
-                      <button type="button" onClick={() => setCurrentTab(0)} className={`${currentTab > 0 ? "" : ""}`}>
+                  <ul className="nav nav-tabs text-center navul2">
+                    <li className={`${currentTab === 0 ? "active" : ""} `}>
+                      <button
+                        type="button"
+                        onClick={() => setCurrentTab(0)}
+                        className={`${currentTab > 0 ? "" : ""} tastebtn`}
+                      >
                         Stay
                       </button>
                     </li>
 
                     <li className={`${currentTab === 1 ? "active" : ""}`}>
-                      <button type="button" onClick={() => setCurrentTab(1)} className={`${currentTab > 1 ? "" : ""}`}>
+                      <button
+                        type="button"
+                        onClick={() => setCurrentTab(1)}
+                        className={`${currentTab > 1 ? "" : ""} tastebtn`}
+                      >
                         Taste
                       </button>
                     </li>
 
                     <li className={`${currentTab === 2 ? "active" : ""}`}>
-                      <button type="button" onClick={() => setCurrentTab(2)} className={`${currentTab > 2 ? "" : ""}`}>
+                      <button
+                        type="button"
+                        onClick={() => setCurrentTab(2)}
+                        className={`${currentTab > 2 ? "" : ""} tastebtn`}
+                      >
                         Vibe
                       </button>
                     </li>
@@ -893,9 +965,12 @@ const CreateItinerary = (props: Props) => {
                   </ul>
 
                   <div className="tab-content">
-                    <div className={`tab-pane${currentTab === 0 ? " active" : ""}`} id="tab_default_1">
+                    <div
+                      className={`tab-pane${currentTab === 0 ? " active" : ""}`}
+                      id="tab_default_1"
+                    >
                       <div className="row">
-                        <h2 className="top-heading text-center">Tell about your stay</h2>
+                        <h2 className="top-heading text-center stay0">Tell about your stay</h2>
                       </div>
                       <div className="row">
                         <div className="col-md-12">
@@ -952,7 +1027,10 @@ const CreateItinerary = (props: Props) => {
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "stayImages")}
                               />
-                              <label htmlFor={`day${item.day}image`} style={{ textDecoration: "underline" }}>
+                              <label
+                                htmlFor={`day${item.day}image`}
+                                style={{ textDecoration: "underline" }}
+                              >
                                 Upload from your device
                               </label>
                             </div>
@@ -987,9 +1065,14 @@ const CreateItinerary = (props: Props) => {
                       </div>
                     </div>
 
-                    <div className={`tab-pane${currentTab === 1 ? " active" : ""}`} id="tab_default_2">
+                    <div
+                      className={`tab-pane${currentTab === 1 ? " active" : ""}`}
+                      id="tab_default_2"
+                    >
                       <div className="row">
-                        <h2 className="top-heading text-center">Tell about your culinary experience TASTE</h2>
+                        <h2 className="top-heading text-center">
+                          Tell about your culinary experience TASTE
+                        </h2>
                       </div>
                       <div className="row pd-tb">
                         <div className="col-md-6">
@@ -1016,7 +1099,10 @@ const CreateItinerary = (props: Props) => {
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "tasteImages")}
                               />
-                              <label htmlFor={`day${item.day}taste-image`} style={{ textDecoration: "underline" }}>
+                              <label
+                                htmlFor={`day${item.day}taste-image`}
+                                style={{ textDecoration: "underline" }}
+                              >
                                 Upload from your device
                               </label>
                             </div>
@@ -1050,7 +1136,10 @@ const CreateItinerary = (props: Props) => {
                         </div>
                       </div>
                     </div>
-                    <div className={`tab-pane${currentTab === 2 ? " active" : ""}`} id="tab_default_3">
+                    <div
+                      className={`tab-pane${currentTab === 2 ? " active" : ""}`}
+                      id="tab_default_3"
+                    >
                       <div className="row">
                         <h2 className="top-heading text-center">Tell about the vibe</h2>
                       </div>
@@ -1079,7 +1168,10 @@ const CreateItinerary = (props: Props) => {
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "vibeImages")}
                               />
-                              <label htmlFor={`day${item.day}-vibe-image`} style={{ textDecoration: "underline" }}>
+                              <label
+                                htmlFor={`day${item.day}-vibe-image`}
+                                style={{ textDecoration: "underline" }}
+                              >
                                 Upload from your device
                               </label>
                             </div>
@@ -1114,9 +1206,14 @@ const CreateItinerary = (props: Props) => {
                       </div>
                     </div>
 
-                    <div className={`tab-pane${currentTab === 3 ? " active" : ""}`} id="tab_default_4">
+                    <div
+                      className={`tab-pane${currentTab === 3 ? " active" : ""}`}
+                      id="tab_default_4"
+                    >
                       <div className="row">
-                        <h2 className="top-heading text-center">Provide an intriguing banner of your experience</h2>
+                        <h2 className="top-heading text-center">
+                          Provide an intriguing banner of your experience
+                        </h2>
                       </div>
 
                       <div className="row pd-tb">
@@ -1191,7 +1288,7 @@ const CreateItinerary = (props: Props) => {
         {isComplete && <p>Itinerary created successfuly</p>}
 
         <div className="row">
-          <div className="col-md-12 text-center">
+          <div className="col-md-12 text-center" style={{ marginTop: "20px" }}>
             <button disabled={isLoading} type="submit" className="btn btn-orange navbar-btn">
               {isLoading ? <CircularProgress /> : "Submit Itinerary"}
             </button>

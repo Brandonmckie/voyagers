@@ -1,6 +1,7 @@
 import { MouseEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../utils/api";
+import img123 from "../home/img/img123.jpg";
 import { getUser } from "../../utils/utils";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 
@@ -143,7 +144,7 @@ const SingleItinerary = (props: any) => {
           <section className="itineraries style-input">
             <div className="container">
               <div className="d-itineraries">
-                <div className="row">
+                <div className="row singlerow">
                   <div className="col-md-6">
                     <div className="left-d-itineraries">
                       <ul>
@@ -214,16 +215,18 @@ const SingleItinerary = (props: any) => {
                           </h3>
                         </div>
                         */}
-
-                      <div className="col-md-4 col-sm-3 col-xs-4" style={{ paddingLeft: "0px" }}>
-                        <h3 className="price-sec text-left">
-                          Price: <span> ${data.price}</span>
-                        </h3>
-                      </div>
-
                       <div className="row">
+                        <div
+                          className="col-md-4 col-sm-12 col-xs-12"
+                          // style={{ paddingLeft: "0px" }}
+                        >
+                          <h3 className="price-sec text-left">
+                            Price: <span> ${data.price}</span>
+                          </h3>
+                        </div>
+
                         {isMy ? (
-                          <div className="col-md-2 col-sm-2 col-xs-3">
+                          <div className="col-md-2 col-sm-12 col-xs-12">
                             <button onClick={handleEdit} className="btn btn-orange navbar-btn">
                               Edit
                             </button>
@@ -234,7 +237,7 @@ const SingleItinerary = (props: any) => {
                         {profile.role === "seller" ? (
                           ""
                         ) : (
-                          <div className="col-md-12 col-sm-3 col-xs-4">
+                          <div className="col-md-12 col-sm-12 col-xs-12">
                             {purchasedItineraries.includes(itineraryId) || isMy ? (
                               <></>
                             ) : (
@@ -271,9 +274,15 @@ const SingleItinerary = (props: any) => {
                                   />
                                   <label
                                     htmlFor="myCheckbox"
-                                    style={{ marginLeft: "10px", fontSize: "15px" }}
+                                    className="labelmessage"
+                                    style={{
+                                      marginLeft: "10px",
+                                      fontSize: "15px",
+                                      color: "#383838f7",
+                                    }}
                                   >
-                                    To have a My Voyages Travel Expert execute this itinerary and contact you.
+                                    To have a My Voyages Travel Expert execute this itinerary and
+                                    contact you.
                                   </label>
                                 </div>
                                 <button
@@ -287,12 +296,17 @@ const SingleItinerary = (props: any) => {
                             )}
                           </div>
                         )}
-                        <div className="col-md-4 col-sm-3 col-xs-4"></div>
+                        <div className="col-md-4 col-sm-12 col-xs-12"></div>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <img style={{ maxWidth: "550px", borderRadius: "24px" }} src={data.image} />
+                    <img
+                      className="image00"
+                      style={{ maxWidth: "550px", borderRadius: "24px" }}
+                      src={data.image}
+                      alt={data?.title}
+                    />
                   </div>
                 </div>
               </div>
@@ -359,7 +373,11 @@ const SingleItinerary = (props: any) => {
 
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
-                                    <p>{each.stayDescription}</p>
+                                    <p>
+                                      {each?.stayDescription
+                                        ? each?.stayDescription
+                                        : "No Description"}
+                                    </p>
                                   </div>
                                 </div>
 
@@ -376,21 +394,22 @@ const SingleItinerary = (props: any) => {
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
-                                                  {each.stayImages?.map((image) => (
-                                                    <div
-                                                      key={image}
-                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                                    >
-                                                      <div className="card">
-                                                        <img
-                                                          className="card-img-top"
-                                                          src={image}
-                                                          alt="Card image"
-                                                          style={{ width: "100%" }}
-                                                        />
+                                                  {each?.stayImages?.length !== (0 || undefined) &&
+                                                    each.stayImages?.map((image) => (
+                                                      <div
+                                                        key={image}
+                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                      >
+                                                        <div className="card">
+                                                          <img
+                                                            className="card-img-top"
+                                                            src={image}
+                                                            alt="Card image"
+                                                            style={{ width: "100%" }}
+                                                          />
+                                                        </div>
                                                       </div>
-                                                    </div>
-                                                  ))}
+                                                    ))}
                                                 </div>
                                               </div>
                                             </div>
@@ -429,7 +448,11 @@ const SingleItinerary = (props: any) => {
                                 <div className="row">
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
-                                    <p>{each.tasteDescription}</p>
+                                    <p>
+                                      {each?.tasteDescription
+                                        ? each?.tasteDescription
+                                        : "No Description"}
+                                    </p>
                                   </div>
                                   <div className="col-md-3"></div>
                                 </div>
@@ -439,53 +462,58 @@ const SingleItinerary = (props: any) => {
                                     <div className="carousel-reviews broun-block">
                                       <div className="container-fuild">
                                         <div className="row">
-                                          <div
-                                            id="carousel-reviews"
-                                            className="carousel slide"
-                                            data-ride="carousel"
-                                          >
-                                            <div className="carousel-inner">
-                                              <div className="item active">
-                                                <div className="card-slid">
-                                                  {each.tasteImages?.map((image) => (
-                                                    <div
-                                                      key={image}
-                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                                    >
-                                                      <div className="card">
-                                                        <img
-                                                          className="card-img-top"
-                                                          src={image}
-                                                          alt="Card image"
-                                                          style={{ width: "100%" }}
-                                                        />
+                                          {each?.tasteImages?.length !== 0 && (
+                                            <div
+                                              id="carousel-reviews"
+                                              className="carousel slide"
+                                              data-ride="carousel"
+                                            >
+                                              <div className="carousel-inner">
+                                                <div className="item active">
+                                                  <div className="card-slid">
+                                                    {each.tasteImages?.map((image) => (
+                                                      <div
+                                                        key={image}
+                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                      >
+                                                        <div className="card">
+                                                          <img
+                                                            className="card-img-top"
+                                                            src={image}
+                                                            alt="Card image"
+                                                            style={{
+                                                              width: "100%",
+                                                              borderRadius: "7px",
+                                                            }}
+                                                          />
+                                                        </div>
                                                       </div>
-                                                    </div>
-                                                  ))}
+                                                    ))}
+                                                  </div>
                                                 </div>
                                               </div>
+                                              <a
+                                                className="left carousel-control"
+                                                href="#carousel-reviews"
+                                                role="button"
+                                                data-slide="prev"
+                                              >
+                                                <i id="right" className="fa fa-angle-left">
+                                                  {" "}
+                                                </i>
+                                              </a>
+                                              <a
+                                                className="right carousel-control"
+                                                href="#carousel-reviews"
+                                                role="button"
+                                                data-slide="next"
+                                              >
+                                                <i id="right" className="fa fa-angle-right">
+                                                  {" "}
+                                                </i>
+                                              </a>
                                             </div>
-                                            <a
-                                              className="left carousel-control"
-                                              href="#carousel-reviews"
-                                              role="button"
-                                              data-slide="prev"
-                                            >
-                                              <i id="right" className="fa fa-angle-left">
-                                                {" "}
-                                              </i>
-                                            </a>
-                                            <a
-                                              className="right carousel-control"
-                                              href="#carousel-reviews"
-                                              role="button"
-                                              data-slide="next"
-                                            >
-                                              <i id="right" className="fa fa-angle-right">
-                                                {" "}
-                                              </i>
-                                            </a>
-                                          </div>
+                                          )}
                                         </div>
                                       </div>
                                     </div>
@@ -500,67 +528,76 @@ const SingleItinerary = (props: any) => {
                                 <div className="row">
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
-                                    <p>{each.vibeDescription}</p>
+                                    <p>
+                                      {each?.vibeDescription
+                                        ? each?.vibeDescription
+                                        : "No Description"}
+                                    </p>
                                   </div>
                                   <div className="col-md-3"></div>
                                 </div>
 
                                 <div className="row">
-                                  <div className="col-md-12">
-                                    <div className="carousel-reviews broun-block">
-                                      <div className="container-fuild">
-                                        <div className="row">
-                                          <div
-                                            id="carousel-reviews"
-                                            className="carousel slide"
-                                            data-ride="carousel"
-                                          >
-                                            <div className="carousel-inner">
-                                              <div className="item active">
-                                                <div className="card-slid">
-                                                  {each.vibeImages?.map((image) => (
-                                                    <div
-                                                      key={image}
-                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                                    >
-                                                      <div className="card">
-                                                        <img
-                                                          className="card-img-top"
-                                                          src={image}
-                                                          alt="Card image"
-                                                          style={{ width: "100%" }}
-                                                        />
+                                  {each?.vibeImages.length !== 0 && (
+                                    <div className="col-md-12">
+                                      <div className="carousel-reviews broun-block">
+                                        <div className="container-fuild">
+                                          <div className="row">
+                                            <div
+                                              id="carousel-reviews"
+                                              className="carousel slide"
+                                              data-ride="carousel"
+                                            >
+                                              <div className="carousel-inner">
+                                                <div className="item active">
+                                                  <div className="card-slid">
+                                                    {each?.vibeImages?.map((image) => (
+                                                      <div
+                                                        key={image}
+                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                      >
+                                                        <div className="card">
+                                                          <img
+                                                            className="card-img-top "
+                                                            src={image}
+                                                            alt="Card image"
+                                                            style={{
+                                                              width: "100%",
+                                                              borderRadius: "7px",
+                                                            }}
+                                                          />
+                                                        </div>
                                                       </div>
-                                                    </div>
-                                                  ))}
+                                                    ))}
+                                                  </div>
                                                 </div>
                                               </div>
+                                              <a
+                                                className="left carousel-control"
+                                                href="#carousel-reviews"
+                                                role="button"
+                                                data-slide="prev"
+                                              >
+                                                <i id="right" className="fa fa-angle-left">
+                                                  {" "}
+                                                </i>
+                                              </a>
+                                              <a
+                                                className="right carousel-control"
+                                                href="#carousel-reviews"
+                                                role="button"
+                                                data-slide="next"
+                                              >
+                                                <i id="right" className="fa fa-angle-right">
+                                                  {" "}
+                                                </i>
+                                              </a>
                                             </div>
-                                            <a
-                                              className="left carousel-control"
-                                              href="#carousel-reviews"
-                                              role="button"
-                                              data-slide="prev"
-                                            >
-                                              <i id="right" className="fa fa-angle-left">
-                                                {" "}
-                                              </i>
-                                            </a>
-                                            <a
-                                              className="right carousel-control"
-                                              href="#carousel-reviews"
-                                              role="button"
-                                              data-slide="next"
-                                            >
-                                              <i id="right" className="fa fa-angle-right">
-                                                {" "}
-                                              </i>
-                                            </a>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  )}
                                 </div>
                               </div>
 
@@ -572,71 +609,80 @@ const SingleItinerary = (props: any) => {
                                   <div className="col-md-3">
                                     <h4>Highlights of:</h4>
                                     <div className="service-options">
-                                      <p>{each.highlights}</p>
+                                      <p>{each?.highlights ? each?.highlights : "No Highlights"}</p>
                                     </div>
                                   </div>
                                   <div className="col-md-9">
                                     <h4>Description:</h4>
-                                    <p>{each.experienceDescription}</p>
+                                    <p>
+                                      {each?.experienceDescription
+                                        ? each?.experienceDescription
+                                        : "No Description"}
+                                    </p>
                                   </div>
                                 </div>
 
                                 <div className="row">
-                                  <div className="col-md-12">
-                                    <div className="carousel-reviews broun-block">
-                                      <div className="container-fuild">
-                                        <div className="row">
-                                          <div
-                                            id="carousel-reviews"
-                                            className="carousel slide"
-                                            data-ride="carousel"
-                                          >
-                                            <div className="carousel-inner">
-                                              <div className="item active">
-                                                <div className="card-slid">
-                                                  {each.experienceImages?.map((image) => (
-                                                    <div
-                                                      key={image}
-                                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                                    >
-                                                      <div className="card">
-                                                        <img
-                                                          className="card-img-top"
-                                                          src={image}
-                                                          alt="Card image"
-                                                          style={{ width: "100%" }}
-                                                        />
+                                  {each?.experienceImages.length !== 0 && (
+                                    <div className="col-md-12">
+                                      <div className="carousel-reviews broun-block">
+                                        <div className="container-fuild">
+                                          <div className="row">
+                                            <div
+                                              id="carousel-reviews"
+                                              className="carousel slide"
+                                              data-ride="carousel"
+                                            >
+                                              <div className="carousel-inner">
+                                                <div className="item active">
+                                                  <div className="card-slid">
+                                                    {each?.experienceImages?.map((image) => (
+                                                      <div
+                                                        key={image}
+                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                      >
+                                                        <div className="card">
+                                                          <img
+                                                            className="card-img-top"
+                                                            src={image}
+                                                            alt="Card image"
+                                                            style={{
+                                                              width: "100%",
+                                                              borderRadius: "7px",
+                                                            }}
+                                                          />
+                                                        </div>
                                                       </div>
-                                                    </div>
-                                                  ))}
+                                                    ))}
+                                                  </div>
                                                 </div>
                                               </div>
+                                              <a
+                                                className="left carousel-control"
+                                                href="#carousel-reviews"
+                                                role="button"
+                                                data-slide="prev"
+                                              >
+                                                <i id="right" className="fa fa-angle-left">
+                                                  {" "}
+                                                </i>
+                                              </a>
+                                              <a
+                                                className="right carousel-control"
+                                                href="#carousel-reviews"
+                                                role="button"
+                                                data-slide="next"
+                                              >
+                                                <i id="right" className="fa fa-angle-right">
+                                                  {" "}
+                                                </i>
+                                              </a>
                                             </div>
-                                            <a
-                                              className="left carousel-control"
-                                              href="#carousel-reviews"
-                                              role="button"
-                                              data-slide="prev"
-                                            >
-                                              <i id="right" className="fa fa-angle-left">
-                                                {" "}
-                                              </i>
-                                            </a>
-                                            <a
-                                              className="right carousel-control"
-                                              href="#carousel-reviews"
-                                              role="button"
-                                              data-slide="next"
-                                            >
-                                              <i id="right" className="fa fa-angle-right">
-                                                {" "}
-                                              </i>
-                                            </a>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  )}
                                 </div>
                               </div>
                             </div>

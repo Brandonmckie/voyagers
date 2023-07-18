@@ -16,3 +16,27 @@
   width: 1em;
   margin-left: -1em;
 }
+
+.aboutus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 45px 0px;
+}
+
+.aboutus0 {
+  width: 62%;
+  text-align: justify;
+  font-size: 18px;
+  padding: 8px 0px;
+}
+
+@media (max-width: 786px) {
+  .aboutus {
+    padding: 10px 0px;
+  }
+  .aboutus0 {
+    width: 95%;
+    font-size: 16px;
+  }
+}

@@ -181,6 +181,17 @@ textarea.text-details {
 .row.pd-tb {
   padding-top: 20px;
 }
+.mobiletop {
+  display: none;
+}
+.btnspan span {
+  width: 19px !important;
+  height: 1px !important;
+  border: 1px solid black !important;
+}
+.atag {
+  margin-top: 10px;
+}
 
 /*+++++++++++++++++++++++++++++++++++*/
 @media (max-width: 1024px) {
@@ -200,8 +211,47 @@ textarea.text-details {
   .card {
     margin-bottom: 30px;
   }
+  .atag {
+    margin-top: 0px;
+  }
+
+  .mobileul {
+    margin: 0px !important;
+    display: flex;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+  .mobilelog {
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+  }
+  .mobiledrop {
+    left: -84px !important;
+    min-width: 118px !important;
+  }
   .card-grid {
     padding: 0px 0;
+  }
+  .nav-head {
+    margin-left: 0 !important;
+  }
+  .profilenav0 {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .profilenav0 li a {
+    padding: 5px 16px;
+    text-align: left;
+  }
+}
+@media (max-width: 760px) {
+  .mobiletop {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
   }
 }
 

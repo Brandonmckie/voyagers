@@ -88,4 +88,7 @@
   .sigup-box {
     padding: 50px 19px 15px;
   }
+  .sigup-box {
+    border: 0px solid white;
+  }
 }

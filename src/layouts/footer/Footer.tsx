@@ -19,7 +19,7 @@ const Footer = (props: Props) => {
             <div className="footer-logo">
               <img src={logo} width="64px" height="64px" />
             </div>
-            <p className="footer-p">Explore with My Voyages: Choose Your Itinerary and Book a Travel Expert</p>
+            <p className="footer-p">Simplified travel planning through social interaction</p>
             <div className="social">
               {/* <!-- Facebook --> */}
               <a
@@ -30,15 +30,27 @@ const Footer = (props: Props) => {
                 <img src={fb} />
               </a>
               {/* <!--instagram --> */}
-              <a href="https://www.instagram.com/myvoyagesofficial/" target="_blank" className="yt-ic">
+              <a
+                href="https://www.instagram.com/myvoyagesofficial/"
+                target="_blank"
+                className="yt-ic"
+              >
                 <img src={insta} />
               </a>
               {/* <!-- linkedln --> */}
-              <a href="https://www.linkedin.com/company/myvoyages/" target="_blank" className="inst-ic">
+              <a
+                href="https://www.linkedin.com/company/myvoyages/"
+                target="_blank"
+                className="inst-ic"
+              >
                 <img src={linkedIn} />
               </a>
               {/* <!-- tiktok +--> */}
-              <a href="https://www.tiktok.com/@myvoyagesofficial?lang=en" target="_blank" className="li-ic">
+              <a
+                href="https://www.tiktok.com/@myvoyagesofficial?lang=en"
+                target="_blank"
+                className="li-ic"
+              >
                 <img src={tiktok} />
               </a>
             </div>

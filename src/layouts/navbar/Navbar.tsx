@@ -1,9 +1,4 @@
-import {
-  Link,
-  createSearchParams,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Link, createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { MouseEvent, useEffect, useState } from "react";
 
 import { checkIfUserIsAuthenticated } from "../../utils/utils";
@@ -56,6 +51,8 @@ const Navbar = (props: Props) => {
     image: "",
   });
 
+  const [mobileview, setmobileview] = useState(false);
+
   const verifyLogin = async () => {
     let isAuthenticated = await checkIfUserIsAuthenticated();
 
@@ -76,7 +73,6 @@ const Navbar = (props: Props) => {
   const getUser = async () => {
     try {
       const user = await api("/users/get-profile");
-      console.log(user);
       setUser(user.data.user);
     } catch (err) {
       console.log(err);
@@ -113,20 +109,69 @@ const Navbar = (props: Props) => {
         {/* <!-- header --> */}
         <nav className="navbar">
           <div className="container-fluid">
-            <div className="navbar-header">
-              <button
-                type="button"
-                className="navbar-toggle"
-                data-toggle="collapse"
-                data-target="#myNavbar"
-              >
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <Link to="/" className="navbar-brand">
-                <img src={logo} width="64px" height="64px" />
+            <div className="navbar-header nav-head" style={{ display: "flex" }}>
+              <Link to="/" className="atag">
+                <img src={logo} width="64px" height="64px" alt="imglogo" />
               </Link>
+
+              <div style={{ flexDirection: "row", alignItems: "center" }} className="mobiletop">
+                {isLoggedIn && (
+                  <div>
+                    <ul
+                      className={`nav navbar-nav navbar-right dropdown dropdown-toggle mobileul ${
+                        profileOpen ? " open" : ""
+                      }`}
+                      data-toggle="dropdown"
+                      onClick={() => setProfileOpen(!profileOpen)}
+                      // style={
+                      //   user.role === "seller"
+                      //     ? {
+                      //         display: "flex",
+                      //         alignItems: "center",
+                      //         justifyContent: "center",
+                      //         cursor: "pointer",
+                      //         marginTop: "-68px",
+                      //       }
+                      //     : {}
+                      // }
+                    >
+                      <li>
+                        <img
+                          width="35px"
+                          height="35px"
+                          src={user.image || dp}
+                          alt="DisplayPicture"
+                        />
+                      </li>
+
+                      <ul className="dropdown-menu profile-dropdown mobiledrop">
+                        <li onClick={handleProfileOpen}>Edit Profile</li>
+                        {user.role === "seller" && user.stripeConnected === false ? (
+                          <li onClick={handleStripeOnboarding}>Complete Onboarding</li>
+                        ) : (
+                          ""
+                        )}
+                        <li onClick={handleLogout} className="mobilelog">
+                          Logout
+                        </li>
+                      </ul>
+                    </ul>
+                  </div>
+                )}
+                <button
+                  onClick={() => {
+                    setmobileview(!mobileview);
+                  }}
+                  type="button"
+                  className="navbar-toggle btnspan"
+                  data-toggle="collapse"
+                  data-target="#myNavbar"
+                >
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                </button>
+              </div>
             </div>
 
             <div className="collapse navbar-collapse" id="myNavbar">
@@ -151,9 +196,7 @@ const Navbar = (props: Props) => {
                   <li
                     onMouseLeave={(e) => handleShowDropdown(e, false)}
                     onMouseEnter={(e) => handleShowDropdown(e, true)}
-                    className={`dropdown ${
-                      isDropdownOpen ? " open" : ""
-                    }`}
+                    className={`dropdown ${isDropdownOpen ? " open" : ""}`}
                   >
                     <a
                       style={{ margin: 0, padding: "15px" }}
@@ -163,22 +206,20 @@ const Navbar = (props: Props) => {
                       Destinations <b className="caret"></b>
                     </a>
 
-
-
-                    
                     <ul
                       className="dropdown-menu dropdown-menu-large row"
                       style={{
                         maxHeight: "70vh",
-                        overflowY: "auto",
-                        left: "-40%",
+                        // overflowY: "hidden",
+                        left: "-74%",
+                        width: "228%",
                       }}
                     >
                       {Object.entries(cities).map(([key, val]) => (
                         <li className="col-sm-6">
                           <ul>
                             <li className="dropdown-header">{key}</li>
-                            <div className="row inn-dropdown">
+                            <div className="row inn-dropdown" style={{ width: "250px" }}>
                               {createGroups(val, 23).map((each) => (
                                 <div className="col-sm-6">
                                   {each.map((item) => (
@@ -202,7 +243,6 @@ const Navbar = (props: Props) => {
                         </li>
                       ))}
                     </ul>
-                    
                   </li>
                 ) : (
                   <li>
@@ -214,7 +254,6 @@ const Navbar = (props: Props) => {
                   <Link to="/about-us">About us</Link>
                 </li>
 
-             
                 <li>
                   <Link to="/contact-us">Contact us</Link>
                 </li>
@@ -222,9 +261,7 @@ const Navbar = (props: Props) => {
                 {user.role === "seller" ? (
                   <li>
                     <Link to="/itinerary/create">
-                      <button className="btn btn-orange navbar-btn">
-                        Create Itinerary
-                      </button>
+                      <button className="btn btn-orange navbar-btn">Create Itinerary</button>
                     </Link>
                   </li>
                 ) : (
@@ -270,11 +307,8 @@ const Navbar = (props: Props) => {
 
                     <ul className="dropdown-menu profile-dropdown">
                       <li onClick={handleProfileOpen}>Edit Profile</li>
-                      {user.role === "seller" &&
-                      user.stripeConnected === false ? (
-                        <li onClick={handleStripeOnboarding}>
-                          Complete Onboarding
-                        </li>
+                      {user.role === "seller" && user.stripeConnected === false ? (
+                        <li onClick={handleStripeOnboarding}>Complete Onboarding</li>
                       ) : (
                         ""
                       )}
@@ -286,18 +320,12 @@ const Navbar = (props: Props) => {
                 <>
                   <ul className="nav navbar-nav navbar-right">
                     <li>
-                      <Link
-                        to="/auth/login"
-                        className="btn btn-border navbar-btn"
-                      >
+                      <Link to="/auth/login" className="btn btn-border navbar-btn">
                         Login
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/itinerary/create"
-                        className="btn btn-orange navbar-btn"
-                      >
+                      <Link to="/itinerary/create" className="btn btn-orange navbar-btn">
                         Create Itinerary
                       </Link>
                     </li>
@@ -309,6 +337,148 @@ const Navbar = (props: Props) => {
         </nav>
         {/* <!-- header end--> */}
       </div>
+      {mobileview && (
+        <div className="mobileview">
+          <ul
+            className="nav navbar-nav mobileul"
+            // style={
+            //   user.role === "seller"
+            //     ? {
+            //         display: "flex",
+            //         // alignItems: "center",
+            //         marginTop: 0,
+            //         marginLeft: "20%",
+            //       }
+            //     : {}
+            // }
+          >
+            <li className="active">
+              <Link
+                to="/"
+                onClick={() => {
+                  setmobileview(false);
+                }}
+              >
+                Home
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/about-us"
+                onClick={() => {
+                  setmobileview(false);
+                }}
+              >
+                About us
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/contact-us"
+                onClick={() => {
+                  setmobileview(false);
+                }}
+              >
+                Contact us
+              </Link>
+            </li>
+
+            {!isLoggedIn && (
+              <>
+                <li>
+                  <Link to="/auth/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/itinerary/create">Create Itinerary</Link>
+                </li>
+              </>
+            )}
+
+            {!user._id || user.role === "user" ? (
+              <li
+                onMouseLeave={(e) => handleShowDropdown(e, false)}
+                onMouseEnter={(e) => handleShowDropdown(e, true)}
+                className={`dropdown ${isDropdownOpen ? " open" : ""}`}
+              >
+                <a style={{ margin: 0 }} className="dropdown-toggle btn" data-toggle="dropdown">
+                  Destinations <b className="caret"></b>
+                </a>
+
+                <ul
+                  className="dropdown-menu dropdown-menu-large row"
+                  style={{
+                    maxHeight: "50vh",
+                    overflowY: "auto",
+                    left: "-40%",
+                  }}
+                >
+                  {Object.entries(cities).map(([key, val]) => (
+                    <li className="col-sm-6">
+                      <ul>
+                        <li className="dropdown-header">{key}</li>
+                        <div className="row inn-dropdown">
+                          {createGroups(val, 23).map((each) => (
+                            <div className="col-sm-6">
+                              {each.map((item) => (
+                                <li>
+                                  <Link
+                                    onClick={() => {
+                                      setmobileview(false);
+                                    }}
+                                    to={{
+                                      pathname: "/itinerary/list",
+                                      search: createSearchParams({
+                                        region: item.code,
+                                      }).toString(),
+                                    }}
+                                  >
+                                    {item.country}
+                                  </Link>
+                                </li>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <Link
+                  to="/itinerary/me"
+                  onClick={() => {
+                    setmobileview(false);
+                  }}
+                >
+                  Voyager Itineraries
+                </Link>
+              </li>
+            )}
+
+            {user.role === "seller" ? (
+              <li>
+                <Link to="/itinerary/create">
+                  <button
+                    className="btn btn-orange navbar-btn"
+                    onClick={() => {
+                      setmobileview(false);
+                    }}
+                    style={{ padding: "7px 9px", fontSize: "14px" }}
+                  >
+                    Create Itinerary
+                  </button>
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

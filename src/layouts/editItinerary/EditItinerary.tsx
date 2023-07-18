@@ -103,7 +103,10 @@ const EditItinerary = (props: Props) => {
       setDays(days + 1);
     } else if (type === "-") {
       setDays(days - 1);
-      setValues({ ...values, eachDetail: values.eachDetail.slice(0, values.eachDetail.length - 1) });
+      setValues({
+        ...values,
+        eachDetail: values.eachDetail.slice(0, values.eachDetail.length - 1),
+      });
     }
 
     // let eachDetail = [];
@@ -150,7 +153,9 @@ const EditItinerary = (props: Props) => {
   const changeServices = (title: string, day: number) => {
     if (values.eachDetail[day - 1].services.includes(title)) {
       let filtered = values.eachDetail[day - 1].services.filter((each) => each !== title);
-      let newDetail = values.eachDetail.map((each) => (each.day === day ? { ...each, services: filtered } : each));
+      let newDetail = values.eachDetail.map((each) =>
+        each.day === day ? { ...each, services: filtered } : each
+      );
 
       setValues({ ...values, eachDetail: newDetail });
     } else {
@@ -304,7 +309,8 @@ const EditItinerary = (props: Props) => {
   ) => {
     e.preventDefault();
     let eachDetail = values.eachDetail.map((each) => {
-      if (each.day === day) return { ...each, [type]: [...(each[type] || []), ...Array.from(e.dataTransfer.files)] };
+      if (each.day === day)
+        return { ...each, [type]: [...(each[type] || []), ...Array.from(e.dataTransfer.files)] };
       else return each;
     }) as EachDetail[];
 
@@ -625,11 +631,19 @@ const EditItinerary = (props: Props) => {
           </div>
 
           <div className="row">
-            <div className="col-sm-12 col-md-6 col-lg-6" onDrop={handleDrop} onDragOver={handleDragOver}>
+            <div
+              className="col-sm-12 col-md-6 col-lg-6"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+            >
               <div className="upload-file">
                 {values.image ? (
                   <img
-                    src={typeof values.image === "string" ? values.image : URL.createObjectURL(values.image)}
+                    src={
+                      typeof values.image === "string"
+                        ? values.image
+                        : URL.createObjectURL(values.image)
+                    }
                     style={{ width: "200px" }}
                     alt="Thumbnail"
                   />
@@ -638,7 +652,12 @@ const EditItinerary = (props: Props) => {
                 )}
                 <p>Drag your thumbnail here</p>
                 <div>
-                  <input id="thumbnail" type="file" style={{ display: "none" }} onChange={handleFileChange} />
+                  <input
+                    id="thumbnail"
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={handleFileChange}
+                  />
                   <label htmlFor="thumbnail" style={{ textDecoration: "underline" }}>
                     Upload from your device
                   </label>
@@ -656,7 +675,7 @@ const EditItinerary = (props: Props) => {
               </p>
             </div>
 
-            <div className="col-sm-12 col-md-6 col-lg-6">
+            <div className="col-sm-12 col-md-6 col-lg-6 formdes">
               <label className="control-label" htmlFor="title">
                 Title
               </label>
@@ -710,7 +729,7 @@ const EditItinerary = (props: Props) => {
                     Days
                   </label>
                 </div>
-                <div className="days-input">
+                <div className="days-input" style={{ flexDirection: "row" }}>
                   <input
                     type="number"
                     value={days}
@@ -749,7 +768,12 @@ const EditItinerary = (props: Props) => {
               <label className="control-label" htmlFor="introduction">
                 Introduction
               </label>
-              <textarea name="introduction" id="introduction" value={values.introduction} onChange={handleChange}>
+              <textarea
+                name="introduction"
+                id="introduction"
+                value={values.introduction}
+                onChange={handleChange}
+              >
                 Write your intro...
               </textarea>
 
@@ -789,7 +813,7 @@ const EditItinerary = (props: Props) => {
               </p>
             </div>
 
-            <div className="col-sm-12 col-md-6 col-lg-6">
+            <div className="col-sm-12 col-md-6 col-lg-6 formdes">
               <label className="control-label" htmlFor="message">
                 Choose a category for this itinerary:
               </label>
@@ -798,16 +822,26 @@ const EditItinerary = (props: Props) => {
                   <div
                     className="check-option"
                     onClick={() =>
-                      setValues({ ...values, category: Array.from(new Set([...values.category, "stay"])) })
+                      setValues({
+                        ...values,
+                        category: Array.from(new Set([...values.category, "stay"])),
+                      })
                     }
                   >
-                    <input aria-selected="true" checked={values.category.includes("stay")} type="checkbox" />
+                    <input
+                      aria-selected="true"
+                      checked={values.category.includes("stay")}
+                      type="checkbox"
+                    />
                     <label className="container-radio">Stay</label>
                   </div>
                   <div
                     className="check-option"
                     onClick={() =>
-                      setValues({ ...values, category: Array.from(new Set([...values.category, "taste"])) })
+                      setValues({
+                        ...values,
+                        category: Array.from(new Set([...values.category, "taste"])),
+                      })
                     }
                   >
                     <input type="checkbox" checked={values.category.includes("taste")} />
@@ -818,7 +852,10 @@ const EditItinerary = (props: Props) => {
                   <div
                     className="check-option"
                     onClick={() =>
-                      setValues({ ...values, category: Array.from(new Set([...values.category, "vibe"])) })
+                      setValues({
+                        ...values,
+                        category: Array.from(new Set([...values.category, "vibe"])),
+                      })
                     }
                   >
                     <input type="checkbox" checked={values.category.includes("vibe")} />
@@ -827,7 +864,10 @@ const EditItinerary = (props: Props) => {
                   <div
                     className="check-option"
                     onClick={() =>
-                      setValues({ ...values, category: Array.from(new Set([...values.category, "experience"])) })
+                      setValues({
+                        ...values,
+                        category: Array.from(new Set([...values.category, "experience"])),
+                      })
                     }
                   >
                     <input type="checkbox" checked={values.category.includes("experience")} />
@@ -881,7 +921,10 @@ const EditItinerary = (props: Props) => {
                 >
                   Delete
                 </button>
-                <button className="btn btn-success navbar-btn" onClick={() => setDayForDelete(null)}>
+                <button
+                  className="btn btn-success navbar-btn"
+                  onClick={() => setDayForDelete(null)}
+                >
                   Cancel
                 </button>
               </div>
@@ -890,9 +933,12 @@ const EditItinerary = (props: Props) => {
 
           {values.eachDetail.map((item, idx) => (
             <div
-              className="row"
+              className="row daysrow"
               style={{
                 marginTop: "100px",
+                border: "1px solid rgba(0, 0, 0, 0.2)",
+                padding: "10px",
+                borderRadius: "10px",
               }}
             >
               <div className="col-md-12">
@@ -918,7 +964,7 @@ const EditItinerary = (props: Props) => {
                   type="text"
                   value={item.dayTitle}
                   onChange={(e) => handleChangeItem(e, item.day)}
-                  className="form-control"
+                  className="form-control inputday"
                   id="dayTitle"
                   style={{ width: "50%", margin: "auto", marginBottom: "10px" }}
                   placeholder={`Enter ${
@@ -934,7 +980,7 @@ const EditItinerary = (props: Props) => {
                 />
                 <div className="tabbable-panel tabs-pgs">
                   <div className="tabbable-line">
-                    <ul className="nav nav-tabs text-center">
+                    <ul className="nav nav-tabs text-center navul2">
                       <li className={`${currentTab === 0 ? "active" : ""}`}>
                         <button
                           type="button"
@@ -973,7 +1019,10 @@ const EditItinerary = (props: Props) => {
                     </ul>
 
                     <div className="tab-content">
-                      <div className={`tab-pane${currentTab === 0 ? " active" : ""}`} id="tab_default_1">
+                      <div
+                        className={`tab-pane${currentTab === 0 ? " active" : ""}`}
+                        id="tab_default_1"
+                      >
                         <div className="row">
                           <h2 className="top-heading text-center">Tell about your stay</h2>
                         </div>
@@ -987,7 +1036,10 @@ const EditItinerary = (props: Props) => {
                                   </label>
                                 </li>
                                 <li onClick={() => changeServices("room service", item.day)}>
-                                  <input checked={item.services.includes("room service")} type="checkbox" />
+                                  <input
+                                    checked={item.services.includes("room service")}
+                                    type="checkbox"
+                                  />
                                   <label className="container-radio">Room Service</label>
                                 </li>
                                 <li onClick={() => changeServices("wifi", item.day)}>
@@ -995,11 +1047,17 @@ const EditItinerary = (props: Props) => {
                                   <label className="container-radio">Wifi</label>
                                 </li>
                                 <li onClick={() => changeServices("mini bar", item.day)}>
-                                  <input type="checkbox" checked={item.services.includes("mini bar")} />
+                                  <input
+                                    type="checkbox"
+                                    checked={item.services.includes("mini bar")}
+                                  />
                                   <label className="container-radio">Mini Bar</label>
                                 </li>
                                 <li onClick={() => changeServices("bath tub & shower", item.day)}>
-                                  <input type="checkbox" checked={item.services.includes("bath tub & shower")} />
+                                  <input
+                                    type="checkbox"
+                                    checked={item.services.includes("bath tub & shower")}
+                                  />
                                   <label className="container-radio">Bath Tub & Shower</label>
                                 </li>
                               </ul>
@@ -1032,7 +1090,10 @@ const EditItinerary = (props: Props) => {
                                   style={{ display: "none" }}
                                   onChange={(e) => handlefilesChange(e, item.day, "stayImages")}
                                 />
-                                <label htmlFor={`day${item.day}image`} style={{ textDecoration: "underline" }}>
+                                <label
+                                  htmlFor={`day${item.day}image`}
+                                  style={{ textDecoration: "underline" }}
+                                >
                                   Upload from your device
                                 </label>
                               </div>
@@ -1047,7 +1108,11 @@ const EditItinerary = (props: Props) => {
                                       onClick={() => clearImage("stayImages", idx, item.day)}
                                     ></i>
                                     <img
-                                      src={typeof image === "string" ? image : URL.createObjectURL(image)}
+                                      src={
+                                        typeof image === "string"
+                                          ? image
+                                          : URL.createObjectURL(image)
+                                      }
                                       alt="icon"
                                     />
                                   </li>
@@ -1070,9 +1135,14 @@ const EditItinerary = (props: Props) => {
                         </div>
                       </div>
 
-                      <div className={`tab-pane${currentTab === 1 ? " active" : ""}`} id="tab_default_2">
+                      <div
+                        className={`tab-pane${currentTab === 1 ? " active" : ""}`}
+                        id="tab_default_2"
+                      >
                         <div className="row">
-                          <h2 className="top-heading text-center">Tell about your culinary experience TASTE</h2>
+                          <h2 className="top-heading text-center">
+                            Tell about your culinary experience TASTE
+                          </h2>
                         </div>
                         <div className="row pd-tb">
                           <div className="col-md-6">
@@ -1099,7 +1169,10 @@ const EditItinerary = (props: Props) => {
                                   style={{ display: "none" }}
                                   onChange={(e) => handlefilesChange(e, item.day, "tasteImages")}
                                 />
-                                <label htmlFor={`day${item.day}taste-image`} style={{ textDecoration: "underline" }}>
+                                <label
+                                  htmlFor={`day${item.day}taste-image`}
+                                  style={{ textDecoration: "underline" }}
+                                >
                                   Upload from your device
                                 </label>
                               </div>
@@ -1114,7 +1187,11 @@ const EditItinerary = (props: Props) => {
                                       onClick={() => clearImage("tasteImages", idx, item.day)}
                                     ></i>
                                     <img
-                                      src={typeof image === "string" ? image : URL.createObjectURL(image)}
+                                      src={
+                                        typeof image === "string"
+                                          ? image
+                                          : URL.createObjectURL(image)
+                                      }
                                       alt="icon"
                                     />
                                   </li>
@@ -1136,7 +1213,10 @@ const EditItinerary = (props: Props) => {
                           </div>
                         </div>
                       </div>
-                      <div className={`tab-pane${currentTab === 2 ? " active" : ""}`} id="tab_default_3">
+                      <div
+                        className={`tab-pane${currentTab === 2 ? " active" : ""}`}
+                        id="tab_default_3"
+                      >
                         <div className="row">
                           <h2 className="top-heading text-center">Tell about the vibe</h2>
                         </div>
@@ -1165,7 +1245,10 @@ const EditItinerary = (props: Props) => {
                                   style={{ display: "none" }}
                                   onChange={(e) => handlefilesChange(e, item.day, "vibeImages")}
                                 />
-                                <label htmlFor={`day${item.day}-vibe-image`} style={{ textDecoration: "underline" }}>
+                                <label
+                                  htmlFor={`day${item.day}-vibe-image`}
+                                  style={{ textDecoration: "underline" }}
+                                >
                                   Upload from your device
                                 </label>
                               </div>
@@ -1180,7 +1263,11 @@ const EditItinerary = (props: Props) => {
                                       onClick={() => clearImage("vibeImages", idx, item.day)}
                                     ></i>
                                     <img
-                                      src={typeof image === "string" ? image : URL.createObjectURL(image)}
+                                      src={
+                                        typeof image === "string"
+                                          ? image
+                                          : URL.createObjectURL(image)
+                                      }
                                       alt="icon"
                                     />
                                   </li>
@@ -1203,9 +1290,14 @@ const EditItinerary = (props: Props) => {
                         </div>
                       </div>
 
-                      <div className={`tab-pane${currentTab === 3 ? " active" : ""}`} id="tab_default_4">
+                      <div
+                        className={`tab-pane${currentTab === 3 ? " active" : ""}`}
+                        id="tab_default_4"
+                      >
                         <div className="row">
-                          <h2 className="top-heading text-center">Provide an intriguing banner of your experience</h2>
+                          <h2 className="top-heading text-center">
+                            Provide an intriguing banner of your experience
+                          </h2>
                         </div>
 
                         <div className="row pd-tb">
@@ -1231,7 +1323,9 @@ const EditItinerary = (props: Props) => {
                                   type="file"
                                   multiple
                                   style={{ display: "none" }}
-                                  onChange={(e) => handlefilesChange(e, item.day, "experienceImages")}
+                                  onChange={(e) =>
+                                    handlefilesChange(e, item.day, "experienceImages")
+                                  }
                                 />
                                 <label
                                   htmlFor={`day${item.day}-experience-image`}
@@ -1251,7 +1345,11 @@ const EditItinerary = (props: Props) => {
                                       onClick={() => clearImage("experienceImages", idx, item.day)}
                                     ></i>
                                     <img
-                                      src={typeof image === "string" ? image : URL.createObjectURL(image)}
+                                      src={
+                                        typeof image === "string"
+                                          ? image
+                                          : URL.createObjectURL(image)
+                                      }
                                       alt="icon"
                                     />
                                   </li>
@@ -1281,7 +1379,7 @@ const EditItinerary = (props: Props) => {
           ))}
           {isComplete && <p>Itinerary created successfuly</p>}
           <div className="row">
-            <div className="col-md-12 text-center">
+            <div className="col-md-12 text-center" style={{ marginTop: "20px" }}>
               <button type="submit" className="btn btn-orange navbar-btn">
                 Submit Itinerary
               </button>
