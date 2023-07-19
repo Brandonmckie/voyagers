@@ -291,6 +291,7 @@ const Navbar = (props: Props) => {
                   >
                     <li>
                       <img
+                        style="border-radius:50%"
                         width="44px"
                         height="44px"
                         src={user.image || dp}
