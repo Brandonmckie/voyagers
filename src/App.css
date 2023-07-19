@@ -621,7 +621,7 @@ input#files {
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .left-d-itineraries ul {
   display: flex;
-  margin: 0 0 0 -40px;
+  margin: 0 0 0 0px !important;
 }
 .left-d-itineraries ul li {
   background: rgba(241, 165, 1, 0.24);
