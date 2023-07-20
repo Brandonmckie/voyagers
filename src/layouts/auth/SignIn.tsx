@@ -22,15 +22,15 @@ const SignIn = () => {
     setIsLoading(true);
     try {
       let data = await api.post("/users/login", values);
-      let token = data.data?.token;
+      let token = data?.data?.token;
 
       if (token) {
         localStorage.setItem("jwt", token);
         navigate("/");
       }
     } catch (error: any) {
-      setErrors(error.response.data);
-      console.log(error.response.data.message);
+      setErrors(error?.response?.data);
+      console.log(error?.response?.data?.message);
     } finally {
       setIsLoading(false);
     }
