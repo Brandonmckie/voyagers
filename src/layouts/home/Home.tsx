@@ -105,7 +105,7 @@ const Home = () => {
 
         <div className="container">
           {/* <!-- -----------------------  right image and left text -------------- --> */}
-          <div className="row first-section">
+          <div className="row first-section1">
             <div className="col-sm-12 col-md-6 col-lg-6">
               <div className="left-first">
                 {/* <p className='para-first'>Best Destinations around the world</p> */}
