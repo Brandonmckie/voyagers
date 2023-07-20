@@ -78,7 +78,7 @@ const Home = () => {
 
   const getItineraries = async () => {
     try {
-      let getdata = (await api(`/itinerary?limit=10`)) as { data: Itinerary[] };
+      let getdata = (await api(`/itinerary?limit=20`)) as { data: Itinerary[] };
       setData(getdata.data);
     } catch (error) {
       console.log(error);
