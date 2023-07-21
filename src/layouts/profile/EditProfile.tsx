@@ -27,14 +27,17 @@ const EditProfile = (props: Props) => {
     setIsUpdateLoading(true);
 
     try {
-      const formData = new FormData();
-
-      Object.entries(values).forEach(([key, value]) => {
-        formData.append(key, value);
-      });
-
-      await api.patch("/users", formData);
-      window.location.href = process.env.PUBLIC_URL;
+      if (typeof values?.image === "string") {
+        await api.patch("/users", values);
+        window.location.href = process.env.PUBLIC_URL;
+      } else {
+        const formData = new FormData();
+        Object.entries(values).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+        await api.patch("/users", formData);
+        window.location.href = process.env.PUBLIC_URL;
+      }
     } catch (error) {
       console.log(error);
     } finally {
