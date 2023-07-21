@@ -151,8 +151,8 @@ const SingleItinerary = (props: any) => {
               <div className="d-itineraries">
                 <div className="row singlerow">
                   <div className="col-md-6">
-                    <div className="left-d-itineraries">
-                      <ul>
+                    <div className="single-itinery">
+                      <ul className="ulstyle">
                         {data.category?.map((item) => (
                           <li>{item}</li>
                         ))}
