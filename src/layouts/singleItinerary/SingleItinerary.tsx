@@ -52,15 +52,13 @@ const SingleItinerary = (props: any) => {
     setIsLoading(true);
     try {
       let getdata = (await api(`/itinerary/view/${itineraryId}`)) as { data: Itinerary };
-
+       if (getdata?.data) {
+        setData(getdata?.data);
+      }
       const user = getUser();
 
-      if (user.id === getdata.data.userId?._id) {
+      if (user?.id === getdata?.data?.userId?._id) {
         setIsMy(true);
-      }
-
-      if (getdata.data) {
-        setData(getdata.data);
       }
     } catch (error) {
       console.log(error);
