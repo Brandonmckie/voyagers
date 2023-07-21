@@ -269,7 +269,7 @@ section.topsaling {
   background: url(./layouts/home/img/Decore.png) no-repeat;
   position: absolute;
   background-size: 100%;
-  top: 87px;
+  top: 71px;
   left: 11%;
 }
 /*-----------------------------------------------------------*/
@@ -621,9 +621,23 @@ input#files {
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .left-d-itineraries ul {
   display: flex;
-  margin: 0 0 0 0px !important;
+  margin: 0 0 0 -40px;
+}
+.ulstyle {
+  margin-left: -40px !important;
+  background: none;
+  display: flex;
 }
 .left-d-itineraries ul li {
+  background: rgba(241, 165, 1, 0.24);
+  color: black !important;
+  border-radius: 64px;
+  color: white;
+  padding: 12px 36px;
+  margin: 0 10px 0 0;
+  list-style: none;
+}
+.single-itinery ul li {
   background: rgba(241, 165, 1, 0.24);
   color: black !important;
   border-radius: 64px;
@@ -641,7 +655,25 @@ input#files {
   letter-spacing: -0.02em;
   color: #212832;
 }
+.single-itinery h1 {
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 52px;
+  letter-spacing: -0.02em;
+  color: #212832;
+}
 .left-d-itineraries p {
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: -0.04em;
+  color: #5e6282;
+}
+.single-itinery p {
   font-family: "Work Sans";
   font-style: normal;
   font-weight: 400;
@@ -716,6 +748,10 @@ h3.price-sec span {
   padding: 40px 0 0 0;
 }
 
+.single-itinery {
+  padding: 40px 0 0 0;
+}
+
 /*min width*/
 
 @media (min-width: 1150px) {
@@ -750,9 +786,14 @@ h3.price-sec span {
   /*	.desktop-menu { display: none; }*/
 }
 @media (min-width: 768px) {
+  .ulstyle {
+    margin-left: -40px !important;
+    background: none;
+  }
   .left-d-itineraries ul {
     margin: 0 0 0 0 !important;
   }
+
   .navbar-nav {
     float: none;
     margin: 21px 0 0px 30%;
@@ -803,6 +844,10 @@ h3.price-sec span {
   }
   .navbar-nav {
     margin: 21px 0 0px 10%;
+  }
+  .left-d-itineraries ul {
+    display: flex;
+    margin: 0 0 0 0px !important;
   }
   .daytitle {
     margin-top: 0px;
@@ -862,6 +907,10 @@ h3.price-sec span {
     left: 25%;
   }
   .left-d-itineraries p {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .single-itinery p {
     font-size: 14px;
     line-height: 22px;
   }
@@ -951,6 +1000,7 @@ h3.price-sec span {
   .img-righthre img {
     width: 90px;
   }
+
   .nav > li > a {
     padding: 10px 10px;
   }
@@ -1023,6 +1073,11 @@ h3.price-sec span {
     left: 37%;
     top: 70px;
   }
+  .records:after {
+    width: 170px;
+    left: 37%;
+    top: 37px !important;
+  }
   .client-part h2,
   .faq-part h2,
   .topsaling .top-heading {
@@ -1061,6 +1116,10 @@ h3.price-sec span {
     margin: 8px 10px 0 0 !important;
   }
   .left-d-itineraries h1 {
+    font-size: 38px;
+    line-height: 40px;
+  }
+  .single-itinery h1 {
     font-size: 38px;
     line-height: 40px;
   }
