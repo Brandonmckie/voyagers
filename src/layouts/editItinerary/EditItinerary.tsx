@@ -985,7 +985,7 @@ const EditItinerary = (props: Props) => {
                         <button
                           type="button"
                           onClick={() => setCurrentTab(0)}
-                          className={`${currentTab > 0 ? "complete" : ""}`}
+                          className={`${currentTab > 0 ? "" : ""}`}
                         >
                           Stay
                         </button>
@@ -995,7 +995,7 @@ const EditItinerary = (props: Props) => {
                         <button
                           type="button"
                           onClick={() => setCurrentTab(1)}
-                          className={`${currentTab > 1 ? "complete" : ""}`}
+                          className={`${currentTab > 1 ? "" : ""}`}
                         >
                           Taste
                         </button>
@@ -1005,7 +1005,7 @@ const EditItinerary = (props: Props) => {
                         <button
                           type="button"
                           onClick={() => setCurrentTab(2)}
-                          className={`${currentTab > 2 ? "complete" : ""}`}
+                          className={`${currentTab > 2 ? "" : ""}`}
                         >
                           Vibe
                         </button>
