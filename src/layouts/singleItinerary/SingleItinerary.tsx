@@ -72,6 +72,13 @@ const SingleItinerary = (props: any) => {
 
   const handleCheckout = async () => {
     try {
+        const user = await getUser();
+      if (user?.id) {
+        setIsMy(true);
+      } else  {
+        navigate('/auth/login');
+        return;
+      }
       let data = await api.post("/billing/checkout", { itineraryId, isChecked });
 
       if (data.data) {
