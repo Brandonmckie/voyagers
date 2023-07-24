@@ -407,10 +407,10 @@ const SingleItinerary = (props: any) => {
                                                       >
                                                         <div className="card">
                                                           <img
-                                                            className="card-img-top"
+                                                            className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                            style={{ width: "100%" }}
+                                                      
                                                           />
                                                         </div>
                                                       </div>
@@ -483,13 +483,10 @@ const SingleItinerary = (props: any) => {
                                                       >
                                                         <div className="card">
                                                           <img
-                                                            className="card-img-top"
+                                                            className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                            style={{
-                                                              width: "100%",
-                                                              borderRadius: "7px",
-                                                            }}
+                                                        
                                                           />
                                                         </div>
                                                       </div>
@@ -563,13 +560,10 @@ const SingleItinerary = (props: any) => {
                                                       >
                                                         <div className="card">
                                                           <img
-                                                            className="card-img-top "
+                                                            className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                            style={{
-                                                              width: "100%",
-                                                              borderRadius: "7px",
-                                                            }}
+                                                      
                                                           />
                                                         </div>
                                                       </div>
@@ -648,13 +642,10 @@ const SingleItinerary = (props: any) => {
                                                       >
                                                         <div className="card">
                                                           <img
-                                                            className="card-img-top"
+                                                            className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                            style={{
-                                                              width: "100%",
-                                                              borderRadius: "7px",
-                                                            }}
+                                                         
                                                           />
                                                         </div>
                                                       </div>
