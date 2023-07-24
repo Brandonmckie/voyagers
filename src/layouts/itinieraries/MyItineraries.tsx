@@ -140,7 +140,7 @@ const MyItineraries = (props: Props) => {
                 <div className="left-first">
                   <p className="para-first">My Listing</p>
                   <h1 className="top-heading">
-                    <span className="first-textbg">ITINERARIES Listing</span>
+                    <span className="first-textbg itlisting">ITINERARIES Listing</span>
                   </h1>
                 </div>
               </div>
@@ -204,8 +204,13 @@ const MyItineraries = (props: Props) => {
                           <img
                             className="card-img-top"
                             src={each.image}
-                            alt="Card image"
-                            style={{ width: "100%" }}
+                            alt="Cardimage"
+                            style={{
+                              width: "100%",
+                              height: "200px",
+                              objectFit: "cover",
+                              objectPosition: "center",
+                            }}
                           />
                           {badgeHover === each._id ? (
                             <button
