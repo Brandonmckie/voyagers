@@ -258,7 +258,13 @@ const Home = () => {
                                 className="card-img-top"
                                 src={each.image}
                                 alt="Card image"
-                                style={{ width: "100%" }}
+                                    style={{
+                                  width: "100%",
+                                  minHeight: "234px",
+                                  maxHeight: "234px",
+                                  objectFit: "cover",
+                                  objectPosition: "center",
+                                }}
                               />
                               <div className="badge">
                                 <p>{each.category[0]}</p>
