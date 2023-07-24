@@ -159,11 +159,14 @@ textarea.text-details {
 }
 .images-upload ul li {
   list-style: none;
-  margin: 0 5px;
+  width: 100px !important;
   position: relative;
+  height: 100%;
 }
 .images-upload ul li i.fa.fa-window-close {
   position: absolute;
+  z-index: 1;
+
   right: 5px;
   top: 5px;
   font-size: 18px;
@@ -175,6 +178,20 @@ textarea.text-details {
 }
 .images-upload img {
   width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-left: 5px;
+  object-position: center;
+  border-radius: 4px;
+}
+.slick-next:before {
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #000;
+}
+.ulimage0 {
+  display: unset !important;
 }
 .images-upload {
   margin: 15px 0;
@@ -206,5 +223,12 @@ textarea.text-details {
   }
   .card-grid {
     padding: 0px 0;
+  }
+  .images-upload img {
+    width: 62px;
+    height: 62px;
+  }
+  .images-upload ul li i.fa.fa-window-close {
+    right: 40px;
   }
 }
