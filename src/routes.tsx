@@ -10,6 +10,7 @@ import EditItinerary from "./layouts/editItinerary/EditItinerary";
 import EditProfile from "./layouts/profile/EditProfile";
 import AboutUs from "./layouts/aboutUs/AboutUs";
 import ContactUs from "./layouts/contactUs/ContactUs";
+import Boarding from "./layouts/stripe/Boarding";
 
 const Home = lazy(() => import("./layouts/home/Home"));
 const CreateItinerary = lazy(() => import("./layouts/createItinerary/CreateItinerary"));
@@ -63,6 +64,15 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <ProtectedRoute Element={StripeConnect} />
+      </>
+    ),
+  },
+  {
+    path: "/onboarding",
+    element: (
+      <>
+        <Navbar />
+        <ProtectedRoute Element={Boarding} />
       </>
     ),
   },
