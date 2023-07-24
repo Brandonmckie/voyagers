@@ -20,6 +20,9 @@
   left: -71px;
   top: -26px;
 }
+.screenwidth {
+  margin: 0px 50px;
+}
 .carousel-inner {
   position: relative;
   width: 100%;
@@ -246,9 +249,12 @@ textarea.text-details {
   .imgdiv {
     display: none;
   }
-   .topsingle::after {
+  .topsingle::after {
     top: 34px !important;
     left: 42% !important;
+  }
+  .screenwidth {
+    margin: 0px 0px;
   }
 }
 
