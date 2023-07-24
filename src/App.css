@@ -632,8 +632,8 @@ input#files {
   object-position: center;
 }
 .ulstyle {
-  margin-left: -40px !important;
-  background: none;
+/*   margin-left: -40px !important;
+  background: none; */
   display: flex;
 }
 .left-d-itineraries ul li {
