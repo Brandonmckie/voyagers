@@ -233,7 +233,7 @@ const Home = () => {
             <div className="col-md-7">
               <div className="left-first">
                 <h1 className="top-heading">
-                  Top <span className="first-textbg">ITINERARIES</span>
+                  Top <span className="first-textbg topsingle">ITINERARIES</span>
                 </h1>
               </div>
             </div>
