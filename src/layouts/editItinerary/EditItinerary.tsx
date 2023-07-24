@@ -7,6 +7,7 @@ import "./assets/styles/index.css";
 import "./assets/styles/carousel.css";
 import upload from "./assets/images/Upload.png";
 import { useNavigate, useParams } from "react-router-dom";
+import Slider from "react-slick";
 
 type Params = { itineraryId: string };
 
@@ -75,6 +76,41 @@ const EditItinerary = (props: Props) => {
 
   const handleChange = (e: ChangeEvent<any>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          dots: false,
+        },
+      },
+    ],
   };
 
   const handleChangeDays = (type: string) => {
@@ -1100,36 +1136,47 @@ const EditItinerary = (props: Props) => {
                             </div>
 
                             <div className="images-upload">
-                              <ul>
-                                {item.stayImages?.map((image, idx) => (
-                                  <li>
-                                    <i
-                                      className="fa fa-window-close"
-                                      onClick={() => clearImage("stayImages", idx, item.day)}
-                                    ></i>
-                                    <img
-                                      src={
-                                        typeof image === "string"
-                                          ? image
-                                          : URL.createObjectURL(image)
-                                      }
-                                      alt="icon"
-                                    />
-                                  </li>
-                                ))}
-                                {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                              </ul>
+                              {(item?.stayImages?.length ?? 0) >= 4 ? (
+                                <ul className="ulimage0">
+                                  <Slider {...settings} arrows>
+                                    {item.stayImages?.map((image, idx) => (
+                                      <li>
+                                        <i
+                                          className="fa fa-window-close"
+                                          onClick={() => clearImage("stayImages", idx, item.day)}
+                                        ></i>
+                                        <img
+                                          src={
+                                            typeof image === "string"
+                                              ? image
+                                              : URL.createObjectURL(image)
+                                          }
+                                          alt="icon"
+                                        />
+                                      </li>
+                                    ))}
+                                  </Slider>
+                                </ul>
+                              ) : (
+                                <ul>
+                                  {item.stayImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() => clearImage("stayImages", idx, item.day)}
+                                      ></i>
+                                      <img
+                                        src={
+                                          typeof image === "string"
+                                            ? image
+                                            : URL.createObjectURL(image)
+                                        }
+                                        alt="icon"
+                                      />
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -1179,36 +1226,47 @@ const EditItinerary = (props: Props) => {
                             </div>
 
                             <div className="images-upload">
-                              <ul>
-                                {item.tasteImages?.map((image, idx) => (
-                                  <li>
-                                    <i
-                                      className="fa fa-window-close"
-                                      onClick={() => clearImage("tasteImages", idx, item.day)}
-                                    ></i>
-                                    <img
-                                      src={
-                                        typeof image === "string"
-                                          ? image
-                                          : URL.createObjectURL(image)
-                                      }
-                                      alt="icon"
-                                    />
-                                  </li>
-                                ))}
-                                {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                              </ul>
+                              {(item?.tasteImages?.length ?? 0) >= 4 ? (
+                                <ul className="ulimage0">
+                                  <Slider {...settings} arrows>
+                                    {item.tasteImages?.map((image, idx) => (
+                                      <li>
+                                        <i
+                                          className="fa fa-window-close"
+                                          onClick={() => clearImage("tasteImages", idx, item.day)}
+                                        ></i>
+                                        <img
+                                          src={
+                                            typeof image === "string"
+                                              ? image
+                                              : URL.createObjectURL(image)
+                                          }
+                                          alt="icon"
+                                        />
+                                      </li>
+                                    ))}
+                                  </Slider>
+                                </ul>
+                              ) : (
+                                <ul>
+                                  {item.tasteImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() => clearImage("tasteImages", idx, item.day)}
+                                      ></i>
+                                      <img
+                                        src={
+                                          typeof image === "string"
+                                            ? image
+                                            : URL.createObjectURL(image)
+                                        }
+                                        alt="icon"
+                                      />
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -1255,36 +1313,47 @@ const EditItinerary = (props: Props) => {
                             </div>
 
                             <div className="images-upload">
-                              <ul>
-                                {item.vibeImages?.map((image, idx) => (
-                                  <li>
-                                    <i
-                                      className="fa fa-window-close"
-                                      onClick={() => clearImage("vibeImages", idx, item.day)}
-                                    ></i>
-                                    <img
-                                      src={
-                                        typeof image === "string"
-                                          ? image
-                                          : URL.createObjectURL(image)
-                                      }
-                                      alt="icon"
-                                    />
-                                  </li>
-                                ))}
-                                {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                              </ul>
+                              {(item?.vibeImages?.length ?? 0) >= 4 ? (
+                                <ul className="ulimage0">
+                                  <Slider {...settings} arrows>
+                                    {item.vibeImages?.map((image, idx) => (
+                                      <li>
+                                        <i
+                                          className="fa fa-window-close"
+                                          onClick={() => clearImage("vibeImages", idx, item.day)}
+                                        ></i>
+                                        <img
+                                          src={
+                                            typeof image === "string"
+                                              ? image
+                                              : URL.createObjectURL(image)
+                                          }
+                                          alt="icon"
+                                        />
+                                      </li>
+                                    ))}
+                                  </Slider>
+                                </ul>
+                              ) : (
+                                <ul>
+                                  {item.vibeImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() => clearImage("vibeImages", idx, item.day)}
+                                      ></i>
+                                      <img
+                                        src={
+                                          typeof image === "string"
+                                            ? image
+                                            : URL.createObjectURL(image)
+                                        }
+                                        alt="icon"
+                                      />
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -1337,8 +1406,7 @@ const EditItinerary = (props: Props) => {
                             </div>
 
                             <div className="images-upload">
-                              <ul>
-                                {item.experienceImages?.map((image, idx) => (
+                              {/* {item.experienceImages?.map((image, idx) => (
                                   <li>
                                     <i
                                       className="fa fa-window-close"
@@ -1353,20 +1421,52 @@ const EditItinerary = (props: Props) => {
                                       alt="icon"
                                     />
                                   </li>
-                                ))}
-                                {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                              </ul>
+                                ))} */}
+                              {(item?.experienceImages?.length ?? 0) >= 4 ? (
+                                <ul className="ulimage0">
+                                  <Slider {...settings} arrows>
+                                    {item.experienceImages?.map((image, idx) => (
+                                      <li>
+                                        <i
+                                          className="fa fa-window-close"
+                                          onClick={() =>
+                                            clearImage("experienceImages", idx, item.day)
+                                          }
+                                        ></i>
+                                        <img
+                                          src={
+                                            typeof image === "string"
+                                              ? image
+                                              : URL.createObjectURL(image)
+                                          }
+                                          alt="icon"
+                                        />
+                                      </li>
+                                    ))}
+                                  </Slider>
+                                </ul>
+                              ) : (
+                                <ul>
+                                  {item.experienceImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() =>
+                                          clearImage("experienceImages", idx, item.day)
+                                        }
+                                      ></i>
+                                      <img
+                                        src={
+                                          typeof image === "string"
+                                            ? image
+                                            : URL.createObjectURL(image)
+                                        }
+                                        alt="icon"
+                                      />
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
                             </div>
                           </div>{" "}
                         </div>
