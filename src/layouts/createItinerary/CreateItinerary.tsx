@@ -13,6 +13,7 @@ import img5 from "./assets/images/img5.png";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 
 type Props = {};
 
@@ -60,6 +61,7 @@ type Error400 = {
 const CreateItinerary = (props: Props) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isErrored, setIsErrored] = useState<any>({});
+
   const [isLoading, setIsLoading] = useState(false);
   const [dayForDelete, setDayForDelete] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -94,6 +96,8 @@ const CreateItinerary = (props: Props) => {
   const handleChange = (e: ChangeEvent<any>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  console.log(values.eachDetail[0].stayImages?.length);
 
   const handleChangeDays = (e: ChangeEvent<HTMLInputElement>) => {
     setDays(Number(e.target.value));
@@ -295,6 +299,41 @@ const CreateItinerary = (props: Props) => {
 
     setValues({ ...values, eachDetail: newValues });
     // values.eachDetail[day-1].
+  };
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          dots: false,
+        },
+      },
+    ],
   };
 
   const deleteDay = () => {
@@ -1037,29 +1076,33 @@ const CreateItinerary = (props: Props) => {
                           </div>
 
                           <div className="images-upload">
-                            <ul>
-                              {item.stayImages?.map((image, idx) => (
-                                <li>
-                                  <i
-                                    className="fa fa-window-close"
-                                    onClick={() => clearImage("stayImages", idx, item.day)}
-                                  ></i>
-                                  <img src={URL.createObjectURL(image)} alt="icon" />
-                                </li>
-                              ))}
-                              {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                            </ul>
+                            {(item?.stayImages?.length ?? 0) >= 4 ? (
+                              <ul className="ulimage0">
+                                <Slider {...settings} arrows>
+                                  {item.stayImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() => clearImage("stayImages", idx, item.day)}
+                                      ></i>
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    </li>
+                                  ))}
+                                </Slider>
+                              </ul>
+                            ) : (
+                              <ul>
+                                {item.stayImages?.map((image, idx) => (
+                                  <li>
+                                    <i
+                                      className="fa fa-window-close"
+                                      onClick={() => clearImage("stayImages", idx, item.day)}
+                                    ></i>
+                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -1109,29 +1152,33 @@ const CreateItinerary = (props: Props) => {
                           </div>
 
                           <div className="images-upload">
-                            <ul>
-                              {item.tasteImages?.map((image, idx) => (
-                                <li>
-                                  <i
-                                    className="fa fa-window-close"
-                                    onClick={() => clearImage("tasteImages", idx, item.day)}
-                                  ></i>
-                                  <img src={URL.createObjectURL(image)} alt="icon" />
-                                </li>
-                              ))}
-                              {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                            </ul>
+                            {(item?.tasteImages?.length ?? 0) >= 4 ? (
+                              <ul className="ulimage0">
+                                <Slider {...settings} arrows>
+                                  {item.tasteImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() => clearImage("tasteImages", idx, item.day)}
+                                      ></i>
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    </li>
+                                  ))}
+                                </Slider>
+                              </ul>
+                            ) : (
+                              <ul>
+                                {item.tasteImages?.map((image, idx) => (
+                                  <li>
+                                    <i
+                                      className="fa fa-window-close"
+                                      onClick={() => clearImage("tasteImages", idx, item.day)}
+                                    ></i>
+                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -1178,29 +1225,33 @@ const CreateItinerary = (props: Props) => {
                           </div>
 
                           <div className="images-upload">
-                            <ul>
-                              {item.vibeImages?.map((image, idx) => (
-                                <li>
-                                  <i
-                                    className="fa fa-window-close"
-                                    onClick={() => clearImage("vibeImages", idx, item.day)}
-                                  ></i>
-                                  <img src={URL.createObjectURL(image)} alt="icon" />
-                                </li>
-                              ))}
-                              {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                            </ul>
+                            {(item?.vibeImages?.length ?? 0) >= 4 ? (
+                              <ul className="ulimage0">
+                                <Slider {...settings} arrows>
+                                  {item.vibeImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() => clearImage("vibeImages", idx, item.day)}
+                                      ></i>
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    </li>
+                                  ))}
+                                </Slider>
+                              </ul>
+                            ) : (
+                              <ul>
+                                {item.vibeImages?.map((image, idx) => (
+                                  <li>
+                                    <i
+                                      className="fa fa-window-close"
+                                      onClick={() => clearImage("vibeImages", idx, item.day)}
+                                    ></i>
+                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -1251,29 +1302,35 @@ const CreateItinerary = (props: Props) => {
                           </div>
 
                           <div className="images-upload">
-                            <ul>
-                              {item.experienceImages?.map((image, idx) => (
-                                <li>
-                                  <i
-                                    className="fa fa-window-close"
-                                    onClick={() => clearImage("experienceImages", idx, item.day)}
-                                  ></i>
-                                  <img src={URL.createObjectURL(image)} alt="icon" />
-                                </li>
-                              ))}
-                              {/* <li>
-                                <img src={img2} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img3} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img4} alt="icon" />
-                              </li>
-                              <li>
-                                <img src={img5} alt="icon" />
-                              </li> */}
-                            </ul>
+                            {(item?.experienceImages?.length ?? 0) >= 4 ? (
+                              <ul className="ulimage0">
+                                <Slider {...settings} arrows>
+                                  {item.experienceImages?.map((image, idx) => (
+                                    <li>
+                                      <i
+                                        className="fa fa-window-close"
+                                        onClick={() =>
+                                          clearImage("experienceImages", idx, item.day)
+                                        }
+                                      ></i>
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    </li>
+                                  ))}
+                                </Slider>
+                              </ul>
+                            ) : (
+                              <ul>
+                                {item.experienceImages?.map((image, idx) => (
+                                  <li>
+                                    <i
+                                      className="fa fa-window-close"
+                                      onClick={() => clearImage("experienceImages", idx, item.day)}
+                                    ></i>
+                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </div>{" "}
                       </div>

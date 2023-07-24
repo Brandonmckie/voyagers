@@ -308,7 +308,7 @@ const Home = () => {
                   borderRadius: "36px",
                 }}
               >
-                <Slider {...settings} arrows>
+                <Slider {...settings}>
                   <div style={{ position: "relative" }}>
                     <div
                       style={{

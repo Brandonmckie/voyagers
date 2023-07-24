@@ -632,8 +632,8 @@ input#files {
   object-position: center;
 }
 .ulstyle {
-  /*   margin-left: -40px !important;
-  background: none; */
+  margin-left: -41px;
+  background: none;
   display: flex;
 }
 .left-d-itineraries ul li {
@@ -795,7 +795,7 @@ h3.price-sec span {
 }
 @media (min-width: 768px) {
   .ulstyle {
-    margin-left: -40px !important;
+    margin-left: -41px !important;
     background: none;
   }
   .left-d-itineraries ul {
