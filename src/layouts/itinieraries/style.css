@@ -567,6 +567,10 @@ input#files {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.itlisting::after {
+  top: 74px !important;
+  left: 11% !important;
+}
 .listing h1.top-heading {
   font-family: "Bebas Neue";
   font-style: normal;
