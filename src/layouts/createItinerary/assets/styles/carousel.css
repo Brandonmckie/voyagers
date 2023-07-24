@@ -174,7 +174,12 @@ textarea.text-details {
   background: black;
 }
 .images-upload img {
-  width: 100px;
+    width: 100px;
+    height: 100%;
+    object-fit: cover;
+    margin-left: 5px;
+    object-position: center;
+    border-radius: 4px;  
 }
 .images-upload {
   margin: 15px 0;
