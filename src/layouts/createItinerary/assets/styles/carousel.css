@@ -139,6 +139,19 @@ ul.service-options-ul li label {
   font-weight: 700;
 }
 
+/* .slick-prev:before {
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #000;
+} */
+.slick-next:before {
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: #000;
+}
+
 ul.service-options-ul li input[type="checkbox"] {
   background: #ffffff;
   border: 1px solid rgba(94, 98, 130, 0.25);
@@ -159,11 +172,16 @@ textarea.text-details {
 }
 .images-upload ul li {
   list-style: none;
-  margin: 0 5px;
+  width: 100px !important;
   position: relative;
+  height: 100%;
+}
+.ulimage0 {
+  display: unset !important;
 }
 .images-upload ul li i.fa.fa-window-close {
   position: absolute;
+  z-index: 1;
   right: 5px;
   top: 5px;
   font-size: 18px;
@@ -174,12 +192,12 @@ textarea.text-details {
   background: black;
 }
 .images-upload img {
-    width: 100px;
-    height: 100%;
-    object-fit: cover;
-    margin-left: 5px;
-    object-position: center;
-    border-radius: 4px;  
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-left: 5px;
+  object-position: center;
+  border-radius: 4px;
 }
 .images-upload {
   margin: 15px 0;
@@ -212,6 +230,10 @@ textarea.text-details {
     color: white;
     padding: 11px 21px;
     margin-bottom: 14px;
+  }
+  .images-upload img {
+    width: 62px;
+    height: 62px;
   }
 
   .tabs-pgs li {
