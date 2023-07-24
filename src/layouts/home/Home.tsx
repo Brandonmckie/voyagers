@@ -233,7 +233,7 @@ const Home = () => {
             <div className="col-md-7">
               <div className="left-first">
                 <h1 className="top-heading">
-                  Top <span className="first-textbg topsingle">ITINERARIES</span>
+                  Top <span className="first-textbg topsingle">ITINERARIES1</span>
                 </h1>
               </div>
             </div>
@@ -258,7 +258,7 @@ const Home = () => {
                                 className="card-img-top"
                                 src={each.image}
                                 alt="Card image"
-                                    style={{
+                                style={{
                                   width: "100%",
                                   minHeight: "234px",
                                   maxHeight: "234px",
