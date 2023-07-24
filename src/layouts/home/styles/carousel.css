@@ -6,6 +6,10 @@
 .card-body {
   padding: 20px;
 }
+.topsingle::after {
+  top: 71px !important;
+  left: 11% !important;
+}
 .subtitle {
   display: flex;
   justify-content: space-between;
@@ -241,6 +245,10 @@ textarea.text-details {
 @media (max-width: 770px) {
   .imgdiv {
     display: none;
+  }
+   .topsingle::after {
+    top: 34px !important;
+    left: 42% !important;
   }
 }
 
