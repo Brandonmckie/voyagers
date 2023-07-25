@@ -137,11 +137,11 @@ const Navbar = (props: Props) => {
                     >
                       <li>
                         <img
-                           style={{
-                          borderRadius: "50%",
-                          objectFit: "cover",
-                          objectPosition: "center",
-                        }}
+                          style={{
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            objectPosition: "center",
+                          }}
                           width="35px"
                           height="35px"
                           src={user.image || dp}
@@ -296,12 +296,11 @@ const Navbar = (props: Props) => {
                   >
                     <li>
                       <img
-                        
                         width="44px"
                         height="44px"
                         src={user.image || dp}
                         alt="Display Picture"
-                          style={{
+                        style={{
                           borderRadius: "50%",
                           objectFit: "cover",
                           objectPosition: "center",

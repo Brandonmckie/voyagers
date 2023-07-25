@@ -205,7 +205,7 @@ const Home = () => {
                   <div className="title">
                     <h4>Vibe</h4>
                   </div>
-                  <div className="text">
+                  <div className="text" style={{ height: "74px" }}>
                     <span>Find your next happy place from browsing voyage blogs by</span>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ const Home = () => {
           </div>
         </div>
         <div className="carousel-reviews broun-block">
-          <div className="container-fuild">
+          <div className="container-fuild screenwidth">
             <div className="row">
               <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">

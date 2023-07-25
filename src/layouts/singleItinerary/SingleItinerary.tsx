@@ -52,13 +52,14 @@ const SingleItinerary = (props: any) => {
     setIsLoading(true);
     try {
       let getdata = (await api(`/itinerary/view/${itineraryId}`)) as { data: Itinerary };
-       if (getdata?.data) {
-        setData(getdata?.data);
-      }
+
       const user = getUser();
 
       if (user?.id === getdata?.data?.userId?._id) {
         setIsMy(true);
+      }
+      if (getdata?.data) {
+        setData(getdata?.data);
       }
     } catch (error) {
       console.log(error);
@@ -70,11 +71,11 @@ const SingleItinerary = (props: any) => {
 
   const handleCheckout = async () => {
     try {
-        const user = await getUser();
+      const user = await getUser();
       if (user?.id) {
-        setIsMy(true);
-      } else  {
-        navigate('/auth/login');
+        // setIsMy(true);
+      } else {
+        navigate("/auth/login");
         return;
       }
       let data = await api.post("/billing/checkout", { itineraryId, isChecked });
@@ -410,7 +411,6 @@ const SingleItinerary = (props: any) => {
                                                             className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                      
                                                           />
                                                         </div>
                                                       </div>
@@ -486,7 +486,6 @@ const SingleItinerary = (props: any) => {
                                                             className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                        
                                                           />
                                                         </div>
                                                       </div>
@@ -563,7 +562,6 @@ const SingleItinerary = (props: any) => {
                                                             className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                      
                                                           />
                                                         </div>
                                                       </div>
@@ -645,7 +643,6 @@ const SingleItinerary = (props: any) => {
                                                             className="card-img-top singleimages"
                                                             src={image}
                                                             alt="Card image"
-                                                         
                                                           />
                                                         </div>
                                                       </div>

@@ -346,8 +346,11 @@ const CreateItinerary = (props: Props) => {
   const getUserDetails = async () => {
     try {
       let data = await api("/billing/user-details");
+      console.log(data);
       if (!data?.data?.isCompleted) {
         return navigate("/stripe/connect");
+      } else if (!data?.data?.stripeConnected) {
+        return navigate("/onboarding");
       }
     } catch (error) {
       console.log(error);
