@@ -250,10 +250,11 @@ const Navbar = (props: Props) => {
                   </ul>
                 </li>
                 {/* ) : ( */}
-                <li>
-                  <Link to="/itinerary/me">Voyager Itineraries</Link>
-                </li>
-                {/* )} */}
+                {user._id && user?.role === "seller" && (
+                  <li>
+                    <Link to="/itinerary/me">Voyager Itineraries</Link>
+                  </li>
+                )}
 
                 <li>
                   <Link to="/about-us">About us</Link>
@@ -456,17 +457,19 @@ const Navbar = (props: Props) => {
                 ))}
               </ul>
             </li>
-            {/* ) : ( */}
-            <li>
-              <Link
-                to="/itinerary/me"
-                onClick={() => {
-                  setmobileview(false);
-                }}
-              >
-                Voyager Itineraries
-              </Link>
-            </li>
+            {user._id && user?.role === "seller" && (
+              <li>
+                <Link
+                  to="/itinerary/me"
+                  onClick={() => {
+                    setmobileview(false);
+                  }}
+                >
+                  Voyager Itineraries
+                </Link>
+              </li>
+            )}
+
             {/* )} */}
 
             {user.role === "seller" ? (
