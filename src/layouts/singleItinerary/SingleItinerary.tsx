@@ -4,6 +4,7 @@ import api from "../../utils/api";
 import img123 from "../home/img/img123.jpg";
 import { getUser } from "../../utils/utils";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
+import Carousel from "react-multi-carousel";
 
 type Params = { itineraryId: string };
 
@@ -114,6 +115,26 @@ const SingleItinerary = (props: any) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 8000, min: 3000 },
+      items: 4,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
   };
 
   useEffect(() => {
@@ -240,79 +261,74 @@ const SingleItinerary = (props: any) => {
                         ) : (
                           ""
                         )}
-                        {profile.role === "seller" ? (
+                        {/* {profile.role === "seller" ? (
                           ""
-                        ) : (
-                          <div className="col-md-12 col-sm-12 col-xs-12">
-                            {purchasedItineraries.includes(itineraryId) || isMy ? (
-                              <></>
-                            ) : (
+                        ) : ( */}
+                        <div className="col-md-12 col-sm-12 col-xs-12">
+                          {purchasedItineraries.includes(itineraryId) || isMy ? (
+                            <></>
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                              }}
+                            >
                               <div
                                 style={{
                                   display: "flex",
-                                  flexDirection: "column",
+                                  flexDirection: "row",
+                                  alignItems: "flex-start",
+                                  margin: "12px 0px -2px 0px",
                                 }}
                               >
-                                <div
+                                <input
                                   style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "flex-start",
-                                    margin: "12px 0px -2px 0px",
+                                    width: "17px",
+                                    height: "17px",
+                                    position: "relative",
+                                    top: "-2px",
+                                  }}
+                                  type="checkbox"
+                                  id="myCheckbox"
+                                  name="myCheckbox"
+                                  value="1"
+                                  checked={isChecked}
+                                  onChange={(e) => {
+                                    localStorage.setItem("check", `${e.target.checked}`);
+                                    setIsChecked(e.target.checked);
+                                  }}
+                                />
+                                <label
+                                  htmlFor="myCheckbox"
+                                  className="labelmessage"
+                                  style={{
+                                    marginLeft: "10px",
+                                    fontSize: "15px",
+                                    color: "#383838f7",
                                   }}
                                 >
-                                  <input
-                                    style={{
-                                      width: "17px",
-                                      height: "17px",
-                                      position: "relative",
-                                      top: "-2px",
-                                    }}
-                                    type="checkbox"
-                                    id="myCheckbox"
-                                    name="myCheckbox"
-                                    value="1"
-                                    checked={isChecked}
-                                    onChange={(e) => {
-                                      localStorage.setItem("check", `${e.target.checked}`);
-                                      setIsChecked(e.target.checked);
-                                    }}
-                                  />
-                                  <label
-                                    htmlFor="myCheckbox"
-                                    className="labelmessage"
-                                    style={{
-                                      marginLeft: "10px",
-                                      fontSize: "15px",
-                                      color: "#383838f7",
-                                    }}
-                                  >
-                                    To have a My Voyages Travel Expert execute this itinerary and
-                                    contact you.
-                                  </label>
-                                </div>
-                                <button
-                                  onClick={handleCheckout}
-                                  style={{ width: "116px" }}
-                                  className="btn btn-orange navbar-btn"
-                                >
-                                  Checkout
-                                </button>
+                                  To have a My Voyages Travel Expert execute this itinerary and
+                                  contact you.
+                                </label>
                               </div>
-                            )}
-                          </div>
-                        )}
+                              <button
+                                onClick={handleCheckout}
+                                style={{ width: "116px" }}
+                                className="btn btn-orange navbar-btn"
+                              >
+                                Checkout
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                        {/* )} */}
                         <div className="col-md-4 col-sm-12 col-xs-12"></div>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <img
-                      className="image00"
-                      style={{ maxWidth: "550px", borderRadius: "24px" }}
-                      src={data.image}
-                      alt={data?.title}
-                    />
+                    <img className="image00" src={data.image} alt={data?.title} />
                   </div>
                 </div>
               </div>
@@ -400,21 +416,25 @@ const SingleItinerary = (props: any) => {
                                             <div className="carousel-inner">
                                               <div className="item active">
                                                 <div className="card-slid">
-                                                  {each?.stayImages?.length !== (0 || undefined) &&
-                                                    each.stayImages?.map((image) => (
-                                                      <div
-                                                        key={image}
-                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                                      >
-                                                        <div className="card">
-                                                          <img
-                                                            className="card-img-top singleimages"
-                                                            src={image}
-                                                            alt="Card image"
-                                                          />
+                                                  {each?.stayImages?.length !==
+                                                    (0 || undefined) && (
+                                                    <Carousel
+                                                      itemClass="w-full"
+                                                      responsive={responsive}
+                                                    >
+                                                      {each.stayImages?.map((image) => (
+                                                        <div key={image}>
+                                                          <div className="card">
+                                                            <img
+                                                              className="card-img-top singleimages"
+                                                              src={image}
+                                                              alt="Cardimage"
+                                                            />
+                                                          </div>
                                                         </div>
-                                                      </div>
-                                                    ))}
+                                                      ))}
+                                                    </Carousel>
+                                                  )}
                                                 </div>
                                               </div>
                                             </div>
@@ -476,43 +496,27 @@ const SingleItinerary = (props: any) => {
                                               <div className="carousel-inner">
                                                 <div className="item active">
                                                   <div className="card-slid">
-                                                    {each.tasteImages?.map((image) => (
-                                                      <div
-                                                        key={image}
-                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    {
+                                                      <Carousel
+                                                        itemClass="w-full"
+                                                        responsive={responsive}
                                                       >
-                                                        <div className="card">
-                                                          <img
-                                                            className="card-img-top singleimages"
-                                                            src={image}
-                                                            alt="Card image"
-                                                          />
-                                                        </div>
-                                                      </div>
-                                                    ))}
+                                                        {each.tasteImages?.map((image) => (
+                                                          <div key={image}>
+                                                            <div className="card">
+                                                              <img
+                                                                className="card-img-top singleimages"
+                                                                src={image}
+                                                                alt="Cardimage"
+                                                              />
+                                                            </div>
+                                                          </div>
+                                                        ))}
+                                                      </Carousel>
+                                                    }
                                                   </div>
                                                 </div>
                                               </div>
-                                              <a
-                                                className="left carousel-control"
-                                                href="#carousel-reviews"
-                                                role="button"
-                                                data-slide="prev"
-                                              >
-                                                <i id="right" className="fa fa-angle-left">
-                                                  {" "}
-                                                </i>
-                                              </a>
-                                              <a
-                                                className="right carousel-control"
-                                                href="#carousel-reviews"
-                                                role="button"
-                                                data-slide="next"
-                                              >
-                                                <i id="right" className="fa fa-angle-right">
-                                                  {" "}
-                                                </i>
-                                              </a>
                                             </div>
                                           )}
                                         </div>
@@ -552,43 +556,27 @@ const SingleItinerary = (props: any) => {
                                               <div className="carousel-inner">
                                                 <div className="item active">
                                                   <div className="card-slid">
-                                                    {each?.vibeImages?.map((image) => (
-                                                      <div
-                                                        key={image}
-                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    {
+                                                      <Carousel
+                                                        itemClass="w-full"
+                                                        responsive={responsive}
                                                       >
-                                                        <div className="card">
-                                                          <img
-                                                            className="card-img-top singleimages"
-                                                            src={image}
-                                                            alt="Card image"
-                                                          />
-                                                        </div>
-                                                      </div>
-                                                    ))}
+                                                        {each?.vibeImages?.map((image) => (
+                                                          <div key={image}>
+                                                            <div className="card">
+                                                              <img
+                                                                className="card-img-top singleimages"
+                                                                src={image}
+                                                                alt="Cardimage"
+                                                              />
+                                                            </div>
+                                                          </div>
+                                                        ))}
+                                                      </Carousel>
+                                                    }
                                                   </div>
                                                 </div>
                                               </div>
-                                              <a
-                                                className="left carousel-control"
-                                                href="#carousel-reviews"
-                                                role="button"
-                                                data-slide="prev"
-                                              >
-                                                <i id="right" className="fa fa-angle-left">
-                                                  {" "}
-                                                </i>
-                                              </a>
-                                              <a
-                                                className="right carousel-control"
-                                                href="#carousel-reviews"
-                                                role="button"
-                                                data-slide="next"
-                                              >
-                                                <i id="right" className="fa fa-angle-right">
-                                                  {" "}
-                                                </i>
-                                              </a>
                                             </div>
                                           </div>
                                         </div>
@@ -633,43 +621,27 @@ const SingleItinerary = (props: any) => {
                                               <div className="carousel-inner">
                                                 <div className="item active">
                                                   <div className="card-slid">
-                                                    {each?.experienceImages?.map((image) => (
-                                                      <div
-                                                        key={image}
-                                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                                    {
+                                                      <Carousel
+                                                        itemClass="w-full"
+                                                        responsive={responsive}
                                                       >
-                                                        <div className="card">
-                                                          <img
-                                                            className="card-img-top singleimages"
-                                                            src={image}
-                                                            alt="Card image"
-                                                          />
-                                                        </div>
-                                                      </div>
-                                                    ))}
+                                                        {each?.experienceImages?.map((image) => (
+                                                          <div key={image}>
+                                                            <div className="card">
+                                                              <img
+                                                                className="card-img-top singleimages"
+                                                                src={image}
+                                                                alt="Cardimage"
+                                                              />
+                                                            </div>
+                                                          </div>
+                                                        ))}
+                                                      </Carousel>
+                                                    }
                                                   </div>
                                                 </div>
                                               </div>
-                                              <a
-                                                className="left carousel-control"
-                                                href="#carousel-reviews"
-                                                role="button"
-                                                data-slide="prev"
-                                              >
-                                                <i id="right" className="fa fa-angle-left">
-                                                  {" "}
-                                                </i>
-                                              </a>
-                                              <a
-                                                className="right carousel-control"
-                                                href="#carousel-reviews"
-                                                role="button"
-                                                data-slide="next"
-                                              >
-                                                <i id="right" className="fa fa-angle-right">
-                                                  {" "}
-                                                </i>
-                                              </a>
                                             </div>
                                           </div>
                                         </div>

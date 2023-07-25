@@ -188,7 +188,7 @@ const Navbar = (props: Props) => {
                         display: "flex",
                         alignItems: "center",
                         marginTop: 0,
-                        marginLeft: "20%",
+                        marginLeft: "13%",
                       }
                     : {}
                 }
@@ -197,63 +197,63 @@ const Navbar = (props: Props) => {
                   <Link to="/">Home</Link>
                 </li>
 
-                {!user._id || user.role === "user" ? (
-                  <li
-                    onMouseLeave={(e) => handleShowDropdown(e, false)}
-                    onMouseEnter={(e) => handleShowDropdown(e, true)}
-                    className={`dropdown ${isDropdownOpen ? " open" : ""}`}
+                {/* {user._id ? ( */}
+                <li
+                  onMouseLeave={(e) => handleShowDropdown(e, false)}
+                  onMouseEnter={(e) => handleShowDropdown(e, true)}
+                  className={`dropdown ${isDropdownOpen ? " open" : ""}`}
+                >
+                  <a
+                    style={{ margin: 0, padding: "15px" }}
+                    className="dropdown-toggle btn"
+                    data-toggle="dropdown"
                   >
-                    <a
-                      style={{ margin: 0, padding: "15px" }}
-                      className="dropdown-toggle btn"
-                      data-toggle="dropdown"
-                    >
-                      Destinations <b className="caret"></b>
-                    </a>
+                    Destinations <b className="caret"></b>
+                  </a>
 
-                    <ul
-                      className="dropdown-menu dropdown-menu-large row"
-                      style={{
-                        maxHeight: "70vh",
-                        // overflowY: "hidden",
-                        left: "-74%",
-                        width: "228%",
-                      }}
-                    >
-                      {Object.entries(cities).map(([key, val]) => (
-                        <li className="col-sm-6">
-                          <ul>
-                            <li className="dropdown-header">{key}</li>
-                            <div className="row inn-dropdown" style={{ width: "250px" }}>
-                              {createGroups(val, 23).map((each) => (
-                                <div className="col-sm-6">
-                                  {each.map((item) => (
-                                    <li>
-                                      <Link
-                                        to={{
-                                          pathname: "/itinerary/list",
-                                          search: createSearchParams({
-                                            region: item.code,
-                                          }).toString(),
-                                        }}
-                                      >
-                                        {item.country}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </div>
-                              ))}
-                            </div>
-                          </ul>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ) : (
-                  <li>
-                    <Link to="/itinerary/me">Voyager Itineraries</Link>
-                  </li>
-                )}
+                  <ul
+                    className="dropdown-menu dropdown-menu-large row"
+                    style={{
+                      maxHeight: "70vh",
+                      // overflowY: "hidden",
+                      left: "-74%",
+                      width: "228%",
+                    }}
+                  >
+                    {Object.entries(cities).map(([key, val]) => (
+                      <li className="col-sm-6">
+                        <ul>
+                          <li className="dropdown-header">{key}</li>
+                          <div className="row inn-dropdown" style={{ width: "250px" }}>
+                            {createGroups(val, 23).map((each) => (
+                              <div className="col-sm-6">
+                                {each.map((item) => (
+                                  <li>
+                                    <Link
+                                      to={{
+                                        pathname: "/itinerary/list",
+                                        search: createSearchParams({
+                                          region: item.code,
+                                        }).toString(),
+                                      }}
+                                    >
+                                      {item.country}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+                {/* ) : ( */}
+                <li>
+                  <Link to="/itinerary/me">Voyager Itineraries</Link>
+                </li>
+                {/* )} */}
 
                 <li>
                   <Link to="/about-us">About us</Link>
@@ -406,68 +406,68 @@ const Navbar = (props: Props) => {
               </>
             )}
 
-            {!user._id || user.role === "user" ? (
-              <li
-                onMouseLeave={(e) => handleShowDropdown(e, false)}
-                onMouseEnter={(e) => handleShowDropdown(e, true)}
-                className={`dropdown ${isDropdownOpen ? " open" : ""}`}
-              >
-                <a style={{ margin: 0 }} className="dropdown-toggle btn" data-toggle="dropdown">
-                  Destinations <b className="caret"></b>
-                </a>
+            {/* {!user._id ? ( */}
+            <li
+              onMouseLeave={(e) => handleShowDropdown(e, false)}
+              onMouseEnter={(e) => handleShowDropdown(e, true)}
+              className={`dropdown ${isDropdownOpen ? " open" : ""}`}
+            >
+              <a style={{ margin: 0 }} className="dropdown-toggle btn" data-toggle="dropdown">
+                Destinations <b className="caret"></b>
+              </a>
 
-                <ul
-                  className="dropdown-menu dropdown-menu-large row"
-                  style={{
-                    maxHeight: "50vh",
-                    overflowY: "auto",
-                    left: "-40%",
-                  }}
-                >
-                  {Object.entries(cities).map(([key, val]) => (
-                    <li className="col-sm-6">
-                      <ul>
-                        <li className="dropdown-header">{key}</li>
-                        <div className="row inn-dropdown">
-                          {createGroups(val, 23).map((each) => (
-                            <div className="col-sm-6">
-                              {each.map((item) => (
-                                <li>
-                                  <Link
-                                    onClick={() => {
-                                      setmobileview(false);
-                                    }}
-                                    to={{
-                                      pathname: "/itinerary/list",
-                                      search: createSearchParams({
-                                        region: item.code,
-                                      }).toString(),
-                                    }}
-                                  >
-                                    {item.country}
-                                  </Link>
-                                </li>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ) : (
-              <li>
-                <Link
-                  to="/itinerary/me"
-                  onClick={() => {
-                    setmobileview(false);
-                  }}
-                >
-                  Voyager Itineraries
-                </Link>
-              </li>
-            )}
+              <ul
+                className="dropdown-menu dropdown-menu-large row"
+                style={{
+                  maxHeight: "50vh",
+                  overflowY: "auto",
+                  left: "-40%",
+                }}
+              >
+                {Object.entries(cities).map(([key, val]) => (
+                  <li className="col-sm-6">
+                    <ul>
+                      <li className="dropdown-header">{key}</li>
+                      <div className="row inn-dropdown">
+                        {createGroups(val, 23).map((each) => (
+                          <div className="col-sm-6">
+                            {each.map((item) => (
+                              <li>
+                                <Link
+                                  onClick={() => {
+                                    setmobileview(false);
+                                  }}
+                                  to={{
+                                    pathname: "/itinerary/list",
+                                    search: createSearchParams({
+                                      region: item.code,
+                                    }).toString(),
+                                  }}
+                                >
+                                  {item.country}
+                                </Link>
+                              </li>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            {/* ) : ( */}
+            <li>
+              <Link
+                to="/itinerary/me"
+                onClick={() => {
+                  setmobileview(false);
+                }}
+              >
+                Voyager Itineraries
+              </Link>
+            </li>
+            {/* )} */}
 
             {user.role === "seller" ? (
               <li>

@@ -87,9 +87,9 @@ const Itineraries = (props: Props) => {
   useEffect(() => {
     const userRole = getUserRole(); // Replace this with your logic to get the user's role
     setuserRole(userRole);
-    if (userRole === "seller") {
-      navigate("/itinerary/me");
-    }
+    // if (userRole === "seller") {
+    //   navigate("/itinerary/me");
+    // }
 
     getItineraries();
   }, [searchParams]);
@@ -182,7 +182,7 @@ const Itineraries = (props: Props) => {
                             <div className="row">
                               <div className="col-md-7">
                                 <div className="left-first">
-                                  <h1 className="top-heading">
+                                  <h1 className="top-heading" style={{ paddingLeft: "14px" }}>
                                     <span className="first-textbg">My ITINERARIES</span>
                                   </h1>
                                 </div>
@@ -215,10 +215,15 @@ const Itineraries = (props: Props) => {
                                                       className="card"
                                                     >
                                                       <img
-                                                        className="card-img-top"
+                                                        className="card-img-top imgStyle"
                                                         src={each.image}
                                                         alt="Cardimage"
-                                                        style={{ width: "100%" }}
+                                                        style={{
+                                                          width: "100%",
+                                                          height: "200px",
+                                                          objectFit: "cover",
+                                                          objectPosition: "center",
+                                                        }}
                                                       />
                                                       <div className="badge">
                                                         <p>{each.category[0]}</p>
@@ -331,7 +336,14 @@ const Itineraries = (props: Props) => {
 
                             {data?.length > 0 ? (
                               <div className="row">
-                                <div className="card-grid">
+                                <div
+                                  className="card-grid"
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    flexWrap: "wrap",
+                                  }}
+                                >
                                   {data.map((each) => (
                                     <div
                                       key={each._id}
@@ -343,7 +355,7 @@ const Itineraries = (props: Props) => {
                                         className="card"
                                       >
                                         <img
-                                          className="card-img-top"
+                                          className="card-img-top imgStyle"
                                           src={each.image}
                                           alt="Cardimage"
                                           style={{ width: "100%" }}
@@ -513,15 +525,6 @@ const Itineraries = (props: Props) => {
                               </div>
                             </div>
                           </div> */}
-                            <div className="row">
-                              <div className="col-md-12">
-                                <div className="more-listing text-center">
-                                  <button className="btn btn-orange navbar-btn">
-                                    Discover more
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
                           </div>
                         </section>
                       </div>

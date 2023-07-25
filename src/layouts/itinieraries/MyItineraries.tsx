@@ -53,6 +53,7 @@ const responsive = {
 
 const MyItineraries = (props: Props) => {
   const [data, setData] = useState<Itinerary[]>([]);
+  const [purchasedItineraries, setPurchasedItineraries] = useState<Itinerary[]>([]);
   const [badgeHover, setBadgeHover] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
@@ -65,8 +66,10 @@ const MyItineraries = (props: Props) => {
 
     try {
       let getdata = (await api("/itinerary/list/me")) as { data: Itinerary[] };
-
       setData(getdata.data);
+
+      let purchasedData = (await api(`/itinerary/purchased/${""}`)) as { data: Itinerary[] };
+      setPurchasedItineraries(purchasedData.data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -132,6 +135,7 @@ const MyItineraries = (props: Props) => {
           </div>
         </div>
       </section>
+
       {data.length > 0 ? (
         <section className="listing">
           <div className="container">
@@ -195,6 +199,7 @@ const MyItineraries = (props: Props) => {
                     {data.map((each) => (
                       <Link
                         to={`/itinerary/view/${each._id}`}
+                        style={{ marginBottom: "20px" }}
                         key={each._id}
                         onMouseEnter={() => setBadgeHover(each._id)}
                         onMouseLeave={() => setBadgeHover(null)}

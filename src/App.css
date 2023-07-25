@@ -632,9 +632,12 @@ input#files {
   object-position: center;
 }
 .ulstyle {
-  margin-left: -41px;
   background: none;
   display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  padding-left: 0px;
 }
 .left-d-itineraries ul li {
   background: rgba(241, 165, 1, 0.24);
@@ -653,6 +656,13 @@ input#files {
   padding: 12px 36px;
   margin: 0 10px 0 0;
   list-style: none;
+}
+.image00 {
+  width: 100%;
+  border-radius: 24px;
+  height: 385px;
+  object-fit: cover;
+  object-position: center;
 }
 .left-d-itineraries h1 {
   font-family: "Bebas Neue";
@@ -795,8 +805,6 @@ h3.price-sec span {
 }
 @media (min-width: 768px) {
   .ulstyle {
-    margin-left: -41px !important;
-    background: none;
   }
   .left-d-itineraries ul {
     margin: 0 0 0 0 !important;
@@ -874,6 +882,10 @@ h3.price-sec span {
     align-items: flex-start !important;
     flex-direction: column;
   }
+  .image00 {
+    width: 100%;
+    height: auto;
+  }
   .daysrow {
     padding: 0px !important;
     padding-top: 10px !important;
@@ -900,9 +912,7 @@ h3.price-sec span {
   .d-itineraries {
     padding: 20px 0;
   }
-  .image00 {
-    max-width: 100% !important;
-  }
+
   .left-d-itineraries {
     padding: 22px 0 0 0;
   }
@@ -1049,6 +1059,10 @@ h3.price-sec span {
   /*	----------------------------------------------------------*/
   .img-righttwo img {
     width: 100%;
+  }
+  .image00 {
+    width: 100%;
+    height: auto;
   }
   .img-rightone {
     position: absolute;
