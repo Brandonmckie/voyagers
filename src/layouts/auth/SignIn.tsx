@@ -51,7 +51,7 @@ const SignIn = () => {
                 <Link to="/">
                   <img src={logo} alt="Logo" width="64px" height="64px" />
                 </Link>
-                <h1>Create your My Voyages Account</h1>
+                <h1>Login to your MV account</h1>
               </div>
               <form onSubmit={handleSubmit}>
                 <label className="control-label" htmlFor="email">
