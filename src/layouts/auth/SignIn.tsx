@@ -73,11 +73,7 @@ const SignIn = () => {
   }, [Code]);
 
   useEffect(() => {
-    let params = new URLSearchParams(window.location.search);
-    let check = params.get("check");
-    if (check) {
-      alert("Your Password Updated");
-    }
+    alert("Your Password Updated");
   }, []);
 
   return (

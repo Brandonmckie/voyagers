@@ -28,6 +28,8 @@ const ForgotPassword = () => {
 
       //   if (token) {
       //     localStorage.setItem("jwt", token);
+      alert("Your Password Updated");
+
       navigate("/auth/login?check=true");
       //   }
     } catch (error: any) {
