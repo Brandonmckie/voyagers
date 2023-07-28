@@ -11,6 +11,7 @@ import EditProfile from "./layouts/profile/EditProfile";
 import AboutUs from "./layouts/aboutUs/AboutUs";
 import ContactUs from "./layouts/contactUs/ContactUs";
 import Boarding from "./layouts/stripe/Boarding";
+import ForgotPassword from "./layouts/auth/ForgotPassword";
 
 const Home = lazy(() => import("./layouts/home/Home"));
 const CreateItinerary = lazy(() => import("./layouts/createItinerary/CreateItinerary"));
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <AuthGuardRoute Element={SignIn} />,
+  },
+  {
+    path: "/auth/Reenter-Password",
+    element: <AuthGuardRoute Element={ForgotPassword} />,
+  },
+  {
+    path: "/auth/sign-up",
+    element: <SignUp />,
   },
   {
     path: "/auth/sign-up",

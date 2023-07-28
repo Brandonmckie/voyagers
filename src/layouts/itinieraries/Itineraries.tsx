@@ -96,7 +96,7 @@ const Itineraries = (props: Props) => {
 
   return (
     <>
-      <section className="itineraries style-input">
+      <section className="itineraries style-input picback">
         <div className="container">
           {/* <!-- -----------------------  right image and left text -------------- --> */}
           <div className="row first-section text-center">

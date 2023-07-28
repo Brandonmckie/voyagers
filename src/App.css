@@ -1199,3 +1199,9 @@ h3.price-sec span {
   justify-content: center;
   align-items: center;
 }
+
+@media (min-width: 1200px) {
+  .containersize {
+    width: 1206px !important;
+  }
+}

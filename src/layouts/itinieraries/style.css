@@ -5,6 +5,10 @@ h1 {
   font-family: "Bebas Neue";
 }
 
+.picback {
+  height: 300px;
+}
+
 .hero-image {
   background-image: url(../../layouts/home/img/Hero.png); /* The image used */
   background-color: #fff; /* Used if the image is unavailable */
@@ -818,6 +822,9 @@ h3.price-sec span {
   }
   .left-first {
     text-align: center;
+  }
+  .picback {
+    height: auto;
   }
   span.first-textbg:after {
     width: 200px;

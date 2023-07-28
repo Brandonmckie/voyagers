@@ -13,7 +13,12 @@ type State = {
 };
 
 const SignUp = () => {
-  const [values, setValues] = useState<State>({ email: "", password: "", username: "", role: "user" });
+  const [values, setValues] = useState<State>({
+    email: "",
+    password: "",
+    username: "",
+    role: "user",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<any>({});
 
@@ -25,15 +30,14 @@ const SignUp = () => {
 
     try {
       let data = await api.post("/users/add-user", values);
-      let token = data.data?.token;
+      let token = data?.data?.token;
 
       if (token) {
         localStorage.setItem("jwt", token);
         navigate("/");
       }
     } catch (error: any) {
-      console.log(error);
-      setErrors(error.response.data);
+      setErrors(error?.response?.data);
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +56,7 @@ const SignUp = () => {
             <div className="sigup-box">
               <div className="text-center">
                 <Link to="/">
-                    <img src={logo} alt="Logo" width="64px" height="64px" />
+                  <img src={logo} alt="Logo" width="64px" height="64px" />
                 </Link>
                 <h1>Create your My Voyages Account</h1>
               </div>
@@ -134,7 +138,9 @@ const SignUp = () => {
                   <label htmlFor="role">Are you a seller?</label>
                   <input
                     value={values.role}
-                    onChange={(e) => setValues({ ...values, role: values.role === "seller" ? "user" : "seller" })}
+                    onChange={(e) =>
+                      setValues({ ...values, role: values.role === "seller" ? "user" : "seller" })
+                    }
                     id="role"
                     type="checkbox"
                     aria-label="..."

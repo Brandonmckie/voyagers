@@ -12,6 +12,11 @@
   width: 100%;
   position: relative;
 }
+
+.react-multi-carousel-track {
+  margin-bottom: 20px;
+}
+
 .wrapper i {
   top: 50%;
   height: 50px;

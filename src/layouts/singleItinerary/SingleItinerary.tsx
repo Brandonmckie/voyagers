@@ -169,7 +169,7 @@ const SingleItinerary = (props: any) => {
       ) : (
         <div>
           <section className="itineraries style-input">
-            <div className="container">
+            <div className="container containersize">
               <div className="d-itineraries">
                 <div className="row singlerow">
                   <div className="col-md-6">

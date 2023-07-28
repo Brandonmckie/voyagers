@@ -300,7 +300,7 @@ const Navbar = (props: Props) => {
                         width="44px"
                         height="44px"
                         src={user.image || dp}
-                        alt="Display Picture"
+                        alt="DisplayPicture"
                         style={{
                           borderRadius: "50%",
                           objectFit: "cover",

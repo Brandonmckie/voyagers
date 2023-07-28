@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 import "./assets/styles/index.css";
 import logo from "./assets/images/logo.png";
@@ -14,31 +14,71 @@ type State = {
 const SignIn = () => {
   const [values, setValues] = useState<State>({ email: "", password: "" });
   const [errors, setErrors] = useState<any>({});
+  const [forgotPassword, setforgotPassword] = useState(false);
+  const [Code, setCode] = useState(false);
+  const [codeValue, setcodeValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    try {
-      let data = await api.post("/users/login", values);
-      let token = data.data?.token;
+    if (!forgotPassword && !Code) {
+      try {
+        let data = await api.post("/users/login", values);
+        let token = data?.data?.token;
 
-      if (token) {
-        localStorage.setItem("jwt", token);
-        navigate("/");
+        if (token) {
+          localStorage.setItem("jwt", token);
+          navigate("/");
+        }
+      } catch (error: any) {
+        setErrors(error?.response?.data);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error: any) {
-      setErrors(error.response.data);
-      console.log(error.response.data.message);
-    } finally {
-      setIsLoading(false);
+    } else if (!Code) {
+      try {
+        let { data } = await api.post("/users/forgotpassword", { email: values?.email });
+        setCode(true);
+        setforgotPassword(false);
+      } catch (error: any) {
+        setErrors(error?.response?.data);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      try {
+        let { data } = await api.post("/users/verifyCode", {
+          code: codeValue,
+          email: values?.email,
+        });
+        navigate(`/auth/Reenter-Password?email=${values?.email}`);
+      } catch (error: any) {
+        setErrors(error?.response?.data);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (Code) {
+      alert("We have sent a code to your email address");
+    }
+  }, [Code]);
+
+  useEffect(() => {
+    let params = new URLSearchParams(window.location.search);
+    let check = params.get("check");
+    if (check) {
+      alert("Your Password Updated");
+    }
+  }, []);
 
   return (
     <section className="signup">
@@ -51,45 +91,90 @@ const SignIn = () => {
                 <Link to="/">
                   <img src={logo} alt="Logo" width="64px" height="64px" />
                 </Link>
-                <h1>Create your My Voyages Account</h1>
+                <h1>
+                  {forgotPassword
+                    ? "Forgot Password"
+                    : Code
+                    ? "Verify your Code"
+                    : " Login to your MV account"}
+                </h1>
               </div>
               <form onSubmit={handleSubmit}>
-                <label className="control-label" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  onChange={handleChange}
-                  value={values.email}
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  placeholder="Enter email"
-                  name="email"
-                />
+                {!Code && (
+                  <>
+                    {" "}
+                    <label className="control-label" htmlFor="email">
+                      Email
+                    </label>
+                    <input
+                      onChange={handleChange}
+                      value={values.email}
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter email"
+                      name="email"
+                    />
+                    <p
+                      style={{
+                        textAlign: "center",
+                        display: errors?.email ? "block" : "none",
+                        color: errors?.email ? "red" : "black",
+                        marginTop: "5px",
+                      }}
+                    >
+                      {errors?.email}
+                    </p>
+                  </>
+                )}
 
-                <p
-                  style={{
-                    textAlign: "center",
-                    display: errors?.email ? "block" : "none",
-                    color: errors?.email ? "red" : "black",
-                    marginTop: "5px",
-                  }}
-                >
-                  {errors.email}
-                </p>
+                {Code && (
+                  <>
+                    {" "}
+                    <label className="control-label" htmlFor="email">
+                      Code
+                    </label>
+                    <input
+                      onChange={(e: any) => {
+                        setcodeValue(e.target.value);
+                      }}
+                      value={codeValue}
+                      type="number"
+                      className="form-control"
+                      id="number"
+                      placeholder="0"
+                      name="code"
+                    />
+                    <p
+                      style={{
+                        textAlign: "center",
+                        display: errors?.code ? "block" : "none",
+                        color: errors?.code ? "red" : "black",
+                        marginTop: "5px",
+                      }}
+                    >
+                      {errors?.code}
+                    </p>
+                  </>
+                )}
+
                 <br />
-                <label className="control-label" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  onChange={handleChange}
-                  value={values.password}
-                  className="form-control"
-                  id="password"
-                  placeholder="Enter password"
-                  name="password"
-                />
+                {!forgotPassword && !Code && (
+                  <>
+                    <label className="control-label" htmlFor="password">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      onChange={handleChange}
+                      value={values.password}
+                      className="form-control"
+                      id="password"
+                      placeholder="Enter password"
+                      name="password"
+                    />
+                  </>
+                )}
 
                 <p
                   style={{
@@ -99,7 +184,7 @@ const SignIn = () => {
                     marginTop: "5px",
                   }}
                 >
-                  {errors.password}
+                  {errors?.password}
                 </p>
                 <i className="fa fa-eye-open"></i>
                 <br />
@@ -112,16 +197,31 @@ const SignIn = () => {
                     marginTop: "5px",
                   }}
                 >
-                  {errors.message}
+                  {errors?.message}
                 </p>
-                <p>Forgot Password?</p>
+
+                <p
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    if (forgotPassword || Code) {
+                      setforgotPassword(false);
+                      setCode(false);
+                    } else if (!forgotPassword || !Code) {
+                      setforgotPassword(true);
+                    } else {
+                      navigate("/auth/login");
+                    }
+                  }}
+                >
+                  {forgotPassword || Code ? "Login?" : "Forgot Password?"}
+                </p>
                 <br />
                 <button
                   type="submit"
                   disabled={isLoading}
                   className="btn btn-orange navbar-btn btn-block"
                 >
-                  {isLoading ? <CircularProgress /> : "Login"}
+                  {isLoading ? <CircularProgress /> : forgotPassword || Code ? "Confirm" : "Login"}
                 </button>
               </form>
               <div className="row">
