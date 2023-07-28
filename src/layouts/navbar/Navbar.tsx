@@ -223,7 +223,7 @@ const Navbar = (props: Props) => {
                     {Object.entries(cities).map(([key, val]) => (
                       <li className="col-sm-6">
                         <ul>
-                          <li className="dropdown-header">{key}</li>
+                          {/* <li className="dropdown-header">{key}</li> */}
                           <div className="row inn-dropdown" style={{ width: "250px" }}>
                             {createGroups(val, 23).map((each) => (
                               <div className="col-sm-6">
@@ -428,7 +428,7 @@ const Navbar = (props: Props) => {
                 {Object.entries(cities).map(([key, val]) => (
                   <li className="col-sm-6">
                     <ul>
-                      <li className="dropdown-header">{key}</li>
+                      {/* <li className="dropdown-header">{key}</li> */}
                       <div className="row inn-dropdown">
                         {createGroups(val, 23).map((each) => (
                           <div className="col-sm-6">

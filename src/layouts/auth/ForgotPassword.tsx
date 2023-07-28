@@ -9,10 +9,11 @@ import CircularProgress from "../../components/CircularProgress/CircularProgress
 type State = {
   email: string;
   password: string;
+  cpassword: string;
 };
 
 const ForgotPassword = () => {
-  const [values, setValues] = useState<State>({ email: "", password: "" });
+  const [values, setValues] = useState<State>({ email: "", password: "", cpassword: "" });
   const [errors, setErrors] = useState<any>({});
   const [forgotPassword, setforgotPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,13 +24,16 @@ const ForgotPassword = () => {
     setIsLoading(true);
 
     try {
+      if (values.password !== values.cpassword) {
+        setErrors({ ...errors, message: "Your Password not match" });
+        return;
+      }
       let data = await api.post("/users/reenter-password", values);
       //   let token = data?.data?.token;
 
       //   if (token) {
       //     localStorage.setItem("jwt", token);
       alert("Your Password Updated");
-
       navigate("/auth/login?check=true");
       //   }
     } catch (error: any) {
@@ -49,7 +53,6 @@ const ForgotPassword = () => {
     if (email1) {
       setValues({ ...values, email: email1 });
     }
-    alert("Now you can Reenter your Password");
   }, []);
 
   return (
@@ -63,7 +66,7 @@ const ForgotPassword = () => {
                 <Link to="/">
                   <img src={logo} alt="Logo" width="64px" height="64px" />
                 </Link>
-                <h1>Re-Enter Passowrd</h1>
+                <h1>Enter New Password</h1>
               </div>
               <form onSubmit={handleSubmit}>
                 <>
@@ -120,6 +123,32 @@ const ForgotPassword = () => {
                   {errors?.password}
                 </p>
                 <i className="fa fa-eye-open"></i>
+                <br />
+                <>
+                  <label className="control-label" htmlFor="password">
+                    Confirm Password
+                  </label>
+                  <input
+                    type="password"
+                    onChange={handleChange}
+                    value={values.cpassword}
+                    className="form-control"
+                    id="cpassword"
+                    placeholder="Enter Confirm password"
+                    name="cpassword"
+                  />
+                </>
+
+                <p
+                  style={{
+                    textAlign: "center",
+                    display: errors?.password ? "block" : "none",
+                    color: errors?.password ? "red" : "black",
+                    marginTop: "5px",
+                  }}
+                >
+                  {errors?.cpassword}
+                </p>
                 <br />
 
                 <p

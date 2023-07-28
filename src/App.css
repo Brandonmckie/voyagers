@@ -1088,7 +1088,7 @@ h3.price-sec span {
     line-height: 50px;
   }
   section.second-part {
-    display: none;
+    /* display: none; */
   }
   .topsaling span.first-textbg:after {
     width: 170px;

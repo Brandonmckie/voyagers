@@ -16,7 +16,7 @@ const SignIn = () => {
   const [errors, setErrors] = useState<any>({});
   const [forgotPassword, setforgotPassword] = useState(false);
   const [Code, setCode] = useState(false);
-  const [codeValue, setcodeValue] = useState(0);
+  const [codeValue, setcodeValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const SignIn = () => {
     } else {
       try {
         let { data } = await api.post("/users/verifyCode", {
-          code: codeValue,
+          code: parseInt(codeValue),
           email: values?.email,
         });
         navigate(`/auth/Reenter-Password?email=${values?.email}`);
@@ -71,10 +71,6 @@ const SignIn = () => {
       alert("We have sent a code to your email address");
     }
   }, [Code]);
-
-  useEffect(() => {
-    alert("Your Password Updated");
-  }, []);
 
   return (
     <section className="signup">
@@ -135,10 +131,10 @@ const SignIn = () => {
                         setcodeValue(e.target.value);
                       }}
                       value={codeValue}
-                      type="number"
+                      type="text"
                       className="form-control"
-                      id="number"
-                      placeholder="0"
+                      id="code"
+                      placeholder="000000"
                       name="code"
                     />
                     <p
