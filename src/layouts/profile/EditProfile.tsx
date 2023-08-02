@@ -78,7 +78,7 @@ const EditProfile = (props: Props) => {
 
   return (
     <div className="main-profile">
-      <h3>Login</h3>
+      <h3>Edit Profile</h3>
 
       {isMainLoading ? (
         <CircularProgress />
