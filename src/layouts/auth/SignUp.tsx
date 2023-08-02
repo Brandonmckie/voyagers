@@ -17,7 +17,7 @@ const SignUp = () => {
     email: "",
     password: "",
     username: "",
-    role: "user",
+    role: "seller",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<any>({});
@@ -134,10 +134,11 @@ const SignUp = () => {
                   {errors.password}
                 </p>
                 <i className="fa fa-eye-open"></i>
-                <div className="seller-opt">
+                {/* <div className="seller-opt">
                   <label htmlFor="role">Are you a seller?</label>
                   <input
                     value={values.role}
+                    checked={values.role === "seller"}
                     onChange={(e) =>
                       setValues({ ...values, role: values.role === "seller" ? "user" : "seller" })
                     }
@@ -145,7 +146,7 @@ const SignUp = () => {
                     type="checkbox"
                     aria-label="..."
                   />
-                </div>
+                </div> */}
 
                 <p
                   style={{
