@@ -740,7 +740,12 @@ const CreateItinerary = (props: Props) => {
               type="number"
               value={days}
               onChange={handleChangeDays}
-              onKeyDown={(event) => {}}
+              onKeyDown={(event) => {
+                const allowedKeys = ["Delete", "Backspace", "Tab"];
+                if (!/\d/.test(event.key) && allowedKeys.includes(event.key)) {
+                  event.preventDefault();
+                }
+              }}
               min={1}
               formEncType="number"
               className="form-control"
