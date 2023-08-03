@@ -97,8 +97,6 @@ const CreateItinerary = (props: Props) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  console.log(values.eachDetail[0].stayImages?.length);
-
   const handleChangeDays = (e: ChangeEvent<HTMLInputElement>) => {
     setDays(Number(e.target.value));
 
