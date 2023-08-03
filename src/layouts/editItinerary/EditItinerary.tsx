@@ -47,6 +47,7 @@ const EditItinerary = (props: Props) => {
   const [currentTab, setCurrentTab] = useState(0);
   const [dayForDelete, setDayForDelete] = useState<number | null>(null);
   const navigate = useNavigate();
+  const [totaldays, settotaldays] = useState<any>(1);
   const [values, setValues] = useState<Values>({
     country: "",
     category: [],
@@ -138,11 +139,13 @@ const EditItinerary = (props: Props) => {
       setValues({ ...values, eachDetail: detail });
       setDays(days + 1);
     } else if (type === "-") {
-      setDays(days - 1);
-      setValues({
-        ...values,
-        eachDetail: values.eachDetail.slice(0, values.eachDetail.length - 1),
-      });
+      if (days != totaldays) {
+        setDays(days - 1);
+        setValues({
+          ...values,
+          eachDetail: values.eachDetail.slice(0, values.eachDetail.length - 1),
+        });
+      }
     }
 
     // let eachDetail = [];
@@ -169,7 +172,9 @@ const EditItinerary = (props: Props) => {
 
   const getItinerary = async () => {
     const data = (await api(`/itinerary/view/${itineraryId}`)) as { data: Values };
-    setValues({
+    settotaldays(data?.data?.eachDetail?.length);
+    setDays(data?.data?.eachDetail?.length);
+    let newData0 = {
       eachDetail: data.data.eachDetail,
       country: data.data.country,
       category: data.data.category,
@@ -179,7 +184,11 @@ const EditItinerary = (props: Props) => {
       title: data.data.title,
       image: data.data.image,
       details: "",
+    };
+    let newdata1 = data?.data?.eachDetail.map((item: any, i: any) => {
+      return { ...item, day: i };
     });
+    setValues({ ...newData0, eachDetail: newdata1 });
   };
 
   useEffect(() => {
@@ -372,10 +381,11 @@ const EditItinerary = (props: Props) => {
   };
 
   const deleteDay = () => {
-    const newValues = values.eachDetail.filter((each) => each.day !== dayForDelete);
+    setDays(days - 1);
+    settotaldays(totaldays - 1);
+    const newValues = values?.eachDetail.filter((each) => each.day !== dayForDelete);
     setValues({ ...values, eachDetail: newValues });
     setDayForDelete(null);
-    setDays(days - 1);
 
     api.patch("/itinerary/deleteDay", { itineraryId, newValues });
   };
@@ -720,7 +730,7 @@ const EditItinerary = (props: Props) => {
                 className="form-control"
                 id="title"
                 placeholder="Enter Title"
-                value={values.title}
+                value={values?.title}
                 onChange={handleChange}
                 name="title"
               />
@@ -732,7 +742,7 @@ const EditItinerary = (props: Props) => {
                   marginTop: "5px",
                 }}
               >
-                {isErrored.title}
+                {isErrored?.title}
               </p>
               <br />
               <label className="control-label" htmlFor="price">
@@ -740,7 +750,7 @@ const EditItinerary = (props: Props) => {
               </label>
               <input
                 type="number"
-                value={values.price}
+                value={values?.price}
                 onChange={handleChange}
                 className="form-control"
                 id="price"
@@ -755,7 +765,7 @@ const EditItinerary = (props: Props) => {
                   marginTop: "5px",
                 }}
               >
-                {isErrored.price}
+                {isErrored?.price}
               </p>
               <br />
 
@@ -771,11 +781,12 @@ const EditItinerary = (props: Props) => {
                     value={days}
                     onKeyDown={(event) => {
                       const allowedKeys = ["Delete", "Backspace", "Tab"];
-                      if (!/\d/.test(event.key) && allowedKeys.includes(event.key)) {
+                      if (!/\d/.test(event.key) && allowedKeys?.includes(event.key)) {
                         event.preventDefault();
                       }
                     }}
                     formEncType="number"
+                    min={totaldays}
                     disabled
                     id="days"
                     className="form-control"
@@ -808,7 +819,7 @@ const EditItinerary = (props: Props) => {
               <textarea
                 name="introduction"
                 id="introduction"
-                value={values.introduction}
+                value={values?.introduction}
                 onChange={handleChange}
               >
                 Write your intro...
@@ -821,7 +832,7 @@ const EditItinerary = (props: Props) => {
                   marginTop: "5px",
                 }}
               >
-                {isErrored.introduction}
+                {isErrored?.introduction}
               </p>
               <br />
             </div>
@@ -836,7 +847,7 @@ const EditItinerary = (props: Props) => {
                 placeholder="Write your detail...."
                 name="salesPitch"
                 onChange={handleChange}
-                value={values.salesPitch}
+                value={values?.salesPitch}
               ></textarea>
 
               <p
@@ -846,7 +857,7 @@ const EditItinerary = (props: Props) => {
                   marginTop: "5px",
                 }}
               >
-                {isErrored.salesPitch}
+                {isErrored?.salesPitch}
               </p>
             </div>
 
@@ -861,13 +872,13 @@ const EditItinerary = (props: Props) => {
                     onClick={() =>
                       setValues({
                         ...values,
-                        category: Array.from(new Set([...values.category, "stay"])),
+                        category: Array.from(new Set([...values?.category, "stay"])),
                       })
                     }
                   >
                     <input
                       aria-selected="true"
-                      checked={values.category.includes("stay")}
+                      checked={values?.category?.includes("stay")}
                       type="checkbox"
                     />
                     <label className="container-radio">Stay</label>
@@ -877,11 +888,11 @@ const EditItinerary = (props: Props) => {
                     onClick={() =>
                       setValues({
                         ...values,
-                        category: Array.from(new Set([...values.category, "taste"])),
+                        category: Array.from(new Set([...values?.category, "taste"])),
                       })
                     }
                   >
-                    <input type="checkbox" checked={values.category.includes("taste")} />
+                    <input type="checkbox" checked={values?.category?.includes("taste")} />
                     <label className="container-radio">Taste</label>
                   </div>
                 </div>
@@ -891,11 +902,11 @@ const EditItinerary = (props: Props) => {
                     onClick={() =>
                       setValues({
                         ...values,
-                        category: Array.from(new Set([...values.category, "vibe"])),
+                        category: Array.from(new Set([...values?.category, "vibe"])),
                       })
                     }
                   >
-                    <input type="checkbox" checked={values.category.includes("vibe")} />
+                    <input type="checkbox" checked={values?.category?.includes("vibe")} />
                     <label className="container-radio">Vibe</label>
                   </div>
                   <div
@@ -903,11 +914,11 @@ const EditItinerary = (props: Props) => {
                     onClick={() =>
                       setValues({
                         ...values,
-                        category: Array.from(new Set([...values.category, "experience"])),
+                        category: Array.from(new Set([...values?.category, "experience"])),
                       })
                     }
                   >
-                    <input type="checkbox" checked={values.category.includes("experience")} />
+                    <input type="checkbox" checked={values?.category?.includes("experience")} />
                     <label className="container-radio">Experience</label>
                   </div>
                 </div>
@@ -920,7 +931,7 @@ const EditItinerary = (props: Props) => {
                   marginTop: "5px",
                 }}
               >
-                {isErrored.category}
+                {isErrored?.category}
               </p>
             </div>
           </div>
@@ -968,7 +979,7 @@ const EditItinerary = (props: Props) => {
             </div>
           </Modal>
 
-          {values.eachDetail.map((item, idx) => (
+          {values?.eachDetail?.map((item, idx) => (
             <div
               className="row daysrow"
               style={{
