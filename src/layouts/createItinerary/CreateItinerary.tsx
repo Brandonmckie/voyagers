@@ -97,7 +97,7 @@ const CreateItinerary = (props: Props) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleChangeDays = (e: any) => {
+  const handleChangeDays = (e: ChangeEvent<HTMLInputElement>) => {
     setDays(Number(e.target.value));
     let eachDetail = [];
     for (let i = 0; i < Number(e.target.value); i++) {
@@ -740,12 +740,7 @@ const CreateItinerary = (props: Props) => {
               type="number"
               value={days}
               onChange={handleChangeDays}
-              onKeyDown={(event) => {
-                const allowedKeys = ["Delete", "Backspace", "Tab"];
-                if (!/\d/.test(event.key) && allowedKeys.includes(event.key)) {
-                  event.preventDefault();
-                }
-              }}
+              onKeyDown={(event) => {}}
               min={1}
               formEncType="number"
               className="form-control"
