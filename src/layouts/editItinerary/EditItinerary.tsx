@@ -770,7 +770,8 @@ const EditItinerary = (props: Props) => {
                     type="number"
                     value={days}
                     onKeyDown={(event) => {
-                      if (!/[0-9|Backspace|Delete]/.test(event.key)) {
+                      const allowedKeys = ["Delete", "Backspace", "Tab"];
+                      if (!/\d/.test(event.key) && allowedKeys.includes(event.key)) {
                         event.preventDefault();
                       }
                     }}

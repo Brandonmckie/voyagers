@@ -97,11 +97,8 @@ const CreateItinerary = (props: Props) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  console.log(values.eachDetail[0].stayImages?.length);
-
-  const handleChangeDays = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeDays = (e: any) => {
     setDays(Number(e.target.value));
-
     let eachDetail = [];
     for (let i = 0; i < Number(e.target.value); i++) {
       eachDetail.push({
@@ -744,7 +741,8 @@ const CreateItinerary = (props: Props) => {
               value={days}
               onChange={handleChangeDays}
               onKeyDown={(event) => {
-                if (!/[0-9|Backspace|Delete]/.test(event.key)) {
+                const allowedKeys = ["Delete", "Backspace", "Tab"];
+                if (!/\d/.test(event.key) && allowedKeys.includes(event.key)) {
                   event.preventDefault();
                 }
               }}
