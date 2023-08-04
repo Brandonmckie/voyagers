@@ -97,29 +97,29 @@ const CreateItinerary = (props: Props) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleChangeDays = (e: ChangeEvent<HTMLInputElement>) => {
-    setDays(Number(e.target.value));
-    let eachDetail = [];
-    for (let i = 0; i < Number(e.target.value); i++) {
-      eachDetail.push({
-        day: i + 1,
-        stayTitle: "",
-        stayDescription: "",
-        role: "user",
-        stayImages: [],
-        services: [],
-        dayTitle: "",
-        experienceDescription: "",
-        experienceImages: [],
-        highlights: "Some highlights",
-        tasteDescription: "",
-        tasteImages: [],
-        vibeDescription: "",
-        vibeImages: [],
-      });
-    }
-    setValues({ ...values, eachDetail: eachDetail });
-  };
+  // const handleChangeDays = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setDays(Number(e.target.value));
+  //   let eachDetail = [];
+  //   for (let i = 0; i < Number(e.target.value); i++) {
+  //     eachDetail.push({
+  //       day: i + 1,
+  //       stayTitle: "",
+  //       stayDescription: "",
+  //       role: "user",
+  //       stayImages: [],
+  //       services: [],
+  //       dayTitle: "",
+  //       experienceDescription: "",
+  //       experienceImages: [],
+  //       highlights: "Some highlights",
+  //       tasteDescription: "",
+  //       tasteImages: [],
+  //       vibeDescription: "",
+  //       vibeImages: [],
+  //     });
+  //   }
+  //   setValues({ ...values, eachDetail: eachDetail });
+  // };
 
   const changeServices = (title: string, day: number) => {
     if (values.eachDetail[day - 1].services.includes(title)) {
@@ -170,7 +170,7 @@ const CreateItinerary = (props: Props) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
+    let day = 1;
     try {
       const formData = new FormData();
 
@@ -230,7 +230,7 @@ const CreateItinerary = (props: Props) => {
           stayTitle: data.stayTitle,
           tasteDescription: data.tasteDescription,
           vibeDescription: data.vibeDescription,
-          day: data.day,
+          day: day++,
         });
       });
 
@@ -238,7 +238,6 @@ const CreateItinerary = (props: Props) => {
 
       // Make the POST request using Axios
       const response = await api.post("/itinerary", formData);
-      console.log(response.data); // Handle the server response
       navigate("/itinerary/me");
 
       // Reset the form or perform any other necessary actions
@@ -334,16 +333,54 @@ const CreateItinerary = (props: Props) => {
   };
 
   const deleteDay = () => {
-    const newValues = values.eachDetail.filter((each) => each.day !== dayForDelete);
-    setValues({ ...values, eachDetail: newValues });
+    if (days - 1 != 0) {
+      const newValues = values.eachDetail.filter((each) => each.day !== dayForDelete);
+      setValues({ ...values, eachDetail: newValues });
+      setDayForDelete(null);
+      setDays(days - 1);
+    }
     setDayForDelete(null);
-    setDays(days - 1);
+  };
+
+  const handleChangeDays = (type: string) => {
+    // setDays(Number(e.target.value));
+    if (type === "+") {
+      let detail = [
+        ...values.eachDetail,
+        {
+          day: values.eachDetail.length + 1,
+          stayTitle: "",
+          stayDescription: "",
+          role: "user",
+          stayImages: [],
+          services: [],
+          dayTitle: "",
+          experienceDescription: "",
+          experienceImages: [],
+          highlights: "Some highlights",
+          tasteDescription: "",
+          tasteImages: [],
+          vibeDescription: "",
+          vibeImages: [],
+        },
+      ];
+      setValues({ ...values, eachDetail: detail });
+      setDays(days + 1);
+    } else if (type === "-") {
+      if (days - 1 === 0) {
+      } else {
+        setDays(days - 1);
+        setValues({
+          ...values,
+          eachDetail: values.eachDetail.slice(0, values.eachDetail.length - 1),
+        });
+      }
+    }
   };
 
   const getUserDetails = async () => {
     try {
       let data = await api("/billing/user-details");
-      console.log(data);
       if (!data?.data?.isCompleted) {
         return navigate("/stripe/connect");
       } else if (!data?.data?.stripeConnected) {
@@ -733,7 +770,48 @@ const CreateItinerary = (props: Props) => {
             </p>
             <br />
 
-            <label className="control-label" htmlFor="days">
+            <div>
+              <div>
+                <label className="control-label" htmlFor="days">
+                  Days
+                </label>
+              </div>
+              <div className="days-input" style={{ flexDirection: "row" }}>
+                <input
+                  type="number"
+                  value={days}
+                  onKeyDown={(event) => {
+                    const allowedKeys = ["Delete", "Backspace", "Tab"];
+                    if (!/\d/.test(event.key) && allowedKeys?.includes(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
+                  formEncType="number"
+                  min={1}
+                  disabled
+                  id="days"
+                  className="form-control"
+                  itemType="number"
+                  placeholder="Enter Days"
+                  name="days"
+                />
+              </div>
+
+              <span
+                onClick={() => handleChangeDays("+")}
+                className="glyphicon glyphicon-plus"
+                style={{ marginLeft: "10px", cursor: "pointer" }}
+                aria-hidden="true"
+              ></span>
+
+              <span
+                onClick={() => handleChangeDays("-")}
+                className="glyphicon glyphicon-minus"
+                style={{ marginLeft: "10px", cursor: "pointer" }}
+                aria-hidden="true"
+              ></span>
+            </div>
+            {/* <label className="control-label" htmlFor="days">
               Days
             </label>
             <input
@@ -747,13 +825,15 @@ const CreateItinerary = (props: Props) => {
                 }
               }}
               min={1}
+              disabled
               formEncType="number"
               className="form-control"
               id="days"
               itemType="number"
               placeholder="Enter Days"
               name="days"
-            />
+            /> */}
+
             <br />
             <label className="control-label" htmlFor="introduction">
               Introduction

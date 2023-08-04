@@ -8,6 +8,7 @@ import "./assets/styles/carousel.css";
 import upload from "./assets/images/Upload.png";
 import { useNavigate, useParams } from "react-router-dom";
 import Slider from "react-slick";
+import CircularProgress from "../../components/CircularProgress/CircularProgress";
 
 type Params = { itineraryId: string };
 
@@ -44,6 +45,7 @@ type Values = {
 const EditItinerary = (props: Props) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isErrored, setIsErrored] = useState<any>({});
+  const [isLoading, setIsLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
   const [dayForDelete, setDayForDelete] = useState<number | null>(null);
   const navigate = useNavigate();
@@ -243,6 +245,7 @@ const EditItinerary = (props: Props) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let day = 1;
+    setIsLoading(true);
     try {
       const formData = new FormData();
 
@@ -328,6 +331,8 @@ const EditItinerary = (props: Props) => {
       if (error.response?.data) {
         setIsErrored(error.response?.data);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -379,15 +384,22 @@ const EditItinerary = (props: Props) => {
   };
 
   const deleteDay = () => {
-    setDays(days - 1);
-    if (dayForDelete || dayForDelete === 0) {
-      if (dayForDelete + 1 > totaldays + 1) {
-      } else {
-        settotaldays(totaldays - 1);
+    if (days - 1 != 0) {
+      if (dayForDelete || dayForDelete === 0) {
+        if (dayForDelete + 1 > totaldays + 1) {
+        } else {
+          if (totaldays === 1) {
+            settotaldays(1);
+          } else {
+            settotaldays(totaldays === 1 ? totaldays : totaldays - 1);
+          }
+        }
       }
+      const newValues = values?.eachDetail.filter((each) => each.day !== dayForDelete);
+      setValues({ ...values, eachDetail: newValues });
+      setDays(days - 1);
+      setDayForDelete(null);
     }
-    const newValues = values?.eachDetail.filter((each) => each.day !== dayForDelete);
-    setValues({ ...values, eachDetail: newValues });
     setDayForDelete(null);
 
     // api.patch("/itinerary/deleteDay", { itineraryId, newValues });
@@ -1495,8 +1507,8 @@ const EditItinerary = (props: Props) => {
           {isComplete && <p>Itinerary created successfuly</p>}
           <div className="row">
             <div className="col-md-12 text-center" style={{ marginTop: "20px" }}>
-              <button type="submit" className="btn btn-orange navbar-btn">
-                Submit Itinerary
+              <button disabled={isLoading} type="submit" className="btn btn-orange navbar-btn">
+                {isLoading ? <CircularProgress /> : "Submit Itinerary"}
               </button>
             </div>
           </div>
