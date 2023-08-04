@@ -201,7 +201,6 @@ const EditItinerary = (props: Props) => {
       let newDetail = values.eachDetail.map((each) =>
         each.day === day ? { ...each, services: filtered } : each
       );
-
       setValues({ ...values, eachDetail: newDetail });
     } else {
       let details = values.eachDetail.map((item) => {
@@ -243,7 +242,7 @@ const EditItinerary = (props: Props) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    let day = 1;
     try {
       const formData = new FormData();
 
@@ -313,7 +312,7 @@ const EditItinerary = (props: Props) => {
           vibeImages,
           tasteDescription: data.tasteDescription,
           vibeDescription: data.vibeDescription,
-          day: data.day,
+          day: day++,
         });
       });
 
@@ -321,7 +320,6 @@ const EditItinerary = (props: Props) => {
 
       // Make the POST request using Axios
       const response = await api.patch(`/itinerary/${itineraryId}`, formData);
-      console.log(response.data); // Handle the server response
 
       navigate(`/itinerary/view/${itineraryId}`);
 
@@ -382,12 +380,17 @@ const EditItinerary = (props: Props) => {
 
   const deleteDay = () => {
     setDays(days - 1);
-    settotaldays(totaldays - 1);
+    if (dayForDelete || dayForDelete === 0) {
+      if (dayForDelete + 1 > totaldays + 1) {
+      } else {
+        settotaldays(totaldays - 1);
+      }
+    }
     const newValues = values?.eachDetail.filter((each) => each.day !== dayForDelete);
     setValues({ ...values, eachDetail: newValues });
     setDayForDelete(null);
 
-    api.patch("/itinerary/deleteDay", { itineraryId, newValues });
+    // api.patch("/itinerary/deleteDay", { itineraryId, newValues });
   };
 
   return (
