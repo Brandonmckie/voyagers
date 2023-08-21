@@ -12,9 +12,10 @@ import AboutUs from "./layouts/aboutUs/AboutUs";
 import ContactUs from "./layouts/contactUs/ContactUs";
 import Boarding from "./layouts/stripe/Boarding";
 import ForgotPassword from "./layouts/auth/ForgotPassword";
+import CreateItinerary from "./layouts/createItinerary/CreateItinerary";
 
 const Home = lazy(() => import("./layouts/home/Home"));
-const CreateItinerary = lazy(() => import("./layouts/createItinerary/CreateItinerary"));
+const SetupProfile = lazy(() => import("./layouts/createItinerary/SetupProfile"));
 const SignUp = lazy(() => import("./layouts/auth/SignUp"));
 const SignIn = lazy(() => import("./layouts/auth/SignIn"));
 const MyItineraries = lazy(() => import("./layouts/itinieraries/MyItineraries")) as any;
@@ -99,12 +100,28 @@ const router = createBrowserRouter([
         path: "/itinerary/list",
         element: <Itineraries />,
       },
-      { path: "/itinerary/create", element: <ProtectedRoute Element={CreateItinerary} /> },
-      { path: "/itinerary/me", element: <ProtectedRoute Element={MyItineraries} /> },
+      {
+        path: "/itinerary/setupProfile",
+        element: <ProtectedRoute Element={SetupProfile} />,
+      },
+      {
+        path: "/itinerary/create",
+        element: <ProtectedRoute Element={CreateItinerary} />,
+      },
+      {
+        path: "/itinerary/me",
+        element: <ProtectedRoute Element={MyItineraries} />,
+      },
       // { path: "/itinerary/view/:itineraryId", element: <ProtectedRoute Element={SingleItinerary} /> },
       { path: "/itinerary/view/:itineraryId", element: <SingleItinerary /> },
-      { path: "/itinerary/edit/:itineraryId", element: <ProtectedRoute Element={EditItinerary} /> },
-      { path: "/profile/edit", element: <ProtectedRoute Element={EditProfile} /> },
+      {
+        path: "/itinerary/edit/:itineraryId",
+        element: <ProtectedRoute Element={EditItinerary} />,
+      },
+      {
+        path: "/profile/edit",
+        element: <ProtectedRoute Element={EditProfile} />,
+      },
     ],
   },
 ]);

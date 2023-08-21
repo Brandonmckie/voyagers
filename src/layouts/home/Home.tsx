@@ -22,6 +22,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../utils/api";
 import { checkIfUserIsAuthenticated } from "../../utils/utils";
+import CallToAction from "../../components/CallToAction";
+import StepsSection from "../../components/StepsSection";
 
 type Props = {};
 
@@ -110,13 +112,17 @@ const Home = () => {
               <div className="left-first">
                 {/* <p className='para-first'>Best Destinations around the world</p> */}
                 <h1 className="top-heading heading11">
-                  EXPERIENCE <span style={{ color: "#ef7a03" }}>SIMPLE</span> TRAVEL{" "}
-                  <span style={{ color: "#ef7a03" }}>PLANNING</span> THROUGH{" "}
+                  EXPERIENCE <span style={{ color: "#ef7a03" }}>SIMPLE</span>{" "}
+                  TRAVEL <span style={{ color: "#ef7a03" }}>PLANNING</span>{" "}
+                  THROUGH{" "}
                   <span style={{ color: "#ef7a03" }}>SOCIAL INTERACTION</span>{" "}
                 </h1>
 
                 <div className="row">
-                  <div className="col-sm-7 col-md-6 col-lg-6 signup-btn" style={{}}>
+                  <div
+                    className="col-sm-7 col-md-6 col-lg-6 signup-btn"
+                    style={{}}
+                  >
                     {!user && (
                       <>
                         {" "}
@@ -145,7 +151,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 col-lg-6 imgdiv" style={{ position: "relative" }}>
+            <div
+              className="col-sm-12 col-md-6 col-lg-6 imgdiv"
+              style={{ position: "relative" }}
+            >
               <div className="img-rightone" style={{ zIndex: 1 }}>
                 <img src={backimg} alt="map" />
               </div>
@@ -180,7 +189,10 @@ const Home = () => {
                     <h4>Stay</h4>
                   </div>
                   <div className="text">
-                    <span>Find your next awe-inspiring getaway from browsing voyage blogs by</span>
+                    <span>
+                      Find your next awe-inspiring getaway from browsing voyage
+                      blogs by
+                    </span>
                   </div>
                 </div>
               </div>
@@ -193,7 +205,10 @@ const Home = () => {
                     <h4>Taste</h4>
                   </div>
                   <div className="text">
-                    <span>Find your next soul satisfying meal from browsing voyage blogs by</span>
+                    <span>
+                      Find your next soul satisfying meal from browsing voyage
+                      blogs by
+                    </span>
                   </div>
                 </div>
               </div>
@@ -206,7 +221,9 @@ const Home = () => {
                     <h4>Vibe</h4>
                   </div>
                   <div className="text" style={{ height: "74px" }}>
-                    <span>Find your next happy place from browsing voyage blogs by</span>
+                    <span>
+                      Find your next happy place from browsing voyage blogs by
+                    </span>
                   </div>
                 </div>
               </div>
@@ -219,7 +236,10 @@ const Home = () => {
                     <h4>Experience</h4>
                   </div>
                   <div className="text">
-                    <span>Embark on an unforgettable journey from browsing voyage blogs by</span>
+                    <span>
+                      Embark on an unforgettable journey from browsing voyage
+                      blogs by
+                    </span>
                   </div>
                 </div>
               </div>
@@ -233,7 +253,8 @@ const Home = () => {
             <div className="col-md-7">
               <div className="left-first">
                 <h1 className="top-heading">
-                  Top <span className="first-textbg topsingle">ITINERARIES</span>
+                  Top{" "}
+                  <span className="first-textbg topsingle">ITINERARIES</span>
                 </h1>
               </div>
             </div>
@@ -242,7 +263,11 @@ const Home = () => {
         <div className="carousel-reviews broun-block">
           <div className="container-fuild screenwidth">
             <div className="row">
-              <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+              <div
+                id="carousel-reviews"
+                className="carousel slide"
+                data-ride="carousel"
+              >
                 <div className="carousel-inner">
                   <div className="item active">
                     <div className="card-slid">
@@ -273,7 +298,9 @@ const Home = () => {
                                 <h4 className="card-title">{each.title}</h4>
                                 <div className="subtitle">
                                   <span className="a">Created by:</span>
-                                  <span className="b">{each.userId.username}</span>
+                                  <span className="b">
+                                    {each.userId.username}
+                                  </span>
                                 </div>
                               </div>
                             </Link>
@@ -288,6 +315,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <StepsSection />
+
       <section className="client-part">
         <div className="container">
           <div className="row sliderSection">
@@ -333,8 +363,9 @@ const Home = () => {
                     </div>
 
                     <p className="text-bg">
-                      “Planning any trip takes way too long, being able to connect and plan out the
-                      entire trip in one stop is a major win!”
+                      “Planning any trip takes way too long, being able to
+                      connect and plan out the entire trip in one stop is a
+                      major win!”
                     </p>
                     <h4
                       style={{
@@ -348,7 +379,9 @@ const Home = () => {
                       Zamar
                     </h4>
                   </div>
-                  <div style={{ border: "1px solid #00000054", padding: "16px" }}>
+                  <div
+                    style={{ border: "1px solid #00000054", padding: "16px" }}
+                  >
                     <div
                       style={{
                         display: "flex",
@@ -372,8 +405,8 @@ const Home = () => {
                     </div>
 
                     <p className="text-bg">
-                      “Once I realized I liked traveling a certain way and doing things I like, I
-                      had to use My Voyages to find my vibe.”
+                      “Once I realized I liked traveling a certain way and doing
+                      things I like, I had to use My Voyages to find my vibe.”
                     </p>
                     <h4
                       style={{
@@ -387,7 +420,9 @@ const Home = () => {
                       Angie
                     </h4>
                   </div>
-                  <div style={{ border: "1px solid #00000054", padding: "16px" }}>
+                  <div
+                    style={{ border: "1px solid #00000054", padding: "16px" }}
+                  >
                     <div
                       style={{
                         display: "flex",
@@ -411,8 +446,9 @@ const Home = () => {
                     </div>
 
                     <p className="text-bg">
-                      “After several lackluster trips based off random reviews, experiencing a trip
-                      from tailored reviews and insight was game changing from My Voyages!”
+                      “After several lackluster trips based off random reviews,
+                      experiencing a trip from tailored reviews and insight was
+                      game changing from My Voyages!”
                     </p>
                     <h4
                       style={{
@@ -433,6 +469,8 @@ const Home = () => {
         </div>
       </section>
 
+      <CallToAction />
+
       <section className="faq-part">
         <div className="container">
           <div className="row">
@@ -446,11 +484,15 @@ const Home = () => {
             <div className="col-md-8">
               <div className="panel-group" id="accordion">
                 <div
-                  className={`panel panel-default ${currentTab === 0 ? "" : "collapsed"}`}
+                  className={`panel panel-default ${
+                    currentTab === 0 ? "" : "collapsed"
+                  }`}
                   data-target="#collapseOne"
                   data-toggle="collapse"
                   data-parent="#accordion"
-                  onClick={() => (currentTab === 0 ? setCurrentTab(null) : setCurrentTab(0))}
+                  onClick={() =>
+                    currentTab === 0 ? setCurrentTab(null) : setCurrentTab(0)
+                  }
                   aria-expanded="false"
                 >
                   <div className="panel-heading">
@@ -460,7 +502,9 @@ const Home = () => {
                   </div>
                   <div
                     id="collapseOne"
-                    className={`panel-collapse collapse ${currentTab === 0 ? "in" : ""}`}
+                    className={`panel-collapse collapse ${
+                      currentTab === 0 ? "in" : ""
+                    }`}
                     aria-expanded="false"
                     style={{
                       height: currentTab === 0 ? "auto" : "0px",
@@ -469,12 +513,14 @@ const Home = () => {
                   >
                     <div className="panel-body">
                       <p className="text-bg">
-                        My Voyages simplifies travel planning through social interaction. We get it!
-                        Between time-consuming planning and wasted money on unreliable reviews, you
-                        could easily browse between 8-10 different websites and apps. Welcome to
-                        travel planning made simple, enjoyable, and efficient for the modern
-                        traveler. You can trust our authentic reviews because they’re from
-                        like-minded users like you worldwide.
+                        My Voyages simplifies travel planning through social
+                        interaction. We get it! Between time-consuming planning
+                        and wasted money on unreliable reviews, you could easily
+                        browse between 8-10 different websites and apps. Welcome
+                        to travel planning made simple, enjoyable, and efficient
+                        for the modern traveler. You can trust our authentic
+                        reviews because they’re from like-minded users like you
+                        worldwide.
                       </p>
                     </div>
                   </div>
@@ -483,9 +529,13 @@ const Home = () => {
 
               <div className="panel-group" id="accordion">
                 <div
-                  className={`panel panel-default ${currentTab === 1 ? "" : "collapsed"}`}
+                  className={`panel panel-default ${
+                    currentTab === 1 ? "" : "collapsed"
+                  }`}
                   data-target="#collapsetwo"
-                  onClick={() => (currentTab === 1 ? setCurrentTab(null) : setCurrentTab(1))}
+                  onClick={() =>
+                    currentTab === 1 ? setCurrentTab(null) : setCurrentTab(1)
+                  }
                   data-toggle="collapse"
                   data-parent="#accordion"
                   aria-expanded="false"
@@ -497,7 +547,9 @@ const Home = () => {
                   </div>
                   <div
                     id="collapsetwo"
-                    className={`panel-collapse collapse ${currentTab === 1 ? "in" : ""}`}
+                    className={`panel-collapse collapse ${
+                      currentTab === 1 ? "in" : ""
+                    }`}
                     aria-expanded="false"
                     style={{
                       height: currentTab === 1 ? "auto" : "0px",
@@ -506,9 +558,10 @@ const Home = () => {
                   >
                     <div className="panel-body">
                       <p className="text-bg">
-                        Voyagers can now browse vetted itineraries around the world from some of
-                        your favorite travel personalities. If you like what you see, then buy the
-                        itinerary, and save yourself hours of research and app browsing.
+                        Voyagers can now browse vetted itineraries around the
+                        world from some of your favorite travel personalities.
+                        If you like what you see, then buy the itinerary, and
+                        save yourself hours of research and app browsing.
                       </p>
                     </div>
                   </div>
@@ -517,8 +570,12 @@ const Home = () => {
 
               <div className="panel-group" id="accordion">
                 <div
-                  className={`panel panel-default ${currentTab === 2 ? "" : "collapsed"}`}
-                  onClick={() => (currentTab === 2 ? setCurrentTab(null) : setCurrentTab(2))}
+                  className={`panel panel-default ${
+                    currentTab === 2 ? "" : "collapsed"
+                  }`}
+                  onClick={() =>
+                    currentTab === 2 ? setCurrentTab(null) : setCurrentTab(2)
+                  }
                   data-target="#collapsethr"
                   data-toggle="collapse"
                   data-parent="#accordion"
@@ -532,7 +589,9 @@ const Home = () => {
                   </div>
                   <div
                     id="collapsethr"
-                    className={`panel-collapse collapse ${currentTab === 2 ? "in" : ""}`}
+                    className={`panel-collapse collapse ${
+                      currentTab === 2 ? "in" : ""
+                    }`}
                     aria-expanded="false"
                     style={{
                       height: currentTab === 2 ? "auto" : "0px",
@@ -541,10 +600,11 @@ const Home = () => {
                   >
                     <div className="panel-body">
                       <p className="text-bg">
-                        For an additional fee, you will be matched with a MV travel expert whose
-                        expertise is in where you are headed. You are provided your own personal
-                        concierge from planning to experience in a fashion that can only be found at
-                        My Voyages.
+                        For an additional fee, you will be matched with a MV
+                        travel expert whose expertise is in where you are
+                        headed. You are provided your own personal concierge
+                        from planning to experience in a fashion that can only
+                        be found at My Voyages.
                       </p>
                     </div>
                   </div>
@@ -553,8 +613,12 @@ const Home = () => {
 
               <div className="panel-group" id="accordion">
                 <div
-                  className={`panel panel-default ${currentTab === 3 ? "" : "collapsed"}`}
-                  onClick={() => (currentTab === 3 ? setCurrentTab(null) : setCurrentTab(3))}
+                  className={`panel panel-default ${
+                    currentTab === 3 ? "" : "collapsed"
+                  }`}
+                  onClick={() =>
+                    currentTab === 3 ? setCurrentTab(null) : setCurrentTab(3)
+                  }
                   data-target="#collapsethr"
                   data-toggle="collapse"
                   data-parent="#accordion"
@@ -568,7 +632,9 @@ const Home = () => {
                   </div>
                   <div
                     id="collapsethr"
-                    className={`panel-collapse collapse ${currentTab === 3 ? "in" : ""}`}
+                    className={`panel-collapse collapse ${
+                      currentTab === 3 ? "in" : ""
+                    }`}
                     aria-expanded="false"
                     style={{
                       height: currentTab === 3 ? "auto" : "0px",
@@ -577,11 +643,13 @@ const Home = () => {
                   >
                     <div className="panel-body">
                       <p className="text-bg">
-                        Does everyone come to you for travel ideas, or restaurant ideas, or just for
-                        the vibes in general? Do you want to finally make money for putting together
-                        those fantastic experiences together for other people. If this sounds like
-                        you, send us an email at: info@myvoyages.com and we will reach out to you
-                        with next steps.
+                        Does everyone come to you for travel ideas, or
+                        restaurant ideas, or just for the vibes in general? Do
+                        you want to finally make money for putting together
+                        those fantastic experiences together for other people.
+                        If this sounds like you, send us an email at:
+                        info@myvoyages.com and we will reach out to you with
+                        next steps.
                       </p>
                     </div>
                   </div>

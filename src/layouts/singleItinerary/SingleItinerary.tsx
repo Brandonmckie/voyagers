@@ -45,14 +45,20 @@ const SingleItinerary = (props: any) => {
   const [isMy, setIsMy] = useState(false);
   const [purchasedItineraries, setPurchasedItineraries] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [profile, setProfile] = useState<{ role?: string; username?: string; _id?: string }>({});
+  const [profile, setProfile] = useState<{
+    role?: string;
+    username?: string;
+    _id?: string;
+  }>({});
 
   const navigate = useNavigate();
 
   const getItinerary = async () => {
     setIsLoading(true);
     try {
-      let getdata = (await api(`/itinerary/view/${itineraryId}`)) as { data: Itinerary };
+      let getdata = (await api(`/itinerary/view/${itineraryId}`)) as {
+        data: Itinerary;
+      };
 
       const user = getUser();
 
@@ -68,6 +74,7 @@ const SingleItinerary = (props: any) => {
       setIsLoading(false);
     }
   };
+
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckout = async () => {
@@ -79,7 +86,10 @@ const SingleItinerary = (props: any) => {
         navigate("/auth/login");
         return;
       }
-      let data = await api.post("/billing/checkout", { itineraryId, isChecked });
+      let data = await api.post("/billing/checkout", {
+        itineraryId,
+        isChecked,
+      });
 
       if (data.data) {
         window.open(data.data);
@@ -111,7 +121,6 @@ const SingleItinerary = (props: any) => {
   const sendEmail = async () => {
     try {
       let user = await api(`/itinerary/sendEmail/${itineraryId}`);
-      console.log(user);
     } catch (error) {
       console.log(error);
     }
@@ -173,6 +182,69 @@ const SingleItinerary = (props: any) => {
               <div className="d-itineraries">
                 <div className="row singlerow">
                   <div className="col-md-6">
+                    <div className="itemprofileinfo">
+                      <div className="itemprofileinfo-user">
+                        <img src={data?.userId?.image} alt="" />
+                        <div>
+                          <p className="itemprofileinfo-username">
+                            by <i>{data?.userId?.username}</i>
+                          </p>
+                          <p className="itemprofileinfo-country">
+                            {data?.userId?.country || "Country"}
+                          </p>
+                        </div>
+                      </div>
+
+                      <p className="itemprofileinfo-bio">
+                        {data?.userId?.userInfo?.bio || "User description"}
+                      </p>
+
+                      <div className="itemprofileinfo-voyagestyles itemprofileinfo-meta">
+                        <p>Voyage style - </p>
+                        {data?.userId?.userInfo?.voyageStyle?.length > 0 ? (
+                          <ul>
+                            {data?.userId?.userInfo?.voyageStyle?.map(
+                              (item: string, index: number) => (
+                                <li key={index}>{item || "Label"}</li>
+                              )
+                            )}
+                          </ul>
+                        ) : (
+                          <p className="none">No voyage</p>
+                        )}
+                      </div>
+
+                      <div className="itemprofileinfo-visitedcountries itemprofileinfo-meta">
+                        <p>Visited countries - </p>
+                        {data?.userId?.userInfo?.visitedCountries?.length > 0 ? (
+                          <ul>
+                            {data?.userId?.userInfo?.visitedCountries?.map(
+                              (item: { label: string }, index: number) => (
+                                <li key={index}>{item?.label || "Label"}</li>
+                              )
+                            )}
+                          </ul>
+                        ) : (
+                          <p className="none">No visited countries</p>
+                        )}
+                      </div>
+
+                      <div className="itemprofileinfo-visitedwonders itemprofileinfo-meta">
+                        <p>Visited wonders - </p>
+                        {data?.userId?.userInfo?.visitedWonders?.length > 0 ? (
+                          <ul>
+                            {data?.userId?.userInfo?.visitedWonders?.map(
+                              (item: { label: string }, index: number) => (
+                                <li key={index}>{item?.label || "Label"}</li>
+                              )
+                            )}
+                          </ul>
+                        ) : (
+                          <p className="none"> No visited wonders</p>
+                        )}
+                      </div>
+                    </div>
+
                     <div className="single-itinery">
                       <ul className="ulstyle">
                         {data.category?.map((item) => (
@@ -752,7 +824,9 @@ const SingleItinerary = (props: any) => {
                                                             className="card-img-top"
                                                             src={image}
                                                             alt="Card image"
-                                                            style={{ width: "100%" }}
+                                                            style={{
+                                                              width: "100%",
+                                                            }}
                                                           />
                                                         </div>
                                                       </div>

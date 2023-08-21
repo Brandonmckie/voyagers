@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",
     "react-multi-carousel": "^2.8.4",
+    "react-multi-select-component": "^4.3.4",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
     "slick-carousel": "^1.8.1",
@@ -52,7 +53,7 @@
     "workbox-strategies": "^6.5.4",
     "workbox-streams": "^6.5.4"
   },
-   "scripts": {
+  "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
     "heroku-prebuild": "npm i -g serve",

@@ -272,6 +272,66 @@ section.topsaling {
   top: 71px;
   left: 11%;
 }
+
+/* steps section starts here */
+
+.steps {
+  background: #f3f2ef;
+  padding: 50px 0;
+  padding-bottom: 150px;
+}
+.steps > h1 {
+  text-align: center;
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 60px;
+  letter-spacing: 0.3px;
+  color: #212832;
+}
+.steps > p {
+  text-align: center;
+  width: 53%;
+  margin: auto;
+  font-size: 2rem;
+}
+.steps-visuals {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 100px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+.steps-visuals div div {
+  height: 250px;
+  width: 250px;
+  margin: auto;
+  position: relative;
+  /* top: 30px; */
+}
+.steps-visuals img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.steps-visualsone,
+.steps-visualstwo,
+.steps-visualsthree {
+  background: white;
+  padding: 25px;
+  height: 275px;
+}
+.steps-visualsone > p,
+.steps-visualstwo > p,
+.steps-visualsthree > p {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+/* steps section ends here */
+
 /*-----------------------------------------------------------*/
 section.client-part {
   padding: 50px 15px;
@@ -309,6 +369,77 @@ button.btn.org-faq i.fa.fa-angle-down {
   margin-top: 3px;
   margin-left: 7px;
 }
+
+/* faq section styling starts here */
+
+.calltoaction {
+  background: #eacebf !important;
+  padding: 50px 0;
+  margin-top: 60px;
+}
+.calltoaction-firstrow,
+.calltoaction-lastrow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  justify-items: center;
+  margin-bottom: 50px;
+}
+.calltoaction-firstrow img,
+.calltoaction-lastrow img {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+}
+.calltoaction-middlerow {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  margin-bottom: 50px;
+  align-items: center;
+}
+.calltoaction-middlerow img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+.calltoaction-middlerow div {
+  text-align: center;
+}
+.calltoaction-middlerow div button {
+  background: black;
+  color: white;
+  padding: 12px 50px;
+  border-radius: 30px;
+  margin-top: 30px;
+  border: none;
+}
+.calltoaction-middlerow div h1 {
+  font-size: 5rem;
+}
+.calltoaction-middlerow div p {
+  font-size: 2rem;
+  margin-top: 50px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calltoaction-firstrow img:first-child,
+.calltoaction-firstrow img:nth-child(3) {
+  display: none;
+}
+.calltoaction-middlerow img:first-child,
+.calltoaction-middlerow img:last-child {
+  display: none;
+}
+.calltoaction-lastrow img:nth-child(3),
+.calltoaction-lastrow img:nth-child(4) {
+  display: none;
+}
+
+/* faq section styling ends here */
+
 /*++++++++++++++++++++++++++++++++++++/*/
 .faq-part {
   padding: 70px 15px;
@@ -770,6 +901,254 @@ h3.price-sec span {
   padding: 40px 0 0 0;
 }
 
+/* single itinerary user details styles */
+
+.itemprofileinfo-user {
+  display: flex;
+  align-items: center;
+}
+.itemprofileinfo-user p {
+  margin: 0 !important;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+.itemprofileinfo-user .itemprofileinfo-country {
+  font-size: 1.25rem;
+}
+.itemprofileinfo-user img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.itemprofileinfo-bio {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+.itemprofileinfo-meta {
+  display: flex;
+  align-items: center;
+}
+.itemprofileinfo-meta ul li {
+  display: inline-block;
+  background: #fce9c2;
+  margin-right: 10px;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+.itemprofileinfo-meta ul {
+  margin-left: 10px;
+}
+.itemprofileinfo-voyagestyles {
+  margin-top: 15px;
+}
+.itemprofileinfo-meta .none {
+  margin-left: 2px;
+}
+/* single itinerary user details styles */
+
+/* navbar search styling goes here */
+
+.destinations-search {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d1d1ad;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.destinations-search p {
+  margin: 0 !important;
+}
+
+.destinations-search svg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  position: relative;
+  left: 4px;
+}
+.destinations-lists {
+  height: 200px;
+  overflow: hidden;
+}
+.searchmodal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  height: 100vh;
+  z-index: 100;
+}
+.showingSearch {
+  height: 100vh;
+  overflow: hidden;
+}
+.searchmodal-container {
+  width: 50%;
+  margin: 0 auto;
+  background: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 350px;
+  padding: 30px;
+  padding-top: 50px;
+}
+.searchmodal-container .form div {
+  display: flex;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 5px;
+}
+.searchmodal-container .form div svg {
+  height: 30px;
+  width: 30px;
+}
+.destinations {
+  margin-top: 20px;
+}
+.destinations-single a {
+  display: flex;
+  text-decoration: none;
+}
+.destinations-single a svg {
+  height: 25px;
+  width: 25px;
+  position: relative;
+  top: 2px;
+}
+.destinations-single a p {
+  position: relative;
+  top: 4px;
+}
+.searchmodal-container .form div input {
+  width: 100%;
+  border: 1px solid transparent;
+  outline: none;
+}
+.destinations-single {
+  margin-bottom: 10px;
+}
+
+.destinations-single:hover {
+  background: rgba(255, 166, 0, 0.266);
+  border-radius: 2px;
+}
+
+.searchmodal-closeicon {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+/* navbar search styling ends here */
+
+/* profile setup section starts here */
+
+.profilesetup > h3 {
+  text-align: center;
+}
+.profilesetup-subheading p {
+  font-size: 1.75rem;
+}
+.profilesetup-subheading p {
+  text-align: center;
+}
+.profilesetup-form {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: 1px solid #d1d1d180;
+  border-radius: 10px;
+  padding: 10px;
+}
+.profilesetup-form--name input,
+.profilesetup-form textarea,
+.profilesetup-form--country select {
+  display: block;
+  border: 1px solid #d1d1d194;
+  width: 100%;
+  padding: 5px 7px;
+  border-radius: 6px;
+  outline: none;
+}
+.profilesetup-form--name {
+  margin-bottom: 20px;
+}
+.profilesetup-form label,
+.profilesetup-form--voyagestyle p {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.profilesetup-form--voyagestyle input {
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.profilesetup-form--voyagestyle label {
+  font-weight: 400;
+  font-size: 1.75rem;
+}
+.profilesetup-form--voyagestyle input {
+  display: inline-block;
+  width: auto;
+}
+.profilesetup-form--country {
+  margin: 25px 0;
+}
+.profilesetup-form--country select {
+  background: transparent;
+  font-size: 1.5rem;
+}
+.profilesetup-form--wonders {
+  margin: 25px 0;
+}
+.profilesetup-form--submit {
+  margin-top: 25px;
+}
+.profilesetup-form--submit button {
+  background: #f1a501;
+  border: none;
+  width: 100%;
+  padding: 8px 0;
+  color: white;
+  font-size: 1.65rem;
+  border-radius: 10px;
+}
+.profilesetup-form--submit button:hover {
+  background: #ff9e37;
+}
+
+.profiletab {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.profiletab button {
+  background: transparent;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 5px;
+  margin: 0 10px;
+  border: 1px solid #f1a501;
+}
+.profiletab .profiletab-active {
+  background: #f1a501;
+}
+.profilesetup-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* profile setup section ends here */
+
 /*min width*/
 
 @media (min-width: 1150px) {
@@ -813,7 +1192,7 @@ h3.price-sec span {
   .navbar-nav {
     float: none;
     margin: 21px 0 0px 30%;
-    display: table;
+    display: flex !important;
     table-layout: fixed;
   }
   ul.nav.navbar-nav.navbar-right {
@@ -855,6 +1234,37 @@ h3.price-sec span {
   }
 }
 @media (max-width: 768px) {
+  .steps-visuals {
+    width: 100%;
+  }
+
+  .itemprofileinfo-user img {
+    width: 40px !important;
+  }
+
+  .steps > p {
+    width: 100%;
+  }
+
+  .calltoaction-middlerow div p {
+    width: 100%;
+  }
+
+  .steps > h1 {
+    font-size: 34px;
+    line-height: 37px;
+  }
+
+  .searchmodal-container {
+    width: 90%;
+  }
+
+  .calltoaction-firstrow img,
+  .calltoaction-lastrow img {
+    height: 140px;
+    width: 150px;
+    object-fit: contain;
+  }
   select#country {
     width: 100%;
   }
@@ -1205,3 +1615,74 @@ h3.price-sec span {
     width: 1206px !important;
   }
 }
+
+/* steps style responsive starts */
+
+@media (min-width: 640px) {
+  .steps-visuals {
+    width: 60%;
+  }
+
+  .calltoaction-firstrow,
+  .calltoaction-lastrow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .calltoaction-firstrow img:first-child,
+  .calltoaction-lastrow img:nth-child(3) {
+    display: initial;
+  }
+}
+
+@media (min-width: 768px) {
+  .steps-visuals {
+    width: 50%;
+  }
+
+  .calltoaction-firstrow,
+  .calltoaction-lastrow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .calltoaction-firstrow img:nth-child(3),
+  .calltoaction-lastrow img:nth-child(4) {
+    display: initial;
+  }
+}
+
+@media (min-width: 1024px) {
+  .steps-visuals {
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 100px;
+    grid-column-gap: 50px;
+    width: 80%;
+  }
+
+  .profilesetup-form {
+    width: 80%;
+    padding: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .steps-visuals {
+    grid-template-columns: repeat(3, 1fr);
+    grid-row-gap: 0;
+  }
+
+  .calltoaction-middlerow {
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+  }
+
+  .calltoaction-middlerow img:first-child,
+  .calltoaction-middlerow img:last-child {
+    display: initial;
+  }
+
+  .profilesetup-form {
+    width: 50%;
+    padding: 50px;
+  }
+}
+
+/* steps style responsive ends */

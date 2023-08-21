@@ -1,15 +1,10 @@
-import { ChangeEvent, DragEvent, FormEvent, ReactElement, useEffect, useState } from "react";
+import { ChangeEvent, DragEvent, FormEvent, useEffect, useState } from "react";
 
 import api from "../../utils/api";
 
 import "./assets/styles/index.css";
 import "./assets/styles/carousel.css";
 import upload from "./assets/images/Upload.png";
-import img1 from "./assets/images/img1.png";
-import img2 from "./assets/images/img2.png";
-import img3 from "./assets/images/img3.png";
-import img4 from "./assets/images/img4.png";
-import img5 from "./assets/images/img5.png";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -43,19 +38,6 @@ type Values = {
   eachDetail: EachDetail[];
   details: string;
   category: string[];
-};
-
-type Error400 = {
-  response: {
-    status: number;
-    data: {
-      category: string;
-      country: string;
-      introduction: string;
-      title: string;
-      salesPitch: string;
-    };
-  };
 };
 
 const CreateItinerary = (props: Props) => {
