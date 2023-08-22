@@ -77,12 +77,12 @@ const MyItineraries = (props: Props) => {
     }
   };
 
-  const getUserDetails = async () => {
-    let data = await api("/billing/user-details");
-    if (!data?.data?.isCompleted) {
-      return navigate("/stripe/connect");
-    }
-  };
+  // const getUserDetails = async () => {
+  //   let data = await api("/billing/user-details");
+  //   if (!data?.data?.isCompleted) {
+  //     return navigate("/stripe/connect");
+  //   }
+  // };
 
   useEffect(() => {
     // Check user role here and return the corresponding component
@@ -92,7 +92,7 @@ const MyItineraries = (props: Props) => {
       navigate("/itinerary/list");
     }
 
-    getUserDetails();
+    // getUserDetails();
     getItineraries();
   }, []);
 

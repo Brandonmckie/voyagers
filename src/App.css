@@ -209,7 +209,7 @@ button.btn.btn-ply.navbar-btn {
   font-family: "Work Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 24px;
   letter-spacing: -0.04em;
   color: #5e6282;
@@ -218,23 +218,28 @@ button.btn.btn-ply.navbar-btn {
   padding: 60px 0px;
 }
 .boxhover img {
-  width: 80px;
-  height: 70px;
+  width: 100% !important;
+  height: 250px !important;
+  object-fit: cover;
+  object-position: center;
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
 }
 .box-part {
   background: #fff;
   border-radius: 0;
-  padding: 60px 10px;
+  padding: 0px 0px;
   margin: 30px 0px;
+  height: 370px;
 }
 
-.box-part:hover {
+.box-part {
   background: #ffffff;
   box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852),
     0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 0px 20px 13px rgba(0, 0, 0, 0.01),
     0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185),
     0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481);
-  border-radius: 36px;
+  border-radius: 25px;
 }
 /*-------------------------------------------------*/
 
@@ -936,6 +941,7 @@ h3.price-sec span {
   margin-right: 10px;
   padding: 3px 10px;
   border-radius: 5px;
+  margin-top: 6px;
 }
 .itemprofileinfo-meta ul {
   margin-left: 10px;
@@ -1151,6 +1157,33 @@ h3.price-sec span {
 
 /*min width*/
 
+.itemprofileinfo-voyagestyles p {
+  width: 135px;
+}
+
+.itemprofileinfo-visitedcountries p {
+  width: 135px;
+}
+
+.itemprofileinfo-visitedwonders p {
+  width: 135px;
+}
+
+.itemprofileinfo-voyagestyles ul {
+  width: 86%;
+  padding: 0px;
+}
+
+.itemprofileinfo-visitedcountries ul {
+  width: 86%;
+  padding: 0px;
+}
+
+.itemprofileinfo-visitedwonders ul {
+  width: 86%;
+  padding: 0px;
+}
+
 @media (min-width: 1150px) {
   .img-righttwo img {
     width: 80%;
@@ -1238,12 +1271,44 @@ h3.price-sec span {
     width: 100%;
   }
 
+  .itemprofileinfo-user {
+    margin-top: 14px;
+  }
+
+  .itemprofileinfo-voyagestyles p {
+    width: 110px;
+    font-size: 13px;
+  }
+
+  .itemprofileinfo-visitedcountries p {
+    width: 110px;
+    font-size: 13px;
+  }
+
+  .itemprofileinfo-visitedwonders p {
+    width: 110px;
+    font-size: 13px;
+  }
+
+  .itemprofileinfo-meta ul {
+    font-size: 13px;
+    gap: 0px;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .itemprofileinfo-meta ul li {
+    margin-top: 6px;
+  }
+
   .itemprofileinfo-user img {
     width: 40px !important;
   }
 
   .steps > p {
-    width: 100%;
+    width: 98%;
+    padding: 2px;
   }
 
   .calltoaction-middlerow div p {

@@ -1059,13 +1059,7 @@ const SetupProfile = () => {
           if (user?.data?.user?.userInfo) {
             const { voyageStyle, country, visitedCountries, visitedWonders, bio } =
               user?.data?.user?.userInfo;
-            if (
-              voyageStyle?.length === 0 &&
-              // !country &&
-              visitedCountries?.length === 0 &&
-              visitedWonders?.length === 0 &&
-              !bio
-            ) {
+            if (voyageStyle?.length === 0 && !bio) {
               setIsLoading(false);
             } else {
               getUserDetails();
@@ -1118,13 +1112,14 @@ const SetupProfile = () => {
 
         <div className="profilesetup-form--voyagestyle">
           <p>Voyage Style</p>
-
-          {voyageStyles.map(({ label, value }, index) => (
-            <div key={index}>
-              <input type="checkbox" id={value} value={value} onChange={handleVoyageStyle} />
-              <label htmlFor={value}>{label}</label>
-            </div>
-          ))}
+          <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+            {voyageStyles.map(({ label, value }, index) => (
+              <div key={index}>
+                <input type="checkbox" id={value} value={value} onChange={handleVoyageStyle} />
+                <label htmlFor={value}>{label}</label>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="profilesetup-form--country">

@@ -1148,12 +1148,14 @@ const EditProfile = () => {
         <button
           onClick={() => setTabOption("profile")}
           className={`${tabOption === "profile" ? "profiletab-active" : null}`}
+          style={tabOption === "profile" ? { color: "white" } : { color: "black" }}
         >
           Profile
         </button>
         <button
           onClick={() => setTabOption("userInfo")}
           className={`${tabOption === "userInfo" ? "profiletab-active" : null}`}
+          style={tabOption === "userInfo" ? { color: "white" } : { color: "black" }}
         >
           User Info
         </button>
@@ -1167,15 +1169,23 @@ const EditProfile = () => {
           ) : (
             <form onSubmit={handleSubmit}>
               {values.image ? (
-                <img
-                  src={
-                    typeof values.image === "string"
-                      ? values.image
-                      : URL.createObjectURL(values.image)
-                  }
-                  style={{ width: "200px" }}
-                  alt="Thumbnail"
-                />
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <img
+                    src={
+                      typeof values.image === "string"
+                        ? values.image
+                        : URL.createObjectURL(values.image)
+                    }
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      borderRadius: "360px",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                    }}
+                    alt="Thumbnail"
+                  />
+                </div>
               ) : (
                 <img src={dp} alt="DP" className="dp" />
               )}
@@ -1260,8 +1270,9 @@ const EditProfile = () => {
             <h3>Tell us about yourself</h3>
 
             <div className="profilesetup-subheading">
-              <p>Answer a few quick questions to help us</p>
-              <p>ensure you have a great seller experience.</p>
+              <p>
+                Answer a few quick questions to help us to ensure you have a great seller experience
+              </p>
             </div>
 
             <div className="profilesetup-form">
@@ -1581,11 +1592,9 @@ const EditProfile = () => {
               </div>
 
               <div className="profilesetup-form--submit">
-                {!!isLoading ? (
-                  <button>Updating...</button>
-                ) : (
-                  <button onClick={handleUpdateProfile}>Update</button>
-                )}
+                <button onClick={handleUpdateProfile}>
+                  {isLoading ? <CircularProgress /> : "Save"}
+                </button>
               </div>
             </div>
           </div>

@@ -45,6 +45,7 @@ const SingleItinerary = (props: any) => {
   const [isMy, setIsMy] = useState(false);
   const [purchasedItineraries, setPurchasedItineraries] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showProfile, setshowProfile] = useState(false);
   const [profile, setProfile] = useState<{
     role?: string;
     username?: string;
@@ -183,66 +184,108 @@ const SingleItinerary = (props: any) => {
                 <div className="row singlerow">
                   <div className="col-md-6">
                     <div className="itemprofileinfo">
-                      <div className="itemprofileinfo-user">
-                        <img src={data?.userId?.image} alt="" />
-                        <div>
-                          <p className="itemprofileinfo-username">
-                            by <i>{data?.userId?.username}</i>
-                          </p>
-                          <p className="itemprofileinfo-country">
-                            {data?.userId?.country || "Country"}
-                          </p>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <div className="itemprofileinfo-user">
+                          <img src={data?.userId?.image} alt="" />
+                          <div>
+                            <p className="itemprofileinfo-username">
+                              by <i>{data?.userId?.username}</i>
+                            </p>
+                            <p className="itemprofileinfo-country">
+                              {data?.userId?.country || "Country"}
+                            </p>
+                          </div>
                         </div>
+                        <span
+                          style={{ marginLeft: "10px", cursor: "pointer" }}
+                          onClick={() => {
+                            setshowProfile(!showProfile);
+                          }}
+                        >
+                          {showProfile ? (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              className="bi bi-chevron-down"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                              />
+                            </svg>
+                          ) : (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              className="bi bi-chevron-up"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                              />
+                            </svg>
+                          )}
+                        </span>
                       </div>
 
-                      <p className="itemprofileinfo-bio">
-                        {data?.userId?.userInfo?.bio || "User description"}
-                      </p>
+                      {showProfile && (
+                        <>
+                          <p className="itemprofileinfo-bio">
+                            {data?.userId?.userInfo?.bio || "User description"}
+                          </p>
 
-                      <div className="itemprofileinfo-voyagestyles itemprofileinfo-meta">
-                        <p>Voyage style - </p>
-                        {data?.userId?.userInfo?.voyageStyle?.length > 0 ? (
-                          <ul>
-                            {data?.userId?.userInfo?.voyageStyle?.map(
-                              (item: string, index: number) => (
-                                <li key={index}>{item || "Label"}</li>
-                              )
+                          <div className="itemprofileinfo-voyagestyles itemprofileinfo-meta">
+                            <p>Voyage style: </p>
+                            {data?.userId?.userInfo?.voyageStyle?.length > 0 ? (
+                              <ul>
+                                {data?.userId?.userInfo?.voyageStyle?.map(
+                                  (item: string, index: number) => (
+                                    <li key={index}>{item || "Label"}</li>
+                                  )
+                                )}
+                              </ul>
+                            ) : (
+                              <p className="none">No voyage</p>
                             )}
-                          </ul>
-                        ) : (
-                          <p className="none">No voyage</p>
-                        )}
-                      </div>
+                          </div>
 
-                      <div className="itemprofileinfo-visitedcountries itemprofileinfo-meta">
-                        <p>Visited countries - </p>
-                        {data?.userId?.userInfo?.visitedCountries?.length > 0 ? (
-                          <ul>
-                            {data?.userId?.userInfo?.visitedCountries?.map(
-                              (item: { label: string }, index: number) => (
-                                <li key={index}>{item?.label || "Label"}</li>
-                              )
+                          <div className="itemprofileinfo-visitedcountries itemprofileinfo-meta">
+                            <p>Visited countries: </p>
+                            {data?.userId?.userInfo?.visitedCountries?.length > 0 ? (
+                              <ul>
+                                {data?.userId?.userInfo?.visitedCountries?.map(
+                                  (item: { label: string }, index: number) => (
+                                    <li key={index}>{item?.label || "Label"}</li>
+                                  )
+                                )}
+                              </ul>
+                            ) : (
+                              <p className="none">No visited countries</p>
                             )}
-                          </ul>
-                        ) : (
-                          <p className="none">No visited countries</p>
-                        )}
-                      </div>
+                          </div>
 
-                      <div className="itemprofileinfo-visitedwonders itemprofileinfo-meta">
-                        <p>Visited wonders - </p>
-                        {data?.userId?.userInfo?.visitedWonders?.length > 0 ? (
-                          <ul>
-                            {data?.userId?.userInfo?.visitedWonders?.map(
-                              (item: { label: string }, index: number) => (
-                                <li key={index}>{item?.label || "Label"}</li>
-                              )
+                          <div className="itemprofileinfo-visitedwonders itemprofileinfo-meta">
+                            <p>Visited wonders: </p>
+                            {data?.userId?.userInfo?.visitedWonders?.length > 0 ? (
+                              <ul>
+                                {data?.userId?.userInfo?.visitedWonders?.map(
+                                  (item: { label: string }, index: number) => (
+                                    <li key={index}>{item?.label || "Label"}</li>
+                                  )
+                                )}
+                              </ul>
+                            ) : (
+                              <p className="none"> No visited wonders</p>
                             )}
-                          </ul>
-                        ) : (
-                          <p className="none"> No visited wonders</p>
-                        )}
-                      </div>
+                          </div>
+                        </>
+                      )}
                     </div>
 
                     <div className="single-itinery">
