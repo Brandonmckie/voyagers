@@ -1139,7 +1139,9 @@ const Navbar = (props: Props) => {
                   </li>
 
                   <li>
-                    <Link to="/contact-us">Contact us</Link>
+                    <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
+                      Itinerary Request
+                    </Link>
                   </li>
 
                   {user.role === "seller" ? (
@@ -1282,12 +1284,13 @@ const Navbar = (props: Props) => {
 
               <li>
                 <Link
-                  to="/contact-us"
+                  to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC"
                   onClick={() => {
                     setmobileview(false);
                   }}
+                  target="_blank"
                 >
-                  Contact us
+                  Itinerary Request
                 </Link>
               </li>
 

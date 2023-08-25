@@ -219,18 +219,16 @@ button.btn.btn-ply.navbar-btn {
 }
 .boxhover img {
   width: 100% !important;
-  height: 250px !important;
+  height: 279px !important;
   object-fit: cover;
   object-position: center;
-  border-top-left-radius: 17px;
-  border-top-right-radius: 17px;
+  border-radius: 17px;
 }
 .box-part {
   background: #fff;
   border-radius: 0;
   padding: 0px 0px;
   margin: 30px 0px;
-  height: 370px;
 }
 
 .box-part {
@@ -339,7 +337,7 @@ section.topsaling {
 
 /*-----------------------------------------------------------*/
 section.client-part {
-  padding: 50px 15px;
+  /* padding: 50px 15px; */
 }
 .client-part h3 {
   font-family: "Work Sans";
@@ -448,6 +446,12 @@ button.btn.org-faq i.fa.fa-angle-down {
 /*++++++++++++++++++++++++++++++++++++/*/
 .faq-part {
   padding: 70px 15px;
+  background: white;
+  border-bottom-right-radius: 94px;
+  border-bottom-left-radius: 94px;
+  z-index: 10;
+  position: relative;
+  padding-bottom: 0px;
 }
 .faq-part h3 {
   font-family: "Work Sans";
@@ -488,8 +492,8 @@ p.text-bg {
   font-family: "Work Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 170%;
+  font-size: 19px;
+  line-height: 150%;
   letter-spacing: -0.02em;
   color: #5e6282;
 }
@@ -497,7 +501,7 @@ h4.panel-title {
   font-family: "Work Sans";
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 19px;
   line-height: 23px;
   letter-spacing: -0.04em;
   color: #212832;
@@ -796,7 +800,7 @@ input#files {
 .image00 {
   width: 100%;
   border-radius: 24px;
-  height: 385px;
+  height: 430px;
   object-fit: cover;
   object-position: center;
 }
@@ -1047,6 +1051,10 @@ h3.price-sec span {
   border-radius: 2px;
 }
 
+.h2style:hover {
+  text-decoration: underline;
+}
+
 .searchmodal-closeicon {
   height: 30px;
   width: 30px;
@@ -1131,6 +1139,10 @@ h3.price-sec span {
 }
 .profilesetup-form--submit button:hover {
   background: #ff9e37;
+}
+
+.h2style:hover {
+  background: rgb(0 0 0 / 68%) !important;
 }
 
 .profiletab {
@@ -1267,6 +1279,49 @@ h3.price-sec span {
   }
 }
 @media (max-width: 768px) {
+  p.text-bg {
+    font-size: 12px !important;
+    /* line-height: 10%;
+    letter-spacing: -0.02em; */
+  }
+
+  .divstyle10 {
+    flex-direction: column-reverse !important;
+    gap: 50px !important;
+  }
+
+  .divclass0 {
+    width: 100% !important;
+    height: 205px !important;
+    border-radius: 0px !important;
+  }
+  .divimage0 {
+    border-radius: 0px !important;
+  }
+  .h2style {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  .div3 {
+    border-radius: 0px !important;
+    height: 80% !important;
+  }
+  .single-itinery {
+    padding: 20px;
+  }
+
+  .divrow {
+    padding: 0px;
+  }
+
+  .divstyle1 {
+    gap: 2px;
+  }
+  .divimage {
+    width: 75px;
+    height: 75px;
+  }
   .steps-visuals {
     width: 100%;
   }
@@ -1326,9 +1381,10 @@ h3.price-sec span {
 
   .calltoaction-firstrow img,
   .calltoaction-lastrow img {
-    height: 140px;
-    width: 150px;
+    height: 124px;
+    width: 129px;
     object-fit: contain;
+    border-radius: 360px;
   }
   select#country {
     width: 100%;
@@ -1522,6 +1578,17 @@ h3.price-sec span {
 }
 
 @media (max-width: 480px) {
+  .imgsize00 {
+    width: 70px !important;
+    height: 70px !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+  }
+
+  .div0001 {
+    height: 219px;
+  }
+
   .navbar-nav {
     margin: 0 auto;
     text-align: center;
@@ -1564,6 +1631,8 @@ h3.price-sec span {
   }
   section.second-part {
     /* display: none; */
+    padding: 0px 15px;
+    padding-bottom: 14px;
   }
   .topsaling span.first-textbg:after {
     width: 170px;
@@ -1604,6 +1673,9 @@ h3.price-sec span {
   }
   .d-itineraries img {
     width: 100%;
+  }
+  .image11 {
+    display: none;
   }
   .dt-deatils .nav-tabs {
     border-bottom: 0px solid #ddd;
@@ -1650,7 +1722,7 @@ h3.price-sec span {
     font-size: 36px;
   }
   section.client-part {
-    padding: 0px 15px !important;
+    /* padding: 0px 15px !important; */
   }
 }
 

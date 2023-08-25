@@ -16,10 +16,30 @@
   margin: auto;
 }
 
+.countryHover {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.countryHover:hover {
+  background: rgb(0 0 0 / 8%) !important;
+}
+
+.countryStyling {
+  width: 100% !important;
+  height: 196px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
 .main-profile .btn-upload {
   display: block;
   margin: auto;
   margin-top: 10px;
+}
+
+.card-country {
+  position: absolute;
 }
 
 .main-profile .btn {
@@ -31,10 +51,67 @@
   .main-profile {
     width: 100% !important;
   }
+
+  .countryHover {
+    border-radius: 22px;
+  }
+
+  .cardvalue1 {
+    display: none;
+  }
+
   .main-profile .btn {
     margin-top: 12px !important;
   }
   .main-profile .dp {
     width: 50%;
   }
+  .cardvalue {
+    margin-bottom: 0px !important;
+  }
+
+  .countryStyling {
+    border-radius: 20px;
+  }
+
+  .section1style {
+    display: none;
+  }
+  .card-country {
+    position: absolute;
+    bottom: 4px;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    color: white;
+  }
+  .countryStyling {
+    height: 218px;
+  }
+  .tabsStyle {
+    gap: 12px !important;
+  }
+}
+
+@media (min-width: 700px) {
+  .section2style {
+    display: none;
+  }
+  .card-country {
+    display: none;
+  }
+}
+
+.heading-style0:hover {
+  border-bottom: 2px solid #f1a501 !important;
+}
+
+.heading-style0 {
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #211b1b;
 }

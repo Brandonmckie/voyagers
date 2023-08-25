@@ -15,6 +15,8 @@ import card1 from "./img/card1.jpeg";
 import card2 from "./img/card2.jpeg";
 import card3 from "./img/card3.jpeg";
 import card4 from "./img/card4.jpeg";
+import card5 from "./img/card5.jpeg";
+import card8 from "./img/card8.jpeg";
 
 import vibe from "./img/vibe.png";
 import rect from "./img/Rect2.png";
@@ -27,7 +29,7 @@ import { useEffect, useState } from "react";
 import api from "../../utils/api";
 import { checkIfUserIsAuthenticated } from "../../utils/utils";
 import CallToAction from "../../components/CallToAction";
-import StepsSection from "../../components/StepsSection";
+import StepsSection from "./Components/stepsSection";
 
 type Props = {};
 
@@ -80,6 +82,7 @@ const Home = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
   };
 
   const getItineraries = async () => {
@@ -169,6 +172,8 @@ const Home = () => {
         </div>
       </section>
 
+      <StepsSection />
+
       <section className="second-part text-center">
         <div className="container">
           <div className="row">
@@ -181,52 +186,129 @@ const Home = () => {
             <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="box-part text-center">
                 <div className="boxhover">
-                  <img src={card4} alt="Stay" />
-                  <div className="title">
-                    <h4>Stay</h4>
+                  <img src={card4} alt="Stay" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "40%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                      }}
+                    >
+                      Stay
+                    </h4>
                   </div>
-                  <div className="text">
+                  {/* <div className="text">
                     <span>Find your next awe-inspiring getaway from browsing voyage blogs by</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="box-part text-center">
                 <div className="boxhover">
-                  <img src={card3} alt="taste" />
-                  <div className="title">
-                    <h4>Taste</h4>
+                  <img src={card3} alt="taste" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "36%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                      }}
+                    >
+                      Taste
+                    </h4>
                   </div>
-                  <div className="text">
+                  {/* <div className="text">
                     <span>Find your next soul satisfying meal from browsing voyage blogs by</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="box-part text-center">
                 <div className="boxhover">
-                  <img src={card1} alt="vibe" />
-                  <div className="title">
-                    <h4>Vibe</h4>
+                  <img src={card1} alt="vibe" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "40%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                      }}
+                    >
+                      Vibe
+                    </h4>
                   </div>
-                  <div className="text" style={{ height: "74px" }}>
+                  {/* <div className="text" style={{ height: "74px" }}>
                     <span>Find your next happy place from browsing voyage blogs by</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
             <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div className="box-part text-center">
                 <div className="boxhover">
-                  <img src={card2} alt="experience" />
-                  <div className="title">
-                    <h4>Experience</h4>
+                  <img src={card2} alt="experience" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "23%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                        width: "100%",
+                      }}
+                    >
+                      Experience
+                    </h4>
                   </div>
-                  <div className="text">
+                  {/* <div className="text">
                     <span>Embark on an unforgettable journey from browsing voyage blogs by</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -295,317 +377,374 @@ const Home = () => {
         </div>
       </section>
 
-      <StepsSection />
+      {/* <StepsSection /> */}
 
-      <section className="client-part">
-        <div className="container">
-          <div className="row sliderSection">
-            <div className="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-              <div className="text-area">
-                <h3>Testimonials</h3>
-                <h2>What are Voyagers are saying about us.</h2>
+      {/* <CallToAction /> */}
+
+      <section className="faq-part">
+        <div className="container" style={{ paddingBottom: "45px" }}>
+          <div className="row">
+            <div
+              style={{ display: "flex", flexDirection: "row", gap: "86px" }}
+              className="divstyle10"
+            >
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div className="text-area">
+                  <h3>FAQ’s</h3>
+                  <h2 style={{}}>
+                    Frequently Asked <h2 style={{ color: "#EF7A03", margin: "0px" }}>Questions</h2>{" "}
+                  </h2>
+                </div>
+
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="panel-group" id="accordion">
+                      <div
+                        className={`panel panel-default ${currentTab === 0 ? "" : "collapsed"}`}
+                        data-target="#collapseOne"
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        onClick={() => (currentTab === 0 ? setCurrentTab(null) : setCurrentTab(0))}
+                        aria-expanded="false"
+                      >
+                        <div className="panel-heading">
+                          <h4 className="panel-title">
+                            What is My Voyages? <i className="fa fa-angle-down"></i>
+                          </h4>
+                        </div>
+                        <div
+                          id="collapseOne"
+                          className={`panel-collapse collapse ${currentTab === 0 ? "in" : ""}`}
+                          aria-expanded="false"
+                          style={{
+                            height: currentTab === 0 ? "auto" : "0px",
+                            transition: "2s all",
+                          }}
+                        >
+                          <div className="panel-body">
+                            <p className="text-bg">
+                              My Voyages simplifies travel planning through social interaction. We
+                              get it! Between time-consuming planning and wasted money on unreliable
+                              reviews, you could easily browse between 8-10 different websites and
+                              apps. Welcome to travel planning made simple, enjoyable, and efficient
+                              for the modern traveler. You can trust our authentic reviews because
+                              they’re from like-minded users like you worldwide.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="panel-group" id="accordion">
+                      <div
+                        className={`panel panel-default ${currentTab === 1 ? "" : "collapsed"}`}
+                        data-target="#collapsetwo"
+                        onClick={() => (currentTab === 1 ? setCurrentTab(null) : setCurrentTab(1))}
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        aria-expanded="false"
+                      >
+                        <div className="panel-heading">
+                          <h4 className="panel-title">
+                            What do Voyagers do? <i className="fa fa-angle-down"></i>
+                          </h4>
+                        </div>
+                        <div
+                          id="collapsetwo"
+                          className={`panel-collapse collapse ${currentTab === 1 ? "in" : ""}`}
+                          aria-expanded="false"
+                          style={{
+                            height: currentTab === 1 ? "auto" : "0px",
+                            transition: "2s all",
+                          }}
+                        >
+                          <div className="panel-body">
+                            <p className="text-bg">
+                              Voyagers can now browse vetted itineraries around the world from some
+                              of your favorite travel personalities. If you like what you see, then
+                              buy the itinerary, and save yourself hours of research and app
+                              browsing.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="panel-group" id="accordion">
+                      <div
+                        className={`panel panel-default ${currentTab === 2 ? "" : "collapsed"}`}
+                        onClick={() => (currentTab === 2 ? setCurrentTab(null) : setCurrentTab(2))}
+                        data-target="#collapsethr"
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        aria-expanded="false"
+                      >
+                        <div className="panel-heading">
+                          <h4 className="panel-title">
+                            What is My Voyages Concierge?
+                            <i className="fa fa-angle-down"></i>
+                          </h4>
+                        </div>
+                        <div
+                          id="collapsethr"
+                          className={`panel-collapse collapse ${currentTab === 2 ? "in" : ""}`}
+                          aria-expanded="false"
+                          style={{
+                            height: currentTab === 2 ? "auto" : "0px",
+                            transition: "2s all",
+                          }}
+                        >
+                          <div className="panel-body">
+                            <p className="text-bg">
+                              For an additional fee, you will be matched with a MV travel expert
+                              whose expertise is in where you are headed. You are provided your own
+                              personal concierge from planning to experience in a fashion that can
+                              only be found at My Voyages.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="panel-group" id="accordion">
+                      <div
+                        className={`panel panel-default ${currentTab === 3 ? "" : "collapsed"}`}
+                        onClick={() => (currentTab === 3 ? setCurrentTab(null) : setCurrentTab(3))}
+                        data-target="#collapsethr"
+                        data-toggle="collapse"
+                        data-parent="#accordion"
+                        aria-expanded="false"
+                      >
+                        <div className="panel-heading">
+                          <h4 className="panel-title">
+                            I want to become a trusted My Voyages Seller?
+                            <i className="fa fa-angle-down"></i>
+                          </h4>
+                        </div>
+                        <div
+                          id="collapsethr"
+                          className={`panel-collapse collapse ${currentTab === 3 ? "in" : ""}`}
+                          aria-expanded="false"
+                          style={{
+                            height: currentTab === 3 ? "auto" : "0px",
+                            transition: "2s all",
+                          }}
+                        >
+                          <div className="panel-body">
+                            <p className="text-bg">
+                              Does everyone come to you for travel ideas, or restaurant ideas, or
+                              just for the vibes in general? Do you want to finally make money for
+                              putting together those fantastic experiences together for other
+                              people. If this sounds like you, send us an email at:
+                              info@myvoyages.com and we will reach out to you with next steps.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* <div className="text-center">
+                <button className="btn org-faq">
+                  Show more <i className="fa fa-angle-down"></i>
+                </button>
+              </div> */}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-              <div
-                style={{
-                  border: "1px solid #00000014",
-                  padding: "29px 26px",
-                  zIndex: 2,
-                  background: "#ffffff",
-                  boxShadow: "1px 3px 18px 1px #00000021",
-                  borderRadius: "36px",
-                }}
-              >
-                <Slider {...settings}>
-                  <div style={{ position: "relative" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                      }}
-                    >
-                      <img
-                        src={img006}
-                        alt=""
-                        style={{
-                          width: "70px",
-                          height: "70px",
-                          borderRadius: "360px",
-                          objectFit: "cover",
-                          marginBottom: "17px",
-                          zIndex: 3,
-                          objectPosition: "center",
-                        }}
-                      />
-                    </div>
-
-                    <p className="text-bg">
-                      “Planning any trip takes way too long, being able to connect and plan out the
-                      entire trip in one stop is a major win!”
-                    </p>
-                    <h4
-                      style={{
-                        marginTop: "21px",
-                        fontSize: "18px",
-                        color: "#000000ad",
-                        fontFamily: "Work Sans",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Zamar
-                    </h4>
-                  </div>
-                  <div style={{ border: "1px solid #00000054", padding: "16px" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                      }}
-                    >
-                      <img
-                        src={img002}
-                        alt=""
-                        style={{
-                          width: "70px",
-                          height: "70px",
-                          borderRadius: "360px",
-                          objectFit: "cover",
-                          marginBottom: "17px",
-                          zIndex: 3,
-                          objectPosition: "center",
-                        }}
-                      />
-                    </div>
-
-                    <p className="text-bg">
-                      “Once I realized I liked traveling a certain way and doing things I like, I
-                      had to use My Voyages to find my vibe.”
-                    </p>
-                    <h4
-                      style={{
-                        marginTop: "21px",
-                        fontSize: "18px",
-                        color: "#000000ad",
-                        fontFamily: "Work Sans",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Angie
-                    </h4>
-                  </div>
-                  <div style={{ border: "1px solid #00000054", padding: "16px" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                      }}
-                    >
-                      <img
-                        src={img003}
-                        alt=""
-                        style={{
-                          width: "70px",
-                          height: "70px",
-                          borderRadius: "360px",
-                          objectFit: "cover",
-                          marginBottom: "17px",
-                          zIndex: 3,
-                          objectPosition: "center",
-                        }}
-                      />
-                    </div>
-
-                    <p className="text-bg">
-                      “After several lackluster trips based off random reviews, experiencing a trip
-                      from tailored reviews and insight was game changing from My Voyages!”
-                    </p>
-                    <h4
-                      style={{
-                        marginTop: "21px",
-                        fontSize: "18px",
-                        color: "#000000ad",
-                        fontFamily: "Work Sans",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Samson
-                    </h4>
-                  </div>
-                </Slider>
+              <div>
+                <img src={card8} alt="" className="cardimg88" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <CallToAction />
-
-      <section className="faq-part">
+      <section
+        className="client-part"
+        style={{ position: "relative", height: "621px", top: "-105px" }}
+      >
+        <img className="image000" src={card5} alt="" />
         <div className="container">
-          <div className="row">
-            <div className="text-area text-center">
-              <h3>FAQ’s</h3>
-              <h2>Frequently Asked Questions</h2>
+          <div className="row sliderSection">
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div
+                className="text-area"
+                style={{ display: "flex", justifyContent: "center", marginTop: "167px" }}
+              >
+                <h2 style={{ color: "white" }}>What Voyagers are saying.</h2>
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-2"></div>
-            <div className="col-md-8">
-              <div className="panel-group" id="accordion">
+            <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+              <div className="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                 <div
-                  className={`panel panel-default ${currentTab === 0 ? "" : "collapsed"}`}
-                  data-target="#collapseOne"
-                  data-toggle="collapse"
-                  data-parent="#accordion"
-                  onClick={() => (currentTab === 0 ? setCurrentTab(null) : setCurrentTab(0))}
-                  aria-expanded="false"
+                  className="div0001"
+                  style={{
+                    border: "1px solid #00000014",
+                    zIndex: 2,
+                    background: "#ffffff",
+                    height: "204px",
+                    borderRadius: "20px",
+                  }}
                 >
-                  <div className="panel-heading">
-                    <h4 className="panel-title">
-                      What is My Voyages? <i className="fa fa-angle-down"></i>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapseOne"
-                    className={`panel-collapse collapse ${currentTab === 0 ? "in" : ""}`}
-                    aria-expanded="false"
-                    style={{
-                      height: currentTab === 0 ? "auto" : "0px",
-                      transition: "2s all",
-                    }}
-                  >
-                    <div className="panel-body">
-                      <p className="text-bg">
-                        My Voyages simplifies travel planning through social interaction. We get it!
-                        Between time-consuming planning and wasted money on unreliable reviews, you
-                        could easily browse between 8-10 different websites and apps. Welcome to
-                        travel planning made simple, enjoyable, and efficient for the modern
-                        traveler. You can trust our authentic reviews because they’re from
-                        like-minded users like you worldwide.
-                      </p>
+                  <Slider {...settings}>
+                    <div
+                      style={{
+                        position: "relative",
+                      }}
+                    >
+                      <div
+                        className="testimonial-div"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          height: "202px",
+                          gap: "20px",
+                        }}
+                      >
+                        {/* <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                      }}
+                    > */}
+                        <img
+                          className="imgsize00"
+                          src={img006}
+                          alt=""
+                          style={{
+                            width: "177px",
+                            height: "100%",
+
+                            objectFit: "cover",
+                            borderTopLeftRadius: "20px",
+                            borderBottomLeftRadius: "20px",
+                            zIndex: 3,
+                            objectPosition: "center",
+                          }}
+                        />
+                        {/* </div> */}
+                        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                          {" "}
+                          <p className="text-bg">
+                            “Planning any trip takes way too long, being able to connect and plan
+                            out the entire trip in one stop is a major win!”
+                          </p>
+                          <h4
+                            style={{
+                              marginTop: "0px",
+                              fontSize: "26px",
+                              color: "#000000ad",
+                              fontFamily: "Work Sans",
+                              fontWeight: 600,
+                              textAlign: "center",
+                            }}
+                          >
+                            Zamar
+                          </h4>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                    <div style={{ border: "1px solid #00000054" }}>
+                      <div
+                        className="testimonial-div"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          height: "202px",
+                          gap: "20px",
+                        }}
+                      >
+                        <img
+                          className="imgsize00"
+                          src={img002}
+                          alt=""
+                          style={{
+                            width: "177px",
+                            height: "100%",
+                            borderTopLeftRadius: "20px",
+                            borderBottomLeftRadius: "20px",
+                            objectFit: "cover",
+
+                            zIndex: 3,
+                            objectPosition: "center",
+                          }}
+                        />
+
+                        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                          <p className="text-bg">
+                            “Once I realized I liked traveling a certain way and doing things I
+                            like, I had to use My Voyages to find my vibe.”
+                          </p>
+                          <h4
+                            style={{
+                              marginTop: "0px",
+                              fontSize: "26px",
+                              color: "#000000ad",
+                              fontFamily: "Work Sans",
+                              fontWeight: 600,
+                              textAlign: "center",
+                            }}
+                          >
+                            Angie
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ border: "1px solid #00000054" }}>
+                      <div
+                        className="testimonial-div"
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          height: "202px",
+                          gap: "20px",
+                        }}
+                      >
+                        <img
+                          className="imgsize00"
+                          src={img003}
+                          alt=""
+                          style={{
+                            width: "177px",
+                            height: "100%",
+                            borderTopLeftRadius: "20px",
+                            borderBottomLeftRadius: "20px",
+                            objectFit: "cover",
+
+                            zIndex: 3,
+                            objectPosition: "center",
+                          }}
+                        />
+
+                        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                          <p className="text-bg">
+                            “After several lackluster trips based off random reviews, experiencing a
+                            trip from tailored reviews and insight was game changing from My
+                            Voyages!”
+                          </p>
+                          <h4
+                            style={{
+                              marginTop: "0px",
+                              fontSize: "26px",
+                              color: "#000000ad",
+                              fontFamily: "Work Sans",
+                              fontWeight: 600,
+                              textAlign: "center",
+                            }}
+                          >
+                            Samson
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </Slider>
                 </div>
               </div>
-
-              <div className="panel-group" id="accordion">
-                <div
-                  className={`panel panel-default ${currentTab === 1 ? "" : "collapsed"}`}
-                  data-target="#collapsetwo"
-                  onClick={() => (currentTab === 1 ? setCurrentTab(null) : setCurrentTab(1))}
-                  data-toggle="collapse"
-                  data-parent="#accordion"
-                  aria-expanded="false"
-                >
-                  <div className="panel-heading">
-                    <h4 className="panel-title">
-                      What do Voyagers do? <i className="fa fa-angle-down"></i>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapsetwo"
-                    className={`panel-collapse collapse ${currentTab === 1 ? "in" : ""}`}
-                    aria-expanded="false"
-                    style={{
-                      height: currentTab === 1 ? "auto" : "0px",
-                      transition: "2s all",
-                    }}
-                  >
-                    <div className="panel-body">
-                      <p className="text-bg">
-                        Voyagers can now browse vetted itineraries around the world from some of
-                        your favorite travel personalities. If you like what you see, then buy the
-                        itinerary, and save yourself hours of research and app browsing.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="panel-group" id="accordion">
-                <div
-                  className={`panel panel-default ${currentTab === 2 ? "" : "collapsed"}`}
-                  onClick={() => (currentTab === 2 ? setCurrentTab(null) : setCurrentTab(2))}
-                  data-target="#collapsethr"
-                  data-toggle="collapse"
-                  data-parent="#accordion"
-                  aria-expanded="false"
-                >
-                  <div className="panel-heading">
-                    <h4 className="panel-title">
-                      What is My Voyages Concierge?
-                      <i className="fa fa-angle-down"></i>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapsethr"
-                    className={`panel-collapse collapse ${currentTab === 2 ? "in" : ""}`}
-                    aria-expanded="false"
-                    style={{
-                      height: currentTab === 2 ? "auto" : "0px",
-                      transition: "2s all",
-                    }}
-                  >
-                    <div className="panel-body">
-                      <p className="text-bg">
-                        For an additional fee, you will be matched with a MV travel expert whose
-                        expertise is in where you are headed. You are provided your own personal
-                        concierge from planning to experience in a fashion that can only be found at
-                        My Voyages.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="panel-group" id="accordion">
-                <div
-                  className={`panel panel-default ${currentTab === 3 ? "" : "collapsed"}`}
-                  onClick={() => (currentTab === 3 ? setCurrentTab(null) : setCurrentTab(3))}
-                  data-target="#collapsethr"
-                  data-toggle="collapse"
-                  data-parent="#accordion"
-                  aria-expanded="false"
-                >
-                  <div className="panel-heading">
-                    <h4 className="panel-title">
-                      I want to become a trusted My Voyages Seller?
-                      <i className="fa fa-angle-down"></i>
-                    </h4>
-                  </div>
-                  <div
-                    id="collapsethr"
-                    className={`panel-collapse collapse ${currentTab === 3 ? "in" : ""}`}
-                    aria-expanded="false"
-                    style={{
-                      height: currentTab === 3 ? "auto" : "0px",
-                      transition: "2s all",
-                    }}
-                  >
-                    <div className="panel-body">
-                      <p className="text-bg">
-                        Does everyone come to you for travel ideas, or restaurant ideas, or just for
-                        the vibes in general? Do you want to finally make money for putting together
-                        those fantastic experiences together for other people. If this sounds like
-                        you, send us an email at: info@myvoyages.com and we will reach out to you
-                        with next steps.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* <div className="text-center">
-                <button className="btn org-faq">
-                  Show more <i className="fa fa-angle-down"></i>
-                </button>
-              </div> */}
             </div>
-            <div className="col-md-2"></div>
           </div>
         </div>
       </section>

@@ -5,6 +5,7 @@ import img123 from "../home/img/img123.jpg";
 import { getUser } from "../../utils/utils";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 import Carousel from "react-multi-carousel";
+import { options } from "../profile/countriesNames";
 
 type Params = { itineraryId: string };
 
@@ -46,11 +47,7 @@ const SingleItinerary = (props: any) => {
   const [purchasedItineraries, setPurchasedItineraries] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showProfile, setshowProfile] = useState(false);
-  const [profile, setProfile] = useState<{
-    role?: string;
-    username?: string;
-    _id?: string;
-  }>({});
+  const [profile, setProfile] = useState<any>({});
 
   const navigate = useNavigate();
 
@@ -60,6 +57,17 @@ const SingleItinerary = (props: any) => {
       let getdata = (await api(`/itinerary/view/${itineraryId}`)) as {
         data: Itinerary;
       };
+      let countries = options.find((item, i) => {
+        return item.value === getdata?.data?.userId.userInfo.country;
+      });
+
+      setProfile({
+        ...getdata?.data?.userId,
+        country: countries?.label,
+        voyagestyle: getdata?.data?.userId.userInfo.voyageStyle,
+        visitedCountries: getdata?.data?.userId.userInfo.visitedCountries,
+        visitedWonders: getdata?.data?.userId.userInfo.visitedWonders,
+      });
 
       const user = getUser();
 
@@ -113,7 +121,7 @@ const SingleItinerary = (props: any) => {
     try {
       let user = await api("/users/get-profile");
       setPurchasedItineraries(user.data.user.boughtItineraries);
-      setProfile(user.data.user);
+      // setProfile(user.data.user);
     } catch (error) {
       console.log(error);
     }
@@ -182,8 +190,245 @@ const SingleItinerary = (props: any) => {
             <div className="container containersize">
               <div className="d-itineraries">
                 <div className="row singlerow">
-                  <div className="col-md-6">
-                    <div className="itemprofileinfo">
+                  <div className="col-md-6 divrow">
+                    <div
+                      className="divclass0"
+                      style={{
+                        width: "91%",
+                        height: "178px",
+                        position: "relative",
+                        color: "white",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      <img
+                        className="divimage0"
+                        src={data.image}
+                        alt=""
+                        style={{
+                          position: "absolute",
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "20px",
+                        }}
+                      />
+                      <div style={{ zIndex: "10", position: "inherit" }}>
+                        <h2
+                          className="h2style"
+                          onClick={() => {
+                            navigate(`/user/${data?.userId?.username}`);
+                          }}
+                          style={{
+                            fontWeight: 400,
+                            cursor: "pointer",
+                            color: "white",
+                            margin: "0px",
+                            textAlign: "center",
+                            padding: "4px",
+                            background: "rgba(0, 0, 0, 0.51)",
+                            borderTopRightRadius: " 20px",
+                            borderTopLeftRadius: "20px",
+                          }}
+                        >
+                          {profile?.username}
+                        </h2>
+                      </div>
+                      <div
+                        className="div3"
+                        style={{
+                          background: "rgb(0 0 0 / 51%)",
+                          zIndex: "10",
+                          position: "inherit",
+                          width: "100%",
+                          height: "77%",
+                          borderBottomRightRadius: "20px",
+                          borderBottomLeftRadius: "20px",
+                          padding: "0px 14px 0px 23px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            height: "100%",
+                            alignItems: "center",
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div
+                            className="divstyle1"
+                            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                          >
+                            {" "}
+                            <img
+                              className="divimage"
+                              style={{
+                                width: "100px",
+                                height: "100px",
+                                cursor: "pointer",
+                                borderRadius: "360px",
+                                objectFit: "cover",
+                                objectPosition: "center",
+                              }}
+                              src={data?.userId?.image}
+                              alt=""
+                            />
+                            <div style={{ marginLeft: "10px", display: "none" }}>
+                              <p className="itemprofileinfo-username">
+                                by <i>{data?.userId?.username}</i>
+                              </p>
+                              <p className="itemprofileinfo-country">
+                                {data?.userId?.country || "Country"}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* <div style={{ marginLeft: "10px" }}>
+                            <p>Boating, Hiking</p>
+                            <p>Portugal</p>
+                            <p>14 Reviews</p>
+                            <p>6 Visited Countries</p>
+                          </div> */}
+                          <div style={{ marginLeft: "10px", color: "white" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: "6px",
+                              }}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-gem"
+                                viewBox="0 0 16 16"
+                              >
+                                <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z" />
+                              </svg>
+                              {profile?.voyagestyle?.map(
+                                (item: any, i: any) =>
+                                  i < 2 && (
+                                    <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
+                                      {item}
+                                    </h5>
+                                  )
+                              )}
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <h5
+                                style={{
+                                  fontSize: "15px",
+                                  margin: "7px 0px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "6px",
+                                }}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  fill="currentColor"
+                                  className="bi bi-geo-alt-fill"
+                                  viewBox="0 0 16 16"
+                                >
+                                  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                </svg>{" "}
+                                {profile?.country}
+                              </h5>
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                height: "34px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  margin: "7px 0px",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  height: "39px",
+                                  gap: "9px",
+                                }}
+                              >
+                                <h3 style={{ margin: "0px" }}>
+                                  {profile?.visitedCountries?.length}
+                                </h3>
+                                <h5
+                                  style={{
+                                    fontSize: "15px",
+                                    margin: "0px",
+                                  }}
+                                >
+                                  Visited Countries
+                                </h5>
+                              </div>
+                            </div>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                height: "34px",
+                              }}
+                            >
+                              <h5
+                                style={{
+                                  margin: "0px",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  height: "39px",
+                                  gap: "9px",
+                                }}
+                              >
+                                <h3 style={{ margin: "0px" }}>
+                                  {" "}
+                                  {profile?.visitedWonders?.length}
+                                </h3>{" "}
+                                <h5
+                                  style={{
+                                    fontSize: "15px",
+                                    margin: "0px",
+                                  }}
+                                >
+                                  {" "}
+                                  Visited Wonders{" "}
+                                </h5>
+                              </h5>
+                            </div>
+
+                            {/* <div style={{ cursor: "pointer" }}>
+                          <p
+                            onClick={() => {
+                              setshowCountry(true);
+                            }}
+                          >
+                            {countriescount.length} Visited Countries
+                          </p>
+                          <p> {data.length} Itineraries</p>
+                        </div> */}
+                          </div>
+                        </div>
+                      </div>
+                      {/* <img className="" src={data.image} alt={data?.title} style={{width: "100%"}}/> */}
+                    </div>
+                    {/* <div className="itemprofileinfo">
                       <div style={{ display: "flex", alignItems: "center" }}>
                         <div className="itemprofileinfo-user">
                           <img src={data?.userId?.image} alt="" />
@@ -286,7 +531,7 @@ const SingleItinerary = (props: any) => {
                           </div>
                         </>
                       )}
-                    </div>
+                    </div> */}
 
                     <div className="single-itinery">
                       <ul className="ulstyle">
@@ -443,7 +688,7 @@ const SingleItinerary = (props: any) => {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <img className="image00" src={data.image} alt={data?.title} />
+                    <img className="image00 image11" src={data.image} alt={data?.title} />
                   </div>
                 </div>
               </div>

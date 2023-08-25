@@ -1030,6 +1030,7 @@ const EditProfile = () => {
   const [visitedCountries, setVisitedCountries] = useState([]);
   const [visitedWonders, setVisitedWonders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [errordetial, seterrordetial] = useState("");
   const [bio, setBio] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -1044,15 +1045,24 @@ const EditProfile = () => {
 
     try {
       if (typeof values?.image === "string") {
-        await api.patch("/users", values);
-        window.location.href = process.env.PUBLIC_URL;
+        let data = await api.patch("/users", values);
+        console.log(data?.data);
+        if (data?.data?.error?.message) {
+          seterrordetial(data?.data?.error?.message);
+        } else {
+          window.location.href = process.env.PUBLIC_URL;
+        }
       } else {
         const formData = new FormData();
         Object.entries(values).forEach(([key, value]) => {
           formData.append(key, value);
         });
-        await api.patch("/users", formData);
-        window.location.href = process.env.PUBLIC_URL;
+        let data = await api.patch("/users", formData);
+        if (data?.data?.error?.message) {
+          seterrordetial(data?.data?.error?.message);
+        } else {
+          window.location.href = process.env.PUBLIC_URL;
+        }
       }
     } catch (error) {
       console.log(error);
@@ -1253,6 +1263,9 @@ const EditProfile = () => {
                   {isErrored?.email}
                 </p>
               </div>
+              {errordetial && (
+                <p style={{ textAlign: "center", color: "red", margin: "7px" }}>{errordetial}</p>
+              )}
 
               <button
                 disabled={isUpdateLoading}

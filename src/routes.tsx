@@ -13,6 +13,7 @@ import ContactUs from "./layouts/contactUs/ContactUs";
 import Boarding from "./layouts/stripe/Boarding";
 import ForgotPassword from "./layouts/auth/ForgotPassword";
 import CreateItinerary from "./layouts/createItinerary/CreateItinerary";
+import SingleUserDetail from "./layouts/profile/SingleUserDetail";
 
 const Home = lazy(() => import("./layouts/home/Home"));
 const SetupProfile = lazy(() => import("./layouts/createItinerary/SetupProfile"));
@@ -47,6 +48,16 @@ const router = createBrowserRouter([
   {
     path: "/auth/sign-up",
     element: <SignUp />,
+  },
+  {
+    path: "/user/:id",
+    element: (
+      <>
+        <Navbar />
+        <SingleUserDetail />
+        <Footer />
+      </>
+    ),
   },
   {
     path: "/about-us",

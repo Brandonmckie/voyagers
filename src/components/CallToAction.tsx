@@ -2,14 +2,14 @@ const CallToAction = (): JSX.Element => {
   return (
     <div className="calltoaction">
       <div className="calltoaction-firstrow">
-        <img src="assets/images/call-to-action/image-1.webp" alt="" />
-        <img src="assets/images/call-to-action/image-2.webp" alt="" />
-        <img src="assets/images/call-to-action/image-3.webp" alt="" />
-        <img src="assets/images/call-to-action/image-4.webp" alt="" />
+        <img src="assets/images/call-to-action/card5.jpeg" alt="" />
+        <img src="assets/images/call-to-action/card6.jpeg" alt="" />
+        <img src="assets/images/call-to-action/card7.jpeg" alt="" />
+        <img src="assets/images/call-to-action/card8.jpeg" alt="" />
       </div>
 
       <div className="calltoaction-middlerow">
-        <img src="assets/images/call-to-action/image-5.webp" alt="" />
+        <img src="assets/images/call-to-action/card9.jpeg" alt="" />
 
         <div>
           <h1>Become a travel creator.</h1>
@@ -22,14 +22,14 @@ const CallToAction = (): JSX.Element => {
           <button>Learn More</button>
         </div>
 
-        <img src="assets/images/call-to-action/image-6.webp" alt="" />
+        <img src="assets/images/call-to-action/card10.jpeg" alt="" />
       </div>
 
       <div className="calltoaction-lastrow">
-        <img src="assets/images/call-to-action/image-7.webp" alt="" />
-        <img src="assets/images/call-to-action/image-8.webp" alt="" />
-        <img src="assets/images/call-to-action/image-9.webp" alt="" />
-        <img src="assets/images/call-to-action/image-10.webp" alt="" />
+        <img src="assets/images/call-to-action/card5.jpeg" alt="" />
+        <img src="assets/images/call-to-action/card9.jpeg" alt="" />
+        <img src="assets/images/call-to-action/card6.jpeg" alt="" />
+        <img src="assets/images/call-to-action/card8.jpeg" alt="" />
       </div>
     </div>
   );
