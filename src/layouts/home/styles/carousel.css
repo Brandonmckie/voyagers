@@ -420,6 +420,7 @@ textarea.text-details {
   }
   .divres2 {
     flex-direction: column !important;
+    gap: 27px !important;
   }
   .steps1 {
     font: normal normal bold 31px/38px Montserrat !important;

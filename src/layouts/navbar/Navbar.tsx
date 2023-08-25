@@ -1119,7 +1119,7 @@ const Navbar = (props: Props) => {
                           display: "flex",
                           alignItems: "center",
                           marginTop: 0,
-                          marginLeft: "13%",
+                          marginLeft: "7%",
                         }
                       : {}
                   }
