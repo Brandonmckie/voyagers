@@ -1057,9 +1057,9 @@ const SetupProfile = () => {
         try {
           let user = await api("/users/get-profile");
           if (user?.data?.user?.userInfo) {
-            const { voyageStyle, country, visitedCountries, visitedWonders, bio } =
+            const { voyageStyle, country, visitedCountries, visitedWonders, bio, name } =
               user?.data?.user?.userInfo;
-            if (voyageStyle?.length === 0 && !bio) {
+            if (voyageStyle?.length === 0 || !bio || !country || !name) {
               setIsLoading(false);
             } else {
               getUserDetails();
@@ -1106,7 +1106,7 @@ const SetupProfile = () => {
 
       <div className="profilesetup-form">
         <div className="profilesetup-form--name">
-          <label htmlFor="">User Name</label>
+          <label htmlFor="">Full Name</label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
 

@@ -63,6 +63,7 @@ const SingleItinerary = (props: any) => {
 
       setProfile({
         ...getdata?.data?.userId,
+        name: getdata?.data?.userId.userInfo.name,
         country: countries?.label,
         voyagestyle: getdata?.data?.userId.userInfo.voyageStyle,
         visitedCountries: getdata?.data?.userId.userInfo.visitedCountries,
@@ -216,7 +217,7 @@ const SingleItinerary = (props: any) => {
                         <h2
                           className="h2style"
                           onClick={() => {
-                            navigate(`/user/${data?.userId?.username}`);
+                            navigate(`/user/${profile?.username}`);
                           }}
                           style={{
                             fontWeight: 400,
@@ -230,7 +231,7 @@ const SingleItinerary = (props: any) => {
                             borderTopLeftRadius: "20px",
                           }}
                         >
-                          {profile?.username}
+                          {profile?.name}
                         </h2>
                       </div>
                       <div
@@ -274,7 +275,7 @@ const SingleItinerary = (props: any) => {
                             />
                             <div style={{ marginLeft: "10px", display: "none" }}>
                               <p className="itemprofileinfo-username">
-                                by <i>{data?.userId?.username}</i>
+                                by <i>{profile?.name}</i>
                               </p>
                               <p className="itemprofileinfo-country">
                                 {data?.userId?.country || "Country"}

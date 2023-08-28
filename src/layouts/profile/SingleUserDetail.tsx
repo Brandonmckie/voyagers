@@ -147,6 +147,7 @@ const SingleUserDetail = (props: Props) => {
 
       setnavInfo({
         ...navInfo,
+        name: user.data.user.userInfo.name,
         country: countries?.label,
         voyagestyle: user.data.user.userInfo.voyageStyle,
         visitedCountries: user.data.user.userInfo.visitedCountries,
@@ -237,9 +238,7 @@ const SingleUserDetail = (props: Props) => {
                       />
                       <div style={{ marginLeft: "50px" }}>
                         <div>
-                          <h2 style={{ fontWeight: 400, color: "rgb(0,0,0)" }}>
-                            {profile?.username}
-                          </h2>
+                          <h2 style={{ fontWeight: 400, color: "rgb(0,0,0)" }}>{navInfo?.name}</h2>
                         </div>
                         <div
                           style={{

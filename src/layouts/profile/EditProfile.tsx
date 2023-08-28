@@ -1042,11 +1042,11 @@ const EditProfile = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdateLoading(true);
-
+    let replaceText = values?.username?.trim().replace(/\s+/g, "_");
+    const values1 = { ...values, username: replaceText };
     try {
       if (typeof values?.image === "string") {
-        let data = await api.patch("/users", values);
-        console.log(data?.data);
+        let data = await api.patch("/users", values1);
         if (data?.data?.error?.message) {
           seterrordetial(data?.data?.error?.message);
         } else {
@@ -1054,7 +1054,7 @@ const EditProfile = () => {
         }
       } else {
         const formData = new FormData();
-        Object.entries(values).forEach(([key, value]) => {
+        Object.entries(values1).forEach(([key, value]) => {
           formData.append(key, value);
         });
         let data = await api.patch("/users", formData);
@@ -1226,6 +1226,8 @@ const EditProfile = () => {
                   placeholder="Enter username"
                   value={values.username}
                   onChange={handleChange}
+                  pattern="[a-zA-Z0-9 _]+"
+                  title="Only characters and numbers are allowed"
                   name="username"
                 />
 
@@ -1290,7 +1292,7 @@ const EditProfile = () => {
 
             <div className="profilesetup-form">
               <div className="profilesetup-form--name">
-                <label htmlFor="">User Name</label>
+                <label htmlFor="">Full Name</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
               </div>
 

@@ -1441,7 +1441,7 @@ const Navbar = (props: Props) => {
             </div>
 
             <div className="destinations">
-              {countriesList.length > 0 && <p>SUGGESTIONS</p>}
+              {countriesList.length > 0 ? <p>SUGGESTIONS</p> : <p>TRENDINGS</p>}
 
               <div className="destinations-lists">
                 {countriesList.length > 0

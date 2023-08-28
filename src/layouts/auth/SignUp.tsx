@@ -27,9 +27,10 @@ const SignUp = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
+    let replaceText = values?.username?.trim().replace(/\s+/g, "_");
+    const values1 = { ...values, username: replaceText };
     try {
-      let data = await api.post("/users/add-user", values);
+      let data = await api.post("/users/add-user", values1);
       let token = data?.data?.token;
 
       if (token) {
@@ -72,6 +73,8 @@ const SignUp = () => {
                   value={values.username}
                   onChange={handleChange}
                   placeholder="Enter username"
+                  pattern="[a-zA-Z0-9 _]+"
+                  title="Only characters and numbers are allowed"
                   name="username"
                 />
 
