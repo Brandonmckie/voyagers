@@ -382,6 +382,19 @@ textarea.text-details {
 }
 
 @media (max-width: 700px) {
+  .lastsection0 {
+    text-align: center;
+    display: initial !important;
+    font-size: 27px !important;
+    line-height: 30px !important;
+  }
+
+  .lastsection2 {
+    width: 100% !important;
+  }
+  .lastsection2 {
+    font-size: 20px !important;
+  }
   .contact-button {
     font-size: 15px !important;
     display: none;

@@ -30,6 +30,7 @@ import api from "../../utils/api";
 import { checkIfUserIsAuthenticated } from "../../utils/utils";
 import CallToAction from "../../components/CallToAction";
 import StepsSection from "./Components/stepsSection";
+import LastSection from "./Components/lastSection";
 
 type Props = {};
 
@@ -748,6 +749,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <LastSection user={user} />
     </>
   );
 };
