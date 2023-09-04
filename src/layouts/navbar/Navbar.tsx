@@ -10,6 +10,7 @@ import logo from "./img/logo.png";
 import dp from "./img/dp.png";
 import api from "../../utils/api";
 import "./styles/carousel.css";
+import { topcountries0 } from "./component/topcountries";
 import "react-multi-carousel/lib/styles.css";
 
 type Props = {};
@@ -927,7 +928,7 @@ const Navbar = (props: Props) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [countriesList, setCountriesList] = useState<any>([]);
-  const [topcountries, settopcountries] = useState<any>([]);
+  const [topcountries, settopcountries] = useState<any>(topcountries0);
   const location = useLocation();
   const navigate = useNavigate();
   //const [isDropdownOpen,setIsDropdownOpen] = useState<boolean>(false);
@@ -957,7 +958,7 @@ const Navbar = (props: Props) => {
           topCountries.push({ country: country?.country, code: country?.code });
         }
       }
-      settopcountries(topCountries);
+      // settopcountries(topCountries);
     } catch (error) {
       console.log(error);
     }
@@ -1246,7 +1247,7 @@ const Navbar = (props: Props) => {
           {/* <!-- header end--> */}
         </div>
         {mobileview && (
-          <div className="mobileview">
+          <div className="mobileview" style={{ zIndex: "100" }}>
             <ul
               className="nav navbar-nav mobileul"
               // style={
@@ -1441,9 +1442,9 @@ const Navbar = (props: Props) => {
             </div>
 
             <div className="destinations">
-              {countriesList.length > 0 ? <p>SUGGESTIONS</p> : <p>TRENDINGS</p>}
+              {countriesList.length > 0 ? <p>SUGGESTIONS</p> : <p>TRENDING DESTINATIONS</p>}
 
-              <div className="destinations-lists">
+              <div className="destinations-lists" style={{ overflow: "auto" }}>
                 {countriesList.length > 0
                   ? countriesList.map((item: any) => (
                       <div className="destinations-single" onClick={() => setSearchOpen(false)}>
@@ -1472,7 +1473,7 @@ const Navbar = (props: Props) => {
                     ))
                   : topcountries.map((item: any) => (
                       <div className="destinations-single" onClick={() => setSearchOpen(false)}>
-                        <Link to={`/itinerary/list?region=${item.code}`}>
+                        <Link to={`/itinerary/list?region=${item.value}`}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -1491,7 +1492,7 @@ const Navbar = (props: Props) => {
                               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                             />
                           </svg>
-                          <p>{item.country}</p>
+                          <p>{item.label}</p>
                         </Link>
                       </div>
                     ))}

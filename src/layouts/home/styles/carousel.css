@@ -10,6 +10,12 @@
 .card-body {
   padding: 20px;
 }
+
+.slick-dots li button:before {
+  font-size: 13px;
+  line-height: 24px;
+}
+
 .topsingle::after {
   top: 71px !important;
   left: 11% !important;
@@ -250,6 +256,9 @@ textarea.text-details {
 }
 
 @media (max-width: 770px) {
+  .image0001 {
+    display: none;
+  }
   .imgdiv {
     display: none;
   }
@@ -303,6 +312,7 @@ textarea.text-details {
     flex-direction: column !important;
     gap: 20px !important;
     padding: 9px !important;
+    height: 215px !important;
   }
   .signupbtn {
     width: 70px;

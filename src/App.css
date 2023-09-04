@@ -1587,7 +1587,7 @@ h3.price-sec span {
   }
 
   .div0001 {
-    height: 219px;
+    height: 219px !important;
   }
 
   .navbar-nav {

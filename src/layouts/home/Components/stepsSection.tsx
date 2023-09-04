@@ -1,15 +1,20 @@
 import React from "react";
 import "../styles/carousel.css";
 import card1 from "../img/img000.png";
-import card2 from "../img/card3.jpeg";
-import card3 from "../img/card6.jpeg";
+import card2 from "../img/image1.png";
+import card3 from "../img/image4.png";
+import card4 from "../img/image2.png";
+import card5 from "../img/image3.png";
+
+import card6 from "../img/image22.jpeg";
+import card7 from "../img/image33.jpeg";
 
 const StepsSection = () => {
   return (
     <div style={{}} className="steps0 container">
       <div className="steps1" style={{ display: "flex", justifyContent: "center" }}>
-        <p style={{ display: "flex", flexDirection: "row" }}>
-          HOW IT <p style={{ color: "#EF7A03" }}> WORKS</p>
+        <p style={{ display: "flex", flexDirection: "row", gap: "9px" }}>
+          <p>HOW IT</p> <p style={{ color: "#EF7A03" }}> WORKS</p>
         </p>
       </div>
       <div
@@ -27,7 +32,10 @@ const StepsSection = () => {
           <img src={card1} alt="" className="STEPSimage" />
           <p className="stepshead">CONNECT</p>
           <div className="text" style={{ height: "74px", textAlign: "center" }}>
-            <span>Connect With Voyagers from around the World</span>
+            <span>
+              Connect with likeminded voyagers from around the world, create a profile of your past
+              voyages , itineraries and reviews
+            </span>
           </div>
         </div>
         <div
@@ -38,7 +46,8 @@ const StepsSection = () => {
           }}
           className="divres"
         >
-          <img src={card2} alt="" className="STEPSimage" />
+          <img src={card6} alt="" className="STEPSimage" />
+
           <p className="stepshead" style={{ color: "#EF7A03" }}>
             DISPLAY
           </p>
@@ -58,7 +67,40 @@ const StepsSection = () => {
           }}
           className="divres"
         >
-          <img src={card3} alt="" className="STEPSimage" />
+          <div style={{ position: "relative" }}>
+            <img
+              src={card7}
+              alt=""
+              className="STEPSimage"
+              style={{ position: "relative", zIndex: "10" }}
+            />
+            {/* <img
+              src={card4}
+              className="image0001"
+              alt=""
+              style={{
+                position: "absolute",
+                top: "-15px",
+
+                right: "-106px",
+                width: "166px",
+                zIndex: 7,
+              }}
+            /> */}
+            {/* <img
+              src={card5}
+              className="image0001"
+              alt=""
+              style={{
+                position: "absolute",
+                right: "101px",
+                width: "210px",
+                zIndex: "11",
+                bottom: "-47px",
+              }}
+            /> */}
+          </div>
+
           <p className="stepshead">INSPIRE</p>
           <div className="text" style={{ height: "74px", textAlign: "center" }}>
             <span>

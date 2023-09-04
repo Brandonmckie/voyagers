@@ -14,6 +14,9 @@ import img4 from "./images/img4.jpg";
 import img5 from "./images/img5.jpg";
 import img6 from "./images/img6.jpg";
 import img7 from "./images/img7.jpg";
+import image1 from "./images/image2.jpg";
+import image2 from "./images/image3.jpg";
+// import image3 from "./images/imag";
 
 import ReactModal from "react-modal";
 import { options } from "./countriesNames";
@@ -174,22 +177,46 @@ const SingleUserDetail = (props: Props) => {
   return (
     <>
       <section className="listing-bg section1style">
-        <div className="container">
-          {/* <!-- -----------------------  right image and left text -------------- --> */}
-          <div className="row first-section111">
-            <div className="col-sm-12 col-md-2 col-lg-2"></div>
-            <div className="col-sm-12 col-md-8 col-lg-12">
+        {/* <div className="container"> */}
+        {/* <!-- -----------------------  right image and left text -------------- --> */}
+        <div className="row first-section111">
+          <div className="col-sm-12 col-md-2 col-lg-2"></div>
+          <div className="col-sm-12 col-md-8 col-lg-12">
+            <div
+              style={{
+                width: "100%",
+                height: "263px",
+                position: "relative",
+                // color: "white",
+                borderRadius: "20px",
+                margin: "60px 0px",
+                color: "white",
+                marginTop: "0px",
+              }}
+            >
+              <img
+                src={image2}
+                alt=""
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  color: "white",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
+              />
+
               <div
                 style={{
+                  background: "rgb(0 0 0 / 59%)",
+                  zIndex: "10",
+                  position: "absolute",
                   width: "100%",
-                  height: "200px",
-                  position: "relative",
-                  // color: "white",
-                  borderRadius: "20px",
-                  margin: "60px 0px",
+                  height: "100%",
                 }}
-              >
-                {/* <img
+              ></div>
+              {/* <img
                   src={data[0]?.image}
                   alt=""
                   style={{
@@ -201,136 +228,125 @@ const SingleUserDetail = (props: Props) => {
                     objectPosition: "center",
                   }}
                 /> */}
+              <div
+                style={{
+                  // background: " #00000061",
+
+                  zIndex: "10",
+                  position: "inherit",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "20px",
+                  padding: "0px 178px",
+                }}
+              >
                 <div
                   style={{
-                    // background: " #00000061",
-                    zIndex: "10",
-                    position: "inherit",
-                    width: "100%",
                     height: "100%",
-                    borderRadius: "20px",
-                    padding: "0px 40px",
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <div
-                    style={{
-                      height: "100%",
-                      alignItems: "center",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div
-                      style={{ display: "flex", alignItems: "center", gap: "10px", width: "90%" }}
-                    >
-                      {" "}
-                      <img
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "90%" }}>
+                    {" "}
+                    <img
+                      style={{
+                        width: "170px",
+                        height: "170px",
+                        cursor: "pointer",
+                        borderRadius: "360px",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                      }}
+                      src={profile?.image}
+                      alt=""
+                    />
+                    <div style={{ marginLeft: "50px" }}>
+                      <div>
+                        <h2 style={{ fontWeight: 400, color: "white" }}>{navInfo?.name}</h2>
+                      </div>
+                      <div
                         style={{
-                          width: "170px",
-                          height: "170px",
-                          cursor: "pointer",
-                          borderRadius: "360px",
-                          objectFit: "cover",
-                          objectPosition: "center",
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginBottom: "10px",
                         }}
-                        src={profile?.image}
-                        alt=""
-                      />
-                      <div style={{ marginLeft: "50px" }}>
-                        <div>
-                          <h2 style={{ fontWeight: 400, color: "rgb(0,0,0)" }}>{navInfo?.name}</h2>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <h5 style={{ fontSize: "16px", margin: "0px", fontWeight: "bold" }}>
-                            Voyage Style:{" "}
-                          </h5>
-                          {navInfo?.voyagestyle?.map(
-                            (item: any, i: any) =>
-                              i < 2 && (
-                                <h5
-                                  style={{
-                                    fontSize: "15px",
-                                    margin: "7px 0px",
-                                    marginLeft: "10px",
-                                  }}
-                                  key={i}
-                                >
-                                  {item}
-                                </h5>
-                              )
-                          )}
-                        </div>
+                      >
+                        <h5 style={{ fontSize: "16px", margin: "0px" }}>Voyage Style: </h5>
+                        {navInfo?.voyagestyle?.map(
+                          (item: any, i: any) =>
+                            i < 2 && (
+                              <h5
+                                style={{
+                                  fontSize: "15px",
+                                  margin: "7px 0px",
+                                  marginLeft: "10px",
+                                }}
+                                key={i}
+                              >
+                                {item}
+                              </h5>
+                            )
+                        )}
+                      </div>
 
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <h5 style={{ fontSize: "16px", margin: "0px", fontWeight: "bold" }}>
-                            Country:{" "}
-                          </h5>
-                          <p style={{ margin: "0px", marginLeft: "10px" }}>{navInfo?.country}</p>
-                        </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <h5 style={{ fontSize: "16px", margin: "0px" }}>Country: </h5>
+                        <p style={{ margin: "0px", marginLeft: "10px" }}>{navInfo?.country}</p>
+                      </div>
 
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <h5 style={{ fontSize: "16px", margin: "0px", fontWeight: "bold" }}>
-                            Visited Countries:{" "}
-                          </h5>
-                          {navInfo?.visitedCountries?.map((item: any, i: any) => (
-                            <p style={{ margin: "0px", marginLeft: "10px" }}>{item.label}</p>
-                          ))}
-                        </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Countries: </h5>
+                        {navInfo?.visitedCountries?.map((item: any, i: any) => (
+                          <p style={{ margin: "0px", marginLeft: "10px" }}>{item.label}</p>
+                        ))}
+                      </div>
 
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <h5 style={{ fontSize: "16px", margin: "0px", fontWeight: "bold" }}>
-                            Visited Wonders:{" "}
-                          </h5>
-                          {navInfo?.visitedWonders?.map((item: any, i: any) => (
-                            <p style={{ margin: "0px", marginLeft: "10px" }}>{item.label}</p>
-                          ))}
-                        </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Wonders: </h5>
+                        {navInfo?.visitedWonders?.map((item: any, i: any) => (
+                          <p style={{ margin: "0px", marginLeft: "10px" }}>{item.label}</p>
+                        ))}
+                      </div>
 
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginBottom: "10px",
-                          }}
-                        >
-                          <h5 style={{ fontSize: "16px", margin: "0px", fontWeight: "bold" }}>
-                            About Us:{" "}
-                          </h5>
-                          <p style={{ margin: "0px", marginLeft: "10px" }}>
-                            {profile?.userInfo?.bio}
-                          </p>
-                        </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        <h5 style={{ fontSize: "16px", margin: "0px" }}>About Us: </h5>
+                        <p style={{ margin: "0px", marginLeft: "10px" }}>
+                          {profile?.userInfo?.bio}
+                        </p>
+                      </div>
 
-                        {/* <div style={{ cursor: "pointer" }}>
+                      {/* <div style={{ cursor: "pointer" }}>
                           <p
                             onClick={() => {
                               setshowCountry(true);
@@ -340,10 +356,10 @@ const SingleUserDetail = (props: Props) => {
                           </p>
                           <p> {data.length} Itineraries</p>
                         </div> */}
-                      </div>
                     </div>
+                  </div>
 
-                    {/* <div style={{ marginLeft: "10px" }}>
+                  {/* <div style={{ marginLeft: "10px" }}>
                       <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                         {navInfo?.voyagestyle?.map((item: any, i: any) => (
                           <p>{item}</p>
@@ -363,50 +379,53 @@ const SingleUserDetail = (props: Props) => {
                         <p> {data.length} Itineraries</p>
                       </div>
                     </div> */}
-                  </div>
                 </div>
-                {/* <img className="" src={data.image} alt={data?.title} style={{width: "100%"}}/> */}
               </div>
+              {/* <img className="" src={data.image} alt={data?.title} style={{width: "100%"}}/> */}
             </div>
-            <div className="col-sm-12 col-md-2 col-lg-2"></div>
           </div>
+          <div className="col-sm-12 col-md-2 col-lg-2"></div>
         </div>
+        {/* </div> */}
       </section>
       <section className="listing-bg section2style">
         <div className="container">
           {/* <!-- -----------------------  right image and left text -------------- --> */}
           <div className="row first-section111">
             <div className="col-sm-12 col-md-2 col-lg-2"></div>
-            <div className="col-sm-12 col-md-8 col-lg-12" style={{ padding: "0px" }}>
+            <div
+              className="col-sm-12 col-md-8 col-lg-12"
+              style={{ padding: "0px", height: "auto", position: "relative" }}
+            >
+              <img
+                src={image2}
+                alt=""
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  color: "white",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
+              />
+
               <div
                 style={{
+                  background: "#00000061",
+                  zIndex: "10",
+                  position: "inherit",
                   width: "100%",
-                  height: "205px",
-                  position: "relative",
-                  // color: "white",
-                  margin: "10px 0px",
+                  height: "100%",
                 }}
               >
-                <img
-                  src={data[1]?.image}
-                  alt=""
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    color: "white",
-                    objectFit: "cover",
-                    objectPosition: "center",
-                  }}
-                />
-
                 <div
                   style={{
-                    background: "#00000061",
-                    zIndex: "10",
-                    position: "inherit",
                     width: "100%",
-                    height: "100%",
+                    height: "205px",
+                    position: "relative",
+                    // color: "white",
+                    // margin: "10px 0px",
                   }}
                 >
                   <div>
@@ -420,7 +439,7 @@ const SingleUserDetail = (props: Props) => {
                         padding: "4px",
                       }}
                     >
-                      {profile?.username}
+                      {navInfo?.name}
                     </h2>
                   </div>
                   <div
@@ -589,6 +608,23 @@ const SingleUserDetail = (props: Props) => {
                     </div> */}
                   </div>
                 </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+
+                    padding: "15px",
+                    paddingTop: "0px",
+                    color: "white",
+                  }}
+                >
+                  <h5 style={{ fontSize: "18px", margin: "0px", textAlign: "center" }}>
+                    About Us:{" "}
+                  </h5>
+                  <p style={{ margin: "0px", marginLeft: "10px" }}>{profile?.userInfo?.bio}</p>
+                </div>
+
                 {/* <img className="" src={data.image} alt={data?.title} style={{width: "100%"}}/> */}
               </div>
             </div>

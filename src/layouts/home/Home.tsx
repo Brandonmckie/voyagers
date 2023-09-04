@@ -84,6 +84,8 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
 
   const getItineraries = async () => {
@@ -180,7 +182,6 @@ const Home = () => {
           <div className="row">
             <div className="text-area">
               <h3>CATEGORY</h3>
-              <h2>We Offer Best Services</h2>
             </div>
           </div>
           <div className="row">
@@ -626,7 +627,12 @@ const Home = () => {
                           }}
                         />
                         {/* </div> */}
-                        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column-reverse",
+                          }}
+                        >
                           {" "}
                           <p className="text-bg">
                             “Planning any trip takes way too long, being able to connect and plan
@@ -674,7 +680,12 @@ const Home = () => {
                           }}
                         />
 
-                        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column-reverse",
+                          }}
+                        >
                           <p className="text-bg">
                             “Once I realized I liked traveling a certain way and doing things I
                             like, I had to use My Voyages to find my vibe.”
@@ -721,8 +732,14 @@ const Home = () => {
                           }}
                         />
 
-                        <div style={{ display: "flex", flexDirection: "column-reverse" }}>
-                          <p className="text-bg">
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column-reverse",
+                            height: "125px",
+                          }}
+                        >
+                          <p className="text-bg" style={{ paddingBottom: "5px" }}>
                             “After several lackluster trips based off random reviews, experiencing a
                             trip from tailored reviews and insight was game changing from My
                             Voyages!”

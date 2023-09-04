@@ -19,7 +19,7 @@ const LastSection = ({ user }: Props) => {
         style={{
           position: "absolute",
           top: "0",
-          width: "100%",
+          width: "95%",
           height: "455px",
           zIndex: "-1",
           opacity: "0.6",
