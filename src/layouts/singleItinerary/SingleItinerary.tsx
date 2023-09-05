@@ -48,6 +48,7 @@ const SingleItinerary = (props: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showProfile, setshowProfile] = useState(false);
   const [profile, setProfile] = useState<any>({});
+  const [message, setmessage] = useState("Show More");
 
   const navigate = useNavigate();
 
@@ -63,6 +64,7 @@ const SingleItinerary = (props: any) => {
 
       setProfile({
         ...getdata?.data?.userId,
+        bio: getdata?.data?.userId.userInfo.bio,
         name: getdata?.data?.userId.userInfo.name,
         country: countries?.label,
         voyagestyle: getdata?.data?.userId.userInfo.voyageStyle,
@@ -535,6 +537,35 @@ const SingleItinerary = (props: any) => {
                     </div> */}
 
                     <div className="single-itinery">
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          paddingBottom: "20px",
+                        }}
+                      >
+                        <p style={{ margin: "0px", textAlign: "justify" }}>
+                          {message === "Show Less"
+                            ? profile?.bio
+                            : profile?.bio?.length <= 200
+                            ? profile?.bio
+                            : `${profile?.bio?.slice(0, 200)}...`}
+                        </p>
+                        {profile?.bio?.length > 200 && (
+                          <p
+                            style={{ cursor: "pointer", color: "#939191" }}
+                            onClick={() => {
+                              if (message === "Show More") {
+                                setmessage("Show Less");
+                              } else {
+                                setmessage("Show More");
+                              }
+                            }}
+                          >
+                            {message}
+                          </p>
+                        )}
+                      </div>
                       <ul className="ulstyle">
                         {data.category?.map((item) => (
                           <li>{item}</li>

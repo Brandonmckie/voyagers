@@ -46,8 +46,7 @@ const LastSection = ({ user }: Props) => {
           className="lastsection2"
           style={{ textAlign: "center", fontWeight: "bold", width: "70%", fontSize: "22px" }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
+          Join Our Verified Voyager Community
         </h4>
         {!user && (
           <span

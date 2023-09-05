@@ -908,7 +908,8 @@ h3.price-sec span {
 }
 
 .single-itinery {
-  padding: 40px 0 0 0;
+  padding: 14px 0 0 0;
+  width: 91%;
 }
 
 /* single itinerary user details styles */
@@ -1310,6 +1311,7 @@ h3.price-sec span {
   }
   .single-itinery {
     padding: 20px;
+    width: 100%;
   }
 
   .divrow {

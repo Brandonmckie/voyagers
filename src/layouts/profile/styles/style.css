@@ -97,6 +97,7 @@
   }
   .tabsStyle {
     gap: 12px !important;
+    margin: 18px 40px !important;
   }
 }
 

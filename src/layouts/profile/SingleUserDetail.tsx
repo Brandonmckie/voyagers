@@ -72,6 +72,7 @@ const SingleUserDetail = (props: Props) => {
   const [showItinerary, setshowItinerary] = useState(true);
   const [showWonders, setshowWonders] = useState(false);
   const [isOpenDelete, setIsOpenDelete] = useState<string>("");
+  const [message, setmessage] = useState("Show More");
   const [profile, setprofile] = useState<any>([]);
   const [countriescount, setcountriescount] = useState<any>([]);
   const [navInfo, setnavInfo] = useState<any>([]);
@@ -83,7 +84,7 @@ const SingleUserDetail = (props: Props) => {
 
     try {
       let getdata = (await api(`/itinerary/userItinerary?username=${id}`)) as { data: Itinerary[] };
-      console.log(getdata);
+
       // console.log(getdata);
       // let countries0 = getdata.data.map((item: any) => item.country);
       // for (const data of countries0) {
@@ -142,7 +143,6 @@ const SingleUserDetail = (props: Props) => {
   const getProfile = async () => {
     try {
       let user = await api(`/users/get-userprofile?name=${id}`);
-      console.log(user);
 
       let countries = options.find((item, i) => {
         return item.value === user.data.user.userInfo.country;
@@ -252,10 +252,10 @@ const SingleUserDetail = (props: Props) => {
                     {" "}
                     <img
                       style={{
-                        width: "170px",
-                        height: "170px",
+                        width: "231px",
+                        height: "135px",
                         cursor: "pointer",
-                        borderRadius: "360px",
+                        borderRadius: "100%",
                         objectFit: "cover",
                         objectPosition: "center",
                       }}
@@ -336,11 +336,13 @@ const SingleUserDetail = (props: Props) => {
                         style={{
                           display: "flex",
                           flexDirection: "row",
-                          alignItems: "center",
+                          // alignItems: "center",
                           marginBottom: "10px",
                         }}
                       >
-                        <h5 style={{ fontSize: "16px", margin: "0px" }}>About Us: </h5>
+                        <h5 style={{ fontSize: "16px", margin: "0px", width: "149px" }}>
+                          About Us:{" "}
+                        </h5>
                         <p style={{ margin: "0px", marginLeft: "10px" }}>
                           {profile?.userInfo?.bio}
                         </p>
@@ -609,22 +611,6 @@ const SingleUserDetail = (props: Props) => {
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-
-                    padding: "15px",
-                    paddingTop: "0px",
-                    color: "white",
-                  }}
-                >
-                  <h5 style={{ fontSize: "18px", margin: "0px", textAlign: "center" }}>
-                    About Us:{" "}
-                  </h5>
-                  <p style={{ margin: "0px", marginLeft: "10px" }}>{profile?.userInfo?.bio}</p>
-                </div>
-
                 {/* <img className="" src={data.image} alt={data?.title} style={{width: "100%"}}/> */}
               </div>
             </div>
@@ -632,6 +618,40 @@ const SingleUserDetail = (props: Props) => {
           </div>
         </div>
       </section>
+      <div className="container aboutUs">
+        <div className="row">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "15px",
+              paddingTop: "0px",
+            }}
+          >
+            <p style={{ margin: "0px", textAlign: "justify" }}>
+              {message === "Show Less"
+                ? profile?.userInfo?.bio
+                : profile?.userInfo?.bio?.length <= 200
+                ? profile?.userInfo?.bio
+                : `${profile?.userInfo?.bio?.slice(0, 200)}...`}
+            </p>
+            {profile?.userInfo?.bio?.length > 200 && (
+              <p
+                style={{ cursor: "pointer", color: "#939191" }}
+                onClick={() => {
+                  if (message === "Show More") {
+                    setmessage("Show Less");
+                  } else {
+                    setmessage("Show More");
+                  }
+                }}
+              >
+                {message}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
       <div className="container">
         <div className="row">
           <div
