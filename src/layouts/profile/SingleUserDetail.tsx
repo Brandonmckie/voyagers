@@ -628,7 +628,7 @@ const SingleUserDetail = (props: Props) => {
               paddingTop: "0px",
             }}
           >
-            <p style={{ margin: "0px", textAlign: "justify" }}>
+            <p style={{ margin: "0px", marginTop: "10px", textAlign: "justify" }}>
               {message === "Show Less"
                 ? profile?.userInfo?.bio
                 : profile?.userInfo?.bio?.length <= 200
