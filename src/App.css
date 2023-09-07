@@ -1583,10 +1583,23 @@ h3.price-sec span {
     background-size: contain;
   }
 }
+.banner0011 {
+  display: none;
+}
 
 @media (max-width: 480px) {
   .banner0001 {
     display: flex;
+  }
+  .banner0011 {
+    display: flex;
+    position: absolute;
+    top: -23px;
+    z-index: 100;
+    left: -33px;
+  }
+  .banner0011 img {
+    width: 110%;
   }
   .banner0001 img {
     width: 100%;
