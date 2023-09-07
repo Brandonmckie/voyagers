@@ -124,12 +124,16 @@ const Home = () => {
             <div className="col-sm-12 col-md-6 col-lg-6">
               <div className="left-first">
                 {/* <p className='para-first'>Best Destinations around the world</p> */}
-                <h1 className="top-heading heading11">
-                  EXPERIENCE <span style={{ color: "#ef7a03" }}>SIMPLE</span> TRAVEL{" "}
-                  <span style={{ color: "#ef7a03" }}>PLANNING</span> THROUGH{" "}
-                  <span style={{ color: "#ef7a03" }}>SOCIAL INTERACTION</span>{" "}
-                </h1>
-
+                <div style={{ position: "relative" }}>
+                  <h1 className="top-heading heading11">
+                    EXPERIENCE <span style={{ color: "#ef7a03" }}>SIMPLE</span> TRAVEL{" "}
+                    <span style={{ color: "#ef7a03" }}>PLANNING</span> THROUGH{" "}
+                    <span style={{ color: "#ef7a03" }}>SOCIAL INTERACTION</span>{" "}
+                  </h1>
+                  {/* <div style={{ position: "absolute", top: "0px" }}>
+                    <img src={img00} alt="" />
+                  </div> */}
+                </div>
                 <div className="row">
                   <div className="col-sm-7 col-md-6 col-lg-6 signup-btn" style={{}}>
                     {!user && (
@@ -197,7 +201,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+      <div style={{}} className="banner0001">
+        <img src={backimg} alt="" />
+      </div>
       <StepsSection />
 
       <section className="second-part text-center">
