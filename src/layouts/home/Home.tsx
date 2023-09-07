@@ -31,6 +31,8 @@ import { checkIfUserIsAuthenticated } from "../../utils/utils";
 import CallToAction from "../../components/CallToAction";
 import StepsSection from "./Components/stepsSection";
 import LastSection from "./Components/lastSection";
+import SearchInput from "./Components/searchInput";
+import RatingStar from "./Components/RatingStar";
 
 type Props = {};
 
@@ -76,6 +78,7 @@ const Home = () => {
   const [data, setData] = useState<Itinerary[]>([]);
   const [currentTab, setCurrentTab] = useState<number | null>(null);
   const [user, setUser] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   const settings = {
     dots: true,
@@ -154,6 +157,26 @@ const Home = () => {
                   </div>
 
                   <div className="col-sm-2 col-md-4"></div>
+                </div>
+                <div
+                  className="destinations-search destinationinput"
+                  style={{ justifyContent: "space-between" }}
+                  onClick={() => setSearchOpen(true)}
+                >
+                  <p>Explore Destinations</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
                 </div>
               </div>
             </div>
@@ -474,42 +497,6 @@ const Home = () => {
 
                     <div className="panel-group" id="accordion">
                       <div
-                        className={`panel panel-default ${currentTab === 2 ? "" : "collapsed"}`}
-                        onClick={() => (currentTab === 2 ? setCurrentTab(null) : setCurrentTab(2))}
-                        data-target="#collapsethr"
-                        data-toggle="collapse"
-                        data-parent="#accordion"
-                        aria-expanded="false"
-                      >
-                        <div className="panel-heading">
-                          <h4 className="panel-title">
-                            What is My Voyages Concierge?
-                            <i className="fa fa-angle-down"></i>
-                          </h4>
-                        </div>
-                        <div
-                          id="collapsethr"
-                          className={`panel-collapse collapse ${currentTab === 2 ? "in" : ""}`}
-                          aria-expanded="false"
-                          style={{
-                            height: currentTab === 2 ? "auto" : "0px",
-                            transition: "2s all",
-                          }}
-                        >
-                          <div className="panel-body">
-                            <p className="text-bg">
-                              For an additional fee, you will be matched with a MV travel expert
-                              whose expertise is in where you are headed. You are provided your own
-                              personal concierge from planning to experience in a fashion that can
-                              only be found at My Voyages.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="panel-group" id="accordion">
-                      <div
                         className={`panel panel-default ${currentTab === 3 ? "" : "collapsed"}`}
                         onClick={() => (currentTab === 3 ? setCurrentTab(null) : setCurrentTab(3))}
                         data-target="#collapsethr"
@@ -573,7 +560,9 @@ const Home = () => {
                 className="text-area"
                 style={{ display: "flex", justifyContent: "center", marginTop: "167px" }}
               >
-                <h2 style={{ color: "white" }}>What Voyagers are saying.</h2>
+                <h2 style={{ color: "white", borderBottom: "5px solid #EF7A03" }}>
+                  What Voyagers are saying.
+                </h2>
               </div>
             </div>
             <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
@@ -638,9 +627,10 @@ const Home = () => {
                             “Planning any trip takes way too long, being able to connect and plan
                             out the entire trip in one stop is a major win!”
                           </p>
+                          <RatingStar />
                           <h4
                             style={{
-                              marginTop: "0px",
+                              margin: "0px",
                               fontSize: "26px",
                               color: "#000000ad",
                               fontFamily: "Work Sans",
@@ -690,9 +680,10 @@ const Home = () => {
                             “Once I realized I liked traveling a certain way and doing things I
                             like, I had to use My Voyages to find my vibe.”
                           </p>
+                          <RatingStar />
                           <h4
                             style={{
-                              marginTop: "0px",
+                              margin: "0px",
                               fontSize: "26px",
                               color: "#000000ad",
                               fontFamily: "Work Sans",
@@ -736,7 +727,7 @@ const Home = () => {
                           style={{
                             display: "flex",
                             flexDirection: "column-reverse",
-                            height: "125px",
+                            // height: "125px",
                           }}
                         >
                           <p className="text-bg" style={{ paddingBottom: "5px" }}>
@@ -744,9 +735,10 @@ const Home = () => {
                             trip from tailored reviews and insight was game changing from My
                             Voyages!”
                           </p>
+                          <RatingStar />
                           <h4
                             style={{
-                              marginTop: "0px",
+                              margin: "0px",
                               fontSize: "26px",
                               color: "#000000ad",
                               fontFamily: "Work Sans",
@@ -768,6 +760,7 @@ const Home = () => {
       </section>
 
       <LastSection user={user} />
+      {!!searchOpen && <SearchInput setSearchOpen={setSearchOpen} />}
     </>
   );
 };

@@ -13,8 +13,9 @@ type Props = {
 const LastSection = ({ user }: Props) => {
   const navigate = useNavigate();
   return (
-    <div className="container" style={{ height: "359px", position: "relative" }}>
+    <div className="container containerset" style={{ height: "359px", position: "relative" }}>
       <img
+        className="imagebg0"
         src={img00}
         style={{
           position: "absolute",

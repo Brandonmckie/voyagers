@@ -4,6 +4,15 @@
   border-radius: 16px;
 }
 
+.ratingStar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  color: #ef7a03;
+  margin: 7px;
+}
+
 .react-multi-carousel-track {
   padding-bottom: 30px;
 }
@@ -12,8 +21,15 @@
 }
 
 .slick-dots li button:before {
-  font-size: 13px;
+  font-size: 19px;
   line-height: 24px;
+  opacity: 0.75;
+  color: white;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1;
+  color: #ef7a03;
 }
 
 .topsingle::after {
@@ -308,11 +324,23 @@ textarea.text-details {
     font-size: 43px;
     line-height: 44px;
   }
+  .imagebg0 {
+    top: -16px !important;
+    left: 7px !important;
+    height: 220px !important;
+  }
+  .containerset {
+    height: 204px !important;
+  }
+  .ratingStar svg {
+    width: 25px !important;
+    height: 25px !important;
+  }
   .testimonial-div {
     flex-direction: column !important;
     gap: 20px !important;
     padding: 9px !important;
-    height: 215px !important;
+    height: auto !important;
   }
   .signupbtn {
     width: 70px;
@@ -384,11 +412,15 @@ textarea.text-details {
 .cardimg88 {
   width: 590px;
   border-radius: 21px;
-  height: 470px;
+  height: 380px;
   position: relative;
   top: 68px;
   object-fit: cover;
   object-position: center;
+}
+
+.destinationinput {
+  display: none;
 }
 
 @media (max-width: 700px) {
@@ -398,7 +430,9 @@ textarea.text-details {
     font-size: 27px !important;
     line-height: 30px !important;
   }
-
+  .destinationinput {
+    display: flex;
+  }
   .lastsection2 {
     width: 100% !important;
   }

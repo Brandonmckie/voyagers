@@ -1587,9 +1587,12 @@ h3.price-sec span {
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
   }
+  .client-part h2 {
+    border-bottom: 3px solid #ef7a03 !important;
+  }
 
   .div0001 {
-    height: 219px !important;
+    height: auto !important;
   }
 
   .navbar-nav {
@@ -1653,6 +1656,7 @@ h3.price-sec span {
     font-size: 34px;
     line-height: 40px;
   }
+
   .text-area {
     text-align: center;
   }

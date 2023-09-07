@@ -185,7 +185,7 @@ const SingleUserDetail = (props: Props) => {
             <div
               style={{
                 width: "100%",
-                height: "263px",
+                minHeight: "263px",
                 position: "relative",
                 // color: "white",
                 borderRadius: "20px",
@@ -250,18 +250,20 @@ const SingleUserDetail = (props: Props) => {
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "90%" }}>
                     {" "}
-                    <img
-                      style={{
-                        width: "231px",
-                        height: "135px",
-                        cursor: "pointer",
-                        borderRadius: "100%",
-                        objectFit: "cover",
-                        objectPosition: "center",
-                      }}
-                      src={profile?.image}
-                      alt=""
-                    />
+                    <div style={{ width: "135px" }}>
+                      <img
+                        style={{
+                          width: "135px",
+                          height: "135px",
+                          cursor: "pointer",
+                          borderRadius: "100%",
+                          objectFit: "cover",
+                          objectPosition: "center",
+                        }}
+                        src={profile?.image}
+                        alt=""
+                      />
+                    </div>
                     <div style={{ marginLeft: "50px" }}>
                       <div>
                         <h2 style={{ fontWeight: 400, color: "white" }}>{navInfo?.name}</h2>
@@ -296,7 +298,7 @@ const SingleUserDetail = (props: Props) => {
                         style={{
                           display: "flex",
                           flexDirection: "row",
-                          alignItems: "center",
+
                           marginBottom: "10px",
                         }}
                       >
@@ -308,7 +310,7 @@ const SingleUserDetail = (props: Props) => {
                         style={{
                           display: "flex",
                           flexDirection: "row",
-                          alignItems: "center",
+
                           marginBottom: "10px",
                         }}
                       >
@@ -322,7 +324,7 @@ const SingleUserDetail = (props: Props) => {
                         style={{
                           display: "flex",
                           flexDirection: "row",
-                          alignItems: "center",
+
                           marginBottom: "10px",
                         }}
                       >
@@ -340,9 +342,7 @@ const SingleUserDetail = (props: Props) => {
                           marginBottom: "10px",
                         }}
                       >
-                        <h5 style={{ fontSize: "16px", margin: "0px", width: "149px" }}>
-                          About Us:{" "}
-                        </h5>
+                        <h5 style={{ fontSize: "16px", margin: "0px" }}>Introduction:</h5>
                         <p style={{ margin: "0px", marginLeft: "10px" }}>
                           {profile?.userInfo?.bio}
                         </p>
