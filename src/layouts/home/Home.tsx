@@ -69,6 +69,7 @@ type Itinerary = {
   userId: {
     username: string;
     _id: string;
+    userInfo: any;
   };
   __v: number;
   _id: string;
@@ -395,7 +396,7 @@ const Home = () => {
                                 <h4 className="card-title">{each.title}</h4>
                                 <div className="subtitle">
                                   <span className="a">Created by:</span>
-                                  <span className="b">{each.userId.username}</span>
+                                  <span className="b">{each?.userId?.userInfo?.name}</span>
                                 </div>
                               </div>
                             </Link>
