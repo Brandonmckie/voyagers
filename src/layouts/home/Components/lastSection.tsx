@@ -40,12 +40,23 @@ const LastSection = ({ user }: Props) => {
           gap: "14px",
         }}
       >
-        <span className="lastsection0" style={{ display: "flex", flexDirection: "row" }}>
+        <span
+          className="lastsection0"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            fontFamily: "Bebas Neue",
+            fontStyle: "normal",
+            fontWeight: 500,
+            fontSize: "56px",
+            gap: "6px",
+          }}
+        >
           BECOME A <span style={{ color: "#EF7A03" }}> VERIFIED VOYAGER</span>
         </span>
         <h4
           className="lastsection2"
-          style={{ textAlign: "center", fontWeight: "bold", width: "70%", fontSize: "22px" }}
+          style={{ textAlign: "center", fontWeight: "bold", width: "70%", fontSize: "26px" }}
         >
           Join Our Verified Voyager Community
         </h4>

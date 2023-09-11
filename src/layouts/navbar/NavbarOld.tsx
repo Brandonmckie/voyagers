@@ -349,7 +349,7 @@ const Navbar = (props: Props) => {
         {/* <!-- header end--> */}
       </div>
       {mobileview && (
-        <div className="mobileview">
+        <div className="mobileview" style={{ zIndex: "9000" }}>
           <ul
             className="nav navbar-nav mobileul"
             // style={

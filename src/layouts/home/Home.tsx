@@ -137,6 +137,26 @@ const Home = () => {
                     <img src={img00} alt="" />
                   </div>
                 </div>
+                <div
+                  className="destinations-search destinationinput"
+                  style={{ justifyContent: "space-between", marginBottom: "11px" }}
+                  onClick={() => setSearchOpen(true)}
+                >
+                  <p>Explore Destinations</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                </div>
                 <div className="row">
                   <div className="col-sm-7 col-md-6 col-lg-6 signup-btn" style={{}}>
                     {!user && (
@@ -164,26 +184,6 @@ const Home = () => {
                   </div>
 
                   <div className="col-sm-2 col-md-4"></div>
-                </div>
-                <div
-                  className="destinations-search destinationinput"
-                  style={{ justifyContent: "space-between" }}
-                  onClick={() => setSearchOpen(true)}
-                >
-                  <p>Explore Destinations</p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
                 </div>
               </div>
             </div>
