@@ -27,7 +27,7 @@ const SignUp = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    let replaceText = values?.username?.trim().replace(/\s+/g, "_");
+    let replaceText = values?.username?.trim().replace(/\s+/g, "_").toLowerCase();
     const values1 = { ...values, username: replaceText };
     try {
       let data = await api.post("/users/add-user", values1);

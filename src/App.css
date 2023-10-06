@@ -5,6 +5,30 @@ h1 {
   font-family: "Bebas Neue";
 }
 
+.qrcodeh1 {
+  margin: 40px;
+  font: normal normal bold 31px/57px Montserrat;
+  text-align: center;
+  letter-spacing: 0px;
+  color: #000000;
+  height: 40px;
+}
+
+.editstyle0 {
+  display: flex;
+  flex-direction: column;
+}
+
+.singlenavstyle {
+  gap: 17px;
+}
+
+:where(.css-dev-only-do-not-override-1m62vyb).ant-switch.ant-switch-checked:hover:not(
+    .ant-switch-disabled
+  ) {
+  background: #f1a501;
+}
+
 .hero-image {
   background-image: url("./layouts/home/img/Hero.png"); /* The image used */
   background-color: #fff; /* Used if the image is unavailable */
@@ -1285,6 +1309,15 @@ h3.price-sec span {
   }
 }
 @media (max-width: 768px) {
+  .singlenavstyle {
+    flex-direction: column;
+  }
+  .qrcode {
+    max-width: 212px !important;
+  }
+  .d-itineraries {
+    padding: 0px 0 !important;
+  }
   p.text-bg {
     font-size: 12px !important;
     /* line-height: 10%;
@@ -1316,6 +1349,7 @@ h3.price-sec span {
   .single-itinery {
     padding: 20px;
     width: 100%;
+    padding-bottom: 15px;
   }
 
   .divrow {
@@ -1588,6 +1622,10 @@ h3.price-sec span {
 }
 
 @media (max-width: 480px) {
+  .editstyle0 {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .banner0001 {
     display: flex;
   }
@@ -1724,6 +1762,11 @@ h3.price-sec span {
   .single-itinery h1 {
     font-size: 38px;
     line-height: 40px;
+    text-align: center;
+  }
+
+  .ulstyle {
+    justify-content: center;
   }
   .testimonial-arrow {
     display: none;

@@ -6,6 +6,31 @@
 .card-body {
   padding: 20px;
 }
+.creatediv1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+  align-items: center;
+}
+
+.formdes2 {
+  width: 100%;
+  padding: 0px;
+  margin-top: 46px;
+}
+
+.labeltitle1 {
+  width: 89%;
+  display: flex;
+  font-size: 26px;
+  justify-content: center;
+  font-weight: 500;
+}
+
+.labeltitle1 input {
+  width: 88%;
+}
+
 .subtitle {
   display: flex;
   justify-content: space-between;
@@ -38,6 +63,11 @@ i#right {
   top: 100px;
   padding: 8px;
   opacity: 23;
+}
+
+.labelstyle22 {
+  width: 100%;
+  font-size: 17px;
 }
 .carousel-control {
   opacity: 23;
@@ -88,6 +118,8 @@ label.container-radio {
   padding: 5px 0;
 }
 .spc-2nd {
+  display: flex;
+  justify-content: center;
   padding: 20px 0;
 }
 /*tabs*/
@@ -163,7 +195,7 @@ textarea.text-details {
   height: 400px;
 }
 .upload-file {
-  height: 270px;
+  height: 222px;
 }
 
 .images-upload ul {
@@ -255,11 +287,22 @@ textarea.text-details {
   textarea.text-details {
     height: 202px !important;
   }
+
   .formdes {
+    /* padding: 0px; */
     margin-top: 15px !important;
   }
   .formdes2 {
+    margin-left: 0px;
     margin-top: 15px !important;
+  }
+  .creatediv1 {
+    display: block;
+
+    margin-top: 0px;
+  }
+  .labeltitle1 {
+    width: 100%;
   }
   .top-heading {
     font-size: 28px;
@@ -298,7 +341,7 @@ textarea.text-details {
     padding: 0px !important;
     padding-top: 10px !important;
     margin: 0px;
-    margin-top: 50px !important;
+    margin-top: 0px !important;
   }
   .inputday {
     width: 100% !important;

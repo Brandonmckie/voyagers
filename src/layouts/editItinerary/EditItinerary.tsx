@@ -269,25 +269,33 @@ const EditItinerary = (props: Props) => {
       values.eachDetail.forEach((each) => {
         if (each.stayImages) {
           each.stayImages.forEach((file, index) => {
-            formData.append(`eachDetail[${each.day}].stayImages[${index}]`, file);
+            if (file instanceof File) {
+              formData.append(`eachDetail[${each.day}].stayImages[${index}]`, file);
+            }
           });
         }
 
         if (each.vibeImages) {
           each.vibeImages.forEach((file, index) => {
-            formData.append(`eachDetail[${each.day}].vibeImages[${index}]`, file);
+            if (file instanceof File) {
+              formData.append(`eachDetail[${each.day}].vibeImages[${index}]`, file);
+            }
           });
         }
 
         if (each.tasteImages) {
           each.tasteImages.forEach((file, index) => {
-            formData.append(`eachDetail[${each.day}].tasteImages[${index}]`, file);
+            if (file instanceof File) {
+              formData.append(`eachDetail[${each.day}].tasteImages[${index}]`, file);
+            }
           });
         }
 
         if (each.experienceImages) {
           each.experienceImages.forEach((file, index) => {
-            formData.append(`eachDetail[${each.day}].experienceImages[${index}]`, file);
+            if (file instanceof File) {
+              formData.append(`eachDetail[${each.day}].experienceImages[${index}]`, file);
+            }
           });
         }
 
@@ -315,12 +323,12 @@ const EditItinerary = (props: Props) => {
           vibeImages,
           tasteDescription: data.tasteDescription,
           vibeDescription: data.vibeDescription,
-          day: day++,
+          day: 0,
         });
       });
 
       formData.append("eachDetail", JSON.stringify(eachData));
-
+      // console.log(formData);
       // Make the POST request using Axios
       const response = await api.patch(`/itinerary/${itineraryId}`, formData);
 
@@ -691,13 +699,13 @@ const EditItinerary = (props: Props) => {
             <div className="col-sm-12 col-md-2 col-lg-2"></div>
           </div>
 
-          <div className="row">
+          <div className="row" style={{ marginTop: "22px" }}>
             <div
               className="col-sm-12 col-md-6 col-lg-6"
               onDrop={handleDrop}
               onDragOver={handleDragOver}
             >
-              <div className="upload-file">
+              <div className="upload-file" style={{ height: "214px" }}>
                 {values.image ? (
                   <img
                     src={
@@ -705,7 +713,13 @@ const EditItinerary = (props: Props) => {
                         ? values.image
                         : URL.createObjectURL(values.image)
                     }
-                    style={{ width: "200px" }}
+                    style={{
+                      width: "200px",
+                      height: "100px",
+                      borderRadius: "8px",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                    }}
                     alt="Thumbnail"
                   />
                 ) : (
@@ -737,30 +751,111 @@ const EditItinerary = (props: Props) => {
             </div>
 
             <div className="col-sm-12 col-md-6 col-lg-6 formdes">
-              <label className="control-label" htmlFor="title">
-                Title
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                placeholder="Enter Title"
-                value={values?.title}
-                onChange={handleChange}
-                name="title"
-              />
+              <div>
+                <div>
+                  <label className="control-label" htmlFor="title" style={{ fontSize: "20px" }}>
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    placeholder="Enter Title"
+                    value={values?.title}
+                    onChange={handleChange}
+                    name="title"
+                  />
 
-              <p
-                style={{
-                  display: isErrored?.title ? "block" : "none",
-                  color: isErrored?.title ? "red" : "black",
-                  marginTop: "5px",
-                }}
-              >
-                {isErrored?.title}
-              </p>
-              <br />
-              <label className="control-label" htmlFor="price">
+                  <p
+                    style={{
+                      display: isErrored?.title ? "block" : "none",
+                      color: isErrored?.title ? "red" : "black",
+                      marginTop: "5px",
+                    }}
+                  >
+                    {isErrored?.title}
+                  </p>
+                  <br />
+                </div>
+                <div
+                  className="col-sm-12 col-md-6 col-lg-6 formdes"
+                  style={{ width: "100%", paddingLeft: " 0px", marginTop: "32px" }}
+                >
+                  <label className="control-label" htmlFor="message" style={{ fontSize: "17px" }}>
+                    Choose a category for this itinerary:
+                  </label>
+                  <div className="row">
+                    <div className="col-sm-12 col-md-6 col-lg-6">
+                      <div
+                        className="check-option"
+                        onClick={() =>
+                          setValues({
+                            ...values,
+                            category: Array.from(new Set([...values?.category, "stay"])),
+                          })
+                        }
+                      >
+                        <input
+                          aria-selected="true"
+                          checked={values?.category?.includes("stay")}
+                          type="checkbox"
+                        />
+                        <label className="container-radio">Stay</label>
+                      </div>
+                      <div
+                        className="check-option"
+                        onClick={() =>
+                          setValues({
+                            ...values,
+                            category: Array.from(new Set([...values?.category, "taste"])),
+                          })
+                        }
+                      >
+                        <input type="checkbox" checked={values?.category?.includes("taste")} />
+                        <label className="container-radio">Taste</label>
+                      </div>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6">
+                      <div
+                        className="check-option"
+                        onClick={() =>
+                          setValues({
+                            ...values,
+                            category: Array.from(new Set([...values?.category, "vibe"])),
+                          })
+                        }
+                      >
+                        <input type="checkbox" checked={values?.category?.includes("vibe")} />
+                        <label className="container-radio">Vibe</label>
+                      </div>
+                      <div
+                        className="check-option"
+                        onClick={() =>
+                          setValues({
+                            ...values,
+                            category: Array.from(new Set([...values?.category, "experience"])),
+                          })
+                        }
+                      >
+                        <input type="checkbox" checked={values?.category?.includes("experience")} />
+                        <label className="container-radio">Experience</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p
+                    style={{
+                      display: isErrored?.category ? "block" : "none",
+                      color: isErrored?.category ? "red" : "black",
+                      marginTop: "5px",
+                    }}
+                  >
+                    {isErrored?.category}
+                  </p>
+                </div>
+              </div>
+
+              {/* <label className="control-label" htmlFor="price">
                 Price
               </label>
               <input
@@ -848,13 +943,13 @@ const EditItinerary = (props: Props) => {
                 }}
               >
                 {isErrored?.introduction}
-              </p>
+              </p> */}
               <br />
             </div>
           </div>
 
           <div className="row spc-2nd">
-            <div className="col-sm-12 col-md-6 col-lg-6">
+            {/* <div className="col-sm-12 col-md-6 col-lg-6">
               <label className="control-label" htmlFor="message">
                 Include a descriptive sales pitch for the payment page of itinerary
               </label>
@@ -874,84 +969,7 @@ const EditItinerary = (props: Props) => {
               >
                 {isErrored?.salesPitch}
               </p>
-            </div>
-
-            <div className="col-sm-12 col-md-6 col-lg-6 formdes">
-              <label className="control-label" htmlFor="message">
-                Choose a category for this itinerary:
-              </label>
-              <div className="row">
-                <div className="col-sm-12 col-md-6 col-lg-6">
-                  <div
-                    className="check-option"
-                    onClick={() =>
-                      setValues({
-                        ...values,
-                        category: Array.from(new Set([...values?.category, "stay"])),
-                      })
-                    }
-                  >
-                    <input
-                      aria-selected="true"
-                      checked={values?.category?.includes("stay")}
-                      type="checkbox"
-                    />
-                    <label className="container-radio">Stay</label>
-                  </div>
-                  <div
-                    className="check-option"
-                    onClick={() =>
-                      setValues({
-                        ...values,
-                        category: Array.from(new Set([...values?.category, "taste"])),
-                      })
-                    }
-                  >
-                    <input type="checkbox" checked={values?.category?.includes("taste")} />
-                    <label className="container-radio">Taste</label>
-                  </div>
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-6">
-                  <div
-                    className="check-option"
-                    onClick={() =>
-                      setValues({
-                        ...values,
-                        category: Array.from(new Set([...values?.category, "vibe"])),
-                      })
-                    }
-                  >
-                    <input type="checkbox" checked={values?.category?.includes("vibe")} />
-                    <label className="container-radio">Vibe</label>
-                  </div>
-                  <div
-                    className="check-option"
-                    onClick={() =>
-                      setValues({
-                        ...values,
-                        category: Array.from(new Set([...values?.category, "experience"])),
-                      })
-                    }
-                  >
-                    <input type="checkbox" checked={values?.category?.includes("experience")} />
-                    <label className="container-radio">Experience</label>
-                  </div>
-                </div>
-              </div>
-
-              <p
-                style={{
-                  display: isErrored?.category ? "block" : "none",
-                  color: isErrored?.category ? "red" : "black",
-                  marginTop: "5px",
-                }}
-              >
-                {isErrored?.category}
-              </p>
-            </div>
-          </div>
-          <div className="row ">
-            <h2 className="top-heading text-center">Please fill out the itinerary FORM below</h2>
+            </div> */}
           </div>
 
           <Modal
@@ -1005,7 +1023,7 @@ const EditItinerary = (props: Props) => {
               }}
             >
               <div className="col-md-12">
-                <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
+                {/* <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
                   <button
                     type="button"
                     onClick={() => setDayForDelete(item.day)}
@@ -1021,8 +1039,8 @@ const EditItinerary = (props: Props) => {
                       marginBottom: "50px",
                     }}
                   ></button>
-                </div>
-                <h3 style={{ textAlign: "center" }}>Day {idx + 1}</h3>
+                </div> */}
+                <h3 style={{ textAlign: "center" }}>Activity </h3>
                 <input
                   type="text"
                   value={item.dayTitle}
@@ -1030,15 +1048,7 @@ const EditItinerary = (props: Props) => {
                   className="form-control inputday"
                   id="dayTitle"
                   style={{ width: "50%", margin: "auto", marginBottom: "10px" }}
-                  placeholder={`Enter ${
-                    idx + 1 === 1
-                      ? `${idx + 1}st`
-                      : idx + 1 === 2
-                      ? `${idx + 1}nd`
-                      : idx + 1 === 3
-                      ? `${idx + 1}rd`
-                      : `${idx + 1}th`
-                  } day's Title`}
+                  placeholder={`Enter Activity Title`}
                   name="dayTitle"
                 />
                 <div className="tabbable-panel tabs-pgs">

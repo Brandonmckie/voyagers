@@ -9,8 +9,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import img123 from "../home/img/img123.jpg";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
-import { getUserRole } from "../../utils/utils";
+import { checkIfUserIsAuthenticated, getUserRole } from "../../utils/utils";
 import regions from "../../utils/regions";
+import { ProcessRecords } from "../../utils/processReocrds";
+import { MultiSelect } from "react-multi-select-component";
 
 type Props = {};
 
@@ -24,10 +26,9 @@ type Itinerary = {
   salesPitch: string;
   services: string[];
   title: string;
-  userId: {
-    username: string;
-    _id: string;
-  };
+  eachDetail: any;
+  type: any;
+  userId: any;
   __v: number;
   _id: string;
 };
@@ -52,11 +53,113 @@ const responsive = {
   },
 };
 
+const voyageStyles = [
+  {
+    label: "Family",
+    value: "Family",
+  },
+  {
+    label: "Adventure",
+    value: "Adventure",
+  },
+  {
+    label: "Outdoors",
+    value: "Outdoors",
+  },
+  {
+    label: "Foodie",
+    value: "Foodie",
+  },
+  {
+    label: "Backpacker",
+    value: "Backpacker",
+  },
+  {
+    label: "Female Solo",
+    value: "Female Solo",
+  },
+  {
+    label: "Photography",
+    value: "Photography",
+  },
+  {
+    label: "Van Life",
+    value: "Van Life",
+  },
+  {
+    label: "Overlanding",
+    value: "Overlanding",
+  },
+  {
+    label: "Sustainable Eco",
+    value: "Sustainable Eco",
+  },
+  {
+    label: "Budget",
+    value: "Budget",
+  },
+  {
+    label: "Business",
+    value: "Business",
+  },
+  {
+    label: "Slow Travel",
+    value: "Slow Travel",
+  },
+  {
+    label: "LGTBQ+",
+    value: "LGTBQ+",
+  },
+  {
+    label: "Luxury",
+    value: "Luxury",
+  },
+  {
+    label: "Wellness",
+    value: "Wellness",
+  },
+  {
+    label: "Faith",
+    value: "Faith",
+  },
+  {
+    label: "Romantic",
+    value: "Romantic",
+  },
+  {
+    label: "Art",
+    value: "Art",
+  },
+  {
+    label: "Architecture",
+    value: "Architecture",
+  },
+  {
+    label: "History",
+    value: "History",
+  },
+  {
+    label: "People & Culture",
+    value: "People & Culture",
+  },
+  {
+    label: "Boutique",
+    value: "Boutique",
+  },
+  {
+    label: "Other",
+    value: "Other",
+  },
+];
+
 const Itineraries = (props: Props) => {
   const [data, setData] = useState<Itinerary[]>([]);
+  const [searchdata, setsearchdata] = useState<any>([]);
+  const [voyageStyle, setVoyageStyle] = useState([]);
   const [purchasedItineraries, setPurchasedItineraries] = useState<Itinerary[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedTab, setselectedTab] = useState("");
+  const [User, setUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [userRole, setuserRole] = useState("");
   const navigate = useNavigate();
@@ -64,35 +167,78 @@ const Itineraries = (props: Props) => {
   const getItineraries = async () => {
     try {
       setIsLoading(true);
+      if (searchParams.get("name")) {
+        let id = searchParams.get("name");
+        let region = searchParams.get("region");
+        let getdata = (await api(`/itinerary/userItinerary?username=${id}`)) as {
+          data: Itinerary[];
+        };
+        let filteredData = getdata.data.filter((item) => item.country === region);
+        setData(filteredData);
+        setsearchdata(filteredData);
+      } else {
+        let getdata = (await api(
+          `/itinerary${searchParams.get("region") ? "?region=" + searchParams.get("region") : ""}`
+        )) as { data: Itinerary[] };
 
-      let getdata = (await api(
-        `/itinerary${searchParams.get("region") ? "?region=" + searchParams.get("region") : ""}`
-      )) as { data: Itinerary[] };
-      console.log(getdata);
-      setData(getdata.data);
+        // let activities = [];
+        // activities = ProcessRecords(getdata);
 
-      let purchasedData = (await api(
-        `/itinerary/purchased/${
-          searchParams.get("region") ? "?region=" + searchParams.get("region") : ""
-        }`
-      )) as { data: Itinerary[] };
-      setPurchasedItineraries(purchasedData.data);
+        setData(getdata.data);
+        setsearchdata(getdata.data);
+        // setData(getdata.data);
+
+        // let purchasedData = (await api(
+        //   `/itinerary/purchased/${
+        //     searchParams.get("region") ? "?region=" + searchParams.get("region") : ""
+        //   }`
+        // )) as { data: Itinerary[] };
+        // let purchasedRecords = ProcessRecords(purchasedData);
+        // setPurchasedItineraries(purchasedRecords.flat());
+      }
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
+  const verifyLogin = async () => {
+    let isAuthenticated = await checkIfUserIsAuthenticated();
 
+    if (isAuthenticated) setUser(true);
+    else setUser(false);
+  };
   useEffect(() => {
-    const userRole = getUserRole(); // Replace this with your logic to get the user's role
+    const userRole = getUserRole();
     setuserRole(userRole);
-    // if (userRole === "seller") {
-    //   navigate("/itinerary/me");
-    // }
-
     getItineraries();
   }, [searchParams]);
+
+  useEffect(() => {
+    verifyLogin();
+  }, []);
+
+  useEffect(() => {
+    setselectedTab("");
+    let filteredData = searchdata.filter((item: any) => {
+      let available = true;
+      voyageStyle.map((style: any) => {
+        if (item.userId.userInfo.voyageStyle.includes(style?.value)) {
+        } else {
+          available = false;
+        }
+      });
+      if (available) {
+        return item;
+      }
+      // return voyageStyle.some((style) => {
+      //   console.log(item.userId.userInfo.voyageStyle);
+      //   return item.userId.userInfo.voyageStyle.includes(style);
+      // });
+    });
+
+    setData(filteredData);
+  }, [voyageStyle]);
 
   return (
     <>
@@ -174,9 +320,18 @@ const Itineraries = (props: Props) => {
                         </a>
                       </li>
                     </ul>
+                    <div className="multivoyagers">
+                      <MultiSelect
+                        options={voyageStyles}
+                        value={voyageStyle}
+                        onChange={setVoyageStyle}
+                        labelledBy="Select"
+                      />
+                    </div>
+
                     <div className="tab-content listingtabs">
                       <div className="tab-pane active" id="tab_default_1">
-                        {userRole ? (
+                        {userRole && purchasedItineraries?.length > 0 ? (
                           <>
                             {" "}
                             <div className="row">
@@ -188,7 +343,7 @@ const Itineraries = (props: Props) => {
                                 </div>
                               </div>
                             </div>
-                            <div className="carousel-reviews broun-block">
+                            {/* <div className="carousel-reviews broun-block">
                               <div className="container-fuild">
                                 {purchasedItineraries?.length > 0 ? (
                                   <div className="row">
@@ -241,66 +396,7 @@ const Itineraries = (props: Props) => {
                                                   </div>
                                                 ))}
                                             </Carousel>
-                                            {/* <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div className="card">
-                                      <img
-                                        className="card-img-top"
-                                        src="img/Rect2.png"
-                                        alt="Card image"
-                                        style={{ width: "100%" }}
-                                      />
-                                      <div className="badge">
-                                        <p>Stay</p>
-                                      </div>
-                                      <div className="card-body">
-                                        <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                        <div className="subtitle">
-                                          <span className="a">Created by:</span>
-                                          <span className="b">Tichelle Richards</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div className="card">
-                                      <img
-                                        className="card-img-top"
-                                        src="img/Rect2.png"
-                                        alt="Card image"
-                                        style={{ width: "100%" }}
-                                      />
-                                      <div className="badge">
-                                        <p>Stay</p>
-                                      </div>
-                                      <div className="card-body">
-                                        <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                        <div className="subtitle">
-                                          <span className="a">Created by:</span>
-                                          <span className="b">Tichelle Richards</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div className="card">
-                                      <img
-                                        className="card-img-top"
-                                        src="img/Rect2.png"
-                                        alt="Card image"
-                                        style={{ width: "100%" }}
-                                      />
-                                      <div className="badge">
-                                        <p>Stay</p>
-                                      </div>
-                                      <div className="card-body">
-                                        <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                        <div className="subtitle">
-                                          <span className="a">Created by:</span>
-                                          <span className="b">Tichelle Richards</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div> */}
+                                           
                                           </div>
                                         </div>
                                       </div>
@@ -314,7 +410,7 @@ const Itineraries = (props: Props) => {
                                   </div>
                                 )}
                               </div>
-                            </div>
+                            </div> */}
                           </>
                         ) : (
                           <></>
@@ -344,35 +440,47 @@ const Itineraries = (props: Props) => {
                                     flexWrap: "wrap",
                                   }}
                                 >
-                                  {data.map((each) => (
-                                    <div
-                                      key={each._id}
-                                      className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                    >
-                                      <Link
-                                        style={{ textDecoration: "none" }}
-                                        to={`/itinerary/view/${each._id}`}
-                                        className="card"
+                                  {data
+                                    .filter((each) =>
+                                      // selectedTab ? each?.type === selectedTab : true
+                                      selectedTab ? each?.category.includes(selectedTab) : true
+                                    )
+                                    .map((each: any) => (
+                                      <div
+                                        key={each._id}
+                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
                                       >
-                                        <img
-                                          className="card-img-top imgStyle"
-                                          src={each.image}
-                                          alt="Cardimage"
-                                          style={{ width: "100%" }}
-                                        />
-                                        <div className="badge">
-                                          <p>{each.category[0]}</p>
-                                        </div>
-                                        <div className="card-body">
-                                          <h4 className="card-title">{each.title}</h4>
-                                          <div className="subtitle">
-                                            <span className="a">Created by:</span>
-                                            <span className="b">{each.userId.username}</span>
+                                        <div
+                                          onClick={() => {
+                                            if (User) {
+                                              navigate(`/itinerary/view/${each?._id}`);
+                                            } else {
+                                              navigate("/auth/login");
+                                            }
+                                          }}
+                                          style={{ textDecoration: "none", cursor: "pointer" }}
+                                          // to={`/user/${each.username}`}
+                                          className="card"
+                                        >
+                                          <img
+                                            className="card-img-top imgStyle"
+                                            src={each.image}
+                                            alt="Cardimage"
+                                            style={{ width: "100%" }}
+                                          />
+                                          <div className="badge">
+                                            {<p>{selectedTab ? selectedTab : each.category[0]}</p>}
+                                          </div>
+                                          <div className="card-body">
+                                            <h4 className="card-title">{each.title}</h4>
+                                            <div className="subtitle">
+                                              <span className="a">Created by:</span>
+                                              <span className="b">{each?.userId?.username}</span>
+                                            </div>
                                           </div>
                                         </div>
-                                      </Link>
-                                    </div>
-                                  ))}
+                                      </div>
+                                    ))}
                                   {/* <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div className="card">
                                   <img

@@ -165,6 +165,7 @@ const Navbar = (props: Props) => {
                         className={`nav navbar-nav navbar-right dropdown dropdown-toggle mobileul ${
                           profileOpen ? " open" : ""
                         }`}
+                        style={{ marginLeft: !isLoggedIn ? "22%" : "30%" }}
                         data-toggle="dropdown"
                         onClick={() => setProfileOpen(!profileOpen)}
                         // style={
@@ -193,13 +194,28 @@ const Navbar = (props: Props) => {
                           />
                         </li>
 
-                        <ul className="dropdown-menu profile-dropdown mobiledrop">
+                        <ul
+                          className="dropdown-menu profile-dropdown mobiledrop"
+                          style={{ zIndex: 1000000 }}
+                        >
                           <li onClick={handleProfileOpen}>Edit Profile</li>
                           {user.role === "seller" && user.stripeConnected === false ? (
                             <li onClick={handleStripeOnboarding}>Complete Onboarding</li>
                           ) : (
                             ""
                           )}
+                          <li>
+                            <Link to="/qrcode">My Qrcode</Link>
+                          </li>
+                          <li>
+                            <Link to="/itinerary/me">My Itinerary</Link>
+                          </li>
+                          <li>
+                            <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
+                              Itinerary Request
+                            </Link>
+                          </li>
+
                           <li onClick={handleLogout} className="mobilelog">
                             Logout
                           </li>
@@ -227,23 +243,25 @@ const Navbar = (props: Props) => {
                 <ul
                   className="nav navbar-nav"
                   style={
-                    user.role === "seller"
+                    user?.role === "seller" || user?.role === "influencer"
                       ? {
                           display: "flex",
                           alignItems: "center",
                           marginTop: 0,
-                          marginLeft: "7%",
+                          marginLeft: "13%",
                         }
-                      : {}
+                      : {
+                          marginLeft: "22%",
+                        }
                   }
                 >
                   <li className="active">
                     <Link to="/">Home</Link>
                   </li>
 
-                  {user._id && user?.role === "seller" && (
+                  {user._id && (user?.role === "seller" || user?.role === "influencer") && (
                     <li>
-                      <Link to="/itinerary/me">Voyager Itineraries</Link>
+                      <Link to="/itinerary/list">Voyager Itineraries</Link>
                     </li>
                   )}
 
@@ -251,13 +269,15 @@ const Navbar = (props: Props) => {
                     <Link to="/about-us">About us</Link>
                   </li>
 
-                  <li>
-                    <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
-                      Itinerary Request
-                    </Link>
-                  </li>
+                  {!isLoggedIn && (
+                    <li>
+                      <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
+                        Itinerary Request
+                      </Link>
+                    </li>
+                  )}
 
-                  {user.role === "seller" ? (
+                  {user.role === "seller" || user.role === "influencer" ? (
                     <li>
                       <Link to="/itinerary/setupProfile">
                         <button className="btn btn-orange navbar-btn">Create Itinerary</button>
@@ -294,7 +314,7 @@ const Navbar = (props: Props) => {
                       data-toggle="dropdown"
                       onClick={() => setProfileOpen(!profileOpen)}
                       style={
-                        user.role === "seller"
+                        user?.role === "seller" || user?.role === "influencer"
                           ? {
                               display: "flex",
                               alignItems: "center",
@@ -333,6 +353,18 @@ const Navbar = (props: Props) => {
                         ) : (
                           ""
                         )}
+                        <li>
+                          <Link to="/qrcode">My Qrcode</Link>
+                        </li>
+                        <li>
+                          <Link to="/itinerary/me">My Itinerary</Link>
+                        </li>
+                        <li>
+                          <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
+                            Itinerary Request
+                          </Link>
+                        </li>
+
                         <li onClick={handleLogout}>Logout</li>
                       </ul>
                     </ul>
@@ -394,18 +426,19 @@ const Navbar = (props: Props) => {
                   About us
                 </Link>
               </li>
-
-              <li>
-                <Link
-                  to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC"
-                  onClick={() => {
-                    setmobileview(false);
-                  }}
-                  target="_blank"
-                >
-                  Itinerary Request
-                </Link>
-              </li>
+              {!isLoggedIn && (
+                <li>
+                  <Link
+                    to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC"
+                    onClick={() => {
+                      setmobileview(false);
+                    }}
+                    target="_blank"
+                  >
+                    Itinerary Request
+                  </Link>
+                </li>
+              )}
 
               {!isLoggedIn && (
                 <>
@@ -469,10 +502,10 @@ const Navbar = (props: Props) => {
                 </ul>
               </li> */}
 
-              {user._id && user?.role === "seller" && (
+              {user._id && (user?.role === "seller" || user?.role === "influencer") && (
                 <li>
                   <Link
-                    to="/itinerary/me"
+                    to="/itinerary/list"
                     onClick={() => {
                       setmobileview(false);
                     }}
@@ -505,7 +538,7 @@ const Navbar = (props: Props) => {
 
               {/* )} */}
 
-              {user.role === "seller" ? (
+              {user.role === "seller" || user.role === "influencer" ? (
                 <li>
                   <Link to="/itinerary/setupProfile">
                     <button

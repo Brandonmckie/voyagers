@@ -6,6 +6,10 @@
 .card-body {
   padding: 20px;
 }
+.multivoyagers {
+  margin-top: 26px;
+  width: 100%;
+}
 .imgStyle {
   width: 100%;
   height: 200px;
@@ -229,6 +233,10 @@ textarea.text-details {
   }
   ul.nav-tabs li {
     margin-bottom: 10px;
+  }
+  .multivoyagers {
+    width: 94%;
+    margin-left: 7px;
   }
 }
 

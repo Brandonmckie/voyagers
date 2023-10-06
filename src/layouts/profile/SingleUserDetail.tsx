@@ -11,6 +11,7 @@ import img1 from "./images/img1.jpg";
 import img2 from "./images/img2.jpg";
 import img3 from "./images/img3.jpg";
 import img4 from "./images/img4.jpg";
+import dp from "../navbar/img/dp.png";
 import img5 from "./images/img5.jpg";
 import img6 from "./images/img6.jpg";
 import img7 from "./images/img7.jpg";
@@ -65,42 +66,22 @@ const responsive = {
 
 const SingleUserDetail = (props: Props) => {
   const [data, setData] = useState<Itinerary[]>([]);
-  const [purchasedItineraries, setPurchasedItineraries] = useState<Itinerary[]>([]);
   const [badgeHover, setBadgeHover] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showCountry, setshowCountry] = useState(false);
+  const [showCountry, setshowCountry] = useState(true);
   const [showItinerary, setshowItinerary] = useState(true);
   const [showWonders, setshowWonders] = useState(false);
-  const [isOpenDelete, setIsOpenDelete] = useState<string>("");
   const [message, setmessage] = useState("Show More");
   const [profile, setprofile] = useState<any>([]);
   const [countriescount, setcountriescount] = useState<any>([]);
   const [navInfo, setnavInfo] = useState<any>([]);
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const getItineraries = async () => {
     setIsLoading(true);
 
     try {
       let getdata = (await api(`/itinerary/userItinerary?username=${id}`)) as { data: Itinerary[] };
-
-      // console.log(getdata);
-      // let countries0 = getdata.data.map((item: any) => item.country);
-      // for (const data of countries0) {
-      //   let countries = options.find((item, i) => {
-      //     return item.value === data;
-      //   });
-      //   if (countries) {
-      //     countriesData.push({ country: countries.label, code: data });
-      //   }
-      // }
-      // console.log(countriesData);
-      // let countriesData0: any[] = Array.from(countriesData).map((code) => {
-      //   let country = options.find((item) => item.value === code)?.label;
-      //   return { country, code };
-      // });
-      // console.log(countriesData0);
 
       let countries0 = getdata.data.map((item: any) => item.country);
       let uniqueCountryCodes = new Set<string>();
@@ -120,8 +101,8 @@ const SingleUserDetail = (props: Props) => {
       setcountriescount(countriesData);
       setData(getdata.data);
 
-      let purchasedData = (await api(`/itinerary/purchased/${""}`)) as { data: Itinerary[] };
-      setPurchasedItineraries(purchasedData.data);
+      // let purchasedData = (await api(`/itinerary/purchased/${""}`)) as { data: Itinerary[] };
+      // setPurchasedItineraries(purchasedData.data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -260,7 +241,7 @@ const SingleUserDetail = (props: Props) => {
                           objectFit: "cover",
                           objectPosition: "center",
                         }}
-                        src={profile?.image}
+                        src={profile?.image ? profile?.image : dp}
                         alt=""
                       />
                     </div>
@@ -285,6 +266,10 @@ const SingleUserDetail = (props: Props) => {
                                   fontSize: "15px",
                                   margin: "7px 0px",
                                   marginLeft: "10px",
+                                  background: " white",
+                                  color: "black",
+                                  padding: "4px",
+                                  borderRadius: "10px",
                                 }}
                                 key={i}
                               >
@@ -298,12 +283,23 @@ const SingleUserDetail = (props: Props) => {
                         style={{
                           display: "flex",
                           flexDirection: "row",
-
+                          alignItems: "center",
                           marginBottom: "10px",
                         }}
                       >
                         <h5 style={{ fontSize: "16px", margin: "0px" }}>Country: </h5>
-                        <p style={{ margin: "0px", marginLeft: "10px" }}>{navInfo?.country}</p>
+                        <p
+                          style={{
+                            margin: "0px",
+                            marginLeft: "10px",
+                            background: " white",
+                            color: "black",
+                            padding: "4px",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          {navInfo?.country}
+                        </p>
                       </div>
 
                       <div
@@ -312,11 +308,23 @@ const SingleUserDetail = (props: Props) => {
                           flexDirection: "row",
 
                           marginBottom: "10px",
+                          alignItems: "center",
                         }}
                       >
                         <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Countries: </h5>
                         {navInfo?.visitedCountries?.map((item: any, i: any) => (
-                          <p style={{ margin: "0px", marginLeft: "10px" }}>{item.label}</p>
+                          <p
+                            style={{
+                              margin: "0px",
+                              marginLeft: "10px",
+                              background: " white",
+                              color: "black",
+                              padding: "4px",
+                              borderRadius: "10px",
+                            }}
+                          >
+                            {item.label}
+                          </p>
                         ))}
                       </div>
 
@@ -326,11 +334,24 @@ const SingleUserDetail = (props: Props) => {
                           flexDirection: "row",
 
                           marginBottom: "10px",
+                          alignItems: "center",
                         }}
                       >
                         <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Wonders: </h5>
                         {navInfo?.visitedWonders?.map((item: any, i: any) => (
-                          <p style={{ margin: "0px", marginLeft: "10px" }}>{item.label}</p>
+                          <p
+                            style={{
+                              margin: "0px",
+                              marginLeft: "10px",
+                              background: " white",
+                              color: "black",
+                              padding: "4px",
+                              borderRadius: "10px",
+                              width: item.label.trim() === "Roman Colosseum, Italy" ? "21%" : "",
+                            }}
+                          >
+                            {item.label}
+                          </p>
                         ))}
                       </div>
 
@@ -467,7 +488,7 @@ const SingleUserDetail = (props: Props) => {
                           objectFit: "cover",
                           objectPosition: "center",
                         }}
-                        src={profile?.image}
+                        src={profile?.image ? profile?.image : dp}
                         alt=""
                       />
                       <div style={{ marginLeft: "0px", color: "white" }}>
@@ -666,7 +687,7 @@ const SingleUserDetail = (props: Props) => {
             }}
             className="tabsStyle"
           >
-            <h4
+            {/* <h4
               className="heading-style0"
               onClick={() => {
                 setshowCountry(false);
@@ -679,8 +700,8 @@ const SingleUserDetail = (props: Props) => {
               }}
             >
               Itineraries
-            </h4>
-            <div style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}></div>
+            </h4> */}
+            {/* <div style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}></div> */}
             <h4
               className="heading-style0"
               style={{
@@ -735,7 +756,7 @@ const SingleUserDetail = (props: Props) => {
                     <div className="card-grid">
                       {countriescount.map((each: any) => (
                         <Link
-                          to={`/itinerary/list?region=${each?.code}`}
+                          to={`/itinerary/list?region=${each?.code}&&name=${id}`}
                           style={{ marginBottom: "20px" }}
                           key={each.code}
                           className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
@@ -819,66 +840,68 @@ const SingleUserDetail = (props: Props) => {
                 <>
                   <div className="row">
                     <div className="card-grid">
-                      {navInfo?.visitedWonders?.map((each: any) => (
-                        <Link
-                          to={``}
-                          style={{ marginBottom: "20px" }}
-                          key={each._id}
-                          // onMouseEnter={() => setBadgeHover(each._id)}
-                          // onMouseLeave={() => setBadgeHover(null)}
-                          className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                        >
-                          <div className="card">
-                            <img
-                              className="card-img-top"
-                              src={
-                                each.label === "Great Wall of China"
-                                  ? img1
-                                  : each.label === "Petra, Jordan"
-                                  ? img2
-                                  : each.label === "Machu Picchu, Peru"
-                                  ? img4
-                                  : each.label === "Chichen Itza, Mexico"
-                                  ? img5
-                                  : each.label === "Roman Colosseum, Italy"
-                                  ? img6
-                                  : each.label === "Christ the Redeemer, Brazil"
-                                  ? img3
-                                  : each.label === "Taj Mahal, India"
-                                  ? img7
-                                  : ""
-                              }
-                              alt="Cardimage"
-                              style={{
-                                width: "100%",
-                                height: "200px",
-                                objectFit: "cover",
-                                objectPosition: "center",
-                              }}
-                            />
+                      {navInfo?.visitedWonders?.map((each: any) => {
+                        return (
+                          <Link
+                            to={``}
+                            style={{ marginBottom: "20px" }}
+                            key={each._id}
+                            // onMouseEnter={() => setBadgeHover(each._id)}
+                            // onMouseLeave={() => setBadgeHover(null)}
+                            className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                          >
+                            <div className="card">
+                              <img
+                                className="card-img-top"
+                                src={
+                                  each.label.trim() === "Chichen Itza, Mexico"
+                                    ? img5
+                                    : each.label.trim() === "Great Wall of China"
+                                    ? img1
+                                    : each.label.trim() === "Petra, Jordan"
+                                    ? img2
+                                    : each.label.trim() === "Machu Picchu, Peru"
+                                    ? img4
+                                    : each.label.trim() === "Roman Colosseum, Italy"
+                                    ? img6
+                                    : each.label.trim() === "Christ the Redeemer, Brazil"
+                                    ? img3
+                                    : each.label.trim() === "Taj Mahal, India"
+                                    ? img7
+                                    : ""
+                                }
+                                alt="Cardimage"
+                                style={{
+                                  width: "100%",
+                                  height: "200px",
+                                  objectFit: "cover",
+                                  objectPosition: "center",
+                                }}
+                              />
 
-                            {/* <div className="badge" style={{ top: "20px" }}>
+                              {/* <div className="badge" style={{ top: "20px" }}>
                               <p>{each.category[0]}</p>
                             </div> */}
-                            <div
-                              className="card-body"
-                              style={{
-                                height: " 66px",
-                                display: "flex",
-                                alignItems: "center",
-                                padding: "0px",
-                                paddingLeft: "14px",
-                              }}
-                            >
-                              <h4 className="card-title">{each.label}</h4>
-                              {/* <div className="subtitle">
+                              <div
+                                className="card-body"
+                                style={{
+                                  height: " 66px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  padding: "0px",
+                                  paddingLeft: "14px",
+                                }}
+                              >
+                                <h4 className="card-title">{each.label}</h4>
+                                {/* <div className="subtitle">
                                 <span className="a">Created by:</span>
                                 <span className="b">{each.userId.username}</span>
                               </div> */}
+                              </div>
                             </div>
-                          </div>
-                        </Link>
-                      ))}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </>

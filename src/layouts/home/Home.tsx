@@ -95,6 +95,7 @@ const Home = () => {
   const getItineraries = async () => {
     try {
       let getdata = (await api(`/itinerary?limit=40`)) as { data: Itinerary[] };
+
       setData(getdata.data);
     } catch (error) {
       console.log(error);
@@ -370,17 +371,23 @@ const Home = () => {
                   <div className="item active">
                     <div className="card-slid">
                       <Carousel itemClass="w-full" responsive={responsive}>
-                        {data.map((each) => (
+                        {data?.map((each) => (
                           <div key={each._id} className="list-item">
-                            <Link
-                              style={{ textDecoration: "none" }}
-                              to={`/itinerary/view/${each._id}`}
+                            <div
+                              onClick={() => {
+                                if (user) {
+                                  navigate(`/itinerary/view/${each._id}`);
+                                } else {
+                                  navigate("/auth/login");
+                                }
+                              }}
+                              style={{ textDecoration: "none", cursor: "pointer" }}
                               className="card"
                             >
                               <img
                                 className="card-img-top"
-                                src={each.image}
-                                alt="Card image"
+                                src={each?.image}
+                                alt="Cardimage"
                                 style={{
                                   width: "100%",
                                   minHeight: "234px",
@@ -390,7 +397,7 @@ const Home = () => {
                                 }}
                               />
                               <div className="badge">
-                                <p>{each.category[0]}</p>
+                                <p>{each?.category[0]}</p>
                               </div>
                               <div className="card-body">
                                 <h4 className="card-title">{each.title}</h4>
@@ -399,7 +406,7 @@ const Home = () => {
                                   <span className="b">{each?.userId?.userInfo?.name}</span>
                                 </div>
                               </div>
-                            </Link>
+                            </div>
                           </div>
                         ))}
                       </Carousel>
@@ -560,7 +567,13 @@ const Home = () => {
 
       <section
         className="client-part"
-        style={{ position: "relative", height: "621px", top: "-105px" }}
+        style={{
+          position: "relative",
+          height: "621px",
+          top: "-105px",
+          paddingLeft: "0px",
+          paddingRight: "0px",
+        }}
       >
         <img className="image000" src={card5} alt="" />
         <div className="container">

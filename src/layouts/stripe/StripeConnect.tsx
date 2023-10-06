@@ -7,7 +7,7 @@ const StripeConnect = (props: Props) => {
   const handleStripeAdd = async () => {
     try {
       const data = await api.post("/billing/connect-stripe");
-      console.log(data);
+
       window.open(data.data);
     } catch (error) {
       console.log(error);

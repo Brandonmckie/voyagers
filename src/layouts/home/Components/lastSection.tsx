@@ -50,9 +50,11 @@ const LastSection = ({ user }: Props) => {
             fontWeight: 500,
             fontSize: "56px",
             gap: "6px",
+            alignItems: " baseline",
+            letterSpacing: "-2px",
           }}
         >
-          BECOME A <span style={{ color: "#EF7A03" }}> VERIFIED VOYAGER</span>
+          <span>BECOME A</span> <span style={{ color: "#EF7A03" }}> VERIFIED VOYAGER</span>
         </span>
         <h4
           className="lastsection2"
@@ -70,7 +72,7 @@ const LastSection = ({ user }: Props) => {
               background: "#EF7A03",
               borderRadius: "5px",
               color: "white",
-              fontSize: "27px",
+              fontSize: "19px",
               padding: "1px 12px",
               lineHeight: "45px",
               cursor: "pointer",

@@ -53,7 +53,6 @@ const responsive = {
 
 const MyItineraries = (props: Props) => {
   const [data, setData] = useState<Itinerary[]>([]);
-  const [purchasedItineraries, setPurchasedItineraries] = useState<Itinerary[]>([]);
   const [badgeHover, setBadgeHover] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteLoading, setIsDeleteLoading] = useState(false);
@@ -68,8 +67,8 @@ const MyItineraries = (props: Props) => {
       let getdata = (await api("/itinerary/list/me")) as { data: Itinerary[] };
       setData(getdata.data);
 
-      let purchasedData = (await api(`/itinerary/purchased/${""}`)) as { data: Itinerary[] };
-      setPurchasedItineraries(purchasedData.data);
+      // let purchasedData = (await api(`/itinerary/purchased/${""}`)) as { data: Itinerary[] };
+      // setPurchasedItineraries(purchasedData.data);
     } catch (err) {
       console.log(err);
     } finally {
@@ -88,7 +87,7 @@ const MyItineraries = (props: Props) => {
     // Check user role here and return the corresponding component
     const userRole = getUserRole(); // Replace this with your logic to get the user's role
 
-    if (userRole !== "seller") {
+    if (userRole === "user") {
       navigate("/itinerary/list");
     }
 
@@ -156,7 +155,7 @@ const MyItineraries = (props: Props) => {
                 <ReactModal
                   style={{
                     content: {
-                      width: "50vw",
+                      width: "90%",
                       height: "200px",
                       inset: "unset",
                       display: "flex",
@@ -174,8 +173,10 @@ const MyItineraries = (props: Props) => {
                   isOpen={typeof isOpenDelete === "string" && isOpenDelete !== ""}
                 >
                   <div>
-                    <h4>Are you sure you want to delete this Itinerary?</h4>
-                    <div className="button-group">
+                    <h4 style={{ textAlign: "center" }}>
+                      Are you sure you want to delete this Itinerary?
+                    </h4>
+                    <div className="button-group" style={{ textAlign: "center" }}>
                       <button
                         disabled={isDeleteLoading}
                         style={{ marginRight: "20px" }}
@@ -217,28 +218,28 @@ const MyItineraries = (props: Props) => {
                               objectPosition: "center",
                             }}
                           />
-                          {badgeHover === each._id ? (
-                            <button
-                              type="button"
-                              onClick={(e) => handleChangeDelete(e, each._id)}
-                              className="glyphicon glyphicon-trash"
-                              style={{
-                                position: "absolute",
-                                left: "20px",
-                                top: "20px",
-                                background: "red",
-                                width: "34px",
-                                height: "34px",
-                                borderRadius: "50%",
-                                border: "none",
-                                outline: "none",
-                                color: "white",
-                                marginBottom: "50px",
-                              }}
-                            ></button>
-                          ) : (
-                            ""
-                          )}
+                          {/* {badgeHover === each._id ? ( */}
+                          <button
+                            type="button"
+                            onClick={(e) => handleChangeDelete(e, each._id)}
+                            className="glyphicon glyphicon-trash"
+                            style={{
+                              position: "absolute",
+                              left: "20px",
+                              top: "20px",
+                              background: "red",
+                              width: "34px",
+                              height: "34px",
+                              borderRadius: "50%",
+                              border: "none",
+                              outline: "none",
+                              color: "white",
+                              marginBottom: "50px",
+                            }}
+                          ></button>
+                          {/* // ) : (
+                          //   ""
+                          // )} */}
                           <div className="badge" style={{ top: "20px" }}>
                             <p>{each.category[0]}</p>
                           </div>

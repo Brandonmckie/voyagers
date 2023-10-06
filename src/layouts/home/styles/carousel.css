@@ -47,7 +47,7 @@
   top: -26px;
 }
 .screenwidth {
-  margin: 0px 50px;
+  margin: 0px 139px;
 }
 .carousel-inner {
   position: relative;
@@ -136,14 +136,7 @@ label.container-radio {
   padding: 20px 0;
 }
 /*tabs*/
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-  background: #f1a501;
-  border-radius: 64px;
-  color: white;
-  padding: 12px 36px;
-}
+
 .tabs-pgs .nav-tabs > li a:visited {
   background: green;
 }
@@ -272,6 +265,17 @@ textarea.text-details {
 }
 
 @media (max-width: 770px) {
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:focus,
+  .nav-tabs > li.active > a:hover {
+    border-radius: 10px !important;
+  }
+  .nav-tabs > li > a {
+    border-radius: 10px !important;
+  }
+  .singlenavstyle {
+    gap: 0px !important;
+  }
   .image0001 {
     display: none;
   }

@@ -5,6 +5,10 @@ const regions = {
       country: "Afghanistan",
     },
     {
+      code: "AX",
+      country: "Aruba",
+    },
+    {
       code: "AM",
       country: "Armenia",
     },

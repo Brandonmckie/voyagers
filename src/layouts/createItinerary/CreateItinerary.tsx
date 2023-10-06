@@ -159,10 +159,10 @@ const CreateItinerary = (props: Props) => {
       // Add non-file values to the formData
       formData.append("country", values.country);
       formData.append("title", values.title);
-      formData.append("price", values.price);
+      // formData.append("price", values.price);
       formData.append("category", JSON.stringify(values.category));
-      formData.append("introduction", values.introduction);
-      formData.append("salesPitch", values.salesPitch);
+      // formData.append("introduction", values.introduction);
+      // formData.append("salesPitch", values.salesPitch);
       // formData.append("eachDetail", JSON.stringify(values.eachDetail));
       // Add other non-file fields to the formData
 
@@ -362,14 +362,36 @@ const CreateItinerary = (props: Props) => {
 
   const getUserDetails = async () => {
     try {
-      let data = await api("/billing/user-details");
-      if (!data?.data?.isCompleted) {
-        return navigate("/stripe/connect");
-      } else if (!data?.data?.stripeConnected) {
-        return navigate("/onboarding");
+      let user = await api("/users/get-profile");
+      if (user?.data?.user?.role === "influencer") {
+        return;
+      } else {
+        let data = await api("/billing/user-details");
+        if (!data?.data?.isCompleted) {
+          return navigate("/stripe/connect");
+        } else if (!data?.data?.stripeConnected) {
+          return navigate("/onboarding");
+        }
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleCheckboxChange = (e: any) => {
+    const isChecked = e.target.checked;
+    const categoryName = e.target.value;
+
+    if (isChecked) {
+      setValues({
+        ...values,
+        category: [...values.category, categoryName],
+      });
+    } else {
+      setValues({
+        ...values,
+        category: values.category.filter((category) => category !== categoryName),
+      });
     }
   };
 
@@ -662,17 +684,23 @@ const CreateItinerary = (props: Props) => {
           <div className="col-sm-12 col-md-2 col-lg-2"></div>
         </div>
 
-        <div className="row">
+        <div className="row creatediv1">
           <div
             className="col-sm-12 col-md-6 col-lg-6"
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <div className="upload-file">
+            <div className="upload-file" style={{ height: "226px" }}>
               {values.image ? (
                 <img
                   src={URL.createObjectURL(values.image)}
-                  style={{ width: "200px" }}
+                  style={{
+                    width: "200px",
+                    height: "100px",
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                  }}
                   alt="Thumbnail"
                 />
               ) : (
@@ -705,7 +733,7 @@ const CreateItinerary = (props: Props) => {
           </div>
 
           <div className="col-sm-12 col-md-6 col-lg-6 formdes">
-            <label className="control-label" htmlFor="title">
+            <label className="control-label" htmlFor="title" style={{ fontSize: "21px" }}>
               Title
             </label>
             <input
@@ -727,8 +755,69 @@ const CreateItinerary = (props: Props) => {
             >
               {isErrored.title}
             </p>
+            <div className="col-sm-12 col-md-6 col-lg-6 formdes2">
+              <label
+                className="control-label labelstyle22"
+                htmlFor="message"
+                style={{ textAlign: "left" }}
+              >
+                Choose a category for this itinerary:
+              </label>
+              <div className="row">
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <div className="check-option">
+                    <input
+                      type="checkbox"
+                      value="stay"
+                      checked={values.category.includes("stay")}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label className="container-radio">Stay</label>
+                  </div>
+                  <div className="check-option">
+                    <input
+                      type="checkbox"
+                      value="taste"
+                      checked={values.category.includes("taste")}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label className="container-radio">Taste</label>
+                  </div>
+                </div>
+                <div className="col-sm-12 col-md-6 col-lg-6">
+                  <div className="check-option">
+                    <input
+                      type="checkbox"
+                      value="vibe"
+                      checked={values.category.includes("vibe")}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label className="container-radio">Vibe</label>
+                  </div>
+                  <div className="check-option">
+                    <input
+                      type="checkbox"
+                      value="experience"
+                      checked={values.category.includes("experience")}
+                      onChange={handleCheckboxChange}
+                    />
+                    <label className="container-radio">Experience</label>
+                  </div>
+                </div>
+              </div>
+
+              <p
+                style={{
+                  display: isErrored?.category ? "block" : "none",
+                  color: isErrored?.category ? "red" : "black",
+                  marginTop: "5px",
+                }}
+              >
+                {isErrored.category}
+              </p>
+            </div>
             <br />
-            <label className="control-label" htmlFor="price">
+            {/* <label className="control-label" htmlFor="price">
               Price
             </label>
             <input
@@ -739,9 +828,9 @@ const CreateItinerary = (props: Props) => {
               id="price"
               placeholder="Enter Price"
               name="price"
-            />
+            /> */}
 
-            <p
+            {/* <p
               style={{
                 display: isErrored?.price ? "block" : "none",
                 color: isErrored?.price ? "red" : "black",
@@ -792,31 +881,9 @@ const CreateItinerary = (props: Props) => {
                 style={{ marginLeft: "10px", cursor: "pointer" }}
                 aria-hidden="true"
               ></span>
-            </div>
-            {/* <label className="control-label" htmlFor="days">
-              Days
-            </label>
-            <input
-              type="number"
-              value={days}
-              onChange={handleChangeDays}
-              onKeyDown={(event) => {
-                const allowedKeys = ["Delete", "Backspace", "Tab"];
-                if (!/\d/.test(event.key) && allowedKeys.includes(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-              min={1}
-              disabled
-              formEncType="number"
-              className="form-control"
-              id="days"
-              itemType="number"
-              placeholder="Enter Days"
-              name="days"
-            /> */}
+            </div> */}
 
-            <br />
+            {/* <br />
             <label className="control-label" htmlFor="introduction">
               Introduction
             </label>
@@ -827,9 +894,9 @@ const CreateItinerary = (props: Props) => {
               onChange={handleChange}
             >
               Write your intro...
-            </textarea>
+            </textarea> */}
 
-            <p
+            {/* <p
               style={{
                 display: isErrored?.introduction ? "block" : "none",
                 color: isErrored?.introduction ? "red" : "black",
@@ -838,12 +905,12 @@ const CreateItinerary = (props: Props) => {
             >
               {isErrored.introduction}
             </p>
-            <br />
+            <br /> */}
           </div>
         </div>
 
-        <div className="row spc-2nd">
-          <div className="col-sm-12 col-md-6 col-lg-6">
+        {/* <div className="row spc-2nd">
+          {/* <div className="col-sm-12 col-md-6 col-lg-6">
             <label className="control-label" htmlFor="message">
               Include a descriptive sales pitch for the payment page of itinerary
             </label>
@@ -863,10 +930,10 @@ const CreateItinerary = (props: Props) => {
             >
               {isErrored.salesPitch}
             </p>
-          </div>
+          </div> 
 
           <div className="col-sm-12 col-md-6 col-lg-6 formdes2">
-            <label className="control-label" htmlFor="message">
+            <label className="control-label labelstyle22" htmlFor="message">
               Choose a category for this itinerary:
             </label>
             <div className="row">
@@ -934,10 +1001,10 @@ const CreateItinerary = (props: Props) => {
               {isErrored.category}
             </p>
           </div>
-        </div>
-        <div className="row ">
+        </div> */}
+        {/* <div className="row ">
           <h2 className="top-heading text-center">Please fill out the itinerary FORM below</h2>
-        </div>
+        </div> */}
 
         <ReactModal
           style={{
@@ -988,7 +1055,7 @@ const CreateItinerary = (props: Props) => {
           >
             <div className="col-md-12">
               <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
-                <button
+                {/* <button
                   type="button"
                   onClick={() => setDayForDelete(item.day)}
                   className="glyphicon glyphicon-trash"
@@ -1002,11 +1069,12 @@ const CreateItinerary = (props: Props) => {
                     color: "white",
                     marginBottom: "50px",
                   }}
-                ></button>
+                ></button> */}
               </div>
 
-              <h3 style={{ textAlign: "center" }} className="daytitle">
-                Day {idx + 1}
+              <h3 style={{ textAlign: "center", marginTop: "20px" }} className="daytitle">
+                {/* Day {idx + 1} */}
+                Activity
               </h3>
               <input
                 type="text"
@@ -1015,15 +1083,16 @@ const CreateItinerary = (props: Props) => {
                 className="form-control inputday"
                 id="dayTitle"
                 style={{ width: "50%", margin: "auto", marginBottom: "10px" }}
-                placeholder={`Enter ${
-                  idx + 1 === 1
-                    ? `${idx + 1}st`
-                    : idx + 1 === 2
-                    ? `${idx + 1}nd`
-                    : idx + 1 === 3
-                    ? `${idx + 1}rd`
-                    : `${idx + 1}th`
-                } day's Title`}
+                // placeholder={`Enter ${
+                //   idx + 1 === 1
+                //     ? `${idx + 1}st`
+                //     : idx + 1 === 2
+                //     ? `${idx + 1}nd`
+                //     : idx + 1 === 3
+                //     ? `${idx + 1}rd`
+                //     : `${idx + 1}th`
+                // } day's Title`}
+                placeholder="Enter Activity Title"
                 name="dayTitle"
               />
               <div className="tabbable-panel tabs-pgs">
@@ -1131,9 +1200,9 @@ const CreateItinerary = (props: Props) => {
                               />
                               <label
                                 htmlFor={`day${item.day}image`}
-                                style={{ textDecoration: "underline" }}
+                                style={{ textDecoration: "underline", textAlign: "center" }}
                               >
-                                Upload from your device
+                                Upload stay images from your device
                               </label>
                             </div>
                           </div>
@@ -1207,9 +1276,9 @@ const CreateItinerary = (props: Props) => {
                               />
                               <label
                                 htmlFor={`day${item.day}taste-image`}
-                                style={{ textDecoration: "underline" }}
+                                style={{ textDecoration: "underline", textAlign: "center" }}
                               >
-                                Upload from your device
+                                Upload taste images from your device
                               </label>
                             </div>
                           </div>
@@ -1280,9 +1349,9 @@ const CreateItinerary = (props: Props) => {
                               />
                               <label
                                 htmlFor={`day${item.day}-vibe-image`}
-                                style={{ textDecoration: "underline" }}
+                                style={{ textDecoration: "underline", textAlign: "center" }}
                               >
-                                Upload from your device
+                                Upload vibe images from your device
                               </label>
                             </div>
                           </div>
@@ -1357,9 +1426,9 @@ const CreateItinerary = (props: Props) => {
                               />
                               <label
                                 htmlFor={`day${item.day}-experience-image`}
-                                style={{ textDecoration: "underline" }}
+                                style={{ textDecoration: "underline", textAlign: "center" }}
                               >
-                                Upload from your device
+                                Upload experience images from your device
                               </label>
                             </div>
                           </div>

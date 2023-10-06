@@ -1042,7 +1042,7 @@ const EditProfile = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdateLoading(true);
-    let replaceText = values?.username?.trim().replace(/\s+/g, "_");
+    let replaceText = values?.username?.trim().replace(/\s+/g, "_").toLowerCase();
     const values1 = { ...values, username: replaceText };
     try {
       if (typeof values?.image === "string") {
@@ -1147,6 +1147,7 @@ const EditProfile = () => {
     try {
       await api.patch("/users", { userInfo: data });
       setIsLoading(false);
+      window.location.reload();
     } catch (error) {
       setIsLoading(false);
     }

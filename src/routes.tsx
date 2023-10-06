@@ -14,6 +14,7 @@ import Boarding from "./layouts/stripe/Boarding";
 import ForgotPassword from "./layouts/auth/ForgotPassword";
 import CreateItinerary from "./layouts/createItinerary/CreateItinerary";
 import SingleUserDetail from "./layouts/profile/SingleUserDetail";
+import Qrcode from "./layouts/qrCode";
 
 const Home = lazy(() => import("./layouts/home/Home"));
 const SetupProfile = lazy(() => import("./layouts/createItinerary/SetupProfile"));
@@ -46,8 +47,14 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/auth/sign-up",
-    element: <SignUp />,
+    path: "/qrcode",
+    element: (
+      <>
+        <Navbar />
+        <Qrcode />
+        <Footer />
+      </>
+    ),
   },
   {
     path: "/user/:id",

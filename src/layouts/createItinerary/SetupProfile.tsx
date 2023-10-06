@@ -10,6 +10,7 @@ let options = [
     label: "Afghanistan",
     value: "AF",
   },
+
   {
     label: "Armenia",
     value: "AM",
@@ -1008,6 +1009,7 @@ const SetupProfile = () => {
   const [voyageStyle, setVoyageStyle] = useState([""]);
   const [country, setCountry] = useState("");
   const [visitedCountries, setVisitedCountries] = useState([]);
+  const [errors, seterrors] = useState<any>({});
   const [visitedWonders, setVisitedWonders] = useState([]);
   const [bio, setBio] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -1029,6 +1031,24 @@ const SetupProfile = () => {
   // setting up profile
   const handleSetupProfile = async () => {
     setIsSetupLoading(true);
+    if (!name) {
+      seterrors({ name: "name is required" });
+      setIsSetupLoading(false);
+      return;
+    } else if (voyageStyle.length <= 1) {
+      seterrors({ style: "voyagestyle is required" });
+      setIsSetupLoading(false);
+      return;
+    } else if (!bio) {
+      seterrors({ bio: "bio is required" });
+      setIsSetupLoading(false);
+      return;
+    } else if (!country) {
+      seterrors({ country: "country is required" });
+      setIsSetupLoading(false);
+      return;
+    }
+
     const allVoyageStyles = voyageStyle.filter((item) => item !== "");
 
     const data = {
@@ -1042,9 +1062,10 @@ const SetupProfile = () => {
 
     try {
       await api.patch("/users", { userInfo: data });
-      getUserDetails();
-
       setIsSetupLoading(false);
+      return navigate("/itinerary/create");
+      // } else{
+      //   getUserDetails("");
     } catch (error) {
       setIsSetupLoading(false);
       console.log(error);
@@ -1056,13 +1077,14 @@ const SetupProfile = () => {
       {
         try {
           let user = await api("/users/get-profile");
+
           if (user?.data?.user?.userInfo) {
-            const { voyageStyle, country, visitedCountries, visitedWonders, bio, name } =
-              user?.data?.user?.userInfo;
+            const { voyageStyle, country, bio, name } = user?.data?.user?.userInfo;
             if (voyageStyle?.length === 0 || !bio || !country || !name) {
               setIsLoading(false);
             } else {
-              getUserDetails();
+              let role = user?.data?.user?.role;
+              getUserDetails(role);
             }
           } else {
             setIsLoading(false);
@@ -1074,15 +1096,19 @@ const SetupProfile = () => {
     })();
   }, []);
 
-  const getUserDetails = async () => {
+  const getUserDetails = async (role: any) => {
     try {
-      let data = await api("/billing/user-details");
-      if (!data?.data?.isCompleted) {
-        return navigate("/stripe/connect");
-      } else if (!data?.data?.stripeConnected) {
-        return navigate("/onboarding");
-      } else {
+      if (role === "influencer") {
         return navigate("/itinerary/create");
+      } else {
+        let data = await api("/billing/user-details");
+        if (!data?.data?.isCompleted) {
+          return navigate("/stripe/connect");
+        } else if (!data?.data?.stripeConnected) {
+          return navigate("/onboarding");
+        } else {
+          return navigate("/itinerary/create");
+        }
       }
     } catch (error) {
       console.log(error);
@@ -1108,6 +1134,7 @@ const SetupProfile = () => {
         <div className="profilesetup-form--name">
           <label htmlFor="">Full Name</label>
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <p style={{ color: "red" }}>{errors?.name}</p>
         </div>
 
         <div className="profilesetup-form--voyagestyle">
@@ -1120,6 +1147,7 @@ const SetupProfile = () => {
               </div>
             ))}
           </div>
+          <p style={{ color: "red" }}>{errors?.style}</p>
         </div>
 
         <div className="profilesetup-form--country">
@@ -1379,6 +1407,7 @@ const SetupProfile = () => {
             <option value="ZM">Zambia</option>
             <option value="ZW">Zimbabwe</option>
           </select>
+          <p style={{ color: "red" }}>{errors?.country}</p>
         </div>
 
         <div className="profilesetup-form--visited">
@@ -1411,6 +1440,7 @@ const SetupProfile = () => {
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
+          <p style={{ color: "red" }}>{errors?.bio}</p>
         </div>
 
         <div className="profilesetup-form--submit">

@@ -1,12 +1,34 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../utils/api";
 import img123 from "../home/img/img123.jpg";
 import { getUser } from "../../utils/utils";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 import Carousel from "react-multi-carousel";
 import { options } from "../profile/countriesNames";
+import dp from "../navbar/img/dp.png";
+import { ProcessRecords } from "../../utils/processReocrds";
+import { Switch } from "antd";
 
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 8000, min: 3000 },
+    items: 4,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 type Params = { itineraryId: string };
 
 type EachDetail = {
@@ -41,7 +63,10 @@ type Itinerary = Partial<{
 
 const SingleItinerary = (props: any) => {
   const { itineraryId } = useParams() as Params;
+  const [activitydata, setactivitydata] = useState([]);
+  const [checkeddata, setchecked] = useState<any>(false);
   const [data, setData] = useState<Itinerary>({});
+  const [selectedTab, setselectedTab] = useState("");
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [isMy, setIsMy] = useState(false);
   const [purchasedItineraries, setPurchasedItineraries] = useState<string[]>([]);
@@ -58,6 +83,8 @@ const SingleItinerary = (props: any) => {
       let getdata = (await api(`/itinerary/view/${itineraryId}`)) as {
         data: Itinerary;
       };
+      let activities = ProcessRecords([getdata.data]);
+      setactivitydata(activities);
       let countries = options.find((item, i) => {
         return item.value === getdata?.data?.userId.userInfo.country;
       });
@@ -138,26 +165,6 @@ const SingleItinerary = (props: any) => {
     }
   };
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 8000, min: 3000 },
-      items: 4,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-
   useEffect(() => {
     getProfile();
     getItinerary();
@@ -165,8 +172,6 @@ const SingleItinerary = (props: any) => {
     const status = urlParams.get("check");
     if (status) {
       if (status === "true" && localStorage.getItem("check")) {
-        console.log(status);
-        console.log(localStorage.getItem("check"));
         sendEmail();
         localStorage.removeItem("check");
       }
@@ -272,7 +277,7 @@ const SingleItinerary = (props: any) => {
                                 objectFit: "cover",
                                 objectPosition: "center",
                               }}
-                              src={data?.userId?.image}
+                              src={data?.userId?.image ? data?.userId?.image : dp}
                               alt=""
                             />
                             <div style={{ marginLeft: "10px", display: "none" }}>
@@ -285,12 +290,6 @@ const SingleItinerary = (props: any) => {
                             </div>
                           </div>
 
-                          {/* <div style={{ marginLeft: "10px" }}>
-                            <p>Boating, Hiking</p>
-                            <p>Portugal</p>
-                            <p>14 Reviews</p>
-                            <p>6 Visited Countries</p>
-                          </div> */}
                           <div style={{ marginLeft: "10px", color: "white" }}>
                             <div
                               style={{
@@ -431,117 +430,13 @@ const SingleItinerary = (props: any) => {
                       </div>
                       {/* <img className="" src={data.image} alt={data?.title} style={{width: "100%"}}/> */}
                     </div>
-                    {/* <div className="itemprofileinfo">
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <div className="itemprofileinfo-user">
-                          <img src={data?.userId?.image} alt="" />
-                          <div>
-                            <p className="itemprofileinfo-username">
-                              by <i>{data?.userId?.username}</i>
-                            </p>
-                            <p className="itemprofileinfo-country">
-                              {data?.userId?.country || "Country"}
-                            </p>
-                          </div>
-                        </div>
-                        <span
-                          style={{ marginLeft: "10px", cursor: "pointer" }}
-                          onClick={() => {
-                            setshowProfile(!showProfile);
-                          }}
-                        >
-                          {showProfile ? (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-chevron-down"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              fill="currentColor"
-                              className="bi bi-chevron-up"
-                              viewBox="0 0 16 16"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
-                              />
-                            </svg>
-                          )}
-                        </span>
-                      </div>
-
-                      {showProfile && (
-                        <>
-                          <p className="itemprofileinfo-bio">
-                            {data?.userId?.userInfo?.bio || "User description"}
-                          </p>
-
-                          <div className="itemprofileinfo-voyagestyles itemprofileinfo-meta">
-                            <p>Voyage style: </p>
-                            {data?.userId?.userInfo?.voyageStyle?.length > 0 ? (
-                              <ul>
-                                {data?.userId?.userInfo?.voyageStyle?.map(
-                                  (item: string, index: number) => (
-                                    <li key={index}>{item || "Label"}</li>
-                                  )
-                                )}
-                              </ul>
-                            ) : (
-                              <p className="none">No voyage</p>
-                            )}
-                          </div>
-
-                          <div className="itemprofileinfo-visitedcountries itemprofileinfo-meta">
-                            <p>Visited countries: </p>
-                            {data?.userId?.userInfo?.visitedCountries?.length > 0 ? (
-                              <ul>
-                                {data?.userId?.userInfo?.visitedCountries?.map(
-                                  (item: { label: string }, index: number) => (
-                                    <li key={index}>{item?.label || "Label"}</li>
-                                  )
-                                )}
-                              </ul>
-                            ) : (
-                              <p className="none">No visited countries</p>
-                            )}
-                          </div>
-
-                          <div className="itemprofileinfo-visitedwonders itemprofileinfo-meta">
-                            <p>Visited wonders: </p>
-                            {data?.userId?.userInfo?.visitedWonders?.length > 0 ? (
-                              <ul>
-                                {data?.userId?.userInfo?.visitedWonders?.map(
-                                  (item: { label: string }, index: number) => (
-                                    <li key={index}>{item?.label || "Label"}</li>
-                                  )
-                                )}
-                              </ul>
-                            ) : (
-                              <p className="none"> No visited wonders</p>
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </div> */}
 
                     <div className="single-itinery">
                       <div
                         style={{
                           display: "flex",
                           flexDirection: "column",
-                          paddingBottom: "20px",
+                          paddingBottom: "0px",
                         }}
                       >
                         <p style={{ margin: "0px", textAlign: "justify" }}>
@@ -566,97 +461,48 @@ const SingleItinerary = (props: any) => {
                           </p>
                         )}
                       </div>
-                      <ul className="ulstyle">
-                        {data.category?.map((item) => (
-                          <li>{item}</li>
-                        ))}
-                        {/* <li>Experience</li> */}
-                      </ul>
-                      <h1>{data.title}</h1>
-                      <p>{data.introduction}</p>
-                      {/*
-                      <div className="row">
+                      <div className="editstyle0">
+                        <h1 className="h1styletitle">{data.title}</h1>
                         {isMy ? (
-                          <div className="col-md-2 col-sm-2 col-xs-3">
-                            <button onClick={handleEdit} className="btn btn-orange navbar-btn">
+                          <div
+                            className="col-md-2 col-sm-12 col-xs-12"
+                            style={{ paddingLeft: "0px", marginTop: "11px" }}
+                          >
+                            <button
+                              onClick={handleEdit}
+                              className="btn btn-orange navbar-btn"
+                              style={{ padding: " 8px 15px" }}
+                            >
                               Edit
                             </button>
                           </div>
                         ) : (
                           ""
                         )}
-                        {profile.role === "seller" ? (
-                          ""
-                        ) : (
-                          <div className="col-md-3 col-sm-3 col-xs-4">
-                            {purchasedItineraries.includes(itineraryId) || isMy ? (
-                              <></>
-                            ) : (
-                              <>
-                                {" "}
-                                <button
-                                  onClick={handleCheckout}
-                                  className="btn btn-orange navbar-btn"
-                                >
-                                  Checkout
-                                </button>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  {" "}
-                                  <input
-                                    type="checkbox"
-                                    id="myCheckbox"
-                                    name="myCheckbox"
-                                    value="1"
-                                    checked={isChecked}
-                                    onChange={(e) => {
-                                      localStorage.setItem("check", `${e.target.checked}`);
+                      </div>
+                      {/* <ul className="ulstyle ulstyle9">
+                        {data.category?.map((item) => (
+                          <li>{item}</li>
+                        ))}
+                        {/* <li>Experience</li> 
+                      </ul> */}
 
-                                      setIsChecked(e.target.checked);
-                                    }}
-                                  />
-                                  <label htmlFor="myCheckbox" style={{ marginLeft: "10px" }}>
-                                    To have a My Voyages Travel Expert execute this itinerary and contact you. 
-                                  </label>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        )}
-                        <div className="col-md-4 col-sm-3 col-xs-4">
-                          <h3 className="price-sec text-left">
-                            Price: <span> ${data.price}</span>
-                          </h3>
-                        </div>
-                        */}
+                      {/* <p>{data.introduction}</p> */}
+
                       <div className="row">
-                        <div
+                        {/* <div
                           className="col-md-4 col-sm-12 col-xs-12"
                           // style={{ paddingLeft: "0px" }}
                         >
                           <h3 className="price-sec text-left">
                             Price: <span> ${data.price}</span>
                           </h3>
-                        </div>
+                        </div> */}
 
-                        {isMy ? (
-                          <div className="col-md-2 col-sm-12 col-xs-12">
-                            <button onClick={handleEdit} className="btn btn-orange navbar-btn">
-                              Edit
-                            </button>
-                          </div>
-                        ) : (
-                          ""
-                        )}
                         {/* {profile.role === "seller" ? (
                           ""
                         ) : ( */}
-                        <div className="col-md-12 col-sm-12 col-xs-12">
+                        {/* <div className="col-md-12 col-sm-12 col-xs-12">
                           {purchasedItineraries.includes(itineraryId) || isMy ? (
                             <></>
                           ) : (
@@ -713,7 +559,7 @@ const SingleItinerary = (props: any) => {
                               </button>
                             </div>
                           )}
-                        </div>
+                        </div> */}
                         {/* )} */}
                         <div className="col-md-4 col-sm-12 col-xs-12"></div>
                       </div>
@@ -727,7 +573,205 @@ const SingleItinerary = (props: any) => {
             </div>
           </section>
 
-          {purchasedItineraries.includes(itineraryId) || isMy ? (
+          <section className="listing">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="left-first">
+                    <ul className="nav nav-tabs text-center singlenavstyle">
+                      <li className={`${selectedTab === "" ? "active" : ""}`}>
+                        <a
+                          href="#tab_default_1"
+                          onClick={() => setselectedTab("")}
+                          data-toggle="tab"
+                        >
+                          All Activities
+                        </a>
+                      </li>
+                      <li className={`${selectedTab === "stay" ? "active" : ""}`}>
+                        <a
+                          href="#tab_default_2"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("stay")}
+                        >
+                          Stay
+                        </a>
+                      </li>
+                      <li className={`${selectedTab === "taste" ? "active" : ""}`}>
+                        <a
+                          href="#tab_default_3"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("taste")}
+                        >
+                          Taste
+                        </a>
+                      </li>
+                      <li className={`${selectedTab === "vibe" ? "active" : ""}`}>
+                        <a
+                          href="#tab_default_4"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("vibe")}
+                        >
+                          Vibe
+                        </a>
+                      </li>
+                      <li className={`${selectedTab === "experience" ? "active" : ""}`}>
+                        <a
+                          href="#tab_default_5"
+                          data-toggle="tab"
+                          onClick={() => setselectedTab("experience")}
+                        >
+                          {" "}
+                          Experience
+                        </a>
+                      </li>
+                    </ul>
+                    {/* <h1 className="top-heading">
+                      <span className="first-textbg">Activities Listing</span>
+                    </h1> */}
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  marginBottom: "13px",
+
+                  flexDirection: "row",
+                  gap: "13px",
+                }}
+              >
+                <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>H</p>
+                <Switch
+                  checked={checkeddata}
+                  onChange={(e) => {
+                    setchecked(!checkeddata);
+                  }}
+                />
+                <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>V</p>
+              </div>
+              {activitydata.length > 0 ? (
+                checkeddata ? (
+                  <div className="row">
+                    <div
+                      className="card-grid"
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        padding: "10px 0px",
+                      }}
+                    >
+                      {activitydata
+                        .filter(
+                          (each: any) => (selectedTab ? each?.type === selectedTab : true)
+                          // selectedTab ? each?.category.includes(selectedTab) : true
+                        )
+                        .map((each: any, i: any) => (
+                          <div
+                            key={i}
+                            className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                            style={{ marginBottom: "12px" }}
+                          >
+                            <div
+                              style={{
+                                textDecoration: "none",
+                                cursor: "default",
+                                marginBottom: "6px",
+                              }}
+                              // to={`/itinerary/view/${each?._id}`}
+                              // to={`/user/${each.username}`}
+                              className="card"
+                            >
+                              <img
+                                className="card-img-top imgStyle"
+                                src={each.image}
+                                alt="Cardimage"
+                                style={{
+                                  width: "100%",
+                                  height: "218px",
+                                  objectFit: "cover",
+                                  objectPosition: "center",
+                                  borderRadius: "7px",
+                                }}
+                              />
+                              <div className="badge">{<p>{each.type}</p>}</div>
+                              {/* <div className="" style={{ padding: "8px" }}>
+                              <p
+                                className=""
+                                style={{
+                                  fontFamily: "Work Sans",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  fontSize: "16px",
+                                  lineHeight: "19px",
+                                  letterSpacing: "-0.04em",
+                                  color: "#5e6282",
+                                  textAlign: "justify",
+                                }}
+                              >
+                                {each.description
+                                  ? each.description.length > 20
+                                    ? `${each.description.slice(0, 20)}...`
+                                    : each.description
+                                  : "No Description"}
+                              </p>
+                            </div> */}
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="row">
+                    <div id="carousel-reviews" className="carousel slide" data-ride="carousel">
+                      <div className="carousel-inner" style={{ padding: "10px 0px" }}>
+                        <div className="item active">
+                          <Carousel itemClass="w-full" responsive={responsive}>
+                            {activitydata
+                              .filter((each: any) =>
+                                selectedTab ? each?.type === selectedTab : true
+                              )
+                              .map((each: any, i: any) => (
+                                <div key={i} style={{ marginBottom: "12px" }}>
+                                  <div
+                                    style={{ textDecoration: "none", cursor: "default" }}
+                                    className="card"
+                                  >
+                                    <img
+                                      className="card-img-top imgStyle"
+                                      src={each.image}
+                                      alt="Cardimage"
+                                      style={{
+                                        width: "93%",
+                                        margin: "0px 12px",
+                                        height: "218px",
+                                        objectFit: "cover",
+                                        objectPosition: "center",
+                                        borderRadius: "7px",
+                                      }}
+                                    />
+                                    <div className="badge">{<p>{each.type}</p>}</div>
+                                  </div>
+                                </div>
+                              ))}
+                          </Carousel>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <div>
+                  <h3 style={{ textAlign: "center" }}>No Itineraries found</h3>
+                </div>
+              )}
+              {/* </Carousel> */}
+            </div>
+          </section>
+
+          {/* {purchasedItineraries.includes(itineraryId) || isMy ? (
             data.eachDetail?.map((each) => (
               <section className="dt-deatils">
                 <div className="container">
@@ -830,26 +874,7 @@ const SingleItinerary = (props: any) => {
                                                 </div>
                                               </div>
                                             </div>
-                                            {/* <a
-                                            className="left carousel-control"
-                                            href="#carousel-reviews"
-                                            role="button"
-                                            data-slide="prev"
-                                          >
-                                            <i id="right" className="fa fa-angle-left">
-                                              {" "}
-                                            </i>
-                                          </a>
-                                          <a
-                                            className="right carousel-control"
-                                            href="#carousel-reviews"
-                                            role="button"
-                                            data-slide="next"
-                                          >
-                                            <i id="right" className="fa fa-angle-right">
-                                              {" "}
-                                            </i>
-                                          </a> */}
+                                    
                                           </div>
                                         </div>
                                       </div>
@@ -1096,11 +1121,11 @@ const SingleItinerary = (props: any) => {
                                     <h4>Services</h4>
                                     <div className="service-options">
                                       <ul className="service-options-ul">
-                                        {/* {each.services.map((item) => ( */}
+                                       
                                         <li>
                                           <span>-</span> Wifi
                                         </li>
-                                        {/* ))} */}
+                                      
                                       </ul>
                                     </div>
                                   </div>
@@ -1155,26 +1180,7 @@ const SingleItinerary = (props: any) => {
                                                 </div>
                                               </div>
                                             </div>
-                                            {/* <a
-                                        className="left carousel-control"
-                                        href="#carousel-reviews"
-                                        role="button"
-                                        data-slide="prev"
-                                      >
-                                        <i id="right" className="fa fa-angle-left">
-                                          {" "}
-                                        </i>
-                                      </a>
-                                      <a
-                                        className="right carousel-control"
-                                        href="#carousel-reviews"
-                                        role="button"
-                                        data-slide="next"
-                                      >
-                                        <i id="right" className="fa fa-angle-right">
-                                          {" "}
-                                        </i>
-                                      </a> */}
+                                     
                                           </div>
                                         </div>
                                       </div>
@@ -1191,7 +1197,7 @@ const SingleItinerary = (props: any) => {
                 </div>
               </section>
             </div>
-          )}
+          )} */}
         </div>
       )}
     </>
