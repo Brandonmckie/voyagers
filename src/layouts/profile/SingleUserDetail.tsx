@@ -229,7 +229,9 @@ const SingleUserDetail = (props: Props) => {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "90%" }}>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}
+                  >
                     {" "}
                     <div style={{ width: "135px" }}>
                       <img
