@@ -6,8 +6,16 @@
 .card-body {
   padding: 20px;
 }
+.multih3 {
+  margin-bottom: 0px;
+  margin-top: 30px;
+  margin-left: 0px;
+  font-size: 18px;
+  color: #212832;
+  font-weight: 600;
+}
 .multivoyagers {
-  margin-top: 26px;
+  margin-top: 10px;
   width: 100%;
 }
 .imgStyle {
@@ -209,7 +217,7 @@ textarea.text-details {
   }
   .subtitle {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
   span.b {
     padding-top: 5px;
@@ -237,6 +245,11 @@ textarea.text-details {
   .multivoyagers {
     width: 94%;
     margin-left: 7px;
+  }
+  .multih3 {
+    text-align: center;
+    margin-left: 8px;
+    font-size: 17px;
   }
 }
 

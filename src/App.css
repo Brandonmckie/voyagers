@@ -4,7 +4,9 @@ body {
 h1 {
   font-family: "Bebas Neue";
 }
-
+.switchstyle00 {
+  margin-top: 24px;
+}
 .qrcodeh1 {
   margin: 40px;
   font: normal normal bold 31px/57px Montserrat;
@@ -1266,7 +1268,7 @@ h3.price-sec span {
 
   .navbar-nav {
     float: none;
-    margin: 21px 0 0px 24%;
+    margin: 21px 0 0px 29%;
     display: flex !important;
     table-layout: fixed;
   }
@@ -1314,6 +1316,9 @@ h3.price-sec span {
   }
   .qrcode {
     max-width: 212px !important;
+  }
+  .switchstyle00 {
+    margin-top: 2px;
   }
   .d-itineraries {
     padding: 0px 0 !important;

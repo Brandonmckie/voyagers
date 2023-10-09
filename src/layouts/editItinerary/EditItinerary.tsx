@@ -733,7 +733,10 @@ const EditItinerary = (props: Props) => {
                     style={{ display: "none" }}
                     onChange={handleFileChange}
                   />
-                  <label htmlFor="thumbnail" style={{ textDecoration: "underline" }}>
+                  <label
+                    htmlFor="thumbnail"
+                    style={{ textDecoration: "underline", textAlign: "center" }}
+                  >
                     Upload from your device
                   </label>
                 </div>
@@ -1165,9 +1168,9 @@ const EditItinerary = (props: Props) => {
                                 />
                                 <label
                                   htmlFor={`day${item.day}image`}
-                                  style={{ textDecoration: "underline" }}
+                                  style={{ textDecoration: "underline", textAlign: "center" }}
                                 >
-                                  Upload from your device
+                                  Upload stay images from your device
                                 </label>
                               </div>
                             </div>
@@ -1255,9 +1258,9 @@ const EditItinerary = (props: Props) => {
                                 />
                                 <label
                                   htmlFor={`day${item.day}taste-image`}
-                                  style={{ textDecoration: "underline" }}
+                                  style={{ textDecoration: "underline", textAlign: "center" }}
                                 >
-                                  Upload from your device
+                                  Upload taste images from your device
                                 </label>
                               </div>
                             </div>
@@ -1342,9 +1345,9 @@ const EditItinerary = (props: Props) => {
                                 />
                                 <label
                                   htmlFor={`day${item.day}-vibe-image`}
-                                  style={{ textDecoration: "underline" }}
+                                  style={{ textDecoration: "underline", textAlign: "center" }}
                                 >
-                                  Upload from your device
+                                  Upload vibe images from your device
                                 </label>
                               </div>
                             </div>
@@ -1435,9 +1438,9 @@ const EditItinerary = (props: Props) => {
                                 />
                                 <label
                                   htmlFor={`day${item.day}-experience-image`}
-                                  style={{ textDecoration: "underline" }}
+                                  style={{ textDecoration: "underline", textAlign: "center" }}
                                 >
-                                  Upload from your device
+                                  Upload experience images from your device
                                 </label>
                               </div>
                             </div>

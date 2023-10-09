@@ -939,6 +939,10 @@ const voyageStyles = [
     value: "Van Life",
   },
   {
+    label: "Yacht Life",
+    value: "Yacht Life",
+  },
+  {
     label: "Overlanding",
     value: "Overlanding",
   },
@@ -1023,7 +1027,8 @@ const EditProfile = () => {
   const [isMainLoading, setIsMainLoading] = useState(false);
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [tabOption, setTabOption] = useState("profile");
-
+  const [showprofile, setshowprofile] = useState(true);
+  const [showuserinfo, setshowuserinfo] = useState(false);
   const [name, setName] = useState("");
   const [voyageStyle, setVoyageStyle] = useState([""]);
   const [country, setCountry] = useState("");
@@ -1156,7 +1161,54 @@ const EditProfile = () => {
   return (
     <>
       <div className="profiletab">
-        <button
+        <div className="container">
+          <div className="row">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "62px",
+                cursor: "pointer",
+                justifyContent: "center",
+                margin: "40px",
+              }}
+              className="tabsStyle"
+            >
+              <h4
+                className="heading-style0"
+                style={{
+                  color: showprofile ? "#f1a501" : "black",
+                  borderBottom: showprofile ? "2px solid #f1a501" : "none",
+                }}
+                onClick={() => {
+                  setshowprofile(true);
+                  setshowuserinfo(false);
+                  setTabOption("profile");
+                }}
+              >
+                Profile
+              </h4>
+              <div style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}></div>
+
+              <h4
+                className="heading-style0"
+                style={{
+                  color: showuserinfo ? "#f1a501" : "black",
+                  borderBottom: showuserinfo ? "2px solid #f1a501" : "none",
+                }}
+                onClick={() => {
+                  setshowprofile(false);
+                  setshowuserinfo(true);
+                  setTabOption("userInfo");
+                }}
+              >
+                User Info
+              </h4>
+            </div>
+          </div>
+        </div>
+        {/* <button
           onClick={() => setTabOption("profile")}
           className={`${tabOption === "profile" ? "profiletab-active" : null}`}
           style={tabOption === "profile" ? { color: "white" } : { color: "black" }}
@@ -1169,7 +1221,7 @@ const EditProfile = () => {
           style={tabOption === "userInfo" ? { color: "white" } : { color: "black" }}
         >
           User Info
-        </button>
+        </button> */}
       </div>
       {tabOption === "profile" ? (
         <div className="main-profile">

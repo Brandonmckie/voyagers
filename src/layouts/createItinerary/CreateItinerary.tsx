@@ -220,6 +220,7 @@ const CreateItinerary = (props: Props) => {
 
       // Make the POST request using Axios
       const response = await api.post("/itinerary", formData);
+      // console.log(response);
       navigate("/itinerary/me");
 
       // Reset the form or perform any other necessary actions
@@ -363,15 +364,15 @@ const CreateItinerary = (props: Props) => {
   const getUserDetails = async () => {
     try {
       let user = await api("/users/get-profile");
-      if (user?.data?.user?.role === "influencer") {
+      if (user?.data?.user?.role === "influencer" || user?.data?.user?.role === "seller") {
         return;
       } else {
-        let data = await api("/billing/user-details");
-        if (!data?.data?.isCompleted) {
-          return navigate("/stripe/connect");
-        } else if (!data?.data?.stripeConnected) {
-          return navigate("/onboarding");
-        }
+        // let data = await api("/billing/user-details");
+        // if (!data?.data?.isCompleted) {
+        //   return navigate("/stripe/connect");
+        // } else if (!data?.data?.stripeConnected) {
+        //   return navigate("/onboarding");
+        // }
       }
     } catch (error) {
       console.log(error);

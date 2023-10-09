@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "../../utils/api";
 import "./style.css";
 import "./slider.css";
@@ -87,6 +87,10 @@ const voyageStyles = [
     value: "Van Life",
   },
   {
+    label: "Yacht Life",
+    value: "Yacht Life",
+  },
+  {
     label: "Overlanding",
     value: "Overlanding",
   },
@@ -153,6 +157,7 @@ const voyageStyles = [
 ];
 
 const Itineraries = (props: Props) => {
+  const multiSelectRef = useRef(null);
   const [data, setData] = useState<Itinerary[]>([]);
   const [searchdata, setsearchdata] = useState<any>([]);
   const [voyageStyle, setVoyageStyle] = useState([]);
@@ -170,10 +175,12 @@ const Itineraries = (props: Props) => {
       if (searchParams.get("name")) {
         let id = searchParams.get("name");
         let region = searchParams.get("region");
-        let getdata = (await api(`/itinerary/userItinerary?username=${id}`)) as {
+        let getdata = (await api(`/itinerary/userItinerary?username=${id?.toLowerCase()}`)) as {
           data: Itinerary[];
         };
+
         let filteredData = getdata.data.filter((item) => item.country === region);
+        // console.log(filteredData);
         setData(filteredData);
         setsearchdata(filteredData);
       } else {
@@ -220,12 +227,14 @@ const Itineraries = (props: Props) => {
 
   useEffect(() => {
     setselectedTab("");
+    // console.log(voyageStyle);
     let filteredData = searchdata.filter((item: any) => {
-      let available = true;
-      voyageStyle.map((style: any) => {
-        if (item.userId.userInfo.voyageStyle.includes(style?.value)) {
+      let available = false;
+      voyageStyle?.map((style: any) => {
+        if (item?.userId?.userInfo?.voyageStyle?.includes(style?.value)) {
+          available = true;
         } else {
-          available = false;
+          // available = false;
         }
       });
       if (available) {
@@ -236,8 +245,11 @@ const Itineraries = (props: Props) => {
       //   return item.userId.userInfo.voyageStyle.includes(style);
       // });
     });
-
-    setData(filteredData);
+    if (voyageStyle.length === 0) {
+      setData(searchdata);
+    } else {
+      setData(filteredData);
+    }
   }, [voyageStyle]);
 
   return (
@@ -320,13 +332,16 @@ const Itineraries = (props: Props) => {
                         </a>
                       </li>
                     </ul>
-                    <div className="multivoyagers">
-                      <MultiSelect
-                        options={voyageStyles}
-                        value={voyageStyle}
-                        onChange={setVoyageStyle}
-                        labelledBy="Select"
-                      />
+                    <div>
+                      <h3 className="multih3">Filter by Voyage Style</h3>
+                      <div className="multivoyagers">
+                        <MultiSelect
+                          options={voyageStyles}
+                          value={voyageStyle}
+                          onChange={setVoyageStyle}
+                          labelledBy="Select Voyage Style"
+                        />
+                      </div>
                     </div>
 
                     <div className="tab-content listingtabs">
@@ -455,6 +470,10 @@ const Itineraries = (props: Props) => {
                                             if (User) {
                                               navigate(`/itinerary/view/${each?._id}`);
                                             } else {
+                                              localStorage.setItem(
+                                                "loginvalue",
+                                                `/itinerary/view/${each?._id}`
+                                              );
                                               navigate("/auth/login");
                                             }
                                           }}
@@ -471,77 +490,106 @@ const Itineraries = (props: Props) => {
                                           <div className="badge">
                                             {<p>{selectedTab ? selectedTab : each.category[0]}</p>}
                                           </div>
-                                          <div className="card-body">
-                                            <h4 className="card-title">{each.title}</h4>
-                                            <div className="subtitle">
-                                              <span className="a">Created by:</span>
-                                              <span className="b">{each?.userId?.username}</span>
+                                          <div
+                                            className="card-body"
+                                            style={{
+                                              width: "100%",
+                                              display: "flex",
+                                              flexDirection: "row",
+                                              alignItems: "center",
+                                              justifyContent: "space-between",
+                                              padding: "10px",
+                                              paddingBottom: "0px",
+                                            }}
+                                          >
+                                            <h4
+                                              className="card-title"
+                                              style={{
+                                                margin: "0px",
+
+                                                paddingRight: "10px",
+                                                color: "#000000d9",
+                                              }}
+                                            >
+                                              {each.title.length >= 37
+                                                ? `${each.title.slice(0, 37)}...`
+                                                : each.title}
+                                            </h4>
+                                            {/* <div
+                                  className="subtitle"
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                  }}
+                                > */}
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                alignItems: "center",
+                                              }}
+                                            >
+                                              <img
+                                                style={{
+                                                  width: "40px",
+                                                  height: "40px",
+                                                  objectFit: "cover",
+                                                  objectPosition: "center",
+                                                  borderRadius: "360px",
+                                                }}
+                                                src={each?.userId?.image}
+                                                alt=""
+                                              />
+                                              {/* <span className="b">{each.userId.username}</span> */}
                                             </div>
+
+                                            {/* </div> */}
+
+                                            {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
                                           </div>
+                                          <div>
+                                            <span style={{ marginLeft: "9px" }} className="b">
+                                              {each?.createdAt?.slice(0, 10)}
+                                            </span>
+                                          </div>
+                                          {/* <div className="card-body">
+                                            <h4 className="card-title" style={{ margin: "0px" }}>
+                                              {each.title}
+                                            </h4>
+                                            <div
+                                              className="subtitle"
+                                              style={{ alignItems: "center" }}
+                                            >
+                                              <span className="a">Created by:</span>
+                                              <img
+                                                src={each?.userId?.image}
+                                                alt=""
+                                                style={{
+                                                  width: "40px",
+                                                  height: "40px",
+                                                  objectFit: "cover",
+                                                  objectPosition: "center",
+                                                  borderRadius: "360px",
+                                                }}
+                                              />
+                                              {/* <span className="b">{each?.userId?.username}</span> 
+                                            </div>
+                                            <div
+                                              className="subtitle"
+                                              style={{ alignItems: "center", marginTop: "6px" }}
+                                            >
+                                              <span className="a">Created At:</span>
+
+                                              <span className="b">
+                                                {each?.createdAt?.slice(0, 10)}
+                                              </span>
+                                            </div>
+                                          </div> */}
                                         </div>
                                       </div>
                                     ))}
-                                  {/* <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div className="card">
-                                  <img
-                                    className="card-img-top"
-                                    src="img/Rect2.png"
-                                    alt="Card image"
-                                    style={{ width: "100%" }}
-                                  />
-                                  <div className="badge">
-                                    <p>Stay</p>
-                                  </div>
-                                  <div className="card-body">
-                                    <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                    <div className="subtitle">
-                                      <span className="a">Created by:</span>
-                                      <span className="b">Tichelle Richards</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div className="card">
-                                  <img
-                                    className="card-img-top"
-                                    src="img/Rect2.png"
-                                    alt="Card image"
-                                    style={{ width: "100%" }}
-                                  />
-                                  <div className="badge">
-                                    <p>Stay</p>
-                                  </div>
-                                  <div className="card-body">
-                                    <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                    <div className="subtitle">
-                                      <span className="a">Created by:</span>
-                                      <span className="b">Tichelle Richards</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                <div className="card">
-                                  <img
-                                    className="card-img-top"
-                                    src="img/Rect2.png"
-                                    alt="Card image"
-                                    style={{ width: "100%" }}
-                                  />
-                                  <div className="badge">
-                                    <p>Stay</p>
-                                  </div>
-                                  <div className="card-body">
-                                    <h4 className="card-title">A Delicious Vacation in Tulum, Mexico</h4>
-                                    <div className="subtitle">
-                                      <span className="a">Created by:</span>
-                                      <span className="b">Tichelle Richards</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div> */}
                                 </div>
                               </div>
                             ) : (

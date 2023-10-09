@@ -66,10 +66,12 @@ type Itinerary = {
   salesPitch: string;
   services: string[];
   title: string;
+  createdAt: string;
   userId: {
     username: string;
     _id: string;
     userInfo: any;
+    image: string;
   };
   __v: number;
   _id: string;
@@ -381,7 +383,12 @@ const Home = () => {
                                   navigate("/auth/login");
                                 }
                               }}
-                              style={{ textDecoration: "none", cursor: "pointer" }}
+                              style={{
+                                textDecoration: "none",
+                                cursor: "pointer",
+                                borderBottomLeftRadius: "16px",
+                                borderBottomRightRadius: "16px",
+                              }}
                               className="card"
                             >
                               <img
@@ -399,12 +406,69 @@ const Home = () => {
                               <div className="badge">
                                 <p>{each?.category[0]}</p>
                               </div>
-                              <div className="card-body">
-                                <h4 className="card-title">{each.title}</h4>
-                                <div className="subtitle">
-                                  <span className="a">Created by:</span>
-                                  <span className="b">{each?.userId?.userInfo?.name}</span>
+                              <div
+                                className="card-body"
+                                style={{
+                                  width: "100%",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  justifyContent: "space-between",
+                                  padding: "10px",
+                                  paddingBottom: "0px",
+                                }}
+                              >
+                                <h4
+                                  className="card-title"
+                                  style={{
+                                    margin: "0px",
+
+                                    paddingRight: "10px",
+                                    color: "#000000d9",
+                                  }}
+                                >
+                                  {each.title.length >= 37
+                                    ? `${each.title.slice(0, 37)}...`
+                                    : each.title}
+                                </h4>
+                                {/* <div
+                                  className="subtitle"
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                  }}
+                                > */}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <img
+                                    style={{
+                                      width: "40px",
+                                      height: "40px",
+                                      objectFit: "cover",
+                                      objectPosition: "center",
+                                      borderRadius: "360px",
+                                    }}
+                                    src={each?.userId?.image}
+                                    alt=""
+                                  />
+                                  {/* <span className="b">{each.userId.username}</span> */}
                                 </div>
+
+                                {/* </div> */}
+
+                                {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
+                              </div>
+                              <div>
+                                <span style={{ marginLeft: "9px" }} className="b">
+                                  {each?.createdAt?.slice(0, 10)}
+                                </span>
                               </div>
                             </div>
                           </div>

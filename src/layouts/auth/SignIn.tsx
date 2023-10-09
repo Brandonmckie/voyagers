@@ -30,7 +30,13 @@ const SignIn = () => {
 
         if (token) {
           localStorage.setItem("jwt", token);
-          navigate("/");
+          let loginval = localStorage.getItem("loginvalue");
+          if (loginval) {
+            localStorage.removeItem("loginvalue");
+            navigate(loginval);
+          } else {
+            navigate("/");
+          }
         }
       } catch (error: any) {
         setErrors(error?.response?.data);

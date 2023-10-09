@@ -49,11 +49,13 @@ const Navbar = (props: Props) => {
     _id: string;
     username: string;
     image: string;
+    userInfo: any;
     stripeConnected: boolean | null;
   }>({
     role: "",
     _id: "",
     username: "",
+    userInfo: {},
     stripeConnected: null,
     image: "",
   });
@@ -102,6 +104,7 @@ const Navbar = (props: Props) => {
   const getUser = async () => {
     try {
       const user = await api("/users/get-profile");
+      // console.log(user);
       setUser(user.data.user);
     } catch (err) {
       console.log(err);
@@ -207,6 +210,22 @@ const Navbar = (props: Props) => {
                           <li>
                             <Link to="/qrcode">My Qrcode</Link>
                           </li>
+                          {user?.userInfo?.name && (
+                            <li>
+                              <a
+                                onClick={() => {
+                                  if (user?.userInfo?.name) {
+                                    navigate(`/user/${user.username}`);
+                                  } else {
+                                    navigate(`/itinerary/setupProfile`);
+                                  }
+                                }}
+                              >
+                                My Profile
+                              </a>
+                            </li>
+                          )}
+
                           <li>
                             <Link to="/itinerary/me">My Itinerary</Link>
                           </li>
@@ -251,7 +270,7 @@ const Navbar = (props: Props) => {
                           marginLeft: "13%",
                         }
                       : {
-                          marginLeft: "22%",
+                          marginLeft: "",
                         }
                   }
                 >
@@ -269,13 +288,13 @@ const Navbar = (props: Props) => {
                     <Link to="/about-us">About us</Link>
                   </li>
 
-                  {!isLoggedIn && (
+                  {/* {!isLoggedIn && (
                     <li>
                       <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
                         Itinerary Request
                       </Link>
                     </li>
-                  )}
+                  )} */}
 
                   {user.role === "seller" || user.role === "influencer" ? (
                     <li>
@@ -356,9 +375,26 @@ const Navbar = (props: Props) => {
                         <li>
                           <Link to="/qrcode">My Qrcode</Link>
                         </li>
+                        {user?.userInfo?.name && (
+                          <li>
+                            <a
+                              onClick={() => {
+                                if (user?.userInfo?.name) {
+                                  navigate(`/user/${user.username}`);
+                                } else {
+                                  navigate(`/itinerary/setupProfile`);
+                                }
+                              }}
+                            >
+                              My Profile
+                            </a>
+                          </li>
+                        )}
+
                         <li>
                           <Link to="/itinerary/me">My Itinerary</Link>
                         </li>
+
                         <li>
                           <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
                             Itinerary Request
@@ -426,7 +462,7 @@ const Navbar = (props: Props) => {
                   About us
                 </Link>
               </li>
-              {!isLoggedIn && (
+              {/* {!isLoggedIn && (
                 <li>
                   <Link
                     to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC"
@@ -438,7 +474,7 @@ const Navbar = (props: Props) => {
                     Itinerary Request
                   </Link>
                 </li>
-              )}
+              )} */}
 
               {!isLoggedIn && (
                 <>

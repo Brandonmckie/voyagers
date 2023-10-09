@@ -939,6 +939,10 @@ const voyageStyles = [
     value: "Van Life",
   },
   {
+    label: "Yacht Life",
+    value: "Yacht Life",
+  },
+  {
     label: "Overlanding",
     value: "Overlanding",
   },
@@ -1098,7 +1102,7 @@ const SetupProfile = () => {
 
   const getUserDetails = async (role: any) => {
     try {
-      if (role === "influencer") {
+      if (role === "influencer" || role === "seller") {
         return navigate("/itinerary/create");
       } else {
         let data = await api("/billing/user-details");

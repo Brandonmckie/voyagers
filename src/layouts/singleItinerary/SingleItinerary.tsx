@@ -633,23 +633,24 @@ const SingleItinerary = (props: any) => {
                 </div>
               </div>
               <div
+                className="switchstyle00"
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end",
+                  justifyContent: "center",
                   marginBottom: "13px",
-
                   flexDirection: "row",
                   gap: "13px",
                 }}
               >
-                <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>H</p>
+                <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>Horizontal</p>
                 <Switch
+                  style={{ position: "relative", top: "3px" }}
                   checked={checkeddata}
                   onChange={(e) => {
                     setchecked(!checkeddata);
                   }}
                 />
-                <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>V</p>
+                <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>Vertical</p>
               </div>
               {activitydata.length > 0 ? (
                 checkeddata ? (
@@ -736,7 +737,13 @@ const SingleItinerary = (props: any) => {
                               .map((each: any, i: any) => (
                                 <div key={i} style={{ marginBottom: "12px" }}>
                                   <div
-                                    style={{ textDecoration: "none", cursor: "default" }}
+                                    style={{
+                                      textDecoration: "none",
+                                      cursor: "default",
+                                      background: "none",
+                                      borderRadius: " 0px",
+                                      boxShadow: "none",
+                                    }}
                                     className="card"
                                   >
                                     <img

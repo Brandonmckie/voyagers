@@ -201,7 +201,7 @@ textarea.text-details {
   }
   .subtitle {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
   span.b {
     padding-top: 5px;

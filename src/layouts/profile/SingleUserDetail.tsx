@@ -81,7 +81,9 @@ const SingleUserDetail = (props: Props) => {
     setIsLoading(true);
 
     try {
-      let getdata = (await api(`/itinerary/userItinerary?username=${id}`)) as { data: Itinerary[] };
+      let getdata = (await api(`/itinerary/userItinerary?username=${id?.toLowerCase()}`)) as {
+        data: Itinerary[];
+      };
 
       let countries0 = getdata.data.map((item: any) => item.country);
       let uniqueCountryCodes = new Set<string>();
@@ -112,18 +114,16 @@ const SingleUserDetail = (props: Props) => {
 
   useEffect(() => {
     // const userRole = getUserRole(); // Replace this with your logic to get the user's role
-
     // if (userRole !== "seller") {
     //   navigate("/itinerary/list");
     // }
-
     // getUserDetails();
     getItineraries();
   }, []);
 
   const getProfile = async () => {
     try {
-      let user = await api(`/users/get-userprofile?name=${id}`);
+      let user = await api(`/users/get-userprofile?name=${id?.toLowerCase()}`);
 
       let countries = options.find((item, i) => {
         return item.value === user.data.user.userInfo.country;
@@ -314,7 +314,22 @@ const SingleUserDetail = (props: Props) => {
                         }}
                       >
                         <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Countries: </h5>
-                        {navInfo?.visitedCountries?.map((item: any, i: any) => (
+                        {navInfo?.visitedCountries?.length > 0 ? (
+                          navInfo?.visitedCountries?.map((item: any, i: any) => (
+                            <p
+                              style={{
+                                margin: "0px",
+                                marginLeft: "10px",
+                                background: " white",
+                                color: "black",
+                                padding: "4px",
+                                borderRadius: "10px",
+                              }}
+                            >
+                              {item.label}
+                            </p>
+                          ))
+                        ) : (
                           <p
                             style={{
                               margin: "0px",
@@ -325,9 +340,9 @@ const SingleUserDetail = (props: Props) => {
                               borderRadius: "10px",
                             }}
                           >
-                            {item.label}
+                            No Visited Countries
                           </p>
-                        ))}
+                        )}
                       </div>
 
                       <div
@@ -340,7 +355,23 @@ const SingleUserDetail = (props: Props) => {
                         }}
                       >
                         <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Wonders: </h5>
-                        {navInfo?.visitedWonders?.map((item: any, i: any) => (
+                        {navInfo?.visitedWonders?.length > 0 ? (
+                          navInfo?.visitedWonders?.map((item: any, i: any) => (
+                            <p
+                              style={{
+                                margin: "0px",
+                                marginLeft: "10px",
+                                background: " white",
+                                color: "black",
+                                padding: "4px",
+                                borderRadius: "10px",
+                                width: item.label.trim() === "Roman Colosseum, Italy" ? "21%" : "",
+                              }}
+                            >
+                              {item.label}
+                            </p>
+                          ))
+                        ) : (
                           <p
                             style={{
                               margin: "0px",
@@ -349,12 +380,11 @@ const SingleUserDetail = (props: Props) => {
                               color: "black",
                               padding: "4px",
                               borderRadius: "10px",
-                              width: item.label.trim() === "Roman Colosseum, Italy" ? "21%" : "",
                             }}
                           >
-                            {item.label}
+                            No Visited Wonders
                           </p>
-                        ))}
+                        )}
                       </div>
 
                       <div
@@ -846,7 +876,7 @@ const SingleUserDetail = (props: Props) => {
                         return (
                           <Link
                             to={``}
-                            style={{ marginBottom: "20px" }}
+                            style={{ marginBottom: "20px", cursor: "default" }}
                             key={each._id}
                             // onMouseEnter={() => setBadgeHover(each._id)}
                             // onMouseLeave={() => setBadgeHover(null)}
@@ -974,7 +1004,13 @@ const SingleUserDetail = (props: Props) => {
                             <h4 className="card-title">{each.title}</h4>
                             <div className="subtitle">
                               <span className="a">Created by:</span>
-                              <span className="b">{each.userId.username}</span>
+                              <img src={each.image} alt="" />
+                              {/* <span className="b">{each.userId.username}</span> */}
+                            </div>
+                            <div className="subtitle">
+                              <span className="a">Created At:</span>
+
+                              {/* <span className="b">{each.userId.username}</span> */}
                             </div>
                           </div>
                         </div>

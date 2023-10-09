@@ -4,7 +4,8 @@
   border-radius: 16px;
 }
 .card-body {
-  padding: 20px;
+  padding: 8px 11px;
+  padding-bottom: 11px;
 }
 .creatediv1 {
   display: flex;
@@ -249,7 +250,7 @@ textarea.text-details {
   }
   .subtitle {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
   span.b {
     padding-top: 5px;
