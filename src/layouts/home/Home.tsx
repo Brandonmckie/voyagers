@@ -411,24 +411,24 @@ const Home = () => {
                                 style={{
                                   width: "100%",
                                   display: "flex",
-                                  flexDirection: "row",
-                                  alignItems: "center",
-                                  justifyContent: "space-between",
+                                  flexDirection: "column",
                                   padding: "10px",
                                   paddingBottom: "0px",
                                 }}
                               >
                                 <h4
+                                  title={each.title}
                                   className="card-title"
                                   style={{
                                     margin: "0px",
 
                                     paddingRight: "10px",
                                     color: "#000000d9",
+                                    paddingBottom: "4px",
                                   }}
                                 >
-                                  {each.title.length >= 37
-                                    ? `${each.title.slice(0, 37)}...`
+                                  {each.title.length >= 31
+                                    ? `${each.title.slice(0, 31)}...`
                                     : each.title}
                                 </h4>
                                 {/* <div
@@ -443,14 +443,15 @@ const Home = () => {
                                 <div
                                   style={{
                                     display: "flex",
-                                    flexDirection: "column",
+                                    flexDirection: "row",
                                     alignItems: "center",
+                                    gap: "6px",
                                   }}
                                 >
                                   <img
                                     style={{
-                                      width: "40px",
-                                      height: "40px",
+                                      width: "35px",
+                                      height: "35px",
                                       objectFit: "cover",
                                       objectPosition: "center",
                                       borderRadius: "360px",
@@ -458,16 +459,33 @@ const Home = () => {
                                     src={each?.userId?.image}
                                     alt=""
                                   />
-                                  {/* <span className="b">{each.userId.username}</span> */}
+                                  <span style={{ padding: "0px", fontSize: "15px" }} className="b">
+                                    {each.userId.username}
+                                  </span>
                                 </div>
 
                                 {/* </div> */}
 
                                 {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
                               </div>
-                              <div>
-                                <span style={{ marginLeft: "9px" }} className="b">
-                                  {each?.createdAt?.slice(0, 10)}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: " end",
+                                  width: "100%",
+                                  padding: "0px 8px",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    marginLeft: "9px",
+                                    paddingTop: "0px",
+                                    position: "relative",
+                                    top: "-9px",
+                                  }}
+                                  className="b"
+                                >
+                                  {each?.createdAt ? each?.createdAt?.slice(0, 10) : "2023 09 09"}
                                 </span>
                               </div>
                             </div>
