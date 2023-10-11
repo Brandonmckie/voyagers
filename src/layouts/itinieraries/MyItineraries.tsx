@@ -26,6 +26,7 @@ type Itinerary = {
   userId: {
     username: string;
     _id: string;
+    image: string;
   };
   __v: number;
   _id: string;
@@ -243,12 +244,72 @@ const MyItineraries = (props: Props) => {
                           <div className="badge" style={{ top: "20px" }}>
                             <p>{each.category[0]}</p>
                           </div>
-                          <div className="card-body">
-                            <h4 className="card-title">{each.title}</h4>
-                            <div className="subtitle">
-                              <span className="a">Created by:</span>
-                              <span className="b">{each.userId.username}</span>
+                          <div
+                            className="card-body"
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              flexDirection: "column",
+                              padding: "10px",
+                              paddingBottom: "0px",
+                            }}
+                          >
+                            <h4
+                              title={each.title}
+                              className="card-title"
+                              style={{
+                                margin: "0px",
+
+                                paddingRight: "10px",
+                                color: "#000000d9",
+                                paddingBottom: "8px",
+                              }}
+                            >
+                              {each.title.length >= 31
+                                ? `${each.title.slice(0, 31)}...`
+                                : each.title}
+                            </h4>
+                            {/* <div
+                                  className="subtitle"
+                                  style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                  }}
+                                > */}
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: "6px",
+                                paddingBottom: "9px",
+                              }}
+                            >
+                              <img
+                                style={{
+                                  width: "35px",
+                                  height: "35px",
+                                  objectFit: "cover",
+                                  objectPosition: "center",
+                                  borderRadius: "360px",
+                                }}
+                                src={
+                                  each?.userId?.image
+                                    ? each?.userId?.image
+                                    : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                }
+                                alt=""
+                              />
+                              <span style={{ padding: "0px", fontSize: "15px" }} className="b">
+                                {each.userId.username}
+                              </span>
                             </div>
+
+                            {/* </div> */}
+
+                            {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
                           </div>
                         </div>
                       </Link>

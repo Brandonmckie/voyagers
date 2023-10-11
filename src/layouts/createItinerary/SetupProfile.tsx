@@ -1032,23 +1032,68 @@ const SetupProfile = () => {
     }
   };
 
+  useEffect(() => {
+    (async () => {
+      {
+        try {
+          let user = (await api("/users/get-profile")) as {
+            data: {
+              user: {
+                boughtItineraries: any[];
+                _id: string;
+                email: string;
+                username: string;
+                __v: number;
+                role: string;
+                image: string;
+                userInfo: {
+                  name: string;
+                  voyageStyle: [string];
+                  country: string;
+                  visitedCountries: [];
+                  visitedWonders: [];
+                  bio: string;
+                };
+              };
+            };
+          };
+
+          let { email, username, image, userInfo } = user.data.user;
+
+          //
+          setName(userInfo?.name);
+          setVoyageStyle(userInfo?.voyageStyle);
+          setCountry(userInfo?.country);
+          setVisitedCountries(userInfo?.visitedCountries);
+          setVisitedWonders(userInfo?.visitedWonders);
+          setBio(userInfo?.bio);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          // setIsMainLoading(false);
+        }
+      }
+    })();
+  }, []);
+
   // setting up profile
   const handleSetupProfile = async () => {
+    console.log(country, name, bio, voyageStyle);
     setIsSetupLoading(true);
     if (!name) {
-      seterrors({ name: "name is required" });
+      seterrors({ name: "name must be provided" });
       setIsSetupLoading(false);
       return;
     } else if (voyageStyle.length <= 1) {
-      seterrors({ style: "voyagestyle is required" });
+      seterrors({ style: "voyage style must be provided" });
       setIsSetupLoading(false);
       return;
     } else if (!bio) {
-      seterrors({ bio: "bio is required" });
+      seterrors({ bio: "Please provide your bio as it is a mandatory requirement" });
       setIsSetupLoading(false);
       return;
     } else if (!country) {
-      seterrors({ country: "country is required" });
+      seterrors({ country: "country must be provided" });
       setIsSetupLoading(false);
       return;
     }
@@ -1068,7 +1113,12 @@ const SetupProfile = () => {
       await api.patch("/users", { userInfo: data });
       setIsSetupLoading(false);
       if (localStorage.getItem("profilenav")) {
+        let data = localStorage.getItem("profilenav");
         localStorage.removeItem("profilenav");
+        if (data) {
+          return navigate(data);
+        }
+      } else {
         return navigate("/itinerary/create");
       }
       // } else{
@@ -1425,7 +1475,7 @@ const SetupProfile = () => {
             onChange={setVisitedCountries}
             labelledBy="Select"
           />
-          {visitedCountries.length > 2 && (
+          {visitedCountries.length > 1 && (
             <>
               <ul style={{ padding: "11px 0px 0px" }}>
                 {visitedCountries.map((item: any) => (
@@ -1444,7 +1494,7 @@ const SetupProfile = () => {
             onChange={setVisitedWonders}
             labelledBy="Select"
           />
-          {visitedWonders.length > 2 && (
+          {visitedWonders.length > 1 && (
             <>
               <ul style={{ padding: "11px 0px 0px" }}>
                 {visitedWonders.map((item: any) => (

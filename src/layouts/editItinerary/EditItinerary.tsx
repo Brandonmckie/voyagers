@@ -693,7 +693,7 @@ const EditItinerary = (props: Props) => {
                 >
                   {isErrored.country}
                 </p>
-                <h2 className="top-heading">Please fill out the itinerary FORM below</h2>
+                <h2 className="top-heading">Please fill out the voyage FORM below</h2>
               </div>
             </div>
             <div className="col-sm-12 col-md-2 col-lg-2"></div>
@@ -785,7 +785,7 @@ const EditItinerary = (props: Props) => {
                   style={{ width: "100%", paddingLeft: " 0px", marginTop: "32px" }}
                 >
                   <label className="control-label" htmlFor="message" style={{ fontSize: "17px" }}>
-                    Choose a category for this itinerary:
+                    Choose a category for this voyage:
                   </label>
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-lg-6">
@@ -1517,11 +1517,11 @@ const EditItinerary = (props: Props) => {
               </div>
             </div>
           ))}
-          {isComplete && <p>Itinerary created successfuly</p>}
+          {isComplete && <p>Voyage created successfuly</p>}
           <div className="row">
             <div className="col-md-12 text-center" style={{ marginTop: "20px" }}>
               <button disabled={isLoading} type="submit" className="btn btn-orange navbar-btn">
-                {isLoading ? <CircularProgress /> : "Submit Itinerary"}
+                {isLoading ? <CircularProgress /> : "Submit Voyage"}
               </button>
             </div>
           </div>

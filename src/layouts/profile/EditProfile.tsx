@@ -1145,19 +1145,19 @@ const EditProfile = () => {
   const handleUpdateProfile = async () => {
     setIsLoading(true);
     if (!name) {
-      seterrors({ name: "name is required" });
+      seterrors({ name: "fullname must be provided" });
       setIsLoading(false);
       return;
     } else if (voyageStyle.length <= 1) {
-      seterrors({ style: "voyagestyle is required" });
+      seterrors({ style: "voyage style must be provided" });
       setIsLoading(false);
       return;
     } else if (!bio) {
-      seterrors({ bio: "bio is required" });
+      seterrors({ bio: "Please provide your bio as it is a mandatory requirement" });
       setIsLoading(false);
       return;
     } else if (!country) {
-      seterrors({ country: "country is required" });
+      seterrors({ country: "country must be provided" });
       setIsLoading(false);
       return;
     }
@@ -1666,7 +1666,7 @@ const EditProfile = () => {
                   onChange={setVisitedCountries}
                   labelledBy="Select"
                 />
-                {visitedCountries.length > 2 && (
+                {visitedCountries.length > 1 && (
                   <>
                     {/* <p
                       onClick={() => {
@@ -1694,7 +1694,7 @@ const EditProfile = () => {
                   onChange={setVisitedWonders}
                   labelledBy="Select"
                 />
-                {visitedWonders.length > 2 && (
+                {visitedWonders.length > 1 && (
                   <>
                     {/* <p
                       onClick={() => {

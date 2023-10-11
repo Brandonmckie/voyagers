@@ -530,6 +530,7 @@ const Itineraries = (props: Props) => {
                                                 flexDirection: "row",
                                                 alignItems: "center",
                                                 gap: "6px",
+                                                paddingBottom: "9px",
                                               }}
                                             >
                                               <img
@@ -540,7 +541,11 @@ const Itineraries = (props: Props) => {
                                                   objectPosition: "center",
                                                   borderRadius: "360px",
                                                 }}
-                                                src={each?.userId?.image}
+                                                src={
+                                                  each?.userId?.image
+                                                    ? each?.userId?.image
+                                                    : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                                }
                                                 alt=""
                                               />
                                               <span
@@ -555,7 +560,7 @@ const Itineraries = (props: Props) => {
 
                                             {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
                                           </div>
-                                          <div
+                                          {/* <div
                                             style={{
                                               display: "flex",
                                               justifyContent: " end",
@@ -576,7 +581,7 @@ const Itineraries = (props: Props) => {
                                                 ? each?.createdAt?.slice(0, 10)
                                                 : "2023 09 09"}
                                             </span>
-                                          </div>
+                                          </div> */}
                                           {/* <div className="card-body">
                                             <h4 className="card-title" style={{ margin: "0px" }}>
                                               {each.title}

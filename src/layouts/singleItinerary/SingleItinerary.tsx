@@ -270,14 +270,18 @@ const SingleItinerary = (props: any) => {
                             <img
                               className="divimage"
                               style={{
-                                width: "100px",
-                                height: "100px",
+                                width: "80px",
+                                height: "80px",
                                 cursor: "pointer",
                                 borderRadius: "360px",
                                 objectFit: "cover",
                                 objectPosition: "center",
                               }}
-                              src={data?.userId?.image ? data?.userId?.image : dp}
+                              src={
+                                data?.userId?.image
+                                  ? data?.userId?.image
+                                  : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                              }
                               alt=""
                             />
                             <div style={{ marginLeft: "10px", display: "none" }}>
@@ -296,6 +300,35 @@ const SingleItinerary = (props: any) => {
                                 display: "flex",
                                 flexDirection: "row",
                                 alignItems: "center",
+                                height: "34px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  margin: "7px 0px",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  height: "39px",
+                                  gap: "9px",
+                                }}
+                              >
+                                <h3 style={{ margin: "0px" }}>{profile?.voyagestyle?.length}</h3>
+                                <h5
+                                  style={{
+                                    fontSize: "15px",
+                                    margin: "0px",
+                                  }}
+                                >
+                                  Voyage Style
+                                </h5>
+                              </div>
+                            </div>
+                            {/* <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
                                 gap: "6px",
                               }}
                             >
@@ -309,15 +342,23 @@ const SingleItinerary = (props: any) => {
                               >
                                 <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z" />
                               </svg>
-                              {profile?.voyagestyle?.map(
-                                (item: any, i: any) =>
-                                  i < 2 && (
-                                    <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
-                                      {item}
-                                    </h5>
-                                  )
-                              )}
-                            </div>
+                              <div
+                                style={{
+                                  overflowX: "auto",
+                                  width: "170px",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  gap: "10px",
+                                }}
+                              >
+                                {profile?.voyagestyle?.map((item: any, i: any) => (
+                                  <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
+                                    {item.replace(/\s+/g, "_")}
+                                  </h5>
+                                ))}
+                              </div>
+                            </div> */}
 
                             <div
                               style={{

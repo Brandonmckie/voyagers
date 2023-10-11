@@ -219,7 +219,7 @@ const Navbar = (props: Props) => {
                             height="35px"
                             src={
                               user.image ||
-                              "	https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                              "	https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
                             }
                             alt="DisplayPicture"
                           />
@@ -260,7 +260,7 @@ const Navbar = (props: Props) => {
                                   setProfileOpen(!profileOpen);
                                   navigate(`/user/${user.username}`);
                                 } else {
-                                  localStorage.setItem("profilnav", `/user/${user.username}`);
+                                  localStorage.setItem("profilenav", `/user/${user.username}`);
                                   navigate(`/itinerary/setupProfile`);
                                 }
                               }}
@@ -595,7 +595,7 @@ const Navbar = (props: Props) => {
                           height="44px"
                           src={
                             user.image ||
-                            "	https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                            "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
                           }
                           alt="DisplayPicture"
                           style={{
@@ -630,7 +630,7 @@ const Navbar = (props: Props) => {
                               if (user?.userInfo?.bio) {
                                 navigate(`/user/${user.username}`);
                               } else {
-                                localStorage.setItem("profilnav", `/user/${user.username}`);
+                                localStorage.setItem("profilenav", `/user/${user.username}`);
                                 navigate(`/itinerary/setupProfile`);
                               }
                             }}

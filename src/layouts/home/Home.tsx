@@ -446,6 +446,7 @@ const Home = () => {
                                     flexDirection: "row",
                                     alignItems: "center",
                                     gap: "6px",
+                                    paddingBottom: "9px",
                                   }}
                                 >
                                   <img
@@ -456,7 +457,11 @@ const Home = () => {
                                       objectPosition: "center",
                                       borderRadius: "360px",
                                     }}
-                                    src={each?.userId?.image}
+                                    src={
+                                      each?.userId?.image
+                                        ? each?.userId?.image
+                                        : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                    }
                                     alt=""
                                   />
                                   <span style={{ padding: "0px", fontSize: "15px" }} className="b">
@@ -468,7 +473,7 @@ const Home = () => {
 
                                 {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
                               </div>
-                              <div
+                              {/* <div
                                 style={{
                                   display: "flex",
                                   justifyContent: " end",
@@ -487,7 +492,7 @@ const Home = () => {
                                 >
                                   {each?.createdAt ? each?.createdAt?.slice(0, 10) : "2023 09 09"}
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         ))}

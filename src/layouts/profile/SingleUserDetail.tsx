@@ -232,7 +232,6 @@ const SingleUserDetail = (props: Props) => {
                   <div
                     style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}
                   >
-                    {" "}
                     <div style={{ width: "135px" }}>
                       <img
                         style={{
@@ -246,7 +245,7 @@ const SingleUserDetail = (props: Props) => {
                         src={
                           profile?.image
                             ? profile?.image
-                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
                         }
                         alt=""
                       />
@@ -263,26 +262,45 @@ const SingleUserDetail = (props: Props) => {
                           marginBottom: "10px",
                         }}
                       >
-                        <h5 style={{ fontSize: "16px", margin: "0px" }}>Voyage Style: </h5>
-                        {navInfo?.voyagestyle?.map(
-                          (item: any, i: any) =>
-                            i < 2 && (
-                              <h5
-                                style={{
-                                  fontSize: "15px",
-                                  margin: "7px 0px",
-                                  marginLeft: "10px",
-                                  background: " white",
-                                  color: "black",
-                                  padding: "4px",
-                                  borderRadius: "10px",
-                                }}
-                                key={i}
-                              >
-                                {item}
-                              </h5>
-                            )
+                        <h5 style={{ fontSize: "16px", margin: "0px", width: "111px" }}>
+                          Voyage Style:{" "}
+                        </h5>
+                        {navInfo?.voyagestyle?.length > 0 ? (
+                          navInfo?.voyagestyle?.map(
+                            (item: any, i: any) =>
+                              i < 8 && (
+                                <h5
+                                  style={{
+                                    fontSize: "15px",
+                                    margin: "7px 0px",
+                                    marginLeft: "10px",
+                                    background: " white",
+                                    color: "black",
+                                    padding: "4px",
+                                    borderRadius: "10px",
+                                  }}
+                                  key={i}
+                                >
+                                  {item.replace(/\s+/g, "_")}
+                                </h5>
+                              )
+                          )
+                        ) : (
+                          <h5
+                            style={{
+                              fontSize: "15px",
+                              margin: "7px 0px",
+                              marginLeft: "10px",
+                              background: " white",
+                              color: "black",
+                              padding: "4px",
+                              borderRadius: "10px",
+                            }}
+                          >
+                            No Voyage Style
+                          </h5>
                         )}
+                        {}
                       </div>
 
                       <div
@@ -304,7 +322,7 @@ const SingleUserDetail = (props: Props) => {
                             borderRadius: "10px",
                           }}
                         >
-                          {navInfo?.country}
+                          {navInfo?.country ? navInfo?.country : "No Country"}
                         </p>
                       </div>
 
@@ -511,23 +529,21 @@ const SingleUserDetail = (props: Props) => {
                       justifyContent: "center",
                     }}
                   >
-                    <div
-                      style={{ display: "flex", alignItems: "center", gap: "28px", width: "100%" }}
-                    >
+                    <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
                       {" "}
                       <img
                         style={{
-                          width: "100px",
-                          height: "100px",
+                          width: "80px",
+                          height: "80px",
                           cursor: "pointer",
-                          borderRadius: "360px",
+                          borderRadius: "100%",
                           objectFit: "cover",
                           objectPosition: "center",
                         }}
                         src={
                           profile?.image
                             ? profile?.image
-                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
                         }
                         alt=""
                       />
@@ -550,13 +566,31 @@ const SingleUserDetail = (props: Props) => {
                           >
                             <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z" />
                           </svg>
-                          {navInfo?.voyagestyle?.map(
-                            (item: any, i: any) =>
-                              i < 2 && ( // Check if index is less than 2
-                                <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
-                                  {item}
-                                </h5>
-                              )
+                          {navInfo?.voyagestyle?.length > 0 ? (
+                            <div
+                              style={{
+                                overflowX: "scroll",
+                                width: "170px",
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                gap: "10px",
+                              }}
+                            >
+                              {navInfo?.voyagestyle?.map(
+                                (item: any, i: any) => {
+                                  return (
+                                    // i < 2 && ( // Check if index is less than 2
+                                    <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
+                                      {`${item.replace(/\s+/g, "_")}${","}`}
+                                    </h5>
+                                  );
+                                }
+                                // )
+                              )}
+                            </div>
+                          ) : (
+                            <h5 style={{ fontSize: "15px", margin: "7px 0px" }}>No Voyage Style</h5>
                           )}
                         </div>
 
@@ -582,7 +616,7 @@ const SingleUserDetail = (props: Props) => {
                             >
                               <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                             </svg>{" "}
-                            {navInfo?.country}
+                            {navInfo?.country ? navInfo?.country : "No Country"}
                           </h5>
                         </div>
 
@@ -914,8 +948,8 @@ const SingleUserDetail = (props: Props) => {
                                 style={{
                                   width: "100%",
                                   height: "200px",
-                                  objectFit: "cover",
-                                  objectPosition: "center",
+                                  // objectFit: "cover",
+                                  // objectPosition: "center",
                                 }}
                               />
 
