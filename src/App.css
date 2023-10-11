@@ -7,6 +7,12 @@ h1 {
 .switchstyle00 {
   margin-top: 24px;
 }
+.slider001 {
+  display: none;
+}
+.slider002 {
+  display: flex;
+}
 .qrcodeh1 {
   margin: 40px;
   font: normal normal bold 25px/57px Montserrat;
@@ -1320,6 +1326,7 @@ h3.price-sec span {
   .switchstyle00 {
     margin-top: 2px;
   }
+
   .d-itineraries {
     padding: 0px 0 !important;
   }
@@ -1630,6 +1637,12 @@ h3.price-sec span {
   .editstyle0 {
     display: flex;
     flex-direction: column-reverse;
+  }
+  .slider001 {
+    display: flex;
+  }
+  .slider002 {
+    display: none;
   }
   .banner0001 {
     display: flex;

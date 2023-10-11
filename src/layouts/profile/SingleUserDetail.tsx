@@ -548,6 +548,38 @@ const SingleUserDetail = (props: Props) => {
                         alt=""
                       />
                       <div style={{ marginLeft: "0px", color: "white" }}>
+                        {/* <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            height: "34px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              margin: "7px 0px",
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              height: "39px",
+                              gap: "9px",
+                            }}
+                          >
+                            <h3 style={{ margin: "0px" }}>{navInfo?.voyagestyle?.length}</h3>
+                            <h5
+                              style={{
+                                fontSize: "15px",
+                                margin: "0px",
+                              }}
+                            >
+                              {
+                                navInfo?.voyagestyle?.length > 1? "Voyage Style": ''
+                              }
+                              Voyage Style
+                            </h5>
+                          </div>
+                        </div> */}
                         <div
                           style={{
                             display: "flex",
@@ -948,8 +980,8 @@ const SingleUserDetail = (props: Props) => {
                                 style={{
                                   width: "100%",
                                   height: "200px",
-                                  // objectFit: "cover",
-                                  // objectPosition: "center",
+                                  objectFit: "cover",
+                                  objectPosition: "top",
                                 }}
                               />
 

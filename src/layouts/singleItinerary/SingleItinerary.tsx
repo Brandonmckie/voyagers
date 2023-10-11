@@ -296,8 +296,8 @@ const SingleItinerary = (props: any) => {
 
                           <div style={{ marginLeft: "10px", color: "white" }}>
                             <div
+                              className="slider002"
                               style={{
-                                display: "flex",
                                 flexDirection: "row",
                                 alignItems: "center",
                                 height: "34px",
@@ -324,9 +324,9 @@ const SingleItinerary = (props: any) => {
                                 </h5>
                               </div>
                             </div>
-                            {/* <div
+                            <div
+                              className="slider001"
                               style={{
-                                display: "flex",
                                 flexDirection: "row",
                                 alignItems: "center",
                                 gap: "6px",
@@ -354,11 +354,11 @@ const SingleItinerary = (props: any) => {
                               >
                                 {profile?.voyagestyle?.map((item: any, i: any) => (
                                   <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
-                                    {item.replace(/\s+/g, "_")}
+                                    {`${item.replace(/\s+/g, "_")},`}
                                   </h5>
                                 ))}
                               </div>
-                            </div> */}
+                            </div>
 
                             <div
                               style={{
