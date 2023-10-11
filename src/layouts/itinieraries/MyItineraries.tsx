@@ -123,10 +123,10 @@ const MyItineraries = (props: Props) => {
             <div className="col-sm-12 col-md-2 col-lg-2"></div>
             <div className="col-sm-12 col-md-8 col-lg-8">
               <div className="left-first">
-                <p className="para-first">Discover Travel Itineraries</p>
-                <h1 className="top-heading">Create NEW itinerarY</h1>
+                <p className="para-first">Discover Travel Voyages</p>
+                <h1 className="top-heading">Create New Voyage</h1>
                 <Link to="/itinerary/create">
-                  <button className="btn btn-orange navbar-btn">Create Itinerary</button>
+                  <button className="btn btn-orange navbar-btn">Create Voyage</button>
                 </Link>
               </div>
             </div>
@@ -143,7 +143,7 @@ const MyItineraries = (props: Props) => {
                 <div className="left-first">
                   <p className="para-first">My Listing</p>
                   <h1 className="top-heading">
-                    <span className="first-textbg itlisting">ITINERARIES Listing</span>
+                    <span className="first-textbg itlisting">Voyages Listing</span>
                   </h1>
                 </div>
               </div>
@@ -174,7 +174,7 @@ const MyItineraries = (props: Props) => {
                 >
                   <div>
                     <h4 style={{ textAlign: "center" }}>
-                      Are you sure you want to delete this Itinerary?
+                      Are you sure you want to delete this Voyage?
                     </h4>
                     <div className="button-group" style={{ textAlign: "center" }}>
                       <button
@@ -397,7 +397,7 @@ const MyItineraries = (props: Props) => {
       ) : (
         <div>
           <h3 style={{ textAlign: "center" }} className="headingtag">
-            No Itineraries created yet
+            No Voyages created yet
           </h3>
         </div>
       )}

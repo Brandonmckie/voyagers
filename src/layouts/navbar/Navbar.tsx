@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { Link, createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { MouseEvent, useEffect, useState } from "react";
-
+import { useDetectClickOutside } from "react-detect-click-outside";
 import { checkIfUserIsAuthenticated } from "../../utils/utils";
 
 import "./styles/styles.css";
@@ -39,6 +39,7 @@ const Navbar = (props: Props) => {
   const [cities, setCities] = useState({});
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [mobiledisplay, setmobiledisplay] = useState(false);
   const [countriesList, setCountriesList] = useState<any>([]);
   const [topcountries, settopcountries] = useState<any>(topcountries0);
   const location = useLocation();
@@ -135,6 +136,24 @@ const Navbar = (props: Props) => {
     window.location.href = stripe_data.data;
   };
 
+  const closeDropdown = () => {
+    setmobileview(false);
+  };
+
+  const ref = useDetectClickOutside({ onTriggered: closeDropdown });
+
+  const closeDropdown1 = () => {
+    setmobiledisplay(false);
+  };
+
+  const mobileref0 = useDetectClickOutside({ onTriggered: closeDropdown1 });
+
+  const closeDropdown0 = () => {
+    setProfileOpen(false);
+  };
+
+  const mobileref = useDetectClickOutside({ onTriggered: closeDropdown0 });
+
   useEffect(() => {
     (() => {
       if (searchInput === "") {
@@ -143,17 +162,19 @@ const Navbar = (props: Props) => {
         const filteredCountries = countries.filter((item: any) =>
           item.country.toLowerCase().includes(searchInput.toLowerCase())
         );
-
         setCountriesList(filteredCountries);
       }
     })();
   }, [searchInput]);
 
+  useEffect(() => {
+    console.log(mobileview);
+  }, [mobileview]);
+
   return (
     <>
       <div className="container">
         <div className="row" id="nav-section">
-          {/* <!-- header --> */}
           <nav className="navbar">
             <div className="container-fluid">
               <div className="navbar-header nav-head" style={{ display: "flex" }}>
@@ -165,12 +186,16 @@ const Navbar = (props: Props) => {
                   {isLoggedIn && (
                     <div>
                       <ul
+                        ref={mobileref}
                         className={`nav navbar-nav navbar-right dropdown dropdown-toggle mobileul ${
                           profileOpen ? " open" : ""
                         }`}
                         style={{ marginLeft: !isLoggedIn ? "22%" : "30%" }}
                         data-toggle="dropdown"
-                        onClick={() => setProfileOpen(!profileOpen)}
+                        onClick={() => {
+                          setProfileOpen(!profileOpen);
+                          setmobileview(false);
+                        }}
                         // style={
                         //   user.role === "seller"
                         //     ? {
@@ -192,7 +217,10 @@ const Navbar = (props: Props) => {
                             }}
                             width="35px"
                             height="35px"
-                            src={user.image || dp}
+                            src={
+                              user.image ||
+                              "	https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                            }
                             alt="DisplayPicture"
                           />
                         </li>
@@ -201,37 +229,66 @@ const Navbar = (props: Props) => {
                           className="dropdown-menu profile-dropdown mobiledrop"
                           style={{ zIndex: 1000000 }}
                         >
-                          <li onClick={handleProfileOpen}>Edit Profile</li>
+                          <li
+                            onClick={() => {
+                              setProfileOpen(false);
+                              handleProfileOpen();
+                            }}
+                          >
+                            Edit Profile
+                          </li>
                           {user.role === "seller" && user.stripeConnected === false ? (
                             <li onClick={handleStripeOnboarding}>Complete Onboarding</li>
                           ) : (
                             ""
                           )}
                           <li>
-                            <Link to="/qrcode">My Qrcode</Link>
+                            <Link
+                              onClick={() => {
+                                setProfileOpen(!profileOpen);
+                              }}
+                              to="/qrcode"
+                            >
+                              My Qrcode
+                            </Link>
                           </li>
-                          {user?.userInfo?.name && (
-                            <li>
-                              <a
-                                onClick={() => {
-                                  if (user?.userInfo?.name) {
-                                    navigate(`/user/${user.username}`);
-                                  } else {
-                                    navigate(`/itinerary/setupProfile`);
-                                  }
-                                }}
-                              >
-                                My Profile
-                              </a>
-                            </li>
-                          )}
+                          {/* {user?.userInfo?.name && ( */}
+                          <li>
+                            <a
+                              onClick={() => {
+                                if (user?.userInfo?.bio) {
+                                  setProfileOpen(!profileOpen);
+                                  navigate(`/user/${user.username}`);
+                                } else {
+                                  localStorage.setItem("profilnav", `/user/${user.username}`);
+                                  navigate(`/itinerary/setupProfile`);
+                                }
+                              }}
+                            >
+                              My Profile
+                            </a>
+                          </li>
+                          {/* )} */}
 
                           <li>
-                            <Link to="/itinerary/me">My Itinerary</Link>
+                            <Link
+                              onClick={() => {
+                                setProfileOpen(!profileOpen);
+                              }}
+                              to="/itinerary/me"
+                            >
+                              My Voyage
+                            </Link>
                           </li>
                           <li>
-                            <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
-                              Itinerary Request
+                            <Link
+                              onClick={() => {
+                                setProfileOpen(!profileOpen);
+                              }}
+                              to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC"
+                              target="_blank"
+                            >
+                              Voyage Request
                             </Link>
                           </li>
 
@@ -242,227 +299,74 @@ const Navbar = (props: Props) => {
                       </ul>
                     </div>
                   )}
-                  <button
-                    onClick={() => {
-                      setmobileview(!mobileview);
-                    }}
-                    type="button"
-                    className="navbar-toggle btnspan"
-                    data-toggle="collapse"
-                    data-target="#myNavbar"
-                  >
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                  </button>
-                </div>
-              </div>
-
-              <div className="collapse navbar-collapse" id="myNavbar">
-                <ul
-                  className="nav navbar-nav"
-                  style={
-                    user?.role === "seller" || user?.role === "influencer"
-                      ? {
+                  <div ref={ref}>
+                    <button
+                      onClick={() => {
+                        setProfileOpen(false);
+                        setmobileview(!mobileview);
+                      }}
+                      type="button"
+                      className="navbar-toggle btnspan"
+                      data-toggle="collapse"
+                      data-target="#myNavbar"
+                    >
+                      <span className="icon-bar"></span>
+                      <span className="icon-bar"></span>
+                      <span className="icon-bar"></span>
+                    </button>
+                    {mobileview && (
+                      <div
+                        className="mobileview"
+                        style={{
+                          zIndex: "9000",
+                          background: "white",
+                          width: "95%",
+                          height: "auto",
+                          justifyContent: "unset",
                           display: "flex",
-                          alignItems: "center",
-                          marginTop: 0,
-                          marginLeft: "13%",
-                        }
-                      : {
-                          marginLeft: "",
-                        }
-                  }
-                >
-                  <li className="active">
-                    <Link to="/">Home</Link>
-                  </li>
-
-                  {user._id && (user?.role === "seller" || user?.role === "influencer") && (
-                    <li>
-                      <Link to="/itinerary/list">Voyager Itineraries</Link>
-                    </li>
-                  )}
-
-                  <li>
-                    <Link to="/about-us">About us</Link>
-                  </li>
-
-                  {/* {!isLoggedIn && (
-                    <li>
-                      <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
-                        Itinerary Request
-                      </Link>
-                    </li>
-                  )} */}
-
-                  {user.role === "seller" || user.role === "influencer" ? (
-                    <li>
-                      <Link to="/itinerary/setupProfile">
-                        <button className="btn btn-orange navbar-btn">Create Itinerary</button>
-                      </Link>
-                    </li>
-                  ) : (
-                    ""
-                  )}
-
-                  <div className="destinations-search" onClick={() => setSearchOpen(true)}>
-                    <p>Explore Destinations</p>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                      />
-                    </svg>
-                  </div>
-                </ul>
-
-                {isLoggedIn ? (
-                  <div>
-                    <ul
-                      className={`nav navbar-nav navbar-right dropdown dropdown-toggle ${
-                        profileOpen ? " open" : ""
-                      }`}
-                      data-toggle="dropdown"
-                      onClick={() => setProfileOpen(!profileOpen)}
-                      style={
-                        user?.role === "seller" || user?.role === "influencer"
-                          ? {
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              cursor: "pointer",
-                              marginTop: "-68px",
-                            }
-                          : {}
-                      }
-                    >
-                      <li>
-                        <img
-                          width="44px"
-                          height="44px"
-                          src={user.image || dp}
-                          alt="DisplayPicture"
-                          style={{
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                            objectPosition: "center",
-                          }}
-                        />
-                      </li>
-                      <li>
-                        <p className="welcome-message">WELOME!</p>
-                        <p className="name">{user.username}</p>
-                      </li>
-                      <li style={{ marginLeft: "13.5px" }}>
-                        <i className="fa fa-angle-down"></i>
-                      </li>
-
-                      <ul className="dropdown-menu profile-dropdown">
-                        <li onClick={handleProfileOpen}>Edit Profile</li>
-                        {user.role === "seller" && user.stripeConnected === false ? (
-                          <li onClick={handleStripeOnboarding}>Complete Onboarding</li>
-                        ) : (
-                          ""
-                        )}
-                        <li>
-                          <Link to="/qrcode">My Qrcode</Link>
-                        </li>
-                        {user?.userInfo?.name && (
-                          <li>
-                            <a
+                          border: " 1px solid #00000059",
+                          boxShadow: "1px 1px 4px 0px #0000009c",
+                          padding: "5px",
+                          position: "fixed",
+                          top: "64px",
+                          left: "7px",
+                        }}
+                      >
+                        <ul
+                          className="nav navbar-nav mobileul"
+                          // style={
+                          //   user.role === "seller"
+                          //     ? {
+                          //         display: "flex",
+                          //         // alignItems: "center",
+                          //         marginTop: 0,
+                          //         marginLeft: "20%",
+                          //       }
+                          //     : {}
+                          // }
+                        >
+                          <li className="active">
+                            <Link
+                              to="/"
                               onClick={() => {
-                                if (user?.userInfo?.name) {
-                                  navigate(`/user/${user.username}`);
-                                } else {
-                                  navigate(`/itinerary/setupProfile`);
-                                }
+                                setmobileview(false);
                               }}
                             >
-                              My Profile
-                            </a>
+                              Home
+                            </Link>
                           </li>
-                        )}
 
-                        <li>
-                          <Link to="/itinerary/me">My Itinerary</Link>
-                        </li>
-
-                        <li>
-                          <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
-                            Itinerary Request
-                          </Link>
-                        </li>
-
-                        <li onClick={handleLogout}>Logout</li>
-                      </ul>
-                    </ul>
-                  </div>
-                ) : (
-                  <>
-                    <ul className="nav navbar-nav navbar-right">
-                      <li>
-                        <Link to="/auth/login" className="btn btn-border navbar-btn">
-                          Login
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/itinerary/setupProfile" className="btn btn-orange navbar-btn">
-                          Create Itinerary
-                        </Link>
-                      </li>
-                    </ul>
-                  </>
-                )}
-              </div>
-            </div>
-          </nav>
-          {/* <!-- header end--> */}
-        </div>
-        {mobileview && (
-          <div className="mobileview" style={{ zIndex: "9000" }}>
-            <ul
-              className="nav navbar-nav mobileul"
-              // style={
-              //   user.role === "seller"
-              //     ? {
-              //         display: "flex",
-              //         // alignItems: "center",
-              //         marginTop: 0,
-              //         marginLeft: "20%",
-              //       }
-              //     : {}
-              // }
-            >
-              <li className="active">
-                <Link
-                  to="/"
-                  onClick={() => {
-                    setmobileview(false);
-                  }}
-                >
-                  Home
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/about-us"
-                  onClick={() => {
-                    setmobileview(false);
-                  }}
-                >
-                  About us
-                </Link>
-              </li>
-              {/* {!isLoggedIn && (
+                          <li>
+                            <Link
+                              to="/about-us"
+                              onClick={() => {
+                                setmobileview(false);
+                              }}
+                            >
+                              About us
+                            </Link>
+                          </li>
+                          {/* {!isLoggedIn && (
                 <li>
                   <Link
                     to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC"
@@ -476,19 +380,19 @@ const Navbar = (props: Props) => {
                 </li>
               )} */}
 
-              {!isLoggedIn && (
-                <>
-                  <li>
-                    <Link to="/auth/login">Login</Link>
-                  </li>
-                  <li>
-                    <Link to="/itinerary/setupProfile">Create Itinerary</Link>
-                  </li>
-                </>
-              )}
+                          {!isLoggedIn && (
+                            <>
+                              <li>
+                                <Link to="/auth/login">Login</Link>
+                              </li>
+                              <li>
+                                <Link to="/itinerary/setupProfile">Create Voyage</Link>
+                              </li>
+                            </>
+                          )}
 
-              {/* {!user._id ? ( */}
-              {/* <li
+                          {/* {!user._id ? ( */}
+                          {/* <li
                 onMouseLeave={(e) => handleShowDropdown(e, false)}
                 onMouseEnter={(e) => handleShowDropdown(e, true)}
                 className={`dropdown ${isDropdownOpen ? " open" : ""}`}
@@ -538,62 +442,239 @@ const Navbar = (props: Props) => {
                 </ul>
               </li> */}
 
-              {user._id && (user?.role === "seller" || user?.role === "influencer") && (
-                <li>
-                  <Link
-                    to="/itinerary/list"
-                    onClick={() => {
-                      setmobileview(false);
-                    }}
-                  >
-                    Voyager Itineraries
-                  </Link>
-                </li>
-              )}
+                          {user._id && (user?.role === "seller" || user?.role === "influencer") && (
+                            <li>
+                              <Link
+                                to="/itinerary/list"
+                                onClick={() => {
+                                  setmobileview(false);
+                                }}
+                              >
+                                Voyager Voyages
+                              </Link>
+                            </li>
+                          )}
 
-              <li
-                className="destinations-search"
-                onClick={() => setSearchOpen(true)}
-                style={{ display: "flex", flexDirection: "row", marginBottom: "12px" }}
-              >
-                <p>Explore Destinations</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
+                          <li
+                            className="destinations-search"
+                            onClick={() => setSearchOpen(true)}
+                            style={{ display: "flex", flexDirection: "row", marginBottom: "12px" }}
+                          >
+                            <p>Explore Destinations</p>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke-width="1.5"
+                              stroke="currentColor"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                              />
+                            </svg>
+                          </li>
+
+                          {/* )} */}
+
+                          {user.role === "seller" || user.role === "influencer" ? (
+                            <li>
+                              <Link to="/itinerary/setupProfile">
+                                <button
+                                  className="btn btn-orange navbar-btn"
+                                  onClick={() => {
+                                    setmobileview(false);
+                                  }}
+                                  style={{ padding: "7px 9px", fontSize: "14px" }}
+                                >
+                                  Create Voyage
+                                </button>
+                              </Link>
+                            </li>
+                          ) : (
+                            ""
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="collapse navbar-collapse" id="myNavbar">
+                <ul
+                  className="nav navbar-nav"
+                  style={
+                    user?.role === "seller" || user?.role === "influencer"
+                      ? {
+                          display: "flex",
+                          alignItems: "center",
+                          marginTop: 0,
+                          marginLeft: "13%",
+                        }
+                      : {
+                          marginLeft: "",
+                        }
+                  }
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                  />
-                </svg>
-              </li>
+                  <li className="active">
+                    <Link to="/">Home</Link>
+                  </li>
 
-              {/* )} */}
+                  {user._id && (user?.role === "seller" || user?.role === "influencer") && (
+                    <li>
+                      <Link to="/itinerary/list">Voyager Voyages</Link>
+                    </li>
+                  )}
 
-              {user.role === "seller" || user.role === "influencer" ? (
-                <li>
-                  <Link to="/itinerary/setupProfile">
-                    <button
-                      className="btn btn-orange navbar-btn"
-                      onClick={() => {
-                        setmobileview(false);
-                      }}
-                      style={{ padding: "7px 9px", fontSize: "14px" }}
+                  <li>
+                    <Link to="/about-us">About us</Link>
+                  </li>
+
+                  {/* {!isLoggedIn && (
+                    <li>
+                      <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
+                        Itinerary Request
+                      </Link>
+                    </li>
+                  )} */}
+
+                  {user.role === "seller" || user.role === "influencer" ? (
+                    <li>
+                      <Link to="/itinerary/setupProfile">
+                        <button className="btn btn-orange navbar-btn">Create Voyage</button>
+                      </Link>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  <div className="destinations-search" onClick={() => setSearchOpen(true)}>
+                    <p>Explore Destinations</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
                     >
-                      Create Itinerary
-                    </button>
-                  </Link>
-                </li>
-              ) : (
-                ""
-              )}
-            </ul>
-          </div>
-        )}
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                      />
+                    </svg>
+                  </div>
+                </ul>
+
+                {isLoggedIn ? (
+                  <div>
+                    <ul
+                      ref={mobileref0}
+                      className={`nav navbar-nav navbar-right dropdown dropdown-toggle ${
+                        mobiledisplay ? " open" : ""
+                      }`}
+                      data-toggle="dropdown"
+                      onClick={() => setmobiledisplay(!mobiledisplay)}
+                      style={
+                        user?.role === "seller" || user?.role === "influencer"
+                          ? {
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              cursor: "pointer",
+                              marginTop: "-68px",
+                            }
+                          : {}
+                      }
+                    >
+                      <li>
+                        <img
+                          width="44px"
+                          height="44px"
+                          src={
+                            user.image ||
+                            "	https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                          }
+                          alt="DisplayPicture"
+                          style={{
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            objectPosition: "center",
+                          }}
+                        />
+                      </li>
+                      <li>
+                        <p className="welcome-message">WELOME!</p>
+                        <p className="name">{user.username}</p>
+                      </li>
+                      <li style={{ marginLeft: "13.5px" }}>
+                        <i className="fa fa-angle-down"></i>
+                      </li>
+
+                      <ul className="dropdown-menu profile-dropdown">
+                        <li onClick={handleProfileOpen}>Edit Profile</li>
+                        {user.role === "seller" && user.stripeConnected === false ? (
+                          <li onClick={handleStripeOnboarding}>Complete Onboarding</li>
+                        ) : (
+                          ""
+                        )}
+                        <li>
+                          <Link to="/qrcode">My Qrcode</Link>
+                        </li>
+                        {/* {user?.userInfo?.name && ( */}
+                        <li>
+                          <a
+                            onClick={() => {
+                              if (user?.userInfo?.bio) {
+                                navigate(`/user/${user.username}`);
+                              } else {
+                                localStorage.setItem("profilnav", `/user/${user.username}`);
+                                navigate(`/itinerary/setupProfile`);
+                              }
+                            }}
+                          >
+                            My Profile
+                          </a>
+                        </li>
+                        {/* )} */}
+
+                        <li>
+                          <Link to="/itinerary/me">My Voyage</Link>
+                        </li>
+
+                        <li>
+                          <Link to="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC" target="_blank">
+                            Voyage Request
+                          </Link>
+                        </li>
+
+                        <li onClick={handleLogout}>Logout</li>
+                      </ul>
+                    </ul>
+                  </div>
+                ) : (
+                  <>
+                    <ul className="nav navbar-nav navbar-right">
+                      <li>
+                        <Link to="/auth/login" className="btn btn-border navbar-btn">
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/itinerary/setupProfile" className="btn btn-orange navbar-btn">
+                          Create Voyage
+                        </Link>
+                      </li>
+                    </ul>
+                  </>
+                )}
+              </div>
+            </div>
+          </nav>
+          {/* <!-- header end--> */}
+        </div>
       </div>
       {!!searchOpen && (
         <div className="searchmodal">

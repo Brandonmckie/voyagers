@@ -359,7 +359,7 @@ const Home = () => {
             <div className="col-md-7">
               <div className="left-first">
                 <h1 className="top-heading">
-                  Top <span className="first-textbg topsingle">ITINERARIES</span>
+                  Top <span className="first-textbg topsingle">VOYAGES</span>
                 </h1>
               </div>
             </div>
@@ -424,7 +424,7 @@ const Home = () => {
 
                                     paddingRight: "10px",
                                     color: "#000000d9",
-                                    paddingBottom: "4px",
+                                    paddingBottom: "8px",
                                   }}
                                 >
                                   {each.title.length >= 31
@@ -584,10 +584,9 @@ const Home = () => {
                         >
                           <div className="panel-body">
                             <p className="text-bg">
-                              Voyagers can now browse vetted itineraries around the world from some
-                              of your favorite travel personalities. If you like what you see, then
-                              buy the itinerary, and save yourself hours of research and app
-                              browsing.
+                              Voyagers can now browse vetted voyages around the world from some of
+                              your favorite travel personalities. If you like what you see, then buy
+                              the itinerary, and save yourself hours of research and app browsing.
                             </p>
                           </div>
                         </div>

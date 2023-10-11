@@ -243,7 +243,11 @@ const SingleUserDetail = (props: Props) => {
                           objectFit: "cover",
                           objectPosition: "center",
                         }}
-                        src={profile?.image ? profile?.image : dp}
+                        src={
+                          profile?.image
+                            ? profile?.image
+                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                        }
                         alt=""
                       />
                     </div>
@@ -520,7 +524,11 @@ const SingleUserDetail = (props: Props) => {
                           objectFit: "cover",
                           objectPosition: "center",
                         }}
-                        src={profile?.image ? profile?.image : dp}
+                        src={
+                          profile?.image
+                            ? profile?.image
+                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                        }
                         alt=""
                       />
                       <div style={{ marginLeft: "0px", color: "white" }}>
@@ -964,7 +972,7 @@ const SingleUserDetail = (props: Props) => {
               <div className="col-md-7">
                 <div className="left-first">
                   <h1 className="top-heading">
-                    <span className="first-textbg itlisting">ITINERARIES</span>
+                    <span className="first-textbg itlisting">VOYAGES</span>
                   </h1>
                 </div>
               </div>
@@ -1035,7 +1043,7 @@ const SingleUserDetail = (props: Props) => {
       ) : (
         <div>
           <h3 style={{ textAlign: "center" }} className="headingtag">
-            No Itineraries
+            No Voyages
           </h3>
         </div>
       )}

@@ -1067,7 +1067,10 @@ const SetupProfile = () => {
     try {
       await api.patch("/users", { userInfo: data });
       setIsSetupLoading(false);
-      return navigate("/itinerary/create");
+      if (localStorage.getItem("profilenav")) {
+        localStorage.removeItem("profilenav");
+        return navigate("/itinerary/create");
+      }
       // } else{
       //   getUserDetails("");
     } catch (error) {
@@ -1422,6 +1425,15 @@ const SetupProfile = () => {
             onChange={setVisitedCountries}
             labelledBy="Select"
           />
+          {visitedCountries.length > 2 && (
+            <>
+              <ul style={{ padding: "11px 0px 0px" }}>
+                {visitedCountries.map((item: any) => (
+                  <li style={{ listStyle: "inside", padding: "2px 0px" }}>{item?.label}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
 
         <div className="profilesetup-form--wonders">
@@ -1432,6 +1444,15 @@ const SetupProfile = () => {
             onChange={setVisitedWonders}
             labelledBy="Select"
           />
+          {visitedWonders.length > 2 && (
+            <>
+              <ul style={{ padding: "11px 0px 0px" }}>
+                {visitedWonders.map((item: any) => (
+                  <li style={{ listStyle: "inside", padding: "2px 0px" }}>{item?.label}</li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
 
         <div className="profilesetup-form--bio">

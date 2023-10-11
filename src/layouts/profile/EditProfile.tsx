@@ -5,6 +5,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import api from "../../utils/api";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 import { MultiSelect } from "react-multi-select-component";
+import { useNavigate } from "react-router-dom";
 
 let options = [
   {
@@ -1023,13 +1024,17 @@ const EditProfile = () => {
     image?: string;
     email?: string;
   }>({});
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<any>({});
   const [isMainLoading, setIsMainLoading] = useState(false);
   const [isUpdateLoading, setIsUpdateLoading] = useState(false);
   const [tabOption, setTabOption] = useState("profile");
+  const [errors, seterrors] = useState<any>({});
   const [showprofile, setshowprofile] = useState(true);
   const [showuserinfo, setshowuserinfo] = useState(false);
   const [name, setName] = useState("");
+  const [wonders, setwonders] = useState(false);
+  const [countries, setcountries] = useState(false);
   const [voyageStyle, setVoyageStyle] = useState([""]);
   const [country, setCountry] = useState("");
   const [visitedCountries, setVisitedCountries] = useState([]);
@@ -1047,6 +1052,7 @@ const EditProfile = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsUpdateLoading(true);
+
     let replaceText = values?.username?.trim().replace(/\s+/g, "_").toLowerCase();
     const values1 = { ...values, username: replaceText };
     try {
@@ -1138,6 +1144,23 @@ const EditProfile = () => {
   // setting up profile
   const handleUpdateProfile = async () => {
     setIsLoading(true);
+    if (!name) {
+      seterrors({ name: "name is required" });
+      setIsLoading(false);
+      return;
+    } else if (voyageStyle.length <= 1) {
+      seterrors({ style: "voyagestyle is required" });
+      setIsLoading(false);
+      return;
+    } else if (!bio) {
+      seterrors({ bio: "bio is required" });
+      setIsLoading(false);
+      return;
+    } else if (!country) {
+      seterrors({ country: "country is required" });
+      setIsLoading(false);
+      return;
+    }
     const allVoyageStyles = voyageStyle.filter((item) => item !== "");
 
     const data = {
@@ -1152,7 +1175,7 @@ const EditProfile = () => {
     try {
       await api.patch("/users", { userInfo: data });
       setIsLoading(false);
-      window.location.reload();
+      navigate(`/user/${values.username}`);
     } catch (error) {
       setIsLoading(false);
     }
@@ -1250,7 +1273,11 @@ const EditProfile = () => {
                   />
                 </div>
               ) : (
-                <img src={dp} alt="DP" className="dp" />
+                <img
+                  src="	https://myvoyagemedia.s3.amazonaws.com/uploads/194b0065-6770-4d6a-a091-246fae11f9bf-img.png"
+                  alt="DP"
+                  className="dp"
+                />
               )}
 
               <div>
@@ -1276,9 +1303,10 @@ const EditProfile = () => {
                   type="text"
                   className="form-control"
                   id="username"
+                  disabled
                   placeholder="Enter username"
                   value={values.username}
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   pattern="[a-zA-Z0-9 _]+"
                   title="Only characters and numbers are allowed"
                   name="username"
@@ -1347,6 +1375,7 @@ const EditProfile = () => {
               <div className="profilesetup-form--name">
                 <label htmlFor="">Full Name</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                <p style={{ color: "red" }}>{errors?.name}</p>
               </div>
 
               <div className="profilesetup-form--voyagestyle">
@@ -1365,6 +1394,7 @@ const EditProfile = () => {
                       <label htmlFor={value}>{label}</label>
                     </div>
                   ))}
+                  <p style={{ color: "red" }}>{errors?.style}</p>
                 </div>
               </div>
 
@@ -1625,6 +1655,7 @@ const EditProfile = () => {
                   <option value="ZM">Zambia</option>
                   <option value="ZW">Zimbabwe</option>
                 </select>
+                <p style={{ color: "red" }}>{errors?.country}</p>
               </div>
 
               <div className="profilesetup-form--visited">
@@ -1635,6 +1666,24 @@ const EditProfile = () => {
                   onChange={setVisitedCountries}
                   labelledBy="Select"
                 />
+                {visitedCountries.length > 2 && (
+                  <>
+                    {/* <p
+                      onClick={() => {
+                        setcountries(!countries);
+                      }}
+                    >
+                      Show All
+                    </p>
+                    {countries && ( */}
+                    <ul style={{ padding: "11px 0px 0px" }}>
+                      {visitedCountries.map((item: any) => (
+                        <li style={{ listStyle: "inside", padding: "2px 0px" }}>{item?.label}</li>
+                      ))}
+                    </ul>
+                    {/* )} */}
+                  </>
+                )}
               </div>
 
               <div className="profilesetup-form--wonders">
@@ -1645,6 +1694,24 @@ const EditProfile = () => {
                   onChange={setVisitedWonders}
                   labelledBy="Select"
                 />
+                {visitedWonders.length > 2 && (
+                  <>
+                    {/* <p
+                      onClick={() => {
+                        setwonders(!wonders);
+                      }}
+                    >
+                      Show All
+                    </p> */}
+                    {/* {wonders && ( */}
+                    <ul style={{ padding: "11px 0px 0px" }}>
+                      {visitedWonders.map((item: any) => (
+                        <li style={{ listStyle: "inside", padding: "2px 0px" }}>{item?.label}</li>
+                      ))}
+                    </ul>
+                    {/* )} */}
+                  </>
+                )}
               </div>
 
               <div className="profilesetup-form--bio">
@@ -1657,6 +1724,7 @@ const EditProfile = () => {
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                 ></textarea>
+                <p style={{ color: "red" }}>{errors?.bio}</p>
               </div>
 
               <div className="profilesetup-form--submit">

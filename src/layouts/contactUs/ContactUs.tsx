@@ -8,7 +8,7 @@ const ContactUs = (props: Props) => {
       <div className="contactus">
         <h3 style={{ color: "#f1a501" }}>Contact Us</h3>
         <p className="text-bg contactus0">
-          For customized itineraries or to inquire about anything My Voyages, send us an email at{" "}
+          For customized voyagers or to inquire about anything My Voyages, send us an email at{" "}
           <span style={{}}>info@myvoyages.com</span>
         </p>
       </div>

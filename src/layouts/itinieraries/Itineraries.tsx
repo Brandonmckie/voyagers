@@ -261,7 +261,7 @@ const Itineraries = (props: Props) => {
             <div className="col-sm-12 col-md-2 col-lg-2"></div>
             <div className="col-sm-12 col-md-8 col-lg-8">
               <div className="left-first">
-                <p className="para-first">Discover Travel Itineraries</p>
+                <p className="para-first">Discover Travel Voyages</p>
                 <h1 className="top-heading">
                   {
                     Object.values(regions)
@@ -288,7 +288,7 @@ const Itineraries = (props: Props) => {
                           data-toggle="tab"
                         >
                           {" "}
-                          All Itineraries
+                          All Voyages
                         </a>
                       </li>
                       <li className={`${selectedTab === "stay" ? "active" : ""}`}>
@@ -353,7 +353,7 @@ const Itineraries = (props: Props) => {
                               <div className="col-md-7">
                                 <div className="left-first">
                                   <h1 className="top-heading" style={{ paddingLeft: "14px" }}>
-                                    <span className="first-textbg">My ITINERARIES</span>
+                                    <span className="first-textbg">My VOYAGES</span>
                                   </h1>
                                 </div>
                               </div>
@@ -439,7 +439,7 @@ const Itineraries = (props: Props) => {
                               <div className="col-md-7">
                                 <div className="left-first">
                                   <h1 className="top-heading">
-                                    <span className="first-textbg">ITINERARIES Listing</span>
+                                    <span className="first-textbg">VOYAGES Listing</span>
                                   </h1>
                                 </div>
                               </div>
@@ -508,7 +508,7 @@ const Itineraries = (props: Props) => {
 
                                                 paddingRight: "10px",
                                                 color: "#000000d9",
-                                                paddingBottom: "4px",
+                                                paddingBottom: "8px",
                                               }}
                                             >
                                               {each.title.length >= 31
@@ -617,7 +617,7 @@ const Itineraries = (props: Props) => {
                               </div>
                             ) : (
                               <div>
-                                <h3 style={{ textAlign: "center" }}>No Itineraries found</h3>
+                                <h3 style={{ textAlign: "center" }}>No Voyages found</h3>
                               </div>
                             )}
                             {/* <div className="row">

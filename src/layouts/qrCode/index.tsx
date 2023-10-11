@@ -45,7 +45,7 @@ const Qrcode = () => {
         </div>
       ) : (
         <>
-          <h4 className="qrcodeh1">QRCODE</h4>
+          <h4 className="qrcodeh1">My Voyages Passport</h4>
           <div style={{ height: "auto", maxWidth: 260, width: "100%" }} className="qrcode">
             <QRCode
               size={256}

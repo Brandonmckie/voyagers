@@ -771,7 +771,7 @@ const SingleItinerary = (props: any) => {
                 )
               ) : (
                 <div>
-                  <h3 style={{ textAlign: "center" }}>No Itineraries found</h3>
+                  <h3 style={{ textAlign: "center" }}>No Voyages found</h3>
                 </div>
               )}
               {/* </Carousel> */}
