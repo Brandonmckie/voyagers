@@ -474,7 +474,7 @@ const Itineraries = (props: Props) => {
                                                 "loginvalue",
                                                 `/itinerary/view/${each?._id}`
                                               );
-                                              navigate("/auth/login");
+                                              navigate("/auth/sign-up");
                                             }
                                           }}
                                           style={{ textDecoration: "none", cursor: "pointer" }}

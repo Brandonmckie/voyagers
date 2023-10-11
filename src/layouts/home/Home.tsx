@@ -380,7 +380,7 @@ const Home = () => {
                                 if (user) {
                                   navigate(`/itinerary/view/${each._id}`);
                                 } else {
-                                  navigate("/auth/login");
+                                  navigate("/auth/sign-up");
                                 }
                               }}
                               style={{

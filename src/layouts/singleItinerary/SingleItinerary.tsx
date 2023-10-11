@@ -122,7 +122,7 @@ const SingleItinerary = (props: any) => {
       if (user?.id) {
         // setIsMy(true);
       } else {
-        navigate("/auth/login");
+        navigate("/auth/sign-up");
         return;
       }
       let data = await api.post("/billing/checkout", {
