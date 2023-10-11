@@ -820,7 +820,7 @@ const SingleUserDetail = (props: Props) => {
                 setshowWonders(false);
               }}
             >
-              Countries
+              My Voyages
             </h4>
             <div style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}></div>
 
@@ -849,7 +849,7 @@ const SingleUserDetail = (props: Props) => {
                 <div className="col-md-7">
                   <div className="left-first">
                     <h1 className="top-heading">
-                      <span className="first-textbg itlisting">COUNTRIES</span>
+                      <span className="first-textbg itlisting"> My Voyages</span>
                     </h1>
                   </div>
                 </div>
@@ -923,8 +923,35 @@ const SingleUserDetail = (props: Props) => {
         ) : (
           <div>
             <h3 style={{ textAlign: "center" }} className="headingtag">
-              No Countries
+              No Voyages
             </h3>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                marginTop: "18px",
+              }}
+            >
+              <a
+                href="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC?typeform-source=www.myvoyages.com"
+                target="_blank"
+              >
+                <button
+                  style={{
+                    background: " #f5ad01",
+                    outline: "none",
+                    border: "none",
+                    color: "white",
+                    padding: "5px",
+                    borderRadius: " 7px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Start Your Voyage
+                </button>
+              </a>
+            </div>
           </div>
         )
       ) : showWonders ? (
