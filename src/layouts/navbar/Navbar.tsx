@@ -450,7 +450,7 @@ const Navbar = (props: Props) => {
                                   setmobileview(false);
                                 }}
                               >
-                                Voyager Voyages
+                                Voyages
                               </Link>
                             </li>
                           )}
@@ -524,7 +524,7 @@ const Navbar = (props: Props) => {
 
                   {user._id && (user?.role === "seller" || user?.role === "influencer") && (
                     <li>
-                      <Link to="/itinerary/list">Voyager Voyages</Link>
+                      <Link to="/itinerary/list">Voyages</Link>
                     </li>
                   )}
 

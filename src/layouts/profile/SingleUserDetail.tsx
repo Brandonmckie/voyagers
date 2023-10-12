@@ -71,6 +71,9 @@ const SingleUserDetail = (props: Props) => {
   const [showCountry, setshowCountry] = useState(true);
   const [showItinerary, setshowItinerary] = useState(true);
   const [showWonders, setshowWonders] = useState(false);
+  const [voyageshow, setvoyageshow] = useState(false);
+  const [wondersshow, setwondersshow] = useState(false);
+  const [countriesshow, setcountriesshow] = useState(false);
   const [message, setmessage] = useState("Show More");
   const [profile, setprofile] = useState<any>([]);
   const [countriescount, setcountriescount] = useState<any>([]);
@@ -138,6 +141,14 @@ const SingleUserDetail = (props: Props) => {
         visitedWonders: user.data.user.userInfo.visitedWonders,
       });
 
+      console.log({
+        name: user.data.user.userInfo.name,
+        country: countries?.label,
+        voyagestyle: user.data.user.userInfo.voyageStyle,
+        visitedCountries: user.data.user.userInfo.visitedCountries,
+        visitedWonders: user.data.user.userInfo.visitedWonders,
+      });
+
       setprofile(user.data.user);
     } catch (error) {
       console.log(error);
@@ -150,9 +161,18 @@ const SingleUserDetail = (props: Props) => {
 
   interface CountryFlagProps {
     countryCode: string;
+    flag: string;
   }
-  const CountryFlag: React.FC<CountryFlagProps> = ({ countryCode }) => {
-    return <span className={`fi fi-${countryCode.toLowerCase()} countryStyling`} />;
+  const CountryFlag: React.FC<CountryFlagProps> = ({ countryCode, flag }) => {
+    return (
+      <span
+        style={{
+          width: flag === "flag" ? "18px" : "",
+          height: flag === "flag" ? "18px" : "",
+        }}
+        className={`fi fi-${countryCode.toLowerCase()} ${flag !== "flag" && "countryStyling"}`}
+      />
+    );
   };
 
   return (
@@ -499,7 +519,7 @@ const SingleUserDetail = (props: Props) => {
                 <div
                   style={{
                     width: "100%",
-                    height: "205px",
+                    height: "100%",
                     position: "relative",
                     // color: "white",
                     // margin: "10px 0px",
@@ -521,39 +541,42 @@ const SingleUserDetail = (props: Props) => {
                   </div>
                   <div
                     style={{
-                      height: "169px",
+                      height: "100%",
                       alignItems: "center",
                       display: "flex",
                       padding: "0px 21px",
-
+                      paddingRight: "0px",
                       justifyContent: "center",
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
-                      {" "}
-                      <img
-                        style={{
-                          width: "80px",
-                          height: "80px",
-                          cursor: "pointer",
-                          borderRadius: "100%",
-                          objectFit: "cover",
-                          objectPosition: "center",
-                        }}
-                        src={
-                          profile?.image
-                            ? profile?.image
-                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
-                        }
-                        alt=""
-                      />
-                      <div style={{ marginLeft: "0px", color: "white" }}>
-                        {/* <div
+                      <div style={{ width: "80px" }}>
+                        <img
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            cursor: "pointer",
+                            borderRadius: "100%",
+                            objectFit: "cover",
+                            objectPosition: "center",
+                          }}
+                          src={
+                            profile?.image
+                              ? profile?.image
+                              : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                          }
+                          alt=""
+                        />
+                      </div>{" "}
+                      <div style={{ marginLeft: "0px", color: "white", width: "186px" }}>
+                        <div
                           style={{
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
                             height: "34px",
+                            width: "93%",
+                            justifyContent: "space-between",
                           }}
                         >
                           <div
@@ -573,61 +596,83 @@ const SingleUserDetail = (props: Props) => {
                                 margin: "0px",
                               }}
                             >
-                              {
-                                navInfo?.voyagestyle?.length > 1? "Voyage Style": ''
-                              }
-                              Voyage Style
+                              {navInfo?.voyagestyle?.length > 1 ? "Voyage Styles" : "Voyage Style"}
                             </h5>
                           </div>
-                        </div> */}
+                          <div
+                            onClick={() => {
+                              setvoyageshow(!voyageshow);
+                            }}
+                          >
+                            {!voyageshow ? (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-chevron-down"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-chevron-up"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                                />
+                              </svg>
+                            )}
+                          </div>
+                        </div>
+
+                        {voyageshow && navInfo?.voyagestyle?.length > 0 && (
+                          <div
+                            style={{
+                              overflowX: "scroll",
+                              // width: "170px",
+                              display: "flex",
+                              flexWrap: "wrap",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              gap: "6px",
+                            }}
+                          >
+                            {navInfo?.voyagestyle?.map(
+                              (item: any, i: any) => {
+                                return (
+                                  // i < 2 && ( // Check if index is less than 2
+                                  <p
+                                    style={{ fontSize: "9px", listStyle: "disc", margin: "0px" }}
+                                    key={i}
+                                  >
+                                    {`${item},`}
+                                  </p>
+                                );
+                              }
+                              // )
+                            )}
+                          </div>
+                        )}
+
                         <div
                           style={{
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
-                            gap: "6px",
+                            width: "93%",
+                            justifyContent: "space-between",
                           }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            className="bi bi-gem"
-                            viewBox="0 0 16 16"
-                          >
-                            <path d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z" />
-                          </svg>
-                          {navInfo?.voyagestyle?.length > 0 ? (
-                            <div
-                              style={{
-                                overflowX: "scroll",
-                                width: "170px",
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                gap: "10px",
-                              }}
-                            >
-                              {navInfo?.voyagestyle?.map(
-                                (item: any, i: any) => {
-                                  return (
-                                    // i < 2 && ( // Check if index is less than 2
-                                    <h5 style={{ fontSize: "15px", margin: "7px 0px" }} key={i}>
-                                      {`${item.replace(/\s+/g, "_")}${","}`}
-                                    </h5>
-                                  );
-                                }
-                                // )
-                              )}
-                            </div>
-                          ) : (
-                            <h5 style={{ fontSize: "15px", margin: "7px 0px" }}>No Voyage Style</h5>
-                          )}
-                        </div>
-
-                        <div
-                          style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
                         >
                           <h5
                             style={{
@@ -653,7 +698,13 @@ const SingleUserDetail = (props: Props) => {
                         </div>
 
                         <div
-                          style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            width: "93%",
+                            justifyContent: "space-between",
+                          }}
                         >
                           <div
                             style={{
@@ -675,10 +726,79 @@ const SingleUserDetail = (props: Props) => {
                               Visited Countries
                             </h5>
                           </div>
+                          <div
+                            onClick={() => {
+                              setcountriesshow(!countriesshow);
+                            }}
+                          >
+                            {!countriesshow ? (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-chevron-down"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-chevron-up"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                                />
+                              </svg>
+                            )}
+                          </div>
                         </div>
 
+                        {countriesshow && navInfo?.visitedCountries?.length > 0 && (
+                          <div
+                            style={{
+                              overflowX: "scroll",
+                              // width: "170px",
+                              display: "flex",
+                              flexDirection: "row",
+                              flexWrap: "wrap",
+                              gap: "6px",
+                            }}
+                          >
+                            {navInfo?.visitedCountries?.map(
+                              (item: any, i: any) => {
+                                return (
+                                  // i < 2 && ( // Check if index is less than 2
+                                  <CountryFlag countryCode={item.value} flag="flag" />
+                                  // <p
+                                  //   style={{ fontSize: "15px", listStyle: "disc", margin: "0px" }}
+                                  //   key={i}
+                                  // >
+                                  //   {`${item.label.replace(/\s+/g, "_")},`}
+                                  // </p>
+                                );
+                              }
+                              // )
+                            )}
+                          </div>
+                        )}
                         <div
-                          style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            width: "93%",
+                            justifyContent: "space-between",
+                          }}
                         >
                           <h5
                             style={{
@@ -700,7 +820,69 @@ const SingleUserDetail = (props: Props) => {
                               Visited Wonders{" "}
                             </h5>
                           </h5>
+                          <div
+                            onClick={() => {
+                              setwondersshow(!wondersshow);
+                            }}
+                          >
+                            {!wondersshow ? (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-chevron-down"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-chevron-up"
+                                viewBox="0 0 16 16"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                                />
+                              </svg>
+                            )}
+                          </div>
                         </div>
+
+                        {wondersshow && navInfo?.visitedWonders?.length > 0 && (
+                          <div
+                            style={{
+                              // width: "170px",
+                              display: "flex",
+                              flexDirection: "row",
+                              flexWrap: "wrap",
+                              gap: "6px",
+                            }}
+                          >
+                            {navInfo?.visitedWonders?.map(
+                              (item: any, i: any) => {
+                                return (
+                                  // i < 2 && ( // Check if index is less than 2
+                                  <p
+                                    style={{ fontSize: "9px", listStyle: "disc", margin: "0px" }}
+                                    key={i}
+                                  >
+                                    {`${item.label},`}
+                                  </p>
+                                );
+                              }
+                              // )
+                            )}
+                          </div>
+                        )}
 
                         {/* <div style={{ cursor: "pointer" }}>
                           <p
@@ -880,7 +1062,7 @@ const SingleUserDetail = (props: Props) => {
                               }}
                             /> */}
                             <div style={{ position: "relative" }}>
-                              <CountryFlag countryCode={each.code} />
+                              <CountryFlag countryCode={each.code} flag="flag1" />
                               <div
                                 className="countryHover"
                                 style={{

@@ -445,6 +445,135 @@ const Itineraries = (props: Props) => {
                               </div>
                             </div>
 
+                            {/* <div
+                                id="carousel-reviews"
+                                className="carousel slide"
+                                data-ride="carousel"
+                              >
+                                <div className="carousel-inner">
+                                  <div className="item active">
+                                    <div className="card-slid">
+                                      <Carousel itemClass="w-full" responsive={responsive}>
+                                        {data
+                                          .filter((each) =>
+                                            // selectedTab ? each?.type === selectedTab : true
+                                            selectedTab
+                                              ? each?.category.includes(selectedTab)
+                                              : true
+                                          )
+                                          .map((each: any) => (
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                width: "100%",
+                                              }}
+                                              key={each._id}
+                                              // className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                            >
+                                              <div
+                                                onClick={() => {
+                                                  if (User) {
+                                                    navigate(`/itinerary/view/${each?._id}`);
+                                                  } else {
+                                                    localStorage.setItem(
+                                                      "loginvalue",
+                                                      `/itinerary/view/${each?._id}`
+                                                    );
+                                                    navigate("/auth/sign-up");
+                                                  }
+                                                }}
+                                                style={{
+                                                  textDecoration: "none",
+                                                  cursor: "pointer",
+                                                  width: "90%",
+                                                }}
+                                                // to={`/user/${each.username}`}
+                                                className="card"
+                                              >
+                                                <img
+                                                  className="card-img-top imgStyle"
+                                                  src={each.image}
+                                                  alt="Cardimage"
+                                                  style={{ width: "100%" }}
+                                                />
+                                                <div className="badge">
+                                                  {
+                                                    <p>
+                                                      {selectedTab ? selectedTab : each.category[0]}
+                                                    </p>
+                                                  }
+                                                </div>
+                                                <div
+                                                  className="card-body"
+                                                  style={{
+                                                    width: "100%",
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    padding: "10px",
+                                                    paddingBottom: "0px",
+                                                  }}
+                                                >
+                                                  <h4
+                                                    title={each.title}
+                                                    className="card-title"
+                                                    style={{
+                                                      margin: "0px",
+
+                                                      paddingRight: "10px",
+                                                      color: "#000000d9",
+                                                      paddingBottom: "8px",
+                                                    }}
+                                                  >
+                                                    {each.title.length >= 31
+                                                      ? `${each.title.slice(0, 31)}...`
+                                                      : each.title}
+                                                  </h4>
+                                        
+                                                  <div
+                                                    style={{
+                                                      display: "flex",
+                                                      flexDirection: "row",
+                                                      alignItems: "center",
+                                                      gap: "6px",
+                                                      paddingBottom: "9px",
+                                                    }}
+                                                  >
+                                                    <img
+                                                      style={{
+                                                        width: "35px",
+                                                        height: "35px",
+                                                        objectFit: "cover",
+                                                        objectPosition: "center",
+                                                        borderRadius: "360px",
+                                                      }}
+                                                      src={
+                                                        each?.userId?.image
+                                                          ? each?.userId?.image
+                                                          : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                                      }
+                                                      alt=""
+                                                    />
+                                                    <span
+                                                      style={{ padding: "0px", fontSize: "15px" }}
+                                                      className="b"
+                                                    >
+                                                      {each.userId.username}
+                                                    </span>
+                                                  </div>
+
+                                                 
+                                                </div>
+                                              
+                                              </div>
+                                            </div>
+                                          ))}
+                                      </Carousel>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div> */}
+
                             {data?.length > 0 ? (
                               <div className="row">
                                 <div

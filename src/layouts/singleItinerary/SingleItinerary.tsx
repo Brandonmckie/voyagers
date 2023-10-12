@@ -9,6 +9,7 @@ import { options } from "../profile/countriesNames";
 import dp from "../navbar/img/dp.png";
 import { ProcessRecords } from "../../utils/processReocrds";
 import { Switch } from "antd";
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 const responsive = {
   superLargeDesktop: {
@@ -67,6 +68,9 @@ const SingleItinerary = (props: any) => {
   const [checkeddata, setchecked] = useState<any>(false);
   const [data, setData] = useState<Itinerary>({});
   const [selectedTab, setselectedTab] = useState("");
+  const [voyageshow, setvoyageshow] = useState(false);
+  const [wondersshow, setwondersshow] = useState(false);
+  const [countriesshow, setcountriesshow] = useState(false);
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [isMy, setIsMy] = useState(false);
   const [purchasedItineraries, setPurchasedItineraries] = useState<string[]>([]);
@@ -142,7 +146,21 @@ const SingleItinerary = (props: any) => {
     e.preventDefault();
     setCurrentTab(tab);
   };
-
+  interface CountryFlagProps {
+    countryCode: string;
+    flag: string;
+  }
+  const CountryFlag: React.FC<CountryFlagProps> = ({ countryCode, flag }) => {
+    return (
+      <span
+        style={{
+          width: flag === "flag" ? "18px" : "",
+          height: flag === "flag" ? "18px" : "",
+        }}
+        className={`fi fi-${countryCode.toLowerCase()} ${flag !== "flag" && "countryStyling"}`}
+      />
+    );
+  };
   const handleEdit = () => {
     navigate(`/itinerary/edit/${itineraryId}`);
   };
@@ -203,7 +221,7 @@ const SingleItinerary = (props: any) => {
                       className="divclass0"
                       style={{
                         width: "91%",
-                        height: "178px",
+                        height: "100%",
                         position: "relative",
                         color: "white",
                         borderRadius: "20px",
@@ -296,11 +314,12 @@ const SingleItinerary = (props: any) => {
 
                           <div style={{ marginLeft: "10px", color: "white" }}>
                             <div
-                              className="slider002"
                               style={{
                                 flexDirection: "row",
                                 alignItems: "center",
                                 height: "34px",
+                                width: "100%",
+                                justifyContent: "space-between",
                               }}
                             >
                               <div
@@ -311,20 +330,98 @@ const SingleItinerary = (props: any) => {
                                   alignItems: "center",
                                   height: "39px",
                                   gap: "9px",
+
+                                  width: "100%",
+                                  justifyContent: "space-between",
                                 }}
                               >
-                                <h3 style={{ margin: "0px" }}>{profile?.voyagestyle?.length}</h3>
-                                <h5
+                                <div
                                   style={{
-                                    fontSize: "15px",
-                                    margin: "0px",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    gap: "8px",
                                   }}
                                 >
-                                  Voyage Style
-                                </h5>
+                                  <h3 style={{ margin: "0px" }}>{profile?.voyagestyle?.length}</h3>
+                                  <h5
+                                    style={{
+                                      fontSize: "15px",
+                                      margin: "0px",
+                                    }}
+                                  >
+                                    Voyage Style
+                                  </h5>
+                                </div>
+                                <div
+                                  onClick={() => {
+                                    setvoyageshow(!voyageshow);
+                                  }}
+                                >
+                                  {!voyageshow ? (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="16"
+                                      height="16"
+                                      fill="currentColor"
+                                      className="bi bi-chevron-down"
+                                      viewBox="0 0 16 16"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                      />
+                                    </svg>
+                                  ) : (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="16"
+                                      height="16"
+                                      fill="currentColor"
+                                      className="bi bi-chevron-up"
+                                      viewBox="0 0 16 16"
+                                    >
+                                      <path
+                                        fill-rule="evenodd"
+                                        d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                                      />
+                                    </svg>
+                                  )}
+                                </div>
                               </div>
                             </div>
-                            <div
+                            {voyageshow && profile?.voyagestyle?.length > 0 && (
+                              <div
+                                style={{
+                                  // width: "170px",
+                                  display: "flex",
+                                  flexWrap: "wrap",
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  gap: "6px",
+                                }}
+                              >
+                                {profile?.voyagestyle?.map(
+                                  (item: any, i: any) => {
+                                    return (
+                                      // i < 2 && ( // Check if index is less than 2
+                                      <p
+                                        style={{
+                                          fontSize: "9px",
+                                          listStyle: "disc",
+                                          margin: "0px",
+                                        }}
+                                        key={i}
+                                      >
+                                        {`${item},`}
+                                      </p>
+                                    );
+                                  }
+                                  // )
+                                )}
+                              </div>
+                            )}
+                            {/* <div
                               className="slider001"
                               style={{
                                 flexDirection: "row",
@@ -358,7 +455,7 @@ const SingleItinerary = (props: any) => {
                                   </h5>
                                 ))}
                               </div>
-                            </div>
+                            </div> */}
 
                             <div
                               style={{
@@ -396,6 +493,8 @@ const SingleItinerary = (props: any) => {
                                 flexDirection: "row",
                                 alignItems: "center",
                                 height: "34px",
+                                width: "101%",
+                                justifyContent: "space-between",
                               }}
                             >
                               <div
@@ -420,7 +519,70 @@ const SingleItinerary = (props: any) => {
                                   Visited Countries
                                 </h5>
                               </div>
+                              <div
+                                onClick={() => {
+                                  setcountriesshow(!countriesshow);
+                                }}
+                              >
+                                {!countriesshow ? (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-chevron-down"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                    />
+                                  </svg>
+                                ) : (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-chevron-up"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                                    />
+                                  </svg>
+                                )}
+                              </div>
                             </div>
+
+                            {countriesshow && profile?.visitedCountries?.length > 0 && (
+                              <div
+                                style={{
+                                  // width: "170px",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  flexWrap: "wrap",
+                                  gap: "6px",
+                                }}
+                              >
+                                {profile?.visitedCountries?.map(
+                                  (item: any, i: any) => {
+                                    return (
+                                      // i < 2 && ( // Check if index is less than 2
+                                      <CountryFlag countryCode={item.value} flag="flag" />
+                                      // <p
+                                      //   style={{ fontSize: "15px", listStyle: "disc", margin: "0px" }}
+                                      //   key={i}
+                                      // >
+                                      //   {`${item.label.replace(/\s+/g, "_")},`}
+                                      // </p>
+                                    );
+                                  }
+                                  // )
+                                )}
+                              </div>
+                            )}
 
                             <div
                               style={{
@@ -428,6 +590,8 @@ const SingleItinerary = (props: any) => {
                                 flexDirection: "row",
                                 alignItems: "center",
                                 height: "34px",
+                                width: "101%",
+                                justifyContent: "space-between",
                               }}
                             >
                               <h5
@@ -454,7 +618,73 @@ const SingleItinerary = (props: any) => {
                                   Visited Wonders{" "}
                                 </h5>
                               </h5>
+                              <div
+                                onClick={() => {
+                                  setwondersshow(!wondersshow);
+                                }}
+                              >
+                                {!wondersshow ? (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-chevron-down"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                                    />
+                                  </svg>
+                                ) : (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-chevron-up"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fill-rule="evenodd"
+                                      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                                    />
+                                  </svg>
+                                )}
+                              </div>
                             </div>
+
+                            {wondersshow && profile?.visitedWonders?.length > 0 && (
+                              <div
+                                style={{
+                                  // width: "170px",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  flexWrap: "wrap",
+                                  gap: "6px",
+                                }}
+                              >
+                                {profile?.visitedWonders?.map(
+                                  (item: any, i: any) => {
+                                    return (
+                                      // i < 2 && ( // Check if index is less than 2
+                                      <p
+                                        style={{
+                                          fontSize: "9px",
+                                          listStyle: "disc",
+                                          margin: "0px",
+                                        }}
+                                        key={i}
+                                      >
+                                        {`${item.label},`}
+                                      </p>
+                                    );
+                                  }
+                                  // )
+                                )}
+                              </div>
+                            )}
 
                             {/* <div style={{ cursor: "pointer" }}>
                           <p
