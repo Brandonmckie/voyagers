@@ -972,6 +972,35 @@ const SingleUserDetail = (props: Props) => {
           </div>
         </div>
       </div>
+      {countriescount?.length > 0 ? (
+        <div style={{ textAlign: "center" }}>
+          <div
+            onClick={() => {
+              if (!user) {
+                navigate("/auth/sign-up");
+              } else {
+                navigate("/itinerary/setupProfile");
+              }
+            }}
+          >
+            <button
+              style={{
+                background: " #f5ad01",
+                outline: "none",
+                border: "none",
+                fontSize: "16px",
+                color: "white",
+                padding: "5px",
+                borderRadius: " 7px",
+                cursor: "pointer",
+              }}
+            >
+              {user ? "Create Voyage" : "Start your voyage"}
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <div className="container">
         <div className="row">
           <div
@@ -1097,32 +1126,6 @@ const SingleUserDetail = (props: Props) => {
                           </div>
                         </Link>
                       ))}
-                      <div style={{ textAlign: "center" }}>
-                        <div
-                          onClick={() => {
-                            if (!user) {
-                              navigate("/auth/sign-up");
-                            } else {
-                              navigate("/itinerary/setupProfile");
-                            }
-                          }}
-                        >
-                          <button
-                            style={{
-                              background: " #f5ad01",
-                              outline: "none",
-                              border: "none",
-                              fontSize: "16px",
-                              color: "white",
-                              padding: "5px",
-                              borderRadius: " 7px",
-                              cursor: "pointer",
-                            }}
-                          >
-                            {user ? "Create Voyage" : "Start your voyage"}
-                          </button>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </>
