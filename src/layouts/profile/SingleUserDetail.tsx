@@ -972,34 +972,33 @@ const SingleUserDetail = (props: Props) => {
           </div>
         </div>
       </div>
-      {countriescount?.length > 0 ? (
-        <div style={{ textAlign: "center" }}>
-          <div
-            onClick={() => {
-              if (!user) {
-                navigate("/auth/sign-up");
-              } else {
-                navigate("/itinerary/setupProfile");
-              }
+
+      <div style={{ textAlign: "center" }}>
+        <div
+          onClick={() => {
+            if (!user) {
+              navigate("/auth/sign-up");
+            } else {
+              navigate("/itinerary/setupProfile");
+            }
+          }}
+        >
+          <button
+            style={{
+              background: " #f5ad01",
+              outline: "none",
+              border: "none",
+              fontSize: "16px",
+              color: "white",
+              padding: "5px",
+              borderRadius: " 7px",
+              cursor: "pointer",
             }}
           >
-            <button
-              style={{
-                background: " #f5ad01",
-                outline: "none",
-                border: "none",
-                fontSize: "16px",
-                color: "white",
-                padding: "5px",
-                borderRadius: " 7px",
-                cursor: "pointer",
-              }}
-            >
-              {user ? "Create Voyage" : "Start your voyage"}
-            </button>
-          </div>
+            {user ? "Create Voyage" : "Start your voyage"}
+          </button>
         </div>
-      ) : null}
+      </div>
 
       <div className="container">
         <div className="row">
@@ -1147,7 +1146,7 @@ const SingleUserDetail = (props: Props) => {
             <h3 style={{ textAlign: "center" }} className="headingtag">
               No Voyages
             </h3>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -1173,7 +1172,7 @@ const SingleUserDetail = (props: Props) => {
                   Start Your Voyage
                 </button>
               </a>
-            </div>
+            </div> */}
           </div>
         )
       ) : showWonders ? (
