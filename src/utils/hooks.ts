@@ -11,7 +11,7 @@ const useAuthentication = () => {
 
     if (!isAuthenticated) {
       // If not authenticated, redirect to the login page or another appropriate route
-      navigate("/auth/login");
+      navigate("/auth/sign-up");
     }
   };
 

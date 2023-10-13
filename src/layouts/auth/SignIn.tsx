@@ -5,6 +5,7 @@ import logo from "./assets/images/logo.png";
 import api from "../../utils/api";
 import { Link, useNavigate } from "react-router-dom";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
+import jwtDecode from "jwt-decode";
 
 type State = {
   email: string;
@@ -22,11 +23,16 @@ const SignIn = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    let username = "";
+    let info = true;
     setIsLoading(true);
     if (!forgotPassword && !Code) {
       try {
         let data = await api.post("/users/login", values);
+
         let token = data?.data?.token;
+        username = data?.data?.username;
+        info = data?.data?.info;
 
         if (token) {
           localStorage.setItem("jwt", token);
@@ -35,7 +41,12 @@ const SignIn = () => {
             localStorage.removeItem("loginvalue");
             navigate(loginval);
           } else {
-            navigate("/");
+            if (info) {
+              navigate(`/user/${username}`);
+            } else {
+              navigate("/itinerary/setupProfile");
+            }
+            // navigate(`/user/${username}`);
           }
         }
       } catch (error: any) {

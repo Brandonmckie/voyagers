@@ -6,7 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
-import { getUserRole } from "../../utils/utils";
+import { checkIfUserIsAuthenticated, getUserRole } from "../../utils/utils";
 import img1 from "./images/img1.jpg";
 import img2 from "./images/img2.jpg";
 import img3 from "./images/img3.jpg";
@@ -69,6 +69,7 @@ const SingleUserDetail = (props: Props) => {
   const [badgeHover, setBadgeHover] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showCountry, setshowCountry] = useState(true);
+  const [user, setUser] = useState(false);
   const [showItinerary, setshowItinerary] = useState(true);
   const [showWonders, setshowWonders] = useState(false);
   const [voyageshow, setvoyageshow] = useState(false);
@@ -79,6 +80,7 @@ const SingleUserDetail = (props: Props) => {
   const [countriescount, setcountriescount] = useState<any>([]);
   const [navInfo, setnavInfo] = useState<any>([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getItineraries = async () => {
     setIsLoading(true);
@@ -115,12 +117,21 @@ const SingleUserDetail = (props: Props) => {
     }
   };
 
+  const verifyLogin = async () => {
+    let isAuthenticated = await checkIfUserIsAuthenticated();
+
+    if (isAuthenticated) setUser(true);
+    else setUser(false);
+  };
+
   useEffect(() => {
     // const userRole = getUserRole(); // Replace this with your logic to get the user's role
     // if (userRole !== "seller") {
     //   navigate("/itinerary/list");
     // }
     // getUserDetails();
+    verifyLogin();
+
     getItineraries();
   }, []);
 
@@ -1086,6 +1097,32 @@ const SingleUserDetail = (props: Props) => {
                           </div>
                         </Link>
                       ))}
+                      <div style={{ textAlign: "center" }}>
+                        <div
+                          onClick={() => {
+                            if (!user) {
+                              navigate("/auth/sign-up");
+                            } else {
+                              navigate("/itinerary/setupProfile");
+                            }
+                          }}
+                        >
+                          <button
+                            style={{
+                              background: " #f5ad01",
+                              outline: "none",
+                              border: "none",
+                              fontSize: "16px",
+                              color: "white",
+                              padding: "5px",
+                              borderRadius: " 7px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            {user ? "Create Voyage" : "Start your voyage"}
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </>
@@ -1117,7 +1154,7 @@ const SingleUserDetail = (props: Props) => {
             >
               <a
                 href="https://dls7hd5yq8f.typeform.com/to/dzOCfYcC?typeform-source=www.myvoyages.com"
-                target="_blank"
+                // target="_blank"
               >
                 <button
                   style={{
