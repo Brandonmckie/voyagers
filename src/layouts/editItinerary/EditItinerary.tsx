@@ -1163,6 +1163,7 @@ const EditItinerary = (props: Props) => {
                                   id={`day${item.day}image`}
                                   type="file"
                                   multiple
+                                  accept="image/*, video/*"
                                   style={{ display: "none" }}
                                   onChange={(e) => handlefilesChange(e, item.day, "stayImages")}
                                 />
@@ -1179,40 +1180,71 @@ const EditItinerary = (props: Props) => {
                               {(item?.stayImages?.length ?? 0) >= 4 ? (
                                 <ul className="ulimage0">
                                   <Slider {...settings} arrows>
-                                    {item.stayImages?.map((image, idx) => (
+                                    {item.stayImages?.map((image: any, idx) => (
                                       <li>
                                         <i
                                           className="fa fa-window-close"
                                           onClick={() => clearImage("stayImages", idx, item.day)}
                                         ></i>
-                                        <img
+
+                                        {typeof image === "string" ? (
+                                          image.includes(
+                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                          ) ? (
+                                            <img src={image} alt="icon" />
+                                          ) : (
+                                            <video
+                                              src={image}
+                                              style={{ width: "100px", height: "100px" }}
+                                            ></video>
+                                          )
+                                        ) : image.type.includes("image") ? (
+                                          <img src={URL.createObjectURL(image)} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={URL.createObjectURL(image)}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )}
+                                        {/* <img
                                           src={
                                             typeof image === "string"
                                               ? image
                                               : URL.createObjectURL(image)
                                           }
                                           alt="icon"
-                                        />
+                                        /> */}
                                       </li>
                                     ))}
                                   </Slider>
                                 </ul>
                               ) : (
                                 <ul>
-                                  {item.stayImages?.map((image, idx) => (
+                                  {item.stayImages?.map((image: any, idx) => (
                                     <li>
                                       <i
                                         className="fa fa-window-close"
                                         onClick={() => clearImage("stayImages", idx, item.day)}
                                       ></i>
-                                      <img
-                                        src={
-                                          typeof image === "string"
-                                            ? image
-                                            : URL.createObjectURL(image)
-                                        }
-                                        alt="icon"
-                                      />
+                                      {typeof image === "string" ? (
+                                        image.includes(
+                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                        ) ? (
+                                          <img src={image} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={image}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )
+                                      ) : image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </ul>
@@ -1253,6 +1285,7 @@ const EditItinerary = (props: Props) => {
                                   id={`day${item.day}taste-image`}
                                   type="file"
                                   multiple
+                                  accept="image/*, video/*"
                                   style={{ display: "none" }}
                                   onChange={(e) => handlefilesChange(e, item.day, "tasteImages")}
                                 />
@@ -1269,40 +1302,62 @@ const EditItinerary = (props: Props) => {
                               {(item?.tasteImages?.length ?? 0) >= 4 ? (
                                 <ul className="ulimage0">
                                   <Slider {...settings} arrows>
-                                    {item.tasteImages?.map((image, idx) => (
+                                    {item.tasteImages?.map((image: any, idx) => (
                                       <li>
                                         <i
                                           className="fa fa-window-close"
                                           onClick={() => clearImage("tasteImages", idx, item.day)}
                                         ></i>
-                                        <img
-                                          src={
-                                            typeof image === "string"
-                                              ? image
-                                              : URL.createObjectURL(image)
-                                          }
-                                          alt="icon"
-                                        />
+                                        {typeof image === "string" ? (
+                                          image.includes(
+                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                          ) ? (
+                                            <img src={image} alt="icon" />
+                                          ) : (
+                                            <video
+                                              src={image}
+                                              style={{ width: "100px", height: "100px" }}
+                                            ></video>
+                                          )
+                                        ) : image.type.includes("image") ? (
+                                          <img src={URL.createObjectURL(image)} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={URL.createObjectURL(image)}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )}
                                       </li>
                                     ))}
                                   </Slider>
                                 </ul>
                               ) : (
                                 <ul>
-                                  {item.tasteImages?.map((image, idx) => (
+                                  {item.tasteImages?.map((image: any, idx) => (
                                     <li>
                                       <i
                                         className="fa fa-window-close"
                                         onClick={() => clearImage("tasteImages", idx, item.day)}
                                       ></i>
-                                      <img
-                                        src={
-                                          typeof image === "string"
-                                            ? image
-                                            : URL.createObjectURL(image)
-                                        }
-                                        alt="icon"
-                                      />
+                                      {typeof image === "string" ? (
+                                        image.includes(
+                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                        ) ? (
+                                          <img src={image} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={image}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )
+                                      ) : image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </ul>
@@ -1340,6 +1395,7 @@ const EditItinerary = (props: Props) => {
                                   id={`day${item.day}-vibe-image`}
                                   type="file"
                                   multiple
+                                  accept="image/*, video/*"
                                   style={{ display: "none" }}
                                   onChange={(e) => handlefilesChange(e, item.day, "vibeImages")}
                                 />
@@ -1356,40 +1412,62 @@ const EditItinerary = (props: Props) => {
                               {(item?.vibeImages?.length ?? 0) >= 4 ? (
                                 <ul className="ulimage0">
                                   <Slider {...settings} arrows>
-                                    {item.vibeImages?.map((image, idx) => (
+                                    {item.vibeImages?.map((image: any, idx) => (
                                       <li>
                                         <i
                                           className="fa fa-window-close"
                                           onClick={() => clearImage("vibeImages", idx, item.day)}
                                         ></i>
-                                        <img
-                                          src={
-                                            typeof image === "string"
-                                              ? image
-                                              : URL.createObjectURL(image)
-                                          }
-                                          alt="icon"
-                                        />
+                                        {typeof image === "string" ? (
+                                          image.includes(
+                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                          ) ? (
+                                            <img src={image} alt="icon" />
+                                          ) : (
+                                            <video
+                                              src={image}
+                                              style={{ width: "100px", height: "100px" }}
+                                            ></video>
+                                          )
+                                        ) : image.type.includes("image") ? (
+                                          <img src={URL.createObjectURL(image)} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={URL.createObjectURL(image)}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )}
                                       </li>
                                     ))}
                                   </Slider>
                                 </ul>
                               ) : (
                                 <ul>
-                                  {item.vibeImages?.map((image, idx) => (
+                                  {item.vibeImages?.map((image: any, idx) => (
                                     <li>
                                       <i
                                         className="fa fa-window-close"
                                         onClick={() => clearImage("vibeImages", idx, item.day)}
                                       ></i>
-                                      <img
-                                        src={
-                                          typeof image === "string"
-                                            ? image
-                                            : URL.createObjectURL(image)
-                                        }
-                                        alt="icon"
-                                      />
+                                      {typeof image === "string" ? (
+                                        image.includes(
+                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                        ) ? (
+                                          <img src={image} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={image}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )
+                                      ) : image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </ul>
@@ -1431,6 +1509,7 @@ const EditItinerary = (props: Props) => {
                                   id={`day${item.day}-experience-image`}
                                   type="file"
                                   multiple
+                                  accept="image/*, video/*"
                                   style={{ display: "none" }}
                                   onChange={(e) =>
                                     handlefilesChange(e, item.day, "experienceImages")
@@ -1465,7 +1544,7 @@ const EditItinerary = (props: Props) => {
                               {(item?.experienceImages?.length ?? 0) >= 4 ? (
                                 <ul className="ulimage0">
                                   <Slider {...settings} arrows>
-                                    {item.experienceImages?.map((image, idx) => (
+                                    {item.experienceImages?.map((image: any, idx) => (
                                       <li>
                                         <i
                                           className="fa fa-window-close"
@@ -1473,21 +1552,32 @@ const EditItinerary = (props: Props) => {
                                             clearImage("experienceImages", idx, item.day)
                                           }
                                         ></i>
-                                        <img
-                                          src={
-                                            typeof image === "string"
-                                              ? image
-                                              : URL.createObjectURL(image)
-                                          }
-                                          alt="icon"
-                                        />
+                                        {typeof image === "string" ? (
+                                          image.includes(
+                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                          ) ? (
+                                            <img src={image} alt="icon" />
+                                          ) : (
+                                            <video
+                                              src={image}
+                                              style={{ width: "100px", height: "100px" }}
+                                            ></video>
+                                          )
+                                        ) : image.type.includes("image") ? (
+                                          <img src={URL.createObjectURL(image)} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={URL.createObjectURL(image)}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )}
                                       </li>
                                     ))}
                                   </Slider>
                                 </ul>
                               ) : (
                                 <ul>
-                                  {item.experienceImages?.map((image, idx) => (
+                                  {item.experienceImages?.map((image: any, idx) => (
                                     <li>
                                       <i
                                         className="fa fa-window-close"
@@ -1495,14 +1585,25 @@ const EditItinerary = (props: Props) => {
                                           clearImage("experienceImages", idx, item.day)
                                         }
                                       ></i>
-                                      <img
-                                        src={
-                                          typeof image === "string"
-                                            ? image
-                                            : URL.createObjectURL(image)
-                                        }
-                                        alt="icon"
-                                      />
+                                      {typeof image === "string" ? (
+                                        image.includes(
+                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
+                                        ) ? (
+                                          <img src={image} alt="icon" />
+                                        ) : (
+                                          <video
+                                            src={image}
+                                            style={{ width: "100px", height: "100px" }}
+                                          ></video>
+                                        )
+                                      ) : image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </ul>

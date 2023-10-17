@@ -133,7 +133,12 @@ const CreateItinerary = (props: Props) => {
   };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, image: e.target?.files?.[0] });
+    if (e.target?.files?.[0].type.includes("image")) {
+      setIsErrored({ ...isErrored, image: "" });
+      setValues({ ...values, image: e.target?.files?.[0] });
+    } else {
+      setIsErrored({ ...isErrored, image: "Image Not Supported" });
+    }
   };
 
   const handlefilesChange = (
@@ -141,6 +146,7 @@ const CreateItinerary = (props: Props) => {
     day: number,
     type: "stayImages" | "experienceImages" | "tasteImages" | "vibeImages"
   ) => {
+    console.log(e.target.files);
     let eachDetail = values.eachDetail.map((each) => {
       if (each.day === day) return { ...each, [type]: [...(each[type] || []), ...e.target.files] };
       else return each;
@@ -715,6 +721,7 @@ const CreateItinerary = (props: Props) => {
                   type="file"
                   style={{ display: "none" }}
                   onChange={handleFileChange}
+                  accept="image/*"
                 />
                 <label htmlFor="thumbnail" style={{ textDecoration: "underline" }}>
                   Upload from your device
@@ -1198,6 +1205,7 @@ const CreateItinerary = (props: Props) => {
                                 multiple
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "stayImages")}
+                                accept="image/*, video/*"
                               />
                               <label
                                 htmlFor={`day${item.day}image`}
@@ -1218,7 +1226,14 @@ const CreateItinerary = (props: Props) => {
                                         className="fa fa-window-close"
                                         onClick={() => clearImage("stayImages", idx, item.day)}
                                       ></i>
-                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                      {image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </Slider>
@@ -1231,7 +1246,14 @@ const CreateItinerary = (props: Props) => {
                                       className="fa fa-window-close"
                                       onClick={() => clearImage("stayImages", idx, item.day)}
                                     ></i>
-                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                    {image.type.includes("image") ? (
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    ) : (
+                                      <video
+                                        src={URL.createObjectURL(image)}
+                                        style={{ width: "100px", height: "100px" }}
+                                      ></video>
+                                    )}
                                   </li>
                                 ))}
                               </ul>
@@ -1274,6 +1296,7 @@ const CreateItinerary = (props: Props) => {
                                 multiple
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "tasteImages")}
+                                accept="image/*, video/*"
                               />
                               <label
                                 htmlFor={`day${item.day}taste-image`}
@@ -1294,7 +1317,14 @@ const CreateItinerary = (props: Props) => {
                                         className="fa fa-window-close"
                                         onClick={() => clearImage("tasteImages", idx, item.day)}
                                       ></i>
-                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                      {image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </Slider>
@@ -1307,7 +1337,14 @@ const CreateItinerary = (props: Props) => {
                                       className="fa fa-window-close"
                                       onClick={() => clearImage("tasteImages", idx, item.day)}
                                     ></i>
-                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                    {image.type.includes("image") ? (
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    ) : (
+                                      <video
+                                        src={URL.createObjectURL(image)}
+                                        style={{ width: "100px", height: "100px" }}
+                                      ></video>
+                                    )}
                                   </li>
                                 ))}
                               </ul>
@@ -1347,6 +1384,7 @@ const CreateItinerary = (props: Props) => {
                                 multiple
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "vibeImages")}
+                                accept="image/*, video/*"
                               />
                               <label
                                 htmlFor={`day${item.day}-vibe-image`}
@@ -1367,7 +1405,14 @@ const CreateItinerary = (props: Props) => {
                                         className="fa fa-window-close"
                                         onClick={() => clearImage("vibeImages", idx, item.day)}
                                       ></i>
-                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                      {image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </Slider>
@@ -1380,7 +1425,14 @@ const CreateItinerary = (props: Props) => {
                                       className="fa fa-window-close"
                                       onClick={() => clearImage("vibeImages", idx, item.day)}
                                     ></i>
-                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                    {image.type.includes("image") ? (
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    ) : (
+                                      <video
+                                        src={URL.createObjectURL(image)}
+                                        style={{ width: "100px", height: "100px" }}
+                                      ></video>
+                                    )}
                                   </li>
                                 ))}
                               </ul>
@@ -1424,6 +1476,7 @@ const CreateItinerary = (props: Props) => {
                                 multiple
                                 style={{ display: "none" }}
                                 onChange={(e) => handlefilesChange(e, item.day, "experienceImages")}
+                                accept="image/*, video/*"
                               />
                               <label
                                 htmlFor={`day${item.day}-experience-image`}
@@ -1446,7 +1499,14 @@ const CreateItinerary = (props: Props) => {
                                           clearImage("experienceImages", idx, item.day)
                                         }
                                       ></i>
-                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                      {image.type.includes("image") ? (
+                                        <img src={URL.createObjectURL(image)} alt="icon" />
+                                      ) : (
+                                        <video
+                                          src={URL.createObjectURL(image)}
+                                          style={{ width: "100px", height: "100px" }}
+                                        ></video>
+                                      )}
                                     </li>
                                   ))}
                                 </Slider>
@@ -1459,7 +1519,14 @@ const CreateItinerary = (props: Props) => {
                                       className="fa fa-window-close"
                                       onClick={() => clearImage("experienceImages", idx, item.day)}
                                     ></i>
-                                    <img src={URL.createObjectURL(image)} alt="icon" />
+                                    {image.type.includes("image") ? (
+                                      <img src={URL.createObjectURL(image)} alt="icon" />
+                                    ) : (
+                                      <video
+                                        src={URL.createObjectURL(image)}
+                                        style={{ width: "100px", height: "100px" }}
+                                      ></video>
+                                    )}
                                   </li>
                                 ))}
                               </ul>

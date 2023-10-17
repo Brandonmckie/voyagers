@@ -956,18 +956,42 @@ const SingleItinerary = (props: any) => {
                               // to={`/user/${each.username}`}
                               className="card"
                             >
-                              <img
-                                className="card-img-top imgStyle"
-                                src={each.image}
-                                alt="Cardimage"
-                                style={{
-                                  width: "100%",
-                                  height: "218px",
-                                  objectFit: "cover",
-                                  objectPosition: "center",
-                                  borderRadius: "7px",
-                                }}
-                              />
+                              {each.image.includes(
+                                "mp4" ||
+                                  "mkv" ||
+                                  "mov" ||
+                                  "wmv" ||
+                                  "webm" ||
+                                  "m4v" ||
+                                  "mpeg" ||
+                                  "ogv"
+                              ) ? (
+                                <video
+                                  controls
+                                  className="card-img-top imgStyle"
+                                  src={each.image}
+                                  style={{
+                                    width: "100%",
+                                    height: "218px",
+                                    objectFit: "cover",
+                                    objectPosition: "center",
+                                    borderRadius: "7px",
+                                  }}
+                                ></video>
+                              ) : (
+                                <img
+                                  className="card-img-top imgStyle"
+                                  src={each.image}
+                                  alt="Cardimage"
+                                  style={{
+                                    width: "100%",
+                                    height: "218px",
+                                    objectFit: "cover",
+                                    objectPosition: "center",
+                                    borderRadius: "7px",
+                                  }}
+                                />
+                              )}
                               <div className="badge">{<p>{each.type}</p>}</div>
                               {/* <div className="" style={{ padding: "8px" }}>
                               <p
@@ -1017,19 +1041,45 @@ const SingleItinerary = (props: any) => {
                                     }}
                                     className="card"
                                   >
-                                    <img
-                                      className="card-img-top imgStyle"
-                                      src={each.image}
-                                      alt="Cardimage"
-                                      style={{
-                                        width: "93%",
-                                        margin: "0px 12px",
-                                        height: "218px",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                        borderRadius: "7px",
-                                      }}
-                                    />
+                                    {each.image.includes(
+                                      "mp4" ||
+                                        "mkv" ||
+                                        "mov" ||
+                                        "wmv" ||
+                                        "webm" ||
+                                        "m4v" ||
+                                        "mpeg" ||
+                                        "ogv"
+                                    ) ? (
+                                      <video
+                                        controls
+                                        className="card-img-top imgStyle"
+                                        src={each.image}
+                                        style={{
+                                          width: "93%",
+                                          margin: "0px 12px",
+                                          height: "218px",
+                                          objectFit: "cover",
+                                          objectPosition: "center",
+                                          borderRadius: "7px",
+                                        }}
+                                      ></video>
+                                    ) : (
+                                      <img
+                                        className="card-img-top imgStyle"
+                                        src={each.image}
+                                        alt="Cardimage"
+                                        style={{
+                                          width: "93%",
+                                          margin: "0px 12px",
+                                          height: "218px",
+                                          objectFit: "cover",
+                                          objectPosition: "center",
+                                          borderRadius: "7px",
+                                        }}
+                                      />
+                                    )}
+
                                     <div className="badge">{<p>{each.type}</p>}</div>
                                   </div>
                                 </div>

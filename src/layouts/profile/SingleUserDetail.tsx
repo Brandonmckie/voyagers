@@ -152,13 +152,13 @@ const SingleUserDetail = (props: Props) => {
         visitedWonders: user.data.user.userInfo.visitedWonders,
       });
 
-      console.log({
-        name: user.data.user.userInfo.name,
-        country: countries?.label,
-        voyagestyle: user.data.user.userInfo.voyageStyle,
-        visitedCountries: user.data.user.userInfo.visitedCountries,
-        visitedWonders: user.data.user.userInfo.visitedWonders,
-      });
+      // console.log({
+      //   name: user.data.user.userInfo.name,
+      //   country: countries?.label,
+      //   voyagestyle: user.data.user.userInfo.voyageStyle,
+      //   visitedCountries: user.data.user.userInfo.visitedCountries,
+      //   visitedWonders: user.data.user.userInfo.visitedWonders,
+      // });
 
       setprofile(user.data.user);
     } catch (error) {

@@ -215,8 +215,8 @@ const MyItineraries = (props: Props) => {
                             style={{
                               width: "100%",
                               height: "200px",
-                              objectFit: "cover",
-                              objectPosition: "center",
+                              objectFit: "fill",
+                              // objectPosition: "center",
                             }}
                           />
                           {/* {badgeHover === each._id ? ( */}
