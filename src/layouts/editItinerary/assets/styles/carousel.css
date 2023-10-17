@@ -229,6 +229,6 @@ textarea.text-details {
     height: 62px;
   }
   .images-upload ul li i.fa.fa-window-close {
-    right: 40px !important;
+    right: 0px !important;
   }
 }

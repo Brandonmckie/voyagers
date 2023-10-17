@@ -1010,6 +1010,7 @@ const voyageStyles = [
 
 const SetupProfile = () => {
   const [name, setName] = useState("");
+  const [username, setusername] = useState("");
   const [voyageStyle, setVoyageStyle] = useState([""]);
   const [country, setCountry] = useState("");
   const [visitedCountries, setVisitedCountries] = useState([]);
@@ -1119,7 +1120,13 @@ const SetupProfile = () => {
           return navigate(data);
         }
       } else {
-        return navigate("/itinerary/create");
+        const params = new URLSearchParams(window.location.search);
+        const login = params.get("login");
+        if (login) {
+          return navigate(`/user/${username}`);
+        } else {
+          return navigate("/itinerary/create");
+        }
       }
       // } else{
       //   getUserDetails("");
@@ -1133,13 +1140,19 @@ const SetupProfile = () => {
     (async () => {
       {
         try {
-          let user = await api("/users/get-profile");
+          const params = new URLSearchParams(window.location.search);
+          const login = params.get("login");
 
+          let user = await api("/users/get-profile");
+          setusername(user?.data?.user?.username);
           if (user?.data?.user?.userInfo) {
             const { voyageStyle, country, bio, name } = user?.data?.user?.userInfo;
             if (voyageStyle?.length === 0 || !bio || !country || !name) {
               setIsLoading(false);
             } else {
+              if (login) {
+                return navigate(`/user/${user?.data?.user?.username}`);
+              }
               let role = user?.data?.user?.role;
               getUserDetails(role);
             }

@@ -399,8 +399,8 @@ const Home = () => {
                                   width: "100%",
                                   minHeight: "234px",
                                   maxHeight: "234px",
-                                  objectFit: "cover",
-                                  objectPosition: "center",
+                                  objectFit: "fill",
+                                  // objectPosition: "center",
                                 }}
                               />
                               <div className="badge">

@@ -33,6 +33,7 @@ const SignIn = () => {
         let token = data?.data?.token;
         username = data?.data?.username;
         info = data?.data?.info;
+        console.log(info);
 
         if (token) {
           localStorage.setItem("jwt", token);
@@ -44,7 +45,7 @@ const SignIn = () => {
             if (info) {
               navigate(`/user/${username}`);
             } else {
-              navigate("/itinerary/setupProfile");
+              navigate("/itinerary/setupProfile?login=true");
             }
             // navigate(`/user/${username}`);
           }

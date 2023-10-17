@@ -265,8 +265,13 @@ textarea.text-details {
     margin-bottom: 14px;
   }
   .images-upload img {
-    width: 62px;
-    height: 62px;
+    width: 62px !important;
+    height: 62px !important;
+  }
+
+  .images-upload video {
+    width: 62px !important;
+    height: 100% !important;
   }
 
   .tabs-pgs li {
@@ -288,7 +293,9 @@ textarea.text-details {
   textarea.text-details {
     height: 202px !important;
   }
-
+  .images-upload ul li {
+    width: 60px !important;
+  }
   .formdes {
     /* padding: 0px; */
     margin-top: 15px !important;

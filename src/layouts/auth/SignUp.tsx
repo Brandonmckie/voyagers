@@ -40,7 +40,7 @@ const SignUp = () => {
           localStorage.removeItem("loginvalue");
           navigate(loginval);
         } else {
-          navigate("/itinerary/setupProfile");
+          navigate("/itinerary/setupProfile?login=true");
         }
       }
     } catch (error: any) {

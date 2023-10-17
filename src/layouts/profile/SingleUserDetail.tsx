@@ -379,7 +379,7 @@ const SingleUserDetail = (props: Props) => {
                                 borderRadius: "10px",
                               }}
                             >
-                              {item.label}
+                              {item.label.replace(/\s+/g, "_")}
                             </p>
                           ))
                         ) : (

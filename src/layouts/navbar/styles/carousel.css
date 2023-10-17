@@ -211,8 +211,13 @@ textarea.text-details {
   .card {
     margin-bottom: 30px;
   }
+
   .atag {
     margin-top: 0px;
+  }
+
+  .images-upload img {
+    width: 60px;
   }
 
   .mobileul {
