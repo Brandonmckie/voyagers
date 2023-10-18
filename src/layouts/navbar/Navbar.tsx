@@ -277,7 +277,7 @@ const Navbar = (props: Props) => {
                               }}
                               to="/itinerary/me"
                             >
-                              My Voyage
+                              My Voyages
                             </Link>
                           </li>
                           <li>
@@ -641,7 +641,7 @@ const Navbar = (props: Props) => {
                         {/* )} */}
 
                         <li>
-                          <Link to="/itinerary/me">My Voyage</Link>
+                          <Link to="/itinerary/me">My Voyages</Link>
                         </li>
 
                         <li>
