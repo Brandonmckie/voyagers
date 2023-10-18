@@ -427,8 +427,8 @@ const Home = () => {
                                     paddingBottom: "8px",
                                   }}
                                 >
-                                  {each.title.length >= 31
-                                    ? `${each.title.slice(0, 31)}...`
+                                  {each.title.length >= 23
+                                    ? `${each.title.slice(0, 23)}...`
                                     : each.title}
                                 </h4>
                                 {/* <div

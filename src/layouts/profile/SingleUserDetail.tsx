@@ -368,20 +368,23 @@ const SingleUserDetail = (props: Props) => {
                       >
                         <h5 style={{ fontSize: "16px", margin: "0px" }}>Visited Countries: </h5>
                         {navInfo?.visitedCountries?.length > 0 ? (
-                          navInfo?.visitedCountries?.map((item: any, i: any) => (
-                            <p
-                              style={{
-                                margin: "0px",
-                                marginLeft: "10px",
-                                background: " white",
-                                color: "black",
-                                padding: "4px",
-                                borderRadius: "10px",
-                              }}
-                            >
-                              {item.label.replace(/\s+/g, "_")}
-                            </p>
-                          ))
+                          navInfo?.visitedCountries?.map(
+                            (item: any, i: any) =>
+                              i < 10 && (
+                                <p
+                                  style={{
+                                    margin: "0px",
+                                    marginLeft: "10px",
+                                    background: " white",
+                                    color: "black",
+                                    padding: "4px",
+                                    borderRadius: "10px",
+                                  }}
+                                >
+                                  {item.label.replace(/\s+/g, "_")}
+                                </p>
+                              )
+                          )
                         ) : (
                           <p
                             style={{

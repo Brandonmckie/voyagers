@@ -1141,7 +1141,7 @@ const SetupProfile = () => {
       {
         try {
           const params = new URLSearchParams(window.location.search);
-          const login = params.get("login");
+          const login = params?.get("login");
 
           let user = await api("/users/get-profile");
           setusername(user?.data?.user?.username);

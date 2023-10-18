@@ -45,6 +45,7 @@ const CreateItinerary = (props: Props) => {
   const [isErrored, setIsErrored] = useState<any>({});
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, seterror] = useState(false);
   const [dayForDelete, setDayForDelete] = useState<number | null>(null);
   const navigate = useNavigate();
 
@@ -234,6 +235,7 @@ const CreateItinerary = (props: Props) => {
       if (error.response?.data) {
         setIsErrored(error.response?.data);
       }
+      seterror(true);
     } finally {
       setIsLoading(false);
     }
@@ -1543,6 +1545,21 @@ const CreateItinerary = (props: Props) => {
         ))}
 
         {isComplete && <p>Voyage created successfuly</p>}
+        {Object.keys(isErrored).length > 0 ? (
+          <p
+            style={{
+              color: "red",
+              textAlign: "center",
+              fontSize: "16px",
+              marginBottom: "0px",
+              marginTop: "26px",
+            }}
+          >
+            Kindly complete all mandatory fields
+          </p>
+        ) : (
+          error && <p style={{ color: "red" }}>Something Went Wrong</p>
+        )}
 
         <div className="row">
           <div className="col-md-12 text-center" style={{ marginTop: "20px" }}>
