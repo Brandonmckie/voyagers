@@ -956,16 +956,24 @@ const SingleItinerary = (props: any) => {
                               // to={`/user/${each.username}`}
                               className="card"
                             >
-                              {each.image.includes(
-                                "mp4" ||
-                                  "mkv" ||
-                                  "mov" ||
-                                  "wmv" ||
-                                  "webm" ||
-                                  "m4v" ||
-                                  "mpeg" ||
-                                  "ogv"
-                              ) ? (
+                              {each.image.includes("mp4") ||
+                              each.image.includes("mp4") ||
+                              each.image.includes("mkv") ||
+                              each.image.includes("MKV") ||
+                              each.image.includes("mov") ||
+                              each.image.includes("wmv") ||
+                              each.image.includes("WMV") ||
+                              each.image.includes("MOV") ||
+                              each.image.includes("webm") ||
+                              each.image.includes("WEBM") ||
+                              each.image.includes("m4v") ||
+                              each.image.includes("M4V") ||
+                              each.image.includes("3gp") ||
+                              each.image.includes("3GP") ||
+                              each.image.includes("mpeg") ||
+                              each.image.includes("MPEG") ||
+                              each.image.includes("ogv") ||
+                              each.image.includes("OGV") ? (
                                 <video
                                   controls
                                   className="card-img-top imgStyle"
@@ -1041,16 +1049,24 @@ const SingleItinerary = (props: any) => {
                                     }}
                                     className="card"
                                   >
-                                    {each.image.includes(
-                                      "mp4" ||
-                                        "mkv" ||
-                                        "mov" ||
-                                        "wmv" ||
-                                        "webm" ||
-                                        "m4v" ||
-                                        "mpeg" ||
-                                        "ogv"
-                                    ) ? (
+                                    {each.image.includes("mp4") ||
+                                    each.image.includes("mp4") ||
+                                    each.image.includes("mkv") ||
+                                    each.image.includes("MKV") ||
+                                    each.image.includes("mov") ||
+                                    each.image.includes("wmv") ||
+                                    each.image.includes("WMV") ||
+                                    each.image.includes("MOV") ||
+                                    each.image.includes("webm") ||
+                                    each.image.includes("WEBM") ||
+                                    each.image.includes("m4v") ||
+                                    each.image.includes("M4V") ||
+                                    each.image.includes("3gp") ||
+                                    each.image.includes("3GP") ||
+                                    each.image.includes("mpeg") ||
+                                    each.image.includes("MPEG") ||
+                                    each.image.includes("ogv") ||
+                                    each.image.includes("OGV") ? (
                                       <video
                                         controls
                                         className="card-img-top imgStyle"

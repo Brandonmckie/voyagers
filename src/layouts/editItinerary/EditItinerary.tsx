@@ -7,6 +7,7 @@ import "./assets/styles/index.css";
 import "./assets/styles/carousel.css";
 import upload from "./assets/images/Upload.png";
 import { useNavigate, useParams } from "react-router-dom";
+import img1 from "./assets/images/images.png";
 import Slider from "react-slick";
 import CircularProgress from "../../components/CircularProgress/CircularProgress";
 
@@ -45,6 +46,8 @@ type Values = {
 const EditItinerary = (props: Props) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isErrored, setIsErrored] = useState<any>({});
+  const [message, setmessage] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
   const [dayForDelete, setDayForDelete] = useState<number | null>(null);
@@ -243,6 +246,7 @@ const EditItinerary = (props: Props) => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setmessage("");
     e.preventDefault();
     let day = 1;
     setIsLoading(true);
@@ -336,6 +340,16 @@ const EditItinerary = (props: Props) => {
 
       // Reset the form or perform any other necessary actions
     } catch (error: any) {
+      if (!values.country || !values.title || !values.image || values.category.length < 1) {
+        setmessage(
+          `Kindly complete the required information for ${!values.country ? "country, " : ""} ${
+            !values.title ? "title, " : ""
+          }${!values.image ? "image, " : ""}${
+            values.category.length < 1 ? "category, " : ""
+          } and other fields`
+        );
+      } else {
+      }
       if (error.response?.data) {
         setIsErrored(error.response?.data);
       }
@@ -717,8 +731,8 @@ const EditItinerary = (props: Props) => {
                       width: "200px",
                       height: "100px",
                       borderRadius: "8px",
-                      objectFit: "cover",
-                      objectPosition: "center",
+                      objectFit: "fill",
+                      // objectPosition: "center",
                     }}
                     alt="Thumbnail"
                   />
@@ -1193,18 +1207,20 @@ const EditItinerary = (props: Props) => {
                                           ) ? (
                                             <img src={image} alt="icon" />
                                           ) : (
-                                            <video
-                                              src={image}
+                                            <img
+                                              src={img1}
+                                              alt=""
                                               style={{ width: "100px", height: "100px" }}
-                                            ></video>
+                                            />
                                           )
                                         ) : image.type.includes("image") ? (
                                           <img src={URL.createObjectURL(image)} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={URL.createObjectURL(image)}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )}
                                         {/* <img
                                           src={
@@ -1314,18 +1330,20 @@ const EditItinerary = (props: Props) => {
                                           ) ? (
                                             <img src={image} alt="icon" />
                                           ) : (
-                                            <video
-                                              src={image}
+                                            <img
+                                              src={img1}
+                                              alt=""
                                               style={{ width: "100px", height: "100px" }}
-                                            ></video>
+                                            />
                                           )
                                         ) : image.type.includes("image") ? (
                                           <img src={URL.createObjectURL(image)} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={URL.createObjectURL(image)}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )}
                                       </li>
                                     ))}
@@ -1345,18 +1363,20 @@ const EditItinerary = (props: Props) => {
                                         ) ? (
                                           <img src={image} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={image}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )
                                       ) : image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}
@@ -1424,18 +1444,20 @@ const EditItinerary = (props: Props) => {
                                           ) ? (
                                             <img src={image} alt="icon" />
                                           ) : (
-                                            <video
-                                              src={image}
+                                            <img
+                                              src={img1}
+                                              alt=""
                                               style={{ width: "100px", height: "100px" }}
-                                            ></video>
+                                            />
                                           )
                                         ) : image.type.includes("image") ? (
                                           <img src={URL.createObjectURL(image)} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={URL.createObjectURL(image)}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )}
                                       </li>
                                     ))}
@@ -1455,18 +1477,20 @@ const EditItinerary = (props: Props) => {
                                         ) ? (
                                           <img src={image} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={image}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )
                                       ) : image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}
@@ -1558,18 +1582,20 @@ const EditItinerary = (props: Props) => {
                                           ) ? (
                                             <img src={image} alt="icon" />
                                           ) : (
-                                            <video
-                                              src={image}
+                                            <img
+                                              src={img1}
+                                              alt=""
                                               style={{ width: "100px", height: "100px" }}
-                                            ></video>
+                                            />
                                           )
                                         ) : image.type.includes("image") ? (
                                           <img src={URL.createObjectURL(image)} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={URL.createObjectURL(image)}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )}
                                       </li>
                                     ))}
@@ -1591,18 +1617,20 @@ const EditItinerary = (props: Props) => {
                                         ) ? (
                                           <img src={image} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={image}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )
                                       ) : image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}
@@ -1619,6 +1647,19 @@ const EditItinerary = (props: Props) => {
             </div>
           ))}
           {isComplete && <p>Voyage created successfuly</p>}
+          {message && (
+            <p
+              style={{
+                color: "red",
+                textAlign: "center",
+                fontSize: "16px",
+                marginBottom: "0px",
+                marginTop: "26px",
+              }}
+            >
+              {message}
+            </p>
+          )}
           <div className="row">
             <div className="col-md-12 text-center" style={{ marginTop: "20px" }}>
               <button disabled={isLoading} type="submit" className="btn btn-orange navbar-btn">

@@ -9,6 +9,7 @@ import CircularProgress from "../../components/CircularProgress/CircularProgress
 import ReactModal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
+import img1 from "./assets/images/images.png";
 
 type Props = {};
 
@@ -43,7 +44,7 @@ type Values = {
 const CreateItinerary = (props: Props) => {
   const [isComplete, setIsComplete] = useState(false);
   const [isErrored, setIsErrored] = useState<any>({});
-
+  const [message, setmessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, seterror] = useState(false);
   const [dayForDelete, setDayForDelete] = useState<number | null>(null);
@@ -157,7 +158,10 @@ const CreateItinerary = (props: Props) => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setmessage("");
+
     e.preventDefault();
+
     setIsLoading(true);
     let day = 1;
     try {
@@ -232,6 +236,16 @@ const CreateItinerary = (props: Props) => {
 
       // Reset the form or perform any other necessary actions
     } catch (error: any) {
+      if (!values.country || !values.title || !values.image || values.category.length < 1) {
+        setmessage(
+          `Kindly complete the required information for ${!values.country ? "country, " : ""} ${
+            !values.title ? "title, " : ""
+          }${!values.image ? "image, " : ""}${
+            values.category.length < 1 ? "category, " : ""
+          } and other fields`
+        );
+      } else {
+      }
       if (error.response?.data) {
         setIsErrored(error.response?.data);
       }
@@ -707,8 +721,8 @@ const CreateItinerary = (props: Props) => {
                     width: "200px",
                     height: "100px",
                     borderRadius: "8px",
-                    objectFit: "cover",
-                    objectPosition: "center",
+                    objectFit: "fill",
+                    // objectPosition: "center",
                   }}
                   alt="Thumbnail"
                 />
@@ -1231,10 +1245,15 @@ const CreateItinerary = (props: Props) => {
                                       {image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
+                                        // <video
+                                        //   src={URL.createObjectURL(image)}
+                                        //   style={{ width: "100px", height: "100px" }}
+                                        // ></video>
                                       )}
                                     </li>
                                   ))}
@@ -1251,10 +1270,11 @@ const CreateItinerary = (props: Props) => {
                                     {image.type.includes("image") ? (
                                       <img src={URL.createObjectURL(image)} alt="icon" />
                                     ) : (
-                                      <video
-                                        src={URL.createObjectURL(image)}
+                                      <img
+                                        src={img1}
+                                        alt=""
                                         style={{ width: "100px", height: "100px" }}
-                                      ></video>
+                                      />
                                     )}
                                   </li>
                                 ))}
@@ -1322,10 +1342,11 @@ const CreateItinerary = (props: Props) => {
                                       {image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}
@@ -1342,10 +1363,15 @@ const CreateItinerary = (props: Props) => {
                                     {image.type.includes("image") ? (
                                       <img src={URL.createObjectURL(image)} alt="icon" />
                                     ) : (
-                                      <video
-                                        src={URL.createObjectURL(image)}
+                                      <img
+                                        src={img1}
+                                        alt=""
                                         style={{ width: "100px", height: "100px" }}
-                                      ></video>
+                                      />
+                                      // <video
+                                      //   src={URL.createObjectURL(image)}
+                                      //   style={{ width: "100px", height: "100px" }}
+                                      // ></video>
                                     )}
                                   </li>
                                 ))}
@@ -1410,10 +1436,11 @@ const CreateItinerary = (props: Props) => {
                                       {image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}
@@ -1430,10 +1457,11 @@ const CreateItinerary = (props: Props) => {
                                     {image.type.includes("image") ? (
                                       <img src={URL.createObjectURL(image)} alt="icon" />
                                     ) : (
-                                      <video
-                                        src={URL.createObjectURL(image)}
+                                      <img
+                                        src={img1}
+                                        alt=""
                                         style={{ width: "100px", height: "100px" }}
-                                      ></video>
+                                      />
                                     )}
                                   </li>
                                 ))}
@@ -1504,10 +1532,11 @@ const CreateItinerary = (props: Props) => {
                                       {image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}
@@ -1524,10 +1553,11 @@ const CreateItinerary = (props: Props) => {
                                     {image.type.includes("image") ? (
                                       <img src={URL.createObjectURL(image)} alt="icon" />
                                     ) : (
-                                      <video
-                                        src={URL.createObjectURL(image)}
+                                      <img
+                                        src={img1}
+                                        alt=""
                                         style={{ width: "100px", height: "100px" }}
-                                      ></video>
+                                      />
                                     )}
                                   </li>
                                 ))}
@@ -1545,7 +1575,7 @@ const CreateItinerary = (props: Props) => {
         ))}
 
         {isComplete && <p>Voyage created successfuly</p>}
-        {Object.keys(isErrored).length > 0 ? (
+        {message && (
           <p
             style={{
               color: "red",
@@ -1555,10 +1585,8 @@ const CreateItinerary = (props: Props) => {
               marginTop: "26px",
             }}
           >
-            Kindly complete all mandatory fields
+            {message}
           </p>
-        ) : (
-          error && <p style={{ color: "red" }}>Something Went Wrong</p>
         )}
 
         <div className="row">
