@@ -6,6 +6,9 @@
 .card-body {
   padding: 20px;
 }
+.userstyle00 {
+  flex-direction: row;
+}
 .multih3 {
   margin-bottom: 0px;
   margin-top: 30px;
@@ -234,9 +237,23 @@ textarea.text-details {
     font-size: 20px;
   }
 }
-
+.usersstyle001 {
+  justify-content: flex-start;
+}
+.userstyle022 {
+  width: 100%;
+}
 @media (max-width: 530px) {
   .nav-tabs {
+    flex-direction: column;
+  }
+  .userstyle022 {
+    width: 129px;
+  }
+  .usersstyle001 {
+    justify-content: center;
+  }
+  .userstyle00 {
     flex-direction: column;
   }
   ul.nav-tabs li {

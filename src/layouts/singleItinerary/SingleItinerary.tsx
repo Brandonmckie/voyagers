@@ -981,8 +981,8 @@ const SingleItinerary = (props: any) => {
                                   style={{
                                     width: "100%",
                                     height: "218px",
-                                    objectFit: "cover",
-                                    objectPosition: "center",
+                                    // objectFit: "cover",
+                                    // objectPosition: "center",
                                     borderRadius: "7px",
                                   }}
                                 ></video>
@@ -994,8 +994,8 @@ const SingleItinerary = (props: any) => {
                                   style={{
                                     width: "100%",
                                     height: "218px",
-                                    objectFit: "cover",
-                                    objectPosition: "center",
+                                    objectFit: "fill",
+                                    // objectPosition: "center",
                                     borderRadius: "7px",
                                   }}
                                 />
@@ -1075,8 +1075,8 @@ const SingleItinerary = (props: any) => {
                                           width: "93%",
                                           margin: "0px 12px",
                                           height: "218px",
-                                          objectFit: "cover",
-                                          objectPosition: "center",
+                                          objectFit: "fill",
+                                          // objectPosition: "center",
                                           borderRadius: "7px",
                                         }}
                                       ></video>
@@ -1089,8 +1089,8 @@ const SingleItinerary = (props: any) => {
                                           width: "93%",
                                           margin: "0px 12px",
                                           height: "218px",
-                                          objectFit: "cover",
-                                          objectPosition: "center",
+                                          objectFit: "fill",
+                                          // objectPosition: "center",
                                           borderRadius: "7px",
                                         }}
                                       />
