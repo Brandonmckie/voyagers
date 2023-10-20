@@ -564,8 +564,8 @@ const Itineraries = (props: Props) => {
                                           >
                                             <img
                                               style={{
-                                                width: "55px",
-                                                height: "55px",
+                                                width: "80px",
+                                                height: "80px",
                                                 objectFit: "cover",
                                                 objectPosition: "center",
                                                 borderRadius: "360px",
@@ -580,7 +580,8 @@ const Itineraries = (props: Props) => {
                                             <span
                                               style={{
                                                 padding: "0px",
-                                                fontSize: "15px",
+                                                fontSize: "10px",
+                                                fontWeight: "600",
                                               }}
                                               className="b"
                                             >
