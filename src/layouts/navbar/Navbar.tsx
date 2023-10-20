@@ -249,7 +249,7 @@ const Navbar = (props: Props) => {
                               }}
                               to="/qrcode"
                             >
-                              My Qrcode
+                              My QR code
                             </Link>
                           </li>
                           {/* {user?.userInfo?.name && ( */}
@@ -621,7 +621,7 @@ const Navbar = (props: Props) => {
                           ""
                         )}
                         <li>
-                          <Link to="/qrcode">My Qrcode</Link>
+                          <Link to="/qrcode">My QR code</Link>
                         </li>
                         {/* {user?.userInfo?.name && ( */}
                         <li>
