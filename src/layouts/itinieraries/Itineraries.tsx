@@ -160,6 +160,9 @@ const Itineraries = (props: Props) => {
   const multiSelectRef = useRef(null);
   const [data, setData] = useState<Itinerary[]>([]);
   const [searchdata, setsearchdata] = useState<any>([]);
+  const [voyagers, setvoyagers] = useState(false);
+  const [voyages, setvoyages] = useState(true);
+
   const [voyageStyle, setVoyageStyle] = useState([]);
   const [usersArray, setusersArray] = useState<any>([]);
   const [purchasedItineraries, setPurchasedItineraries] = useState<Itinerary[]>([]);
@@ -447,35 +450,78 @@ const Itineraries = (props: Props) => {
                         ) : (
                           <></>
                         )}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: "62px",
+                            cursor: "pointer",
+                            justifyContent: "center",
+                            marginBottom: "0px",
+                          }}
+                          className="tabsStyle"
+                        >
+                          <h4
+                            className="heading-style0"
+                            style={{
+                              color: voyages ? "#f1a501" : "black",
+                              borderBottom: voyages ? "2px solid #f1a501" : "none",
+                            }}
+                            onClick={() => {
+                              setvoyagers(false);
+                              setvoyages(true);
+                            }}
+                          >
+                            Voyages
+                          </h4>
+                          <div
+                            style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}
+                          ></div>
 
-                        <br />
-                        <section className="listing">
-                          <div className="container">
-                            <div className="row">
-                              <div className="col-md-7">
-                                <div className="left-first">
-                                  <h1 className="top-heading">
-                                    <span className="first-textbg">VOYAGERS</span>
-                                  </h1>
+                          <h4
+                            className="heading-style0"
+                            style={{
+                              color: voyagers ? "#f1a501" : "black",
+                              borderBottom: voyagers ? "2px solid #f1a501" : "none",
+                            }}
+                            onClick={() => {
+                              setvoyagers(true);
+                              setvoyages(false);
+                            }}
+                          >
+                            Voyagers
+                          </h4>
+                        </div>
+
+                        {voyagers && (
+                          <section className="listing">
+                            <div className="container">
+                              <div className="row">
+                                <div className="col-md-7">
+                                  <div className="left-first">
+                                    <h1 className="top-heading">
+                                      <span className="first-textbg">VOYAGERS</span>
+                                    </h1>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
 
-                            {usersArray?.length > 0 ? (
-                              <div className="row">
-                                <div
-                                  // className="usersstyle001"
-                                  style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    flexWrap: "wrap",
-                                    paddingTop: "20px",
+                              {usersArray?.length > 0 ? (
+                                <div className="row">
+                                  <div
+                                    // className="usersstyle001"
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "row",
+                                      flexWrap: "wrap",
+                                      paddingTop: "20px",
 
-                                    gap: "11px",
-                                    margin: "0px 10px",
-                                  }}
-                                >
-                                  {/* <div
+                                      gap: "11px",
+                                      margin: "0px 10px",
+                                    }}
+                                  >
+                                    {/* <div
                                     id="carousel-reviews"
                                     className="carousel slide"
                                     data-ride="carousel"
@@ -484,224 +530,229 @@ const Itineraries = (props: Props) => {
                                       className="carousel-inner"
                                       style={{ padding: "0px", paddingTop: "21px" }}
                                     > */}
-                                  {/* <div className="item active">
+                                    {/* <div className="item active">
                                         <div className="card-slid"> */}
-                                  {/* <Carousel itemClass="w-full" res/ponsive={responsive}> */}
-                                  {usersArray.map((each: any, i: any) => (
-                                    <div
-                                      key={i}
-                                      // className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                    >
+                                    {/* <Carousel itemClass="w-full" res/ponsive={responsive}> */}
+                                    {usersArray.map((each: any, i: any) => (
                                       <div
-                                        className="userstyle022 card"
-                                        onClick={() => {
-                                          navigate(`/user/${each.username}`);
-                                        }}
-                                        style={{
-                                          textDecoration: "none",
-                                          cursor: "pointer",
-                                          marginBottom: "5px",
-                                        }}
+                                        key={i}
+                                        // className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
                                       >
                                         <div
-                                          className="userstyle00"
-                                          style={{
-                                            display: "flex",
-                                            // flexDirection: "row",
-                                            alignItems: "center",
-                                            gap: "6px",
-                                            paddingBottom: "9px",
-                                            paddingLeft: "11px",
-                                            paddingTop: "9px",
-                                            paddingRight: "11px",
-                                          }}
-                                        >
-                                          <img
-                                            style={{
-                                              width: "35px",
-                                              height: "35px",
-                                              objectFit: "cover",
-                                              objectPosition: "center",
-                                              borderRadius: "360px",
-                                            }}
-                                            src={
-                                              each?.image
-                                                ? each?.image
-                                                : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
-                                            }
-                                            alt=""
-                                          />
-                                          <span
-                                            style={{
-                                              padding: "0px",
-                                              fontSize: "12px",
-                                            }}
-                                            className="b"
-                                          >
-                                            {each.username}
-                                          </span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ))}
-                                  {/* </Carousel> */}
-                                  {/* // </div> */}
-                                  {/* </div> */}
-                                  {/* //{" "} */}
-                                  {/* </div>
-                                  </div> */}
-                                </div>
-                              </div>
-                            ) : (
-                              <div>
-                                <h3 style={{ textAlign: "center" }}>No Voyagers found</h3>
-                              </div>
-                            )}
-                          </div>
-                        </section>
-
-                        <br />
-
-                        <section className="listing">
-                          <div className="container">
-                            <div className="row">
-                              <div className="col-md-7">
-                                <div className="left-first">
-                                  <h1 className="top-heading">
-                                    <span className="first-textbg">VOYAGES Listing</span>
-                                  </h1>
-                                </div>
-                              </div>
-                            </div>
-
-                            {data?.length > 0 ? (
-                              <div className="row">
-                                <div
-                                  className="card-grid"
-                                  style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    flexWrap: "wrap",
-                                  }}
-                                >
-                                  {data
-                                    .filter((each) =>
-                                      // selectedTab ? each?.type === selectedTab : true
-                                      selectedTab ? each?.category.includes(selectedTab) : true
-                                    )
-                                    .map((each: any) => (
-                                      <div
-                                        key={each._id}
-                                        className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-                                        style={{ marginBottom: "20px" }}
-                                      >
-                                        <div
+                                          className="userstyle022 card"
                                           onClick={() => {
-                                            if (User) {
-                                              navigate(`/itinerary/view/${each?._id}`);
-                                            } else {
-                                              localStorage.setItem(
-                                                "loginvalue",
-                                                `/itinerary/view/${each?._id}`
-                                              );
-                                              navigate("/auth/sign-up");
-                                            }
+                                            navigate(`/user/${each.username}`);
                                           }}
-                                          style={{ textDecoration: "none", cursor: "pointer" }}
-                                          // to={`/user/${each.username}`}
-                                          className="card"
+                                          style={{
+                                            textDecoration: "none",
+                                            cursor: "pointer",
+                                            marginBottom: "5px",
+                                          }}
                                         >
-                                          <img
-                                            className="card-img-top imgStyle"
-                                            src={each.image}
-                                            alt="Cardimage"
-                                            style={{ width: "100%" }}
-                                          />
-                                          <div className="badge">
-                                            {<p>{selectedTab ? selectedTab : each.category[0]}</p>}
-                                          </div>
                                           <div
-                                            className="card-body"
+                                            className="userstyle00"
                                             style={{
-                                              width: "100%",
                                               display: "flex",
-                                              flexDirection: "column",
-                                              padding: "10px",
-                                              paddingBottom: "0px",
+                                              // flexDirection: "row",
+                                              alignItems: "center",
+                                              gap: "6px",
+                                              paddingBottom: "9px",
+                                              paddingLeft: "11px",
+                                              paddingTop: "9px",
+                                              paddingRight: "11px",
                                             }}
                                           >
-                                            <h4
-                                              title={each.title}
-                                              className="card-title"
+                                            <img
                                               style={{
-                                                margin: "0px",
-
-                                                paddingRight: "10px",
-                                                color: "#000000d9",
-                                                paddingBottom: "8px",
+                                                width: "55px",
+                                                height: "55px",
+                                                objectFit: "cover",
+                                                objectPosition: "center",
+                                                borderRadius: "360px",
                                               }}
-                                            >
-                                              {each.title.length >= 23
-                                                ? `${each.title.slice(0, 23)}...`
-                                                : each.title}
-                                            </h4>
-                                            {/* <div
-                                  className="subtitle"
-                                  style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                  }}
-                                > */}
-                                            <div
+                                              src={
+                                                each?.image
+                                                  ? each?.image
+                                                  : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                              }
+                                              alt=""
+                                            />
+                                            <span
                                               style={{
-                                                display: "flex",
-                                                flexDirection: "row",
-                                                alignItems: "center",
-                                                gap: "6px",
-                                                paddingBottom: "9px",
+                                                padding: "0px",
+                                                fontSize: "15px",
                                               }}
+                                              className="b"
                                             >
-                                              <img
-                                                style={{
-                                                  width: "35px",
-                                                  height: "35px",
-                                                  objectFit: "cover",
-                                                  objectPosition: "center",
-                                                  borderRadius: "360px",
-                                                }}
-                                                src={
-                                                  each?.userId?.image
-                                                    ? each?.userId?.image
-                                                    : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
-                                                }
-                                                alt=""
-                                              />
-                                              <span
-                                                style={{ padding: "0px", fontSize: "15px" }}
-                                                className="b"
-                                              >
-                                                {each.userId.username}
-                                              </span>
-                                            </div>
-
-                                            {/* </div> */}
-
-                                            {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
+                                              {each.username}
+                                            </span>
                                           </div>
                                         </div>
                                       </div>
                                     ))}
+                                    {/* </Carousel> */}
+                                    {/* // </div> */}
+                                    {/* </div> */}
+                                    {/* //{" "} */}
+                                    {/* </div>
+                                  </div> */}
+                                  </div>
+                                </div>
+                              ) : (
+                                <div>
+                                  <h3 style={{ textAlign: "center" }}>No Voyagers found</h3>
+                                </div>
+                              )}
+                            </div>
+                          </section>
+                        )}
+
+                        {voyages && (
+                          <section className="listing">
+                            <div className="container">
+                              <div className="row">
+                                <div className="col-md-7">
+                                  <div className="left-first">
+                                    <h1 className="top-heading">
+                                      <span className="first-textbg">VOYAGES Listing</span>
+                                    </h1>
+                                  </div>
                                 </div>
                               </div>
-                            ) : (
-                              <div>
-                                <h3 style={{ textAlign: "center" }}>No Voyages found</h3>
-                              </div>
-                            )}
-                          </div>
-                        </section>
+
+                              {data?.length > 0 ? (
+                                <div className="row">
+                                  <div
+                                    className="card-grid"
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "row",
+                                      flexWrap: "wrap",
+                                    }}
+                                  >
+                                    {data
+                                      .filter((each) =>
+                                        // selectedTab ? each?.type === selectedTab : true
+                                        selectedTab ? each?.category.includes(selectedTab) : true
+                                      )
+                                      .map((each: any) => (
+                                        <div
+                                          key={each._id}
+                                          className="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+                                          style={{ marginBottom: "20px" }}
+                                        >
+                                          <div
+                                            onClick={() => {
+                                              if (User) {
+                                                navigate(`/itinerary/view/${each?._id}`);
+                                              } else {
+                                                localStorage.setItem(
+                                                  "loginvalue",
+                                                  `/itinerary/view/${each?._id}`
+                                                );
+                                                navigate("/auth/sign-up");
+                                              }
+                                            }}
+                                            style={{ textDecoration: "none", cursor: "pointer" }}
+                                            // to={`/user/${each.username}`}
+                                            className="card"
+                                          >
+                                            <img
+                                              className="card-img-top imgStyle"
+                                              src={each.image}
+                                              alt="Cardimage"
+                                              style={{ width: "100%" }}
+                                            />
+                                            <div className="badge">
+                                              {
+                                                <p>
+                                                  {selectedTab ? selectedTab : each.category[0]}
+                                                </p>
+                                              }
+                                            </div>
+                                            <div
+                                              className="card-body"
+                                              style={{
+                                                width: "100%",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                padding: "10px",
+                                                paddingBottom: "0px",
+                                              }}
+                                            >
+                                              <h4
+                                                title={each.title}
+                                                className="card-title"
+                                                style={{
+                                                  margin: "0px",
+
+                                                  paddingRight: "10px",
+                                                  color: "#000000d9",
+                                                  paddingBottom: "8px",
+                                                }}
+                                              >
+                                                {each.title.length >= 23
+                                                  ? `${each.title.slice(0, 23)}...`
+                                                  : each.title}
+                                              </h4>
+                                              {/* <div
+          className="subtitle"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        > */}
+                                              <div
+                                                style={{
+                                                  display: "flex",
+                                                  flexDirection: "row",
+                                                  alignItems: "center",
+                                                  gap: "6px",
+                                                  paddingBottom: "9px",
+                                                }}
+                                              >
+                                                <img
+                                                  style={{
+                                                    width: "35px",
+                                                    height: "35px",
+                                                    objectFit: "cover",
+                                                    objectPosition: "center",
+                                                    borderRadius: "360px",
+                                                  }}
+                                                  src={
+                                                    each?.userId?.image
+                                                      ? each?.userId?.image
+                                                      : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                                  }
+                                                  alt=""
+                                                />
+                                                <span
+                                                  style={{ padding: "0px", fontSize: "15px" }}
+                                                  className="b"
+                                                >
+                                                  {each.userId.username}
+                                                </span>
+                                              </div>
+
+                                              {/* </div> */}
+
+                                              {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      ))}
+                                  </div>
+                                </div>
+                              ) : (
+                                <div>
+                                  <h3 style={{ textAlign: "center" }}>No Voyages found</h3>
+                                </div>
+                              )}
+                            </div>
+                          </section>
+                        )}
                       </div>
                       <div className="tab-pane" id="tab_default_2"></div>
                       <div className="tab-pane" id="tab_default_3"></div>
