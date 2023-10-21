@@ -134,9 +134,10 @@ const CreateItinerary = (props: Props) => {
     setValues({ ...values, eachDetail: newData });
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target?.files?.[0].type.includes("image")) {
       setIsErrored({ ...isErrored, image: "" });
+
       setValues({ ...values, image: e.target?.files?.[0] });
     } else {
       setIsErrored({ ...isErrored, image: "Image Not Supported" });

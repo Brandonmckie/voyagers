@@ -1248,18 +1248,20 @@ const EditItinerary = (props: Props) => {
                                         ) ? (
                                           <img src={image} alt="icon" />
                                         ) : (
-                                          <video
-                                            src={image}
+                                          <img
+                                            src={img1}
+                                            alt=""
                                             style={{ width: "100px", height: "100px" }}
-                                          ></video>
+                                          />
                                         )
                                       ) : image.type.includes("image") ? (
                                         <img src={URL.createObjectURL(image)} alt="icon" />
                                       ) : (
-                                        <video
-                                          src={URL.createObjectURL(image)}
+                                        <img
+                                          src={img1}
+                                          alt=""
                                           style={{ width: "100px", height: "100px" }}
-                                        ></video>
+                                        />
                                       )}
                                     </li>
                                   ))}

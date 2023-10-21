@@ -517,7 +517,7 @@ const Itineraries = (props: Props) => {
                                       flexWrap: "wrap",
                                       paddingTop: "20px",
 
-                                      gap: "11px",
+                                      gap: "7px",
                                       margin: "0px 10px",
                                     }}
                                   >
@@ -569,6 +569,7 @@ const Itineraries = (props: Props) => {
                                                 objectFit: "cover",
                                                 objectPosition: "center",
                                                 borderRadius: "360px",
+                                                imageRendering: "auto",
                                               }}
                                               src={
                                                 each?.image
@@ -580,10 +581,10 @@ const Itineraries = (props: Props) => {
                                             <span
                                               style={{
                                                 padding: "0px",
-                                                fontSize: "10px",
+                                                // fontSize: "10px",
                                                 fontWeight: "600",
                                               }}
-                                              className="b"
+                                              className="b spanusername"
                                             >
                                               {each.username}
                                             </span>
@@ -662,7 +663,7 @@ const Itineraries = (props: Props) => {
                                               className="card-img-top imgStyle"
                                               src={each.image}
                                               alt="Cardimage"
-                                              style={{ width: "100%" }}
+                                              style={{ width: "100%", height: "234px" }}
                                             />
                                             <div className="badge">
                                               {

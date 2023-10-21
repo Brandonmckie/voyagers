@@ -236,6 +236,9 @@ const SingleItinerary = (props: any) => {
                           width: "100%",
                           height: "100%",
                           borderRadius: "20px",
+                          objectFit: "fill",
+                          objectPosition: "center",
+                          imageRendering: "auto",
                         }}
                       />
                       <div style={{ zIndex: "10", position: "inherit" }}>
@@ -837,7 +840,12 @@ const SingleItinerary = (props: any) => {
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <img className="image00 image11" src={data.image} alt={data?.title} />
+                    <img
+                      className="image00 image11"
+                      src={data.image}
+                      alt={data?.title}
+                      style={{ imageRendering: "auto", objectFit: "fill" }}
+                    />
                   </div>
                 </div>
               </div>
@@ -995,6 +1003,7 @@ const SingleItinerary = (props: any) => {
                                     width: "100%",
                                     height: "218px",
                                     objectFit: "fill",
+                                    imageRendering: "auto",
                                     // objectPosition: "center",
                                     borderRadius: "7px",
                                   }}
@@ -1090,6 +1099,7 @@ const SingleItinerary = (props: any) => {
                                           margin: "0px 12px",
                                           height: "218px",
                                           objectFit: "fill",
+                                          imageRendering: "auto",
                                           // objectPosition: "center",
                                           borderRadius: "7px",
                                         }}

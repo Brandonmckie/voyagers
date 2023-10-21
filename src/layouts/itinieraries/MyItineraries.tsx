@@ -214,7 +214,7 @@ const MyItineraries = (props: Props) => {
                             alt="Cardimage"
                             style={{
                               width: "100%",
-                              height: "200px",
+                              height: "234px",
                               objectFit: "fill",
                               // objectPosition: "center",
                             }}

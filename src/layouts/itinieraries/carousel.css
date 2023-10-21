@@ -243,7 +243,13 @@ textarea.text-details {
 .userstyle022 {
   width: 100%;
 }
+.spanusername {
+  font-size: 20px !important;
+}
 @media (max-width: 530px) {
+  .spanusername {
+    font-size: 10px !important;
+  }
   .nav-tabs {
     flex-direction: column;
   }
