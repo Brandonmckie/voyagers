@@ -246,9 +246,17 @@ textarea.text-details {
 .spanusername {
   font-size: 20px !important;
 }
+.divheight001 {
+  min-height: 81%;
+  width: 90%;
+}
 @media (max-width: 530px) {
   .spanusername {
     font-size: 10px !important;
+  }
+  .divheight001 {
+    min-height: 68%;
+    width: 91%;
   }
   .nav-tabs {
     flex-direction: column;

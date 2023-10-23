@@ -988,7 +988,7 @@ const SingleItinerary = (props: any) => {
                                   src={each.image}
                                   style={{
                                     width: "100%",
-                                    height: "218px",
+                                    height: "auto",
                                     // objectFit: "cover",
                                     // objectPosition: "center",
                                     borderRadius: "7px",
@@ -1001,7 +1001,7 @@ const SingleItinerary = (props: any) => {
                                   alt="Cardimage"
                                   style={{
                                     width: "100%",
-                                    height: "218px",
+                                    height: "auto",
                                     objectFit: "fill",
                                     imageRendering: "auto",
                                     // objectPosition: "center",
@@ -1083,7 +1083,7 @@ const SingleItinerary = (props: any) => {
                                         style={{
                                           width: "93%",
                                           margin: "0px 12px",
-                                          height: "218px",
+                                          height: "auto",
                                           objectFit: "fill",
                                           // objectPosition: "center",
                                           borderRadius: "7px",
@@ -1097,7 +1097,7 @@ const SingleItinerary = (props: any) => {
                                         style={{
                                           width: "93%",
                                           margin: "0px 12px",
-                                          height: "218px",
+                                          height: "auto",
                                           objectFit: "fill",
                                           imageRendering: "auto",
                                           // objectPosition: "center",

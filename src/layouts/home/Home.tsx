@@ -403,6 +403,56 @@ const Home = () => {
                                   // objectPosition: "center",
                                 }}
                               />
+                              <div
+                                style={{
+                                  background: "#0000008a",
+                                  minHeight: "81%",
+                                  position: "absolute",
+                                  width: "100%",
+                                  justifyContent: "center",
+                                  top: "0",
+                                  display: "flex",
+                                  borderTopLeftRadius: "13px",
+                                  borderTopRightRadius: "13px",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: " white",
+                                    padding: "0px",
+
+                                    zIndex: "1000",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    paddingTop: "34px",
+                                  }}
+                                >
+                                  <h4
+                                    title={each.title}
+                                    className="card-title"
+                                    style={{
+                                      // paddingRight: "10px",
+                                      // color: "#000000d9",
+                                      // paddingBottom: "8px",
+                                      margin: "0px",
+                                      paddingRight: "10px",
+                                      textAlign: "center",
+                                      paddingBottom: " 8px",
+                                      color: "white",
+                                      fontSize: "24px",
+                                      padding: "10px",
+                                      lineHeight: "34px",
+                                      zIndex: "1000",
+                                      textTransform: "uppercase",
+                                    }}
+                                  >
+                                    {each.title.length >= 93
+                                      ? `${each.title.slice(0, 93)}...`
+                                      : each.title}
+                                  </h4>
+                                </div>
+                              </div>
                               <div className="badge">
                                 <p>{each?.category[0]}</p>
                               </div>
@@ -416,7 +466,7 @@ const Home = () => {
                                   paddingBottom: "0px",
                                 }}
                               >
-                                <h4
+                                {/* <h4
                                   title={each.title}
                                   className="card-title"
                                   style={{
@@ -430,7 +480,7 @@ const Home = () => {
                                   {each.title.length >= 23
                                     ? `${each.title.slice(0, 23)}...`
                                     : each.title}
-                                </h4>
+                                </h4> */}
                                 {/* <div
                                   className="subtitle"
                                   style={{
