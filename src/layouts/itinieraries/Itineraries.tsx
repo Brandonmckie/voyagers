@@ -465,23 +465,6 @@ const Itineraries = (props: Props) => {
                           <h4
                             className="heading-style0"
                             style={{
-                              color: voyages ? "#f1a501" : "black",
-                              borderBottom: voyages ? "2px solid #f1a501" : "none",
-                            }}
-                            onClick={() => {
-                              setvoyagers(false);
-                              setvoyages(true);
-                            }}
-                          >
-                            Voyages
-                          </h4>
-                          <div
-                            style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}
-                          ></div>
-
-                          <h4
-                            className="heading-style0"
-                            style={{
                               color: voyagers ? "#f1a501" : "black",
                               borderBottom: voyagers ? "2px solid #f1a501" : "none",
                             }}
@@ -491,6 +474,22 @@ const Itineraries = (props: Props) => {
                             }}
                           >
                             Voyagers
+                          </h4>
+                          <div
+                            style={{ width: "1px", height: "30px", border: "1px solid #00000099" }}
+                          ></div>
+                          <h4
+                            className="heading-style0"
+                            style={{
+                              color: voyages ? "#f1a501" : "black",
+                              borderBottom: voyages ? "2px solid #f1a501" : "none",
+                            }}
+                            onClick={() => {
+                              setvoyagers(false);
+                              setvoyages(true);
+                            }}
+                          >
+                            Voyages
                           </h4>
                         </div>
 

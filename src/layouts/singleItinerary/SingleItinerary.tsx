@@ -983,17 +983,20 @@ const SingleItinerary = (props: any) => {
                               each.image.includes("ogv") ||
                               each.image.includes("OGV") ? (
                                 <video
-                                  controls
-                                  className="card-img-top imgStyle"
-                                  src={each.image}
                                   style={{
-                                    width: "100%",
+                                    width: "96%",
                                     height: "auto",
                                     // objectFit: "cover",
                                     // objectPosition: "center",
                                     borderRadius: "7px",
                                   }}
-                                ></video>
+                                  className="card-img-top imgStyle"
+                                  poster="https://myvoyagemedia.s3.amazonaws.com/uploads/d6abaa3a-305b-420c-a1f5-d1da1929f348-image.png"
+                                  controls
+                                >
+                                  <source src={each.image} type="video/mp4" />
+                                  Your browser does not support the video tag.
+                                </video>
                               ) : (
                                 <img
                                   className="card-img-top imgStyle"
@@ -1055,6 +1058,7 @@ const SingleItinerary = (props: any) => {
                                       background: "none",
                                       borderRadius: " 0px",
                                       boxShadow: "none",
+                                      paddingLeft: "10px",
                                     }}
                                     className="card"
                                   >
@@ -1077,18 +1081,20 @@ const SingleItinerary = (props: any) => {
                                     each.image.includes("ogv") ||
                                     each.image.includes("OGV") ? (
                                       <video
-                                        controls
-                                        className="card-img-top imgStyle"
-                                        src={each.image}
                                         style={{
-                                          width: "93%",
-                                          margin: "0px 12px",
+                                          width: "96%",
                                           height: "auto",
-                                          objectFit: "fill",
+                                          // objectFit: "cover",
                                           // objectPosition: "center",
                                           borderRadius: "7px",
                                         }}
-                                      ></video>
+                                        className="card-img-top imgStyle"
+                                        poster="https://myvoyagemedia.s3.amazonaws.com/uploads/d6abaa3a-305b-420c-a1f5-d1da1929f348-image.png"
+                                        controls
+                                      >
+                                        <source src={each.image} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                      </video>
                                     ) : (
                                       <img
                                         className="card-img-top imgStyle"

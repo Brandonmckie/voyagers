@@ -404,16 +404,15 @@ const Home = () => {
                                 }}
                               />
                               <div
+                                className="hometext0"
                                 style={{
                                   background: "#0000008a",
-                                  minHeight: "81%",
+                                  // minHeight: "81%",
                                   position: "absolute",
-                                  width: "100%",
+                                  width: "87%",
                                   justifyContent: "center",
                                   top: "0",
                                   display: "flex",
-                                  borderTopLeftRadius: "13px",
-                                  borderTopRightRadius: "13px",
                                 }}
                               >
                                 <div
