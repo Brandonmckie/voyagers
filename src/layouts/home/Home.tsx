@@ -409,7 +409,7 @@ const Home = () => {
                                   background: "#0000008a",
                                   // minHeight: "81%",
                                   position: "absolute",
-                                  width: "87%",
+
                                   justifyContent: "center",
                                   top: "0",
                                   display: "flex",

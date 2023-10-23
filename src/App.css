@@ -9,6 +9,7 @@ h1 {
 }
 .hometext0 {
   min-height: 81%;
+  width: 87%;
 }
 .slider001 {
   display: none;
@@ -1643,7 +1644,9 @@ h3.price-sec span {
 
   .hometext0 {
     min-height: 74%;
+    width: 88%;
   }
+
   .editstyle0 {
     display: flex;
     flex-direction: column-reverse;

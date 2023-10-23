@@ -986,7 +986,7 @@ const SingleItinerary = (props: any) => {
                                   style={{
                                     width: "96%",
                                     height: "auto",
-                                    // objectFit: "cover",
+                                    objectFit: "fill",
                                     // objectPosition: "center",
                                     borderRadius: "7px",
                                   }}
@@ -1084,6 +1084,7 @@ const SingleItinerary = (props: any) => {
                                         style={{
                                           width: "96%",
                                           height: "auto",
+                                          objectFit: "fill",
                                           // objectFit: "cover",
                                           // objectPosition: "center",
                                           borderRadius: "7px",
