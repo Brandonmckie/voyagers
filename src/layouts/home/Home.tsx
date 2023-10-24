@@ -143,7 +143,11 @@ const Home = () => {
                 </div>
                 <div
                   className="destinations-search destinationinput"
-                  style={{ justifyContent: "space-between", marginBottom: "11px" }}
+                  style={{
+                    justifyContent: "space-between",
+                    marginBottom: "11px",
+                    marginTop: "21px",
+                  }}
                   onClick={() => setSearchOpen(true)}
                 >
                   <p>Explore Destinations</p>
@@ -208,157 +212,13 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* <div style={{}} className="banner0001">
-        <img src={backimg} alt="" />
-      </div> */}
-      <StepsSection />
 
-      <section className="second-part text-center">
-        <div className="container">
-          <div className="row">
-            <div className="text-area">
-              <h3>CATEGORY</h3>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div className="box-part text-center">
-                <div className="boxhover">
-                  <img src={card4} alt="Stay" style={{ position: "relative" }} />
-                  <div
-                    style={{
-                      position: "absolute",
-                      width: "90%",
-                      height: "279px",
-                      top: "30px",
-                      background: "#0000004d",
-                      borderRadius: "17px",
-                    }}
-                  ></div>
-                  <div className="title" style={{ top: "50%", left: "40%", position: "absolute" }}>
-                    <h4
-                      style={{
-                        color: "white",
-                        margin: "0px",
-                        textTransform: "uppercase",
-                        fontSize: "28px",
-                      }}
-                    >
-                      Stay
-                    </h4>
-                  </div>
-                  {/* <div className="text">
-                    <span>Find your next awe-inspiring getaway from browsing voyage blogs by</span>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div className="box-part text-center">
-                <div className="boxhover">
-                  <img src={card3} alt="taste" style={{ position: "relative" }} />
-                  <div
-                    style={{
-                      position: "absolute",
-                      width: "90%",
-                      height: "279px",
-                      top: "30px",
-                      background: "#0000004d",
-                      borderRadius: "17px",
-                    }}
-                  ></div>
-                  <div className="title" style={{ top: "50%", left: "36%", position: "absolute" }}>
-                    <h4
-                      style={{
-                        color: "white",
-                        margin: "0px",
-                        textTransform: "uppercase",
-                        fontSize: "28px",
-                      }}
-                    >
-                      Taste
-                    </h4>
-                  </div>
-                  {/* <div className="text">
-                    <span>Find your next soul satisfying meal from browsing voyage blogs by</span>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div className="box-part text-center">
-                <div className="boxhover">
-                  <img src={card1} alt="vibe" style={{ position: "relative" }} />
-                  <div
-                    style={{
-                      position: "absolute",
-                      width: "90%",
-                      height: "279px",
-                      top: "30px",
-                      background: "#0000004d",
-                      borderRadius: "17px",
-                    }}
-                  ></div>
-                  <div className="title" style={{ top: "50%", left: "40%", position: "absolute" }}>
-                    <h4
-                      style={{
-                        color: "white",
-                        margin: "0px",
-                        textTransform: "uppercase",
-                        fontSize: "28px",
-                      }}
-                    >
-                      Vibe
-                    </h4>
-                  </div>
-                  {/* <div className="text" style={{ height: "74px" }}>
-                    <span>Find your next happy place from browsing voyage blogs by</span>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div className="box-part text-center">
-                <div className="boxhover">
-                  <img src={card2} alt="experience" style={{ position: "relative" }} />
-                  <div
-                    style={{
-                      position: "absolute",
-                      width: "90%",
-                      height: "279px",
-                      top: "30px",
-                      background: "#0000004d",
-                      borderRadius: "17px",
-                    }}
-                  ></div>
-                  <div className="title" style={{ top: "50%", left: "23%", position: "absolute" }}>
-                    <h4
-                      style={{
-                        color: "white",
-                        margin: "0px",
-                        textTransform: "uppercase",
-                        fontSize: "28px",
-                        width: "100%",
-                      }}
-                    >
-                      Experience
-                    </h4>
-                  </div>
-                  {/* <div className="text">
-                    <span>Embark on an unforgettable journey from browsing voyage blogs by</span>
-                  </div> */}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <section className="topsaling">
         <div className="container">
           <div className="row">
             <div className="col-md-7">
               <div className="left-first">
-                <h1 className="top-heading">
+                <h1 className="top-heading" style={{ margin: "0px" }}>
                   Top <span className="first-textbg topsingle">VOYAGES</span>
                 </h1>
               </div>
@@ -548,6 +408,151 @@ const Home = () => {
                       </Carousel>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* <div style={{}} className="banner0001">
+        <img src={backimg} alt="" />
+      </div> */}
+      <StepsSection />
+
+      <section className="second-part text-center">
+        <div className="container">
+          <div className="row">
+            <div className="text-area">
+              <h3>CATEGORY</h3>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div className="box-part text-center">
+                <div className="boxhover">
+                  <img src={card4} alt="Stay" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "40%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                      }}
+                    >
+                      Stay
+                    </h4>
+                  </div>
+                  {/* <div className="text">
+                    <span>Find your next awe-inspiring getaway from browsing voyage blogs by</span>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div className="box-part text-center">
+                <div className="boxhover">
+                  <img src={card3} alt="taste" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "36%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                      }}
+                    >
+                      Taste
+                    </h4>
+                  </div>
+                  {/* <div className="text">
+                    <span>Find your next soul satisfying meal from browsing voyage blogs by</span>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div className="box-part text-center">
+                <div className="boxhover">
+                  <img src={card1} alt="vibe" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "40%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                      }}
+                    >
+                      Vibe
+                    </h4>
+                  </div>
+                  {/* <div className="text" style={{ height: "74px" }}>
+                    <span>Find your next happy place from browsing voyage blogs by</span>
+                  </div> */}
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div className="box-part text-center">
+                <div className="boxhover">
+                  <img src={card2} alt="experience" style={{ position: "relative" }} />
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: "90%",
+                      height: "279px",
+                      top: "30px",
+                      background: "#0000004d",
+                      borderRadius: "17px",
+                    }}
+                  ></div>
+                  <div className="title" style={{ top: "50%", left: "23%", position: "absolute" }}>
+                    <h4
+                      style={{
+                        color: "white",
+                        margin: "0px",
+                        textTransform: "uppercase",
+                        fontSize: "28px",
+                        width: "100%",
+                      }}
+                    >
+                      Experience
+                    </h4>
+                  </div>
+                  {/* <div className="text">
+                    <span>Embark on an unforgettable journey from browsing voyage blogs by</span>
+                  </div> */}
                 </div>
               </div>
             </div>

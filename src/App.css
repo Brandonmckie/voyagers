@@ -1321,8 +1321,18 @@ h3.price-sec span {
   }
 }
 @media (max-width: 768px) {
+  .verticalslider {
+    padding: 24px 0px !important;
+  }
   .singlenavstyle {
     flex-direction: column;
+  }
+  .carousel-inner {
+    padding-bottom: 0px;
+  }
+
+  section.topsaling {
+    padding-bottom: 0px;
   }
   .qrcode {
     max-width: 212px !important;
@@ -1585,10 +1595,11 @@ h3.price-sec span {
     line-height: 50px;
   }
   .left-first {
-    padding: 0 0 30px 0;
+    padding: 0 0 0px 0;
   }
   .first-section1 {
     padding: 40px 15px;
+    /* padding-bottom: 0px; */
   }
   .img-rightone {
     position: absolute;

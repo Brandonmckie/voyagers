@@ -65,7 +65,7 @@ type Itinerary = Partial<{
 const SingleItinerary = (props: any) => {
   const { itineraryId } = useParams() as Params;
   const [activitydata, setactivitydata] = useState([]);
-  const [checkeddata, setchecked] = useState<any>(false);
+  const [checkeddata, setchecked] = useState<any>(true);
   const [data, setData] = useState<Itinerary>({});
   const [selectedTab, setselectedTab] = useState("");
   const [voyageshow, setvoyageshow] = useState(false);
@@ -911,7 +911,7 @@ const SingleItinerary = (props: any) => {
                   </div>
                 </div>
               </div>
-              <div
+              {/* <div
                 className="switchstyle00"
                 style={{
                   display: "flex",
@@ -930,17 +930,17 @@ const SingleItinerary = (props: any) => {
                   }}
                 />
                 <p style={{ fontWeight: 600, fontSize: "18px", color: "#00000096" }}>Vertical</p>
-              </div>
+              </div> */}
               {activitydata.length > 0 ? (
                 checkeddata ? (
                   <div className="row">
                     <div
-                      className="card-grid"
+                      className="card-grid verticalslider"
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         flexWrap: "wrap",
-                        padding: "10px 0px",
+                        padding: "50px 0px",
                       }}
                     >
                       {activitydata
@@ -959,6 +959,7 @@ const SingleItinerary = (props: any) => {
                                 textDecoration: "none",
                                 cursor: "default",
                                 marginBottom: "6px",
+                                background: "none",
                               }}
                               // to={`/itinerary/view/${each?._id}`}
                               // to={`/user/${each.username}`}
@@ -984,7 +985,7 @@ const SingleItinerary = (props: any) => {
                               each.image.includes("OGV") ? (
                                 <video
                                   style={{
-                                    width: "96%",
+                                    width: "100%",
                                     height: "auto",
                                     objectFit: "fill",
                                     // objectPosition: "center",
@@ -1082,7 +1083,7 @@ const SingleItinerary = (props: any) => {
                                     each.image.includes("OGV") ? (
                                       <video
                                         style={{
-                                          width: "96%",
+                                          width: "100%",
                                           height: "auto",
                                           objectFit: "fill",
                                           // objectFit: "cover",
