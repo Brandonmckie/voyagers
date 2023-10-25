@@ -252,6 +252,7 @@ const Navbar = (props: Props) => {
                               My QR code
                             </Link>
                           </li>
+
                           {/* {user?.userInfo?.name && ( */}
                           <li>
                             <a
@@ -355,7 +356,11 @@ const Navbar = (props: Props) => {
                               Home
                             </Link>
                           </li>
-
+                          <li>
+                            <Link to="https://www.myvoyages.shop" target="_blank">
+                              Shop
+                            </Link>
+                          </li>
                           <li>
                             <Link
                               to="/about-us"
@@ -366,6 +371,7 @@ const Navbar = (props: Props) => {
                               About us
                             </Link>
                           </li>
+
                           {/* {!isLoggedIn && (
                 <li>
                   <Link
@@ -529,6 +535,12 @@ const Navbar = (props: Props) => {
                   )}
 
                   <li>
+                    <Link to="https://www.myvoyages.shop" target="_blank">
+                      Shop
+                    </Link>
+                  </li>
+
+                  <li>
                     <Link to="/about-us">About us</Link>
                   </li>
 
@@ -623,6 +635,7 @@ const Navbar = (props: Props) => {
                         <li>
                           <Link to="/qrcode">My QR code</Link>
                         </li>
+
                         {/* {user?.userInfo?.name && ( */}
                         <li>
                           <a

@@ -1334,6 +1334,10 @@ h3.price-sec span {
   section.topsaling {
     padding-bottom: 0px;
   }
+  .qrcodeh1 {
+    font-size: 21px !important;
+    line-height: normal !important;
+  }
   .qrcode {
     max-width: 212px !important;
   }
