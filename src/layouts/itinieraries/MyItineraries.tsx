@@ -163,6 +163,7 @@ const MyItineraries = (props: Props) => {
                       justifyContent: "center",
                       alignItems: "center",
                       backgroundColor: "rgba(255, 255, 255, 0.75)",
+                      zIndex: "10",
                     },
                     overlay: {
                       display: "flex",
@@ -277,7 +278,6 @@ const MyItineraries = (props: Props) => {
                             className="glyphicon glyphicon-trash"
                             style={{
                               position: "absolute",
-                              zIndex: "1002",
                               left: "20px",
                               top: "20px",
                               background: "red",
@@ -288,13 +288,14 @@ const MyItineraries = (props: Props) => {
                               outline: "none",
                               color: "white",
                               marginBottom: "50px",
+                              zIndex: "0",
                             }}
                           ></button>
 
                           {/* // ) : (
                           //   ""
                           // )} */}
-                          <div className="badge" style={{ top: "20px", zIndex: "1001" }}>
+                          <div className="badge" style={{ top: "20px", zIndex: "0" }}>
                             <p>{each.category[0]}</p>
                           </div>
                           <div
