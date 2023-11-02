@@ -193,6 +193,7 @@ const EditItinerary = (props: Props) => {
     let newdata1 = data?.data?.eachDetail.map((item: any, i: any) => {
       return { ...item, day: i };
     });
+    console.log(newdata1);
     setValues({ ...newData0, eachDetail: newdata1 });
   };
 
@@ -1207,9 +1208,11 @@ const EditItinerary = (props: Props) => {
                                         ></i>
 
                                         {typeof image === "string" ? (
-                                          image.includes(
-                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                          ) ? (
+                                          image.includes("jpeg") ||
+                                          image.includes("png") ||
+                                          image.includes("jpg") ||
+                                          image.includes("jiff") ||
+                                          image.includes("gif") ? (
                                             <img src={image} alt="icon" />
                                           ) : (
                                             <img
@@ -1248,9 +1251,11 @@ const EditItinerary = (props: Props) => {
                                         onClick={() => clearImage("stayImages", idx, item.day)}
                                       ></i>
                                       {typeof image === "string" ? (
-                                        image.includes(
-                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                        ) ? (
+                                        image.includes("jpeg") ||
+                                        image.includes("png") ||
+                                        image.includes("jpg") ||
+                                        image.includes("jiff") ||
+                                        image.includes("gif") ? (
                                           <img src={image} alt="icon" />
                                         ) : (
                                           <img
@@ -1332,9 +1337,11 @@ const EditItinerary = (props: Props) => {
                                           onClick={() => clearImage("tasteImages", idx, item.day)}
                                         ></i>
                                         {typeof image === "string" ? (
-                                          image.includes(
-                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                          ) ? (
+                                          image.includes("jpeg") ||
+                                          image.includes("png") ||
+                                          image.includes("jpg") ||
+                                          image.includes("jiff") ||
+                                          image.includes("gif") ? (
                                             <img src={image} alt="icon" />
                                           ) : (
                                             <img
@@ -1365,9 +1372,11 @@ const EditItinerary = (props: Props) => {
                                         onClick={() => clearImage("tasteImages", idx, item.day)}
                                       ></i>
                                       {typeof image === "string" ? (
-                                        image.includes(
-                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                        ) ? (
+                                        image.includes("jpeg") ||
+                                        image.includes("png") ||
+                                        image.includes("jpg") ||
+                                        image.includes("jiff") ||
+                                        image.includes("gif") ? (
                                           <img src={image} alt="icon" />
                                         ) : (
                                           <img
@@ -1446,9 +1455,11 @@ const EditItinerary = (props: Props) => {
                                           onClick={() => clearImage("vibeImages", idx, item.day)}
                                         ></i>
                                         {typeof image === "string" ? (
-                                          image.includes(
-                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                          ) ? (
+                                          image.includes("jpeg") ||
+                                          image.includes("png") ||
+                                          image.includes("jpg") ||
+                                          image.includes("jiff") ||
+                                          image.includes("gif") ? (
                                             <img src={image} alt="icon" />
                                           ) : (
                                             <img
@@ -1479,9 +1490,11 @@ const EditItinerary = (props: Props) => {
                                         onClick={() => clearImage("vibeImages", idx, item.day)}
                                       ></i>
                                       {typeof image === "string" ? (
-                                        image.includes(
-                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                        ) ? (
+                                        image.includes("jpeg") ||
+                                        image.includes("png") ||
+                                        image.includes("jpg") ||
+                                        image.includes("jiff") ||
+                                        image.includes("gif") ? (
                                           <img src={image} alt="icon" />
                                         ) : (
                                           <img
@@ -1584,9 +1597,11 @@ const EditItinerary = (props: Props) => {
                                           }
                                         ></i>
                                         {typeof image === "string" ? (
-                                          image.includes(
-                                            "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                          ) ? (
+                                          image.includes("jpeg") ||
+                                          image.includes("png") ||
+                                          image.includes("jpg") ||
+                                          image.includes("jiff") ||
+                                          image.includes("gif") ? (
                                             <img src={image} alt="icon" />
                                           ) : (
                                             <img
@@ -1619,9 +1634,11 @@ const EditItinerary = (props: Props) => {
                                         }
                                       ></i>
                                       {typeof image === "string" ? (
-                                        image.includes(
-                                          "jpeg" || "jpg" || "png" || "gif" || "jiff"
-                                        ) ? (
+                                        image.includes("jpeg") ||
+                                        image.includes("png") ||
+                                        image.includes("jpg") ||
+                                        image.includes("jiff") ||
+                                        image.includes("gif") ? (
                                           <img src={image} alt="icon" />
                                         ) : (
                                           <img
