@@ -894,6 +894,26 @@ let options = [
     label: "Venezuela",
     value: "VE",
   },
+  {
+    value: "KR",
+    label: "South Korea",
+  },
+  {
+    value: "ZNZ ",
+    label: "Zanzabar",
+  },
+  {
+    value: "NK",
+    label: " North Korea",
+  },
+  {
+    value: "SX",
+    label: " st Maarten",
+  },
+  {
+    value: "TZ",
+    label: "Tanzania",
+  },
 ];
 
 const wonderOptions = [
@@ -1042,6 +1062,7 @@ const EditProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errordetial, seterrordetial] = useState("");
   const [bio, setBio] = useState("");
+  const [coverpicture, setcoverpicture] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -1104,13 +1125,14 @@ const EditProfile = () => {
                   visitedCountries: [];
                   visitedWonders: [];
                   bio: string;
+                  coverpicture: any;
                 };
               };
             };
           };
 
           let { email, username, image, userInfo } = user.data.user;
-
+          console.log(user.data.user);
           setProfile(user.data);
           setValues({ email, username, image });
 
@@ -1121,6 +1143,7 @@ const EditProfile = () => {
           setVisitedCountries(userInfo?.visitedCountries);
           setVisitedWonders(userInfo?.visitedWonders);
           setBio(userInfo?.bio);
+          setcoverpicture(userInfo?.coverpicture);
         } catch (error) {
           console.log(error);
         } finally {
@@ -1139,6 +1162,10 @@ const EditProfile = () => {
     } else {
       setVoyageStyle(voyageStyle.filter((item) => item !== value));
     }
+  };
+
+  const handlefilesChange = (e: any) => {
+    e.target.files?.[0] && setcoverpicture(e.target.files[0]);
   };
 
   // setting up profile
@@ -1161,24 +1188,46 @@ const EditProfile = () => {
       setIsLoading(false);
       return;
     }
+
     const allVoyageStyles = voyageStyle.filter((item) => item !== "");
-
-    const data = {
-      name,
-      voyageStyle: allVoyageStyles,
-      country,
-      visitedCountries,
-      visitedWonders,
-      bio,
-    };
-
     try {
-      await api.patch("/users", { userInfo: data });
-      setIsLoading(false);
-      navigate(`/user/${values.username}`);
-    } catch (error) {
-      setIsLoading(false);
-    }
+      if (typeof coverpicture === "string") {
+        const data = {
+          name,
+          voyageStyle: allVoyageStyles,
+          country,
+          visitedCountries,
+          visitedWonders,
+          bio,
+          coverpicture,
+        };
+
+        try {
+          await api.patch("/users", { userInfo: data });
+          setIsLoading(false);
+          navigate(`/user/${values.username}`);
+        } catch (error) {
+          setIsLoading(false);
+        }
+      } else {
+        const formData = new FormData();
+        let arrayData = [{ allVoyageStyles }, { visitedCountries }, { visitedWonders }];
+
+        formData.append("country", country);
+        formData.append("arrayData", JSON.stringify(arrayData));
+        formData.append("name", name);
+
+        formData.append("bio", bio);
+        formData.append("image", coverpicture);
+        try {
+          await api.patch("/users/updateuserprofile", formData);
+          setIsLoading(false);
+          navigate(`/user/${values.username}`);
+        } catch (error) {
+          setIsLoading(false);
+        }
+      }
+    } catch (e) {}
   };
 
   return (
@@ -1401,7 +1450,8 @@ const EditProfile = () => {
               <div className="profilesetup-form--country">
                 <label htmlFor="">Home location</label>
                 <select name="country" value={country} onChange={(e) => setCountry(e.target.value)}>
-                  <option>Select country</option>
+                  <option>select country</option>
+
                   <option value="AF">Afghanistan</option>
                   <option value="AX">Aland Islands</option>
                   <option value="AL">Albania</option>
@@ -1566,6 +1616,7 @@ const EditProfile = () => {
                   <option value="NI">Nicaragua</option>
                   <option value="NE">Niger</option>
                   <option value="NG">Nigeria</option>
+                  <option value="NK">North Korea</option>
                   <option value="NU">Niue</option>
                   <option value="NF">Norfolk Island</option>
                   <option value="MP">Northern Mariana Islands</option>
@@ -1599,6 +1650,7 @@ const EditProfile = () => {
                   <option value="SM">San Marino</option>
                   <option value="ST">Sao Tome and Principe</option>
                   <option value="SA">Saudi Arabia</option>
+                  <option value="KR">South Korea</option>
                   <option value="SN">Senegal</option>
                   <option value="RS">Serbia</option>
                   <option value="CS">Serbia and Montenegro</option>
@@ -1617,6 +1669,7 @@ const EditProfile = () => {
                   <option value="LK">Sri Lanka</option>
                   <option value="SD">Sudan</option>
                   <option value="SR">Suriname</option>
+                  <option value="SX">st Maarten</option>
                   <option value="SJ">Svalbard and Jan Mayen</option>
                   <option value="SZ">Swaziland</option>
                   <option value="SE">Sweden</option>
@@ -1624,7 +1677,7 @@ const EditProfile = () => {
                   <option value="SY">Syrian Arab Republic</option>
                   <option value="TW">Taiwan, Province of China</option>
                   <option value="TJ">Tajikistan</option>
-                  <option value="TZ">Tanzania, United Republic of</option>
+                  <option value="TZ">Tanzania</option>
                   <option value="TH">Thailand</option>
                   <option value="TL">Timor-Leste</option>
                   <option value="TG">Togo</option>
@@ -1653,8 +1706,10 @@ const EditProfile = () => {
                   <option value="EH">Western Sahara</option>
                   <option value="YE">Yemen</option>
                   <option value="ZM">Zambia</option>
+                  <option value="ZNZ">Zanzabar</option>
                   <option value="ZW">Zimbabwe</option>
                 </select>
+
                 <p style={{ color: "red" }}>{errors?.country}</p>
               </div>
 
@@ -1725,6 +1780,51 @@ const EditProfile = () => {
                   onChange={(e) => setBio(e.target.value)}
                 ></textarea>
                 <p style={{ color: "red" }}>{errors?.bio}</p>
+              </div>
+
+              <div className="profilesetup-form--bio">
+                <input
+                  id="uploadpicture"
+                  type="file"
+                  multiple
+                  style={{ display: "none" }}
+                  onChange={(e) => handlefilesChange(e)}
+                  accept="image/*"
+                />
+                <label
+                  className="coverpicture"
+                  htmlFor="uploadpicture"
+                  style={{
+                    textAlign: "center",
+                    cursor: "pointer",
+                    border: "1px solid #0000002b",
+                    borderRadius: "5px",
+                    padding: "9px",
+                    width: "100%",
+                  }}
+                >
+                  Upload Cover Picture
+                </label>
+                {coverpicture && (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                      src={
+                        typeof coverpicture === "string"
+                          ? coverpicture
+                          : URL.createObjectURL(coverpicture)
+                      }
+                      style={{
+                        width: "100%",
+                        height: "150px",
+                        borderRadius: "11px",
+                        objectFit: "fill",
+                        objectPosition: "center",
+                        marginTop: "7px",
+                      }}
+                      alt="Thumbnail"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="profilesetup-form--submit">

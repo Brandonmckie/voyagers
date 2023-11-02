@@ -889,4 +889,24 @@ export const options = [
     label: "Venezuela",
     value: "VE",
   },
+  {
+    value: "KR",
+    label: "South Korea",
+  },
+  {
+    value: "ZNZ ",
+    label: "Zanzabar",
+  },
+  {
+    value: "NK",
+    label: " North Korea",
+  },
+  {
+    value: "SX",
+    label: " st Maarten",
+  },
+  {
+    value: "TZ",
+    label: "Tanzania",
+  },
 ];

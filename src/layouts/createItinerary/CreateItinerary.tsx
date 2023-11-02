@@ -439,6 +439,7 @@ const CreateItinerary = (props: Props) => {
                 name="country"
               >
                 <option>select country</option>
+
                 <option value="AF">Afghanistan</option>
                 <option value="AX">Aland Islands</option>
                 <option value="AL">Albania</option>
@@ -603,6 +604,7 @@ const CreateItinerary = (props: Props) => {
                 <option value="NI">Nicaragua</option>
                 <option value="NE">Niger</option>
                 <option value="NG">Nigeria</option>
+                <option value="NK">North Korea</option>
                 <option value="NU">Niue</option>
                 <option value="NF">Norfolk Island</option>
                 <option value="MP">Northern Mariana Islands</option>
@@ -636,6 +638,7 @@ const CreateItinerary = (props: Props) => {
                 <option value="SM">San Marino</option>
                 <option value="ST">Sao Tome and Principe</option>
                 <option value="SA">Saudi Arabia</option>
+                <option value="KR">South Korea</option>
                 <option value="SN">Senegal</option>
                 <option value="RS">Serbia</option>
                 <option value="CS">Serbia and Montenegro</option>
@@ -654,6 +657,7 @@ const CreateItinerary = (props: Props) => {
                 <option value="LK">Sri Lanka</option>
                 <option value="SD">Sudan</option>
                 <option value="SR">Suriname</option>
+                <option value="SX">st Maarten</option>
                 <option value="SJ">Svalbard and Jan Mayen</option>
                 <option value="SZ">Swaziland</option>
                 <option value="SE">Sweden</option>
@@ -661,7 +665,7 @@ const CreateItinerary = (props: Props) => {
                 <option value="SY">Syrian Arab Republic</option>
                 <option value="TW">Taiwan, Province of China</option>
                 <option value="TJ">Tajikistan</option>
-                <option value="TZ">Tanzania, United Republic of</option>
+                <option value="TZ">Tanzania</option>
                 <option value="TH">Thailand</option>
                 <option value="TL">Timor-Leste</option>
                 <option value="TG">Togo</option>
@@ -690,6 +694,7 @@ const CreateItinerary = (props: Props) => {
                 <option value="EH">Western Sahara</option>
                 <option value="YE">Yemen</option>
                 <option value="ZM">Zambia</option>
+                <option value="ZNZ">Zanzabar</option>
                 <option value="ZW">Zimbabwe</option>
               </select>
 

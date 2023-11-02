@@ -81,6 +81,10 @@
     border-radius: 20px;
   }
 
+  .coverpicture:hover {
+    background: "#f1a501";
+  }
+
   .section1style {
     display: none;
   }

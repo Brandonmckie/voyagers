@@ -1019,6 +1019,7 @@ const SetupProfile = () => {
   const [bio, setBio] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSetupLoading, setIsSetupLoading] = useState(false);
+  const [coverpicture, setcoverpicture] = useState<any>("");
 
   const navigate = useNavigate();
 
@@ -1054,6 +1055,7 @@ const SetupProfile = () => {
                   visitedCountries: [];
                   visitedWonders: [];
                   bio: string;
+                  coverpicture: string;
                 };
               };
             };
@@ -1068,6 +1070,7 @@ const SetupProfile = () => {
           setVisitedCountries(userInfo?.visitedCountries);
           setVisitedWonders(userInfo?.visitedWonders);
           setBio(userInfo?.bio);
+          setcoverpicture(userInfo?.coverpicture);
         } catch (error) {
           console.log(error);
         } finally {
@@ -1076,6 +1079,10 @@ const SetupProfile = () => {
       }
     })();
   }, []);
+
+  const handlefilesChange = (e: any) => {
+    e.target.files?.[0] && setcoverpicture(e.target.files[0]);
+  };
 
   // setting up profile
   const handleSetupProfile = async () => {
@@ -1101,39 +1108,78 @@ const SetupProfile = () => {
 
     const allVoyageStyles = voyageStyle.filter((item) => item !== "");
 
-    const data = {
-      name,
-      voyageStyle: allVoyageStyles,
-      country,
-      visitedCountries,
-      visitedWonders,
-      bio,
-    };
-
     try {
-      await api.patch("/users", { userInfo: data });
-      setIsSetupLoading(false);
-      if (localStorage.getItem("profilenav")) {
-        let data = localStorage.getItem("profilenav");
-        localStorage.removeItem("profilenav");
-        if (data) {
-          return navigate(data);
+      if (typeof coverpicture === "string") {
+        const data = {
+          name,
+          voyageStyle: allVoyageStyles,
+          country,
+          visitedCountries,
+          visitedWonders,
+          bio,
+          coverpicture,
+        };
+
+        try {
+          await api.patch("/users", { userInfo: data });
+          setIsSetupLoading(false);
+          if (localStorage.getItem("profilenav")) {
+            let data = localStorage.getItem("profilenav");
+            localStorage.removeItem("profilenav");
+            if (data) {
+              return navigate(data);
+            }
+          } else {
+            const params = new URLSearchParams(window.location.search);
+            const login = params.get("login");
+            if (login) {
+              return navigate(`/user/${username}`);
+            } else {
+              return navigate("/itinerary/create");
+            }
+          }
+          // } else{
+          //   getUserDetails("");
+        } catch (error) {
+          setIsSetupLoading(false);
+          console.log(error);
         }
       } else {
-        const params = new URLSearchParams(window.location.search);
-        const login = params.get("login");
-        if (login) {
-          return navigate(`/user/${username}`);
-        } else {
-          return navigate("/itinerary/create");
+        const formData = new FormData();
+        let arrayData = [{ allVoyageStyles }, { visitedCountries }, { visitedWonders }];
+
+        formData.append("country", country);
+        formData.append("arrayData", JSON.stringify(arrayData));
+        formData.append("name", name);
+
+        formData.append("bio", bio);
+        formData.append("image", coverpicture);
+        try {
+          await api.patch("/users/updateuserprofile", formData);
+          setIsSetupLoading(false);
+          if (localStorage.getItem("profilenav")) {
+            let data = localStorage.getItem("profilenav");
+            localStorage.removeItem("profilenav");
+            if (data) {
+              return navigate(data);
+            }
+          } else {
+            const params = new URLSearchParams(window.location.search);
+            const login = params.get("login");
+            if (login) {
+              return navigate(`/user/${username}`);
+            } else {
+              return navigate("/itinerary/create");
+            }
+          }
+          // } else{
+          //   getUserDetails("");
+        } catch (error) {
+          setIsSetupLoading(false);
+          console.log(error);
         }
       }
-      // } else{
-      //   getUserDetails("");
-    } catch (error) {
-      setIsSetupLoading(false);
-      console.log(error);
-    }
+    } catch (e) {}
   };
 
   useLayoutEffect(() => {
@@ -1223,7 +1269,8 @@ const SetupProfile = () => {
         <div className="profilesetup-form--country">
           <label htmlFor="">Home location</label>
           <select name="country" value={country} onChange={(e) => setCountry(e.target.value)}>
-            <option>Select country</option>
+            <option>select country</option>
+
             <option value="AF">Afghanistan</option>
             <option value="AX">Aland Islands</option>
             <option value="AL">Albania</option>
@@ -1388,6 +1435,7 @@ const SetupProfile = () => {
             <option value="NI">Nicaragua</option>
             <option value="NE">Niger</option>
             <option value="NG">Nigeria</option>
+            <option value="NK">North Korea</option>
             <option value="NU">Niue</option>
             <option value="NF">Norfolk Island</option>
             <option value="MP">Northern Mariana Islands</option>
@@ -1421,6 +1469,7 @@ const SetupProfile = () => {
             <option value="SM">San Marino</option>
             <option value="ST">Sao Tome and Principe</option>
             <option value="SA">Saudi Arabia</option>
+            <option value="KR">South Korea</option>
             <option value="SN">Senegal</option>
             <option value="RS">Serbia</option>
             <option value="CS">Serbia and Montenegro</option>
@@ -1439,6 +1488,7 @@ const SetupProfile = () => {
             <option value="LK">Sri Lanka</option>
             <option value="SD">Sudan</option>
             <option value="SR">Suriname</option>
+            <option value="SX">st Maarten</option>
             <option value="SJ">Svalbard and Jan Mayen</option>
             <option value="SZ">Swaziland</option>
             <option value="SE">Sweden</option>
@@ -1446,7 +1496,7 @@ const SetupProfile = () => {
             <option value="SY">Syrian Arab Republic</option>
             <option value="TW">Taiwan, Province of China</option>
             <option value="TJ">Tajikistan</option>
-            <option value="TZ">Tanzania, United Republic of</option>
+            <option value="TZ">Tanzania</option>
             <option value="TH">Thailand</option>
             <option value="TL">Timor-Leste</option>
             <option value="TG">Togo</option>
@@ -1475,6 +1525,7 @@ const SetupProfile = () => {
             <option value="EH">Western Sahara</option>
             <option value="YE">Yemen</option>
             <option value="ZM">Zambia</option>
+            <option value="ZNZ">Zanzabar</option>
             <option value="ZW">Zimbabwe</option>
           </select>
           <p style={{ color: "red" }}>{errors?.country}</p>
@@ -1529,6 +1580,51 @@ const SetupProfile = () => {
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
           <p style={{ color: "red" }}>{errors?.bio}</p>
+        </div>
+
+        <div className="profilesetup-form--bio">
+          <input
+            id="uploadpicture"
+            type="file"
+            multiple
+            style={{ display: "none" }}
+            onChange={(e) => handlefilesChange(e)}
+            accept="image/*"
+          />
+          <label
+            className="coverpicture"
+            htmlFor="uploadpicture"
+            style={{
+              textAlign: "center",
+              cursor: "pointer",
+              border: "1px solid #0000002b",
+              borderRadius: "5px",
+              padding: "9px",
+              width: "100%",
+            }}
+          >
+            Upload Cover Picture
+          </label>
+          {coverpicture && (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img
+                src={
+                  typeof coverpicture === "string"
+                    ? coverpicture
+                    : URL.createObjectURL(coverpicture)
+                }
+                style={{
+                  width: "100%",
+                  height: "150px",
+                  borderRadius: "11px",
+                  objectFit: "fill",
+                  objectPosition: "center",
+                  marginTop: "7px",
+                }}
+                alt="Thumbnail"
+              />
+            </div>
+          )}
         </div>
 
         <div className="profilesetup-form--submit">

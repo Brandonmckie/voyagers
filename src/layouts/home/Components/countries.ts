@@ -885,4 +885,24 @@ export let countries = [
     code: "VE",
     country: "Venezuela",
   },
+  {
+    code: "KR",
+    country: "South Korea",
+  },
+  {
+    code: "ZNZ ",
+    country: "Zanzabar",
+  },
+  {
+    code: "NK",
+    country: " North Korea",
+  },
+  {
+    code: "SX",
+    country: " st Maarten",
+  },
+  {
+    code: "TZ",
+    country: "Tanzania",
+  },
 ];

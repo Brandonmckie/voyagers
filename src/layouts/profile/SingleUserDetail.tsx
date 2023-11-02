@@ -150,6 +150,7 @@ const SingleUserDetail = (props: Props) => {
         voyagestyle: user.data.user.userInfo.voyageStyle,
         visitedCountries: user.data.user.userInfo.visitedCountries,
         visitedWonders: user.data.user.userInfo.visitedWonders,
+        coverpicture: user.data.user.userInfo.coverpicture,
       });
 
       // console.log({
@@ -207,14 +208,14 @@ const SingleUserDetail = (props: Props) => {
               }}
             >
               <img
-                src={image2}
+                src={navInfo.coverpicture ? navInfo.coverpicture : image2}
                 alt=""
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%",
                   color: "white",
-                  objectFit: "cover",
+                  objectFit: "fill",
                   objectPosition: "center",
                 }}
               />
@@ -509,14 +510,14 @@ const SingleUserDetail = (props: Props) => {
               style={{ padding: "0px", height: "auto", position: "relative" }}
             >
               <img
-                src={image2}
+                src={navInfo.coverpicture ? navInfo.coverpicture : image2}
                 alt=""
                 style={{
                   position: "absolute",
                   width: "100%",
                   height: "100%",
                   color: "white",
-                  objectFit: "cover",
+                  objectFit: "fill",
                   objectPosition: "center",
                 }}
               />

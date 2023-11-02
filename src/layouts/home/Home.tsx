@@ -232,100 +232,102 @@ const Home = () => {
                 <div className="carousel-inner">
                   <div className="item active">
                     <div className="card-slid">
-                      <Carousel itemClass="w-full" responsive={responsive}>
-                        {data?.map((each) => (
-                          <div key={each._id} className="list-item">
-                            <div
-                              onClick={() => {
-                                if (user) {
-                                  navigate(`/itinerary/view/${each._id}`);
-                                } else {
-                                  navigate("/auth/sign-up");
-                                }
-                              }}
-                              style={{
-                                textDecoration: "none",
-                                cursor: "pointer",
-                                borderBottomLeftRadius: "16px",
-                                borderBottomRightRadius: "16px",
-                              }}
-                              className="card"
-                            >
-                              <img
-                                className="card-img-top"
-                                src={each?.image}
-                                alt="Cardimage"
-                                style={{
-                                  width: "100%",
-                                  minHeight: "234px",
-                                  maxHeight: "234px",
-                                  objectFit: "fill",
-                                  // objectPosition: "center",
-                                }}
-                              />
-                              <div
-                                className="hometext0"
-                                style={{
-                                  background: "#0000008a",
-                                  // minHeight: "81%",
-                                  position: "absolute",
-
-                                  justifyContent: "center",
-                                  top: "0",
-                                  display: "flex",
-                                }}
-                              >
+                      {data && (
+                        <Carousel itemClass="w-full" responsive={responsive}>
+                          {data &&
+                            data?.map((each) => (
+                              <div key={each._id} className="list-item">
                                 <div
-                                  style={{
-                                    color: " white",
-                                    padding: "0px",
-
-                                    zIndex: "1000",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    paddingTop: "34px",
+                                  onClick={() => {
+                                    if (user) {
+                                      navigate(`/itinerary/view/${each._id}`);
+                                    } else {
+                                      navigate("/auth/sign-up");
+                                    }
                                   }}
+                                  style={{
+                                    textDecoration: "none",
+                                    cursor: "pointer",
+                                    borderBottomLeftRadius: "16px",
+                                    borderBottomRightRadius: "16px",
+                                  }}
+                                  className="card"
                                 >
-                                  <h4
-                                    title={each.title}
-                                    className="card-title"
+                                  <img
+                                    className="card-img-top"
+                                    src={each?.image}
+                                    alt="Cardimage"
                                     style={{
-                                      // paddingRight: "10px",
-                                      // color: "#000000d9",
-                                      // paddingBottom: "8px",
-                                      margin: "0px",
-                                      paddingRight: "10px",
-                                      textAlign: "center",
-                                      paddingBottom: " 8px",
-                                      color: "white",
-                                      fontSize: "24px",
-                                      padding: "10px",
-                                      lineHeight: "34px",
-                                      zIndex: "1000",
-                                      textTransform: "uppercase",
+                                      width: "100%",
+                                      minHeight: "234px",
+                                      maxHeight: "234px",
+                                      objectFit: "fill",
+                                      // objectPosition: "center",
+                                    }}
+                                  />
+                                  <div
+                                    className="hometext0"
+                                    style={{
+                                      background: "#0000008a",
+                                      // minHeight: "81%",
+                                      position: "absolute",
+
+                                      justifyContent: "center",
+                                      top: "0",
+                                      display: "flex",
                                     }}
                                   >
-                                    {each.title.length >= 93
-                                      ? `${each.title.slice(0, 93)}...`
-                                      : each.title}
-                                  </h4>
-                                </div>
-                              </div>
-                              <div className="badge">
-                                <p>{each?.category[0]}</p>
-                              </div>
-                              <div
-                                className="card-body"
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  padding: "10px",
-                                  paddingBottom: "0px",
-                                }}
-                              >
-                                {/* <h4
+                                    <div
+                                      style={{
+                                        color: " white",
+                                        padding: "0px",
+
+                                        zIndex: "1000",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        paddingTop: "34px",
+                                      }}
+                                    >
+                                      <h4
+                                        title={each.title}
+                                        className="card-title"
+                                        style={{
+                                          // paddingRight: "10px",
+                                          // color: "#000000d9",
+                                          // paddingBottom: "8px",
+                                          margin: "0px",
+                                          paddingRight: "10px",
+                                          textAlign: "center",
+                                          paddingBottom: " 8px",
+                                          color: "white",
+                                          fontSize: "24px",
+                                          padding: "10px",
+                                          lineHeight: "34px",
+                                          zIndex: "1000",
+                                          textTransform: "uppercase",
+                                        }}
+                                      >
+                                        {each.title.length >= 93
+                                          ? `${each.title.slice(0, 93)}...`
+                                          : each.title}
+                                      </h4>
+                                    </div>
+                                  </div>
+                                  <div className="badge">
+                                    <p>{each?.category[0]}</p>
+                                  </div>
+                                  <div
+                                    className="card-body"
+                                    style={{
+                                      width: "100%",
+                                      display: "flex",
+                                      flexDirection: "column",
+                                      padding: "10px",
+                                      paddingBottom: "0px",
+                                    }}
+                                  >
+                                    {/* <h4
                                   title={each.title}
                                   className="card-title"
                                   style={{
@@ -340,7 +342,7 @@ const Home = () => {
                                     ? `${each.title.slice(0, 23)}...`
                                     : each.title}
                                 </h4> */}
-                                {/* <div
+                                    {/* <div
                                   className="subtitle"
                                   style={{
                                     display: "flex",
@@ -349,40 +351,43 @@ const Home = () => {
                                     justifyContent: "space-between",
                                   }}
                                 > */}
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    gap: "6px",
-                                    paddingBottom: "9px",
-                                  }}
-                                >
-                                  <img
-                                    style={{
-                                      width: "35px",
-                                      height: "35px",
-                                      objectFit: "cover",
-                                      objectPosition: "center",
-                                      borderRadius: "360px",
-                                    }}
-                                    src={
-                                      each?.userId?.image
-                                        ? each?.userId?.image
-                                        : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
-                                    }
-                                    alt=""
-                                  />
-                                  <span style={{ padding: "0px", fontSize: "15px" }} className="b">
-                                    {each.userId.username}
-                                  </span>
-                                </div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        gap: "6px",
+                                        paddingBottom: "9px",
+                                      }}
+                                    >
+                                      <img
+                                        style={{
+                                          width: "35px",
+                                          height: "35px",
+                                          objectFit: "cover",
+                                          objectPosition: "center",
+                                          borderRadius: "360px",
+                                        }}
+                                        src={
+                                          each?.userId?.image
+                                            ? each?.userId?.image
+                                            : "https://myvoyagemedia.s3.amazonaws.com/uploads/989b161d-df1b-4d8b-ae51-8faf95e5cc6c-img.jpeg"
+                                        }
+                                        alt=""
+                                      />
+                                      <span
+                                        style={{ padding: "0px", fontSize: "15px" }}
+                                        className="b"
+                                      >
+                                        {each.userId.username}
+                                      </span>
+                                    </div>
 
-                                {/* </div> */}
+                                    {/* </div> */}
 
-                                {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
-                              </div>
-                              {/* <div
+                                    {/* <span className="b">{each?.createdAt?.slice(0, 10)}</span> */}
+                                  </div>
+                                  {/* <div
                                 style={{
                                   display: "flex",
                                   justifyContent: " end",
@@ -402,10 +407,11 @@ const Home = () => {
                                   {each?.createdAt ? each?.createdAt?.slice(0, 10) : "2023 09 09"}
                                 </span>
                               </div> */}
-                            </div>
-                          </div>
-                        ))}
-                      </Carousel>
+                                </div>
+                              </div>
+                            ))}
+                        </Carousel>
+                      )}
                     </div>
                   </div>
                 </div>
