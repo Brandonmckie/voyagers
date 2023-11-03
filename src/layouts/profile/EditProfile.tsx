@@ -1281,7 +1281,7 @@ const EditProfile = () => {
           {isMainLoading ? (
             <CircularProgress />
           ) : (
-            <form onSubmit={handleSubmit} style={{ padding: "14px", width: "100%" }}>
+            <form onSubmit={handleSubmit} style={{ padding: "14px" }} className="editprofilewidth">
               {values.image ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <img

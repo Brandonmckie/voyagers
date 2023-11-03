@@ -10,6 +10,9 @@
 .aboutUs {
   display: none;
 }
+.editprofilewidth {
+  width: 70%;
+}
 
 .main-profile .dp {
   margin-top: 20px;
@@ -57,6 +60,10 @@
   }
   .aboutUs {
     display: flex;
+  }
+
+  .editprofilewidth {
+    width: 100%;
   }
 
   .countryHover {
