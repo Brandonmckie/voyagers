@@ -248,13 +248,12 @@ const Home = () => {
                                   style={{
                                     textDecoration: "none",
                                     cursor: "pointer",
-                                    borderBottomLeftRadius: "16px",
-                                    borderBottomRightRadius: "16px",
+                                    position: "static",
                                   }}
                                   className="card"
                                 >
                                   <img
-                                    className="card-img-top"
+                                    // className="card-img-top"
                                     src={each?.image}
                                     alt="Cardimage"
                                     style={{
@@ -262,6 +261,9 @@ const Home = () => {
                                       minHeight: "234px",
                                       maxHeight: "234px",
                                       objectFit: "fill",
+                                      borderTopLeftRadius: "13px",
+                                      borderTopRightRadius: "13px",
+
                                       // objectPosition: "center",
                                     }}
                                   />
@@ -275,6 +277,8 @@ const Home = () => {
                                       justifyContent: "center",
                                       top: "0",
                                       display: "flex",
+                                      borderTopLeftRadius: "13px",
+                                      borderTopRightRadius: "13px",
                                     }}
                                   >
                                     <div
@@ -314,7 +318,7 @@ const Home = () => {
                                       </h4>
                                     </div>
                                   </div>
-                                  <div className="badge">
+                                  <div className="badge" style={{ right: 25 }}>
                                     <p>{each?.category[0]}</p>
                                   </div>
                                   <div
