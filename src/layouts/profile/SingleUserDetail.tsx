@@ -150,7 +150,7 @@ const SingleUserDetail = (props: Props) => {
         voyagestyle: user.data.user.userInfo.voyageStyle,
         visitedCountries: user.data.user.userInfo.visitedCountries,
         visitedWonders: user.data.user.userInfo.visitedWonders,
-        coverpicture: user.data.user.userInfo.coverpicture,
+        coverpicture: user.data.user.coverpicture,
       });
 
       // console.log({

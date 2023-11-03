@@ -1075,9 +1075,9 @@ const EditProfile = () => {
     setIsUpdateLoading(true);
 
     let replaceText = values?.username?.trim().replace(/\s+/g, "_").toLowerCase();
-    const values1 = { ...values, username: replaceText };
+    const values1 = { ...values, username: replaceText, coverpicture };
     try {
-      if (typeof values?.image === "string") {
+      if (typeof values?.image === "string" && typeof coverpicture === "string") {
         let data = await api.patch("/users", values1);
         if (data?.data?.error?.message) {
           seterrordetial(data?.data?.error?.message);
@@ -1118,6 +1118,7 @@ const EditProfile = () => {
                 __v: number;
                 role: string;
                 image: string;
+                coverpicture: any;
                 userInfo: {
                   name: string;
                   voyageStyle: [string];
@@ -1125,14 +1126,12 @@ const EditProfile = () => {
                   visitedCountries: [];
                   visitedWonders: [];
                   bio: string;
-                  coverpicture: any;
                 };
               };
             };
           };
 
-          let { email, username, image, userInfo } = user.data.user;
-          console.log(user.data.user);
+          let { email, username, image, userInfo, coverpicture } = user.data.user;
           setProfile(user.data);
           setValues({ email, username, image });
 
@@ -1143,7 +1142,7 @@ const EditProfile = () => {
           setVisitedCountries(userInfo?.visitedCountries);
           setVisitedWonders(userInfo?.visitedWonders);
           setBio(userInfo?.bio);
-          setcoverpicture(userInfo?.coverpicture);
+          setcoverpicture(coverpicture);
         } catch (error) {
           console.log(error);
         } finally {
@@ -1191,41 +1190,21 @@ const EditProfile = () => {
 
     const allVoyageStyles = voyageStyle.filter((item) => item !== "");
     try {
-      if (typeof coverpicture === "string") {
-        const data = {
-          name,
-          voyageStyle: allVoyageStyles,
-          country,
-          visitedCountries,
-          visitedWonders,
-          bio,
-          coverpicture,
-        };
+      const data = {
+        name,
+        voyageStyle: allVoyageStyles,
+        country,
+        visitedCountries,
+        visitedWonders,
+        bio,
+      };
 
-        try {
-          await api.patch("/users", { userInfo: data });
-          setIsLoading(false);
-          navigate(`/user/${values.username}`);
-        } catch (error) {
-          setIsLoading(false);
-        }
-      } else {
-        const formData = new FormData();
-        let arrayData = [{ allVoyageStyles }, { visitedCountries }, { visitedWonders }];
-
-        formData.append("country", country);
-        formData.append("arrayData", JSON.stringify(arrayData));
-        formData.append("name", name);
-
-        formData.append("bio", bio);
-        formData.append("image", coverpicture);
-        try {
-          await api.patch("/users/updateuserprofile", formData);
-          setIsLoading(false);
-          navigate(`/user/${values.username}`);
-        } catch (error) {
-          setIsLoading(false);
-        }
+      try {
+        await api.patch("/users", { userInfo: data });
+        setIsLoading(false);
+        navigate(`/user/${values.username}`);
+      } catch (error) {
+        setIsLoading(false);
       }
     } catch (e) {}
   };
@@ -1302,7 +1281,7 @@ const EditProfile = () => {
           {isMainLoading ? (
             <CircularProgress />
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ padding: "14px", width: "100%" }}>
               {values.image ? (
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <img
@@ -1394,6 +1373,50 @@ const EditProfile = () => {
                 >
                   {isErrored?.email}
                 </p>
+              </div>
+              <div style={{ marginTop: "18px" }}>
+                <input
+                  id="uploadpicture"
+                  type="file"
+                  multiple
+                  style={{ display: "none" }}
+                  onChange={(e) => handlefilesChange(e)}
+                  accept="image/*"
+                />
+                <label
+                  className="coverpicture"
+                  htmlFor="uploadpicture"
+                  style={{
+                    textAlign: "center",
+                    cursor: "pointer",
+                    border: "1px solid #0000002b",
+                    borderRadius: "5px",
+                    padding: "9px",
+                    width: "100%",
+                  }}
+                >
+                  Upload Cover Picture
+                </label>
+                {coverpicture && (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                      src={
+                        typeof coverpicture === "string"
+                          ? coverpicture
+                          : URL.createObjectURL(coverpicture)
+                      }
+                      style={{
+                        width: "100%",
+                        height: "150px",
+                        borderRadius: "11px",
+                        objectFit: "fill",
+                        objectPosition: "center",
+                        marginTop: "7px",
+                      }}
+                      alt="Thumbnail"
+                    />
+                  </div>
+                )}
               </div>
               {errordetial && (
                 <p style={{ textAlign: "center", color: "red", margin: "7px" }}>{errordetial}</p>
@@ -1780,51 +1803,6 @@ const EditProfile = () => {
                   onChange={(e) => setBio(e.target.value)}
                 ></textarea>
                 <p style={{ color: "red" }}>{errors?.bio}</p>
-              </div>
-
-              <div className="profilesetup-form--bio">
-                <input
-                  id="uploadpicture"
-                  type="file"
-                  multiple
-                  style={{ display: "none" }}
-                  onChange={(e) => handlefilesChange(e)}
-                  accept="image/*"
-                />
-                <label
-                  className="coverpicture"
-                  htmlFor="uploadpicture"
-                  style={{
-                    textAlign: "center",
-                    cursor: "pointer",
-                    border: "1px solid #0000002b",
-                    borderRadius: "5px",
-                    padding: "9px",
-                    width: "100%",
-                  }}
-                >
-                  Upload Cover Picture
-                </label>
-                {coverpicture && (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <img
-                      src={
-                        typeof coverpicture === "string"
-                          ? coverpicture
-                          : URL.createObjectURL(coverpicture)
-                      }
-                      style={{
-                        width: "100%",
-                        height: "150px",
-                        borderRadius: "11px",
-                        objectFit: "fill",
-                        objectPosition: "center",
-                        marginTop: "7px",
-                      }}
-                      alt="Thumbnail"
-                    />
-                  </div>
-                )}
               </div>
 
               <div className="profilesetup-form--submit">

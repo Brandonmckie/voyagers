@@ -1048,6 +1048,7 @@ const SetupProfile = () => {
                 __v: number;
                 role: string;
                 image: string;
+                coverpicture: string;
                 userInfo: {
                   name: string;
                   voyageStyle: [string];
@@ -1055,13 +1056,12 @@ const SetupProfile = () => {
                   visitedCountries: [];
                   visitedWonders: [];
                   bio: string;
-                  coverpicture: string;
                 };
               };
             };
           };
 
-          let { email, username, image, userInfo } = user.data.user;
+          let { email, username, image, userInfo, coverpicture } = user.data.user;
 
           //
           setName(userInfo?.name);
@@ -1070,7 +1070,7 @@ const SetupProfile = () => {
           setVisitedCountries(userInfo?.visitedCountries);
           setVisitedWonders(userInfo?.visitedWonders);
           setBio(userInfo?.bio);
-          setcoverpicture(userInfo?.coverpicture);
+          setcoverpicture(coverpicture);
         } catch (error) {
           console.log(error);
         } finally {
@@ -1109,75 +1109,38 @@ const SetupProfile = () => {
     const allVoyageStyles = voyageStyle.filter((item) => item !== "");
 
     try {
-      if (typeof coverpicture === "string") {
-        const data = {
-          name,
-          voyageStyle: allVoyageStyles,
-          country,
-          visitedCountries,
-          visitedWonders,
-          bio,
-          coverpicture,
-        };
+      const data = {
+        name,
+        voyageStyle: allVoyageStyles,
+        country,
+        visitedCountries,
+        visitedWonders,
+        bio,
+      };
 
-        try {
-          await api.patch("/users", { userInfo: data });
-          setIsSetupLoading(false);
-          if (localStorage.getItem("profilenav")) {
-            let data = localStorage.getItem("profilenav");
-            localStorage.removeItem("profilenav");
-            if (data) {
-              return navigate(data);
-            }
-          } else {
-            const params = new URLSearchParams(window.location.search);
-            const login = params.get("login");
-            if (login) {
-              return navigate(`/user/${username}`);
-            } else {
-              return navigate("/itinerary/create");
-            }
+      try {
+        await api.patch("/users", { userInfo: data });
+        setIsSetupLoading(false);
+        if (localStorage.getItem("profilenav")) {
+          let data = localStorage.getItem("profilenav");
+          localStorage.removeItem("profilenav");
+          if (data) {
+            return navigate(data);
           }
-          // } else{
-          //   getUserDetails("");
-        } catch (error) {
-          setIsSetupLoading(false);
-          console.log(error);
-        }
-      } else {
-        const formData = new FormData();
-        let arrayData = [{ allVoyageStyles }, { visitedCountries }, { visitedWonders }];
-
-        formData.append("country", country);
-        formData.append("arrayData", JSON.stringify(arrayData));
-        formData.append("name", name);
-
-        formData.append("bio", bio);
-        formData.append("image", coverpicture);
-        try {
-          await api.patch("/users/updateuserprofile", formData);
-          setIsSetupLoading(false);
-          if (localStorage.getItem("profilenav")) {
-            let data = localStorage.getItem("profilenav");
-            localStorage.removeItem("profilenav");
-            if (data) {
-              return navigate(data);
-            }
+        } else {
+          const params = new URLSearchParams(window.location.search);
+          const login = params.get("login");
+          if (login) {
+            return navigate(`/user/${username}`);
           } else {
-            const params = new URLSearchParams(window.location.search);
-            const login = params.get("login");
-            if (login) {
-              return navigate(`/user/${username}`);
-            } else {
-              return navigate("/itinerary/create");
-            }
+            return navigate("/itinerary/create");
           }
-          // } else{
-          //   getUserDetails("");
-        } catch (error) {
-          setIsSetupLoading(false);
-          console.log(error);
         }
+        // } else{
+        //   getUserDetails("");
+      } catch (error) {
+        setIsSetupLoading(false);
+        console.log(error);
       }
     } catch (e) {}
   };
@@ -1580,51 +1543,6 @@ const SetupProfile = () => {
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
           <p style={{ color: "red" }}>{errors?.bio}</p>
-        </div>
-
-        <div className="profilesetup-form--bio">
-          <input
-            id="uploadpicture"
-            type="file"
-            multiple
-            style={{ display: "none" }}
-            onChange={(e) => handlefilesChange(e)}
-            accept="image/*"
-          />
-          <label
-            className="coverpicture"
-            htmlFor="uploadpicture"
-            style={{
-              textAlign: "center",
-              cursor: "pointer",
-              border: "1px solid #0000002b",
-              borderRadius: "5px",
-              padding: "9px",
-              width: "100%",
-            }}
-          >
-            Upload Cover Picture
-          </label>
-          {coverpicture && (
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src={
-                  typeof coverpicture === "string"
-                    ? coverpicture
-                    : URL.createObjectURL(coverpicture)
-                }
-                style={{
-                  width: "100%",
-                  height: "150px",
-                  borderRadius: "11px",
-                  objectFit: "fill",
-                  objectPosition: "center",
-                  marginTop: "7px",
-                }}
-                alt="Thumbnail"
-              />
-            </div>
-          )}
         </div>
 
         <div className="profilesetup-form--submit">
